@@ -1,0 +1,3284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gia đình cầu vồng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f7f8fa;
+            --container-bg: #ffffff;
+            --box-bg: #fffaf0;
+            --border-color: #ffe4e1;
+            --primary-color: #ff69b4;
+            --header-bg: #ffb6c1;
+            --text-color: #333333;
+            --subtext-color: #666666;
+            --badge-completed: #7c4dff;
+            --badge-updating: #ff4081;
+            --badge-hidden: #7f8c8d;
+            --badge-18: #e74c3c;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1625;
+            --container-bg: #262035;
+            --box-bg: #2d263f;
+            --border-color: #3d3450;
+            --primary-color: #ff85c0;
+            --header-bg: #3b2d4a;
+            --text-color: #e2d9f3;
+            --subtext-color: #a295be;
+        }
+
+        body {
+            font-family: 'Comfortaa', cursive, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; transition: all 0.3s ease;
+        }
+
+        .theme-toggle {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--container-bg); border: 2px solid var(--primary-color);
+            color: var(--primary-color); padding: 6px 12px; border-radius: 20px;
+            cursor: pointer; font-family: inherit; font-size: 13px; font-weight: bold;
+            z-index: 10;
+        }
+
+        .brand-title {
+            font-weight: 900 !important;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            user-select: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .brand-title:hover { opacity: 0.8; }
+
+        #pass-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-color);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+        }
+
+        .pass-box {
+            background: var(--container-bg); padding: 30px; border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); text-align: center; max-width: 320px; width: 85%;
+            border: 2px solid var(--header-bg);
+        }
+
+        .pass-input {
+            width: 80%; padding: 10px; margin: 15px 0;
+            border: 2px solid var(--header-bg); background: var(--box-bg);
+            color: var(--text-color); border-radius: 15px;
+            text-align: center; font-family: inherit; font-size: 16px; outline: none;
+        }
+
+        .pass-btn {
+            background-color: var(--primary-color); color: white; border: none;
+            padding: 10px 20px; border-radius: 20px; cursor: pointer;
+            font-family: inherit; font-weight: bold;
+        }
+
+        .continue-reading-banner {
+            background: linear-gradient(135deg, var(--header-bg), var(--primary-color));
+            color: white; padding: 15px 20px; border-radius: 15px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background-color: var(--header-bg); width: 100%; padding: 25px 15px 20px 15px;
+            text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative;
+            box-sizing: border-box;
+        }
+
+        header h1 { margin: 0; color: #ffffff; font-size: 28px; }
+        .slogan { margin-top: 8px; color: #ffffff; font-size: 13px; line-height: 1.6; }
+
+        .nav-menu { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+
+        .nav-btn {
+            background-color: var(--container-bg); color: var(--primary-color);
+            border: 2px solid var(--header-bg); padding: 8px 16px; border-radius: 25px;
+            cursor: pointer; font-weight: bold; font-family: inherit; transition: all 0.3s ease; font-size: 13px;
+            position: relative;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background-color: var(--primary-color); color: white; border-color: var(--primary-color);
+        }
+
+        .notification-badge {
+            position: absolute; top: -6px; right: -6px;
+            background-color: #ff4d4d; color: white; font-size: 10px; font-weight: bold;
+            padding: 2px 6px; border-radius: 10px; border: 2px solid var(--container-bg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            width: 95%; max-width: 960px; background: var(--container-bg);
+            margin: 20px 0 40px 0; padding: 20px; border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06); box-sizing: border-box;
+        }
+
+        .section-title {
+            color: var(--primary-color); font-size: 18px; margin: 25px 0 15px 0;
+            display: flex; align-items: center; gap: 8px;
+            border-bottom: 2px dashed var(--border-color); padding-bottom: 8px;
+        }
+
+        .search-box {
+            display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;
+            background: var(--box-bg); padding: 12px; border-radius: 15px; border: 1px solid var(--border-color);
+        }
+        .search-input {
+            flex-grow: 1; padding: 8px 12px; border: 1.5px solid var(--border-color);
+            border-radius: 10px; font-family: inherit; font-size: 13px; outline: none;
+            background: var(--container-bg); color: var(--text-color);
+        }
+        .search-input:focus { border-color: var(--primary-color); }
+        .filter-select {
+            padding: 8px; border: 1.5px solid var(--border-color);
+            border-radius: 10px; font-family: inherit; font-size: 13px; outline: none;
+            background: var(--container-bg); color: var(--text-color);
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 13px; color: var(--primary-color); }
+        .form-control {
+            width: 100%; padding: 10px; border: 1.5px solid var(--border-color);
+            border-radius: 12px; font-family: inherit; font-size: 13px;
+            background: var(--box-bg); color: var(--text-color); box-sizing: border-box; outline: none;
+        }
+        .form-control:focus { border-color: var(--primary-color); }
+
+        textarea.form-control { resize: none; height: 150px; }
+
+        .nickname-select {
+            width: 100%; padding: 8px 12px; margin-top: 6px; margin-bottom: 4px;
+            border: 1.5px solid var(--border-color); border-radius: 10px;
+            background: var(--box-bg); color: var(--primary-color);
+            font-family: inherit; font-size: 12px; font-weight: bold; outline: none;
+            cursor: pointer;
+        }
+        .nickname-select:focus { border-color: var(--primary-color); }
+
+        .mode-selector { display: flex; gap: 8px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
+        .mode-btn {
+            background: var(--box-bg); border: 2px solid var(--border-color);
+            padding: 8px 14px; border-radius: 20px; cursor: pointer;
+            font-family: inherit; font-size: 12px; font-weight: bold; color: var(--text-color);
+        }
+        .mode-btn.active { border-color: var(--primary-color); background: var(--primary-color); color: white; }
+
+        .admin-sub-tabs {
+            display: flex; gap: 8px; justify-content: center; margin-bottom: 25px;
+            background: var(--box-bg); padding: 8px; border-radius: 25px; border: 1.5px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+        .admin-sub-btn {
+            background: var(--container-bg); border: 2px solid var(--border-color);
+            padding: 8px 16px; border-radius: 20px; cursor: pointer;
+            font-family: inherit; font-size: 12px; font-weight: bold; color: var(--text-color);
+            transition: all 0.2s ease;
+        }
+        .admin-sub-btn.active {
+            background: var(--primary-color); color: white; border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.25);
+        }
+
+        .stats-grid-dashboard {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;
+        }
+        .stat-card-item {
+            background: var(--box-bg); border: 1.5px solid var(--border-color);
+            padding: 16px; border-radius: 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+        .stat-card-item:hover { transform: translateY(-3px); border-color: var(--primary-color); }
+        .stat-card-icon { font-size: 22px; margin-bottom: 6px; }
+        .stat-card-label { font-size: 12px; font-weight: bold; color: var(--subtext-color); }
+        .stat-card-number { font-size: 22px; font-weight: 900; color: var(--primary-color); margin-top: 4px; }
+
+        .btn-submit {
+            background: var(--primary-color); color: white; border: none; padding: 10px 24px;
+            border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 13px;
+            transition: all 0.2s ease;
+        }
+        .btn-submit:hover { opacity: 0.9; transform: scale(1.02); }
+
+        .btn-delete {
+            background: #ff4d4d; color: white; border: none; padding: 10px 20px;
+            border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 13px;
+            transition: all 0.2s ease;
+        }
+        .btn-delete:hover { background: #e03e3e; transform: scale(1.02); }
+
+        .forum-container { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+        .forum-post-card {
+            background: var(--box-bg); border: 1px solid var(--border-color);
+            padding: 16px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            position: relative; transition: transform 0.2s ease;
+        }
+        .forum-post-card:hover { border-color: var(--primary-color); }
+        .forum-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .forum-author { font-weight: bold; color: var(--primary-color); font-size: 14px; display: flex; align-items: center; gap: 6px; }
+        .forum-badge-author { background: var(--primary-color); color: white; font-size: 9px; padding: 2px 6px; border-radius: 6px; }
+        .forum-time { font-size: 11px; color: var(--subtext-color); }
+        .forum-title { font-size: 15px; font-weight: bold; margin-bottom: 6px; color: var(--text-color); }
+        .forum-content { font-size: 13px; line-height: 1.6; margin-bottom: 12px; }
+        .forum-footer-actions { display: flex; gap: 12px; align-items: center; font-size: 12px; border-top: 1px dashed var(--border-color); padding-top: 10px; }
+        .forum-action-btn { background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; font-family: inherit; padding: 0; display: flex; align-items: center; gap: 4px; }
+        .forum-action-btn:hover { text-decoration: underline; }
+
+        .reply-list { 
+            margin-top: 10px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px; 
+            padding-left: 15px; 
+            border-left: 2.5px solid var(--border-color);
+            max-height: 220px; 
+            overflow-y: auto;  
+            padding-right: 6px; 
+        }
+        .reply-item { background: var(--container-bg); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 12px; }
+        .reply-author { font-weight: bold; color: var(--primary-color); margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+
+        .latest-list { display: flex; flex-direction: column; gap: 10px; }
+        .latest-item {
+            background: var(--box-bg); border: 1px solid var(--border-color);
+            padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+        }
+        .latest-item:hover { border-color: var(--primary-color); transform: translateX(4px); }
+        .latest-title { font-weight: bold; font-size: 13px; color: var(--text-color); }
+        .latest-chapter { font-size: 12px; color: var(--primary-color); margin-top: 3px; }
+        .latest-time { font-size: 11px; color: var(--subtext-color); }
+
+        .notice-board-container { display: flex; flex-direction: column; gap: 14px; margin-top: 15px; }
+        .notice-card {
+            border: 1px solid rgba(0,0,0,0.06);
+            padding: 14px 18px; border-radius: 14px; position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02); transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .notice-card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        
+        .notice-card:nth-child(4n + 1) { background-color: #fff0f3; border-color: #ffccd5; color: #6e3b44; }
+        .notice-card:nth-child(4n + 2) { background-color: #fcf6bd; border-color: #f7ed94; color: #615a24; }
+        .notice-card:nth-child(4n + 3) { background-color: #e8f5e9; border-color: #c8e6c9; color: #2d5a36; }
+        .notice-card:nth-child(4n + 4) { background-color: #f4f6f8; border-color: #e2e8f0; color: #334155; }
+
+        body.dark-mode .notice-card:nth-child(4n + 1) { background-color: #3b282e; border-color: #4f363f; color: #ffccd5; }
+        body.dark-mode .notice-card:nth-child(4n + 2) { background-color: #383523; border-color: #4a452f; color: #fcf6bd; }
+        body.dark-mode .notice-card:nth-child(4n + 3) { background-color: #243829; border-color: #304a36; color: #d0f0c0; }
+        body.dark-mode .notice-card:nth-child(4n + 4) { background-color: #2d263f; border-color: #3d3450; color: #e2d9f3; }
+
+        .notice-card.pinned {
+            background: linear-gradient(135deg, #fff0f5, #ffe4e1) !important;
+            border: 2.5px solid #ff1493 !important;
+            box-shadow: 0 4px 20px rgba(255, 20, 147, 0.2) !important;
+            color: #8b008b !important;
+        }
+        body.dark-mode .notice-card.pinned {
+            background: linear-gradient(135deg, #3d2435, #2d1e2b) !important;
+            border: 2.5px solid #ff69b4 !important;
+            color: #ffb6c1 !important;
+        }
+        .pinned-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: #ff1493; color: white; font-size: 10px; font-weight: bold;
+            padding: 3px 8px; border-radius: 8px; margin-bottom: 6px;
+            box-shadow: 0 2px 5px rgba(255,20,147,0.3);
+        }
+
+        .notice-date { font-size: 11px; font-weight: bold; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; opacity: 0.8; }
+        .notice-title { font-size: 14px; font-weight: bold; margin-bottom: 6px; }
+        .notice-content { font-size: 12px; line-height: 1.6; }
+        
+        .story-progress-box {
+            background: var(--box-bg); border: 1.5px dashed var(--primary-color);
+            padding: 14px 20px; border-radius: 14px; margin: 15px 0;
+            max-width: 100%; width: 100%; box-sizing: border-box;
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.08);
+        }
+        .story-progress-header {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 13px; font-weight: bold; color: var(--primary-color); margin-bottom: 8px;
+        }
+        .story-progress-bar-bg {
+            width: 100%; height: 12px; background: var(--border-color);
+            border-radius: 8px; overflow: hidden; position: relative;
+        }
+        .story-progress-bar-fill {
+            height: 100%; background: linear-gradient(90deg, #ff9a9e, var(--primary-color));
+            border-radius: 8px; width: 0%; transition: width 0.6s ease;
+        }
+        .story-progress-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 12px; color: var(--subtext-color); margin-top: 8px; font-weight: 600;
+        }
+
+        .ranking-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .ranking-item {
+            background: var(--box-bg); border: 1px solid var(--border-color);
+            padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .ranking-item:hover { border-color: var(--primary-color); transform: translateX(4px); }
+        .ranking-left { display: flex; align-items: center; gap: 15px; }
+        .ranking-number {
+            font-size: 16px; font-weight: 900; width: 28px; height: 28px;
+            background: var(--border-color); color: var(--primary-color); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .ranking-item:nth-child(1) .ranking-number { background: #ffd700; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .ranking-item:nth-child(2) .ranking-number { background: #c0c0c0; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .ranking-item:nth-child(3) .ranking-number { background: #cd7f32; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+
+        .story-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 18px; margin-top: 15px; }
+        .story-card { background: var(--container-bg); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: all 0.3s ease; position: relative; }
+        .story-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .story-card-cover-wrapper { position: relative; width: 100%; padding-top: 135%; background-color: var(--border-color); }
+        .story-card-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 12px; font-weight: bold; }
+        .story-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .badge { position: absolute; top: 8px; right: 8px; color: white; font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: bold; z-index: 2; }
+        .badge.hoan-thanh { background-color: var(--badge-completed); }
+        .badge.dang-cap-nhat { background-color: var(--badge-updating); }
+        .badge.tam-an { background-color: var(--badge-hidden); }
+        
+        .story-card-info { padding: 10px; display: flex; flex-direction: column; flex-grow: 1; }
+        .story-card-title { font-size: 13px; font-weight: 700; color: var(--text-color); margin-bottom: 5px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .story-card-desc { font-size: 11px; color: var(--subtext-color); margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .story-card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; }
+        .mini-tag { background-color: var(--box-bg); color: var(--subtext-color); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 8px; font-size: 9px; }
+
+        .about-author { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; max-width: 600px; margin: 0 auto; }
+        .avatar { width: 100px; height: 100px; border-radius: 50%; background-color: var(--border-color); border: 3px solid var(--header-bg); display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 12px; overflow: hidden; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .author-bio { background-color: var(--box-bg); padding: 18px; border-radius: 15px; border-left: 4px solid var(--header-bg); text-align: left; line-height: 1.8; font-size: 13px; width: 100%; box-sizing: border-box; }
+
+        .back-btn { background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; font-family: inherit; margin-bottom: 12px; padding: 0; }
+        .story-detail-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap; }
+        
+        .story-detail-cover { width: 220px; height: 310px; background-color: var(--border-color); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 13px; font-weight: bold; flex-shrink: 0; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.1); border: 2px solid var(--border-color); }
+        .story-detail-cover img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .tag { display: inline-block; background-color: var(--border-color); color: var(--primary-color); padding: 2px 8px; border-radius: 10px; font-size: 11px; margin: 2px 2px 5px 0; }
+        
+        .action-buttons-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+        .offline-btn, .fav-btn {
+            background-color: var(--box-bg); color: var(--primary-color); border: 2px solid var(--primary-color);
+            padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 12px;
+            display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;
+        }
+        .offline-btn:hover, .fav-btn:hover { background-color: var(--primary-color); color: white; }
+        .offline-btn.saved, .fav-btn.saved { background-color: var(--primary-color); color: white; }
+
+        .chapter-list { list-style: none; padding: 0; margin-top: 12px; }
+        .chapter-item { background-color: var(--box-bg); border: 1px solid var(--border-color); padding: 10px 15px; margin-bottom: 8px; border-radius: 10px; cursor: pointer; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+        .chapter-item:hover { background-color: var(--border-color); color: var(--primary-color); font-weight: bold; }
+        
+        .reading-box { line-height: 1.8; font-size: 14px; background: var(--box-bg); padding: 18px; border-radius: 12px; border: 1px solid var(--border-color); position: relative; }
+        
+        .wattpad-progress-bar-fixed {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 6px;
+            background: rgba(0,0,0,0.1); z-index: 9999; cursor: pointer;
+        }
+        .wattpad-progress-bar-fill {
+            height: 100%; background: var(--primary-color); width: 0%; pointer-events: none;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .chapter-stats-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 12px; color: var(--subtext-color); margin: 15px 0 5px 0; padding: 0 5px;
+        }
+
+        .reading-nav { display: flex; justify-content: space-between; margin-top: 25px; }
+        .read-btn { background-color: var(--header-bg); color: white; border: none; padding: 8px 14px; border-radius: 12px; cursor: pointer; font-family: inherit; font-weight: bold; }
+        .read-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .comment-section { margin-top: 35px; border-top: 2px dashed var(--border-color); padding-top: 20px; }
+        .comment-input-box { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .comment-input { width: 100%; padding: 10px; border: 1.5px solid var(--border-color); border-radius: 12px; background: var(--box-bg); color: var(--text-color); font-family: inherit; font-size: 13px; box-sizing: border-box; outline: none; }
+        .comment-input:focus { border-color: var(--primary-color); }
+        
+        textarea.comment-input { resize: none; height: 120px; }
+
+        .comment-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: var(--container-bg);
+            border: 1.5px solid var(--border-color);
+            padding: 14px;
+            border-radius: 16px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .comment-item { 
+            background: var(--box-bg); 
+            border: 1px solid var(--border-color); 
+            padding: 12px 14px; 
+            border-radius: 12px; 
+            font-size: 13px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .comment-author { font-weight: bold; color: var(--primary-color); margin-bottom: 4px; font-size: 12px; }
+
+        #warning-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+        }
+        .warning-box {
+            background: var(--container-bg); padding: 25px; border-radius: 16px;
+            text-align: center; max-width: 320px; width: 85%; border: 2px solid #e74c3c;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .scroll-controls {
+            position: fixed; bottom: 25px; right: 20px;
+            display: flex; flex-direction: column; gap: 8px; z-index: 1000;
+        }
+        .scroll-btn {
+            background: var(--primary-color); color: white; border: none;
+            width: 40px; height: 40px; border-radius: 50%;
+            cursor: pointer; font-weight: bold; font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .scroll-btn:hover { transform: scale(1.1); }
+
+        .floating-menu-btn {
+            background: var(--header-bg); color: white; border: none;
+            width: 40px; height: 40px; border-radius: 50%;
+            cursor: pointer; font-weight: bold; font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .floating-menu-btn:hover { transform: scale(1.1); background: var(--primary-color); }
+
+        #chapter-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center;
+            z-index: 9998; backdrop-filter: blur(2px);
+        }
+        .chapter-modal-box {
+            background: var(--container-bg); border: 2px solid var(--primary-color);
+            width: 90%; max-width: 420px; max-height: 80vh; border-radius: 20px;
+            display: flex; flex-direction: column; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+        }
+        .chapter-modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px dashed var(--border-color); padding-bottom: 10px; margin-bottom: 10px;
+        }
+        .chapter-modal-list {
+            overflow-y: auto; flex-grow: 1; display: flex; flex-direction: column; gap: 6px; padding-right: 4px;
+        }
+        .chapter-modal-item {
+            background: var(--box-bg); border: 1px solid var(--border-color); padding: 10px 12px;
+            border-radius: 10px; cursor: pointer; font-size: 13px; display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.2s;
+        }
+        .chapter-modal-item:hover, .chapter-modal-item.active {
+            background: var(--primary-color); color: white; border-color: var(--primary-color); font-weight: bold;
+        }
+
+        .hidden { display: none !important; }
+        footer { margin-top: auto; padding: 15px; color: var(--primary-color); font-size: 12px; text-align: center; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 22px; }
+            .slogan { font-size: 11px; padding: 0 10px; }
+            header { padding: 20px 10px 15px 10px; }
+            
+            .nav-menu { gap: 5px; margin-top: 12px; padding: 0 5px; }
+            .nav-btn { padding: 6px 10px; font-size: 11px; }
+
+            .container { width: 98%; padding: 12px; margin: 10px 0 30px 0; border-radius: 14px; }
+
+            .search-box { padding: 8px; gap: 6px; }
+            .search-input, .filter-select { font-size: 12px; padding: 7px 10px; }
+
+            .story-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            
+            .story-detail-header { flex-direction: column; align-items: center; text-align: center; }
+            .story-detail-cover { width: 160px; height: 220px; margin: 0 auto; }
+            
+            .scroll-controls { bottom: 25px; right: 15px; }
+            .scroll-btn, .floating-menu-btn { width: 35px; height: 35px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="pass-screen">
+        <div class="pass-box">
+            <h3 class="brand-title" style="color: var(--primary-color); margin-top: 0;" onclick="troVeTrangChu()">Gia đình cầu vồng</h3>
+            <p style="font-size: 13px; color: var(--subtext-color);">Nhập mật khẩu để vào xem truyện nhé!</p>
+            <input type="password" id="pass-input" class="pass-input" placeholder="Mật khẩu...">
+            <br>
+            <button class="pass-btn" onclick="kiemTraMatKhau()">Mở khóa 💕</button>
+            <p id="pass-error" style="color: #ff4d4d; font-size: 12px; margin-top: 10px; display: none;">Mật khẩu chưa đúng rồi nè!</p>
+        </div>
+    </div>
+
+    <div id="admin-pass-modal" class="hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+        <div class="pass-box">
+            <h3 style="color: var(--primary-color); margin-top: 0;">🔐 Xác Thực Chủ Tịch</h3>
+            <p style="font-size: 13px; color: var(--subtext-color);">Nhập mật khẩu quản lý:</p>
+            <input type="password" id="admin-pass-input" class="pass-input" placeholder="Mật khẩu...">
+            <br>
+            <div style="display: flex; gap: 8px; justify-content: center;">
+                <button class="pass-btn" onclick="xacNhanMatKhauAdmin()">Vào Thống Kê ✨</button>
+                <button class="pass-btn" style="background: var(--subtext-color);" onclick="dongModalAdmin()">Đóng</button>
+            </div>
+            <p id="admin-pass-error" style="color: #ff4d4d; font-size: 12px; margin-top: 10px; display: none;">Mật khẩu quản lý chưa đúng!</p>
+        </div>
+    </div>
+
+    <div id="chapter-modal-overlay" class="hidden">
+        <div class="chapter-modal-box">
+            <div class="chapter-modal-header">
+                <h4 style="color: var(--primary-color); margin: 0;">📑 Danh Sách Chương</h4>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <button class="pass-btn" style="padding: 4px 10px; font-size: 11px;" onclick="quayLaiTrangGioiThieuTuModal()">📖 Giới thiệu</button>
+                    <button class="pass-btn" style="background: none; border: none; font-size: 18px; color: var(--text-color); cursor: pointer;" onclick="dongModalMucLuc()">×</button>
+                </div>
+            </div>
+            <div class="chapter-modal-list" id="modal-chapter-list-box"></div>
+        </div>
+    </div>
+
+    <div id="warning-modal" class="hidden">
+        <div class="warning-box">
+            <h3 style="color: #e74c3c; margin-top: 0;">⚠️ CẢNH BÁO NỘI DUNG</h3>
+            <p style="font-size: 13px; line-height: 1.6;">Chương truyện này có chứa yếu tố **18+, bạo lực hoặc nhạy cảm**. Bạn đã đủ 18 tuổi và sẵn sàng tâm lý để đọc chứ?</p>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+                <button class="pass-btn" style="background-color: #e74c3c;" onclick="xacNhanVaoDoc(true)">Tôi đã đủ 18+</button>
+                <button class="pass-btn" style="background-color: var(--subtext-color);" onclick="xacNhanVaoDoc(false)">Chạy ngay đi</button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <button class="theme-toggle" onclick="doiCheDoSangToi()">🌙 Tối</button>
+        <h1 class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</h1>
+        <div class="slogan">
+            Chẳng sợ lãng phí năm tháng thanh xuân<br>
+            Chỉ muốn theo người đến chân trời góc bể
+        </div>
+    </header>
+
+    <div class="nav-menu">
+        <button class="nav-btn active" id="btn-tab-trang-chu" onclick="chuyenTab('trang-chu')">🏠 Trang chủ</button>
+        <button class="nav-btn" id="btn-tab-tat-ca-truyen" onclick="chuyenTab('tat-ca-truyen')">📚 Tất cả truyện</button>
+        <button class="nav-btn" id="btn-tab-xep-hang" onclick="chuyenTab('xep-hang')">🏆 Xếp Hạng</button>
+        <button class="nav-btn" id="btn-tab-bang-thong-bao" onclick="chuyenTab('bang-thong-bao')">
+            🔔 Bảng Thông Báo 
+            <span id="unread-badge" class="notification-badge hidden">0</span>
+        </button>
+        <button class="nav-btn" id="btn-tab-dien-dan" onclick="chuyenTab('dien-dan')">💬 Diễn đàn</button>
+        <button class="nav-btn" id="btn-tab-tu-sach-offline" onclick="chuyenTab('tu-sach-offline')">🧳 Tủ Sách</button>
+        <button class="nav-btn" id="btn-tab-dang-truyen" onclick="chuyenTab('dang-truyen')">➕ Đăng Truyện</button>
+        <button class="nav-btn" id="btn-tab-quan-li" onclick="yeuCauMoTabQuanLi()" style="background: var(--header-bg); color: white; border-color: var(--primary-color);">🔐 Quản Lý</button>
+        <button class="nav-btn" id="btn-tab-gioi-thieu" onclick="chuyenTab('gioi-thieu')">🎀 Giới thiệu</button>
+    </div>
+
+    <div class="container">
+        
+        <div id="tab-trang-chu">
+            <div id="continue-banner-box" class="hidden continue-reading-banner">
+                <div>
+                    <div style="font-size: 11px; opacity: 0.9;">📖 ĐỌC TIẾP CHƯƠNG GẦN NHẤT</div>
+                    <div id="continue-title" style="font-weight: bold; font-size: 14px; margin-top: 2px;">Tên truyện - Chương</div>
+                </div>
+                <button class="pass-btn" style="background: white; color: var(--primary-color);" onclick="tiepTucDocNgay()">Đọc ngay ›</button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="search-home-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện..." oninput="locTruyen()">
+                <select id="search-home-tag" class="filter-select" onchange="locTruyen()">
+                    <option value="tat-ca">Tất cả Tag</option>
+                </select>
+                <select id="search-home-status" class="filter-select" onchange="locTruyen()">
+                    <option value="tat-ca">Tất cả trạng thái</option>
+                    <option value="Đang cập nhật">Đang cập nhật</option>
+                    <option value="Hoàn thành">Hoàn thành</option>
+                </select>
+                <select id="search-home-sort" class="filter-select" onchange="locTruyen()">
+                    <option value="moi-nhat">✨ Mới cập nhật</option>
+                    <option value="dai-nhat">📖 Truyện dài (>50c)</option>
+                    <option value="ngan-nhat">⚡ Truyện ngắn (<=50c)</option>
+                    <option value="az">🔤 Tên từ A-Z</option>
+                </select>
+            </div>
+
+            <div class="section-title">⚡ Mới Cập Nhật</div>
+            <div class="latest-list" id="home-latest-list"></div>
+
+            <div class="section-title">💖 Kho Tàng Truyện</div>
+            <div class="story-grid" id="home-story-grid"></div>
+
+            <div class="section-title" style="margin-top: 35px;">💌 Lời nhắn nhà chung</div>
+            <p style="font-size: 12px; color: var(--subtext-color); margin-top: -8px; margin-bottom: 12px;">Góc nhỏ để các cậu thả lời nhắn nhanh, hóng chương hoặc cảm ơn chủ nhà nhé! ✨</p>
+            
+            <div style="background: var(--box-bg); padding: 16px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>Tên của bạn:</label>
+                    <input type="text" id="home-chat-name" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
+                    <select id="select-picker-home-chat" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-home-chat', 'home-chat-name')"></select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <div style="background: var(--container-bg); padding: 8px 12px; border-radius: 10px; border: 1.5px solid var(--border-color);">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; color: var(--primary-color); font-weight: bold; margin: 0;">
+                            <input type="checkbox" id="home-chat-anon" style="width: 16px; height: 16px; accent-color: var(--primary-color);" onchange="toggleHomeAnonymity()">
+                            <span>🕵️‍♂️ Bình luận ẩn danh (Hóa thân thành Người qua đường bí ẩn 🌸)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <textarea id="home-chat-text" class="form-control" placeholder="Ví dụ: Hóng chương mới quá đi tác giả ơi, 10 điểm không có nhưng! 💕" style="height: 90px;"></textarea>
+                </div>
+                <button type="button" class="btn-submit" onclick="guiLoiNhanTrangChu()">Gửi lời nhắn 🌸</button>
+            </div>
+
+            <div class="comment-list" id="home-chat-list-box"></div>
+        </div>
+
+        <div id="tab-tat-ca-truyen" class="hidden">
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">📚 Danh Sách Tất Cả Truyện</h3>
+            
+            <div class="search-box">
+                <input type="text" id="search-all-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện..." oninput="locTruyen()">
+                <select id="search-all-tag" class="filter-select" onchange="locTruyen()">
+                    <option value="tat-ca">Tất cả Tag</option>
+                </select>
+                <select id="search-all-status" class="filter-select" onchange="locTruyen()">
+                    <option value="tat-ca">Tất cả trạng thái</option>
+                    <option value="Đang cập nhật">Đang cập nhật</option>
+                    <option value="Hoàn thành">Hoàn thành</option>
+                </select>
+                <select id="search-all-sort" class="filter-select" onchange="locTruyen()">
+                    <option value="moi-nhat">✨ Mới cập nhật</option>
+                    <option value="dai-nhat">📖 Truyện dài (>50c)</option>
+                    <option value="ngan-nhat">⚡ Truyện ngắn (<=50c)</option>
+                    <option value="az">🔤 Tên từ A-Z</option>
+                </select>
+            </div>
+            
+            <div class="story-grid" id="danh-sach-truyen"></div>
+        </div>
+
+        <div id="tab-xep-hang" class="hidden">
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">🏆 Bảng Xếp Hạng Lượt Xem</h3>
+            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 25px;">Những bộ truyện có tổng lượt đọc cao nhất được yêu thích nhất.</p>
+            <div class="ranking-list" id="ranking-list-box"></div>
+        </div>
+
+        <div id="tab-bang-thong-bao" class="hidden">
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">🔔 Bảng Thông Báo & Sự Kiện</h3>
+            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 15px;">Góc nhỏ thông báo lịch ra chương và lời nhắn gửi từ tác giả.</p>
+            
+            <div class="search-box">
+                <input type="text" id="search-notice-input" class="search-input" placeholder="🔎 Tìm kiếm thông báo..." oninput="hienThiBangThongBao()">
+                <select id="filter-notice-select" class="filter-select" onchange="hienThiBangThongBao()">
+                    <option value="tat-ca">Tất cả thông báo</option>
+                    <option value="truyen">Mới ra truyện / Chương</option>
+                    <option value="khac">Lịch nghỉ / Khác</option>
+                </select>
+            </div>
+
+            <div class="notice-board-container" id="notice-board-list"></div>
+        </div>
+
+        <div id="tab-dien-dan" class="hidden">
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">💬 Diễn Đàn Trò Chuyện & Góp Ý</h3>
+            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 20px;">Nơi bàn luận gu truyện, đề cử tác phẩm hoặc gửi lời nhắn nhủ tới tác giả! ✨</p>
+
+            <div style="background: var(--box-bg); padding: 16px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 25px;">
+                <h4 style="color: var(--primary-color); margin-top: 0; margin-bottom: 12px;">✍️ Tạo chủ đề thảo luận mới</h4>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>Tên của bạn:</label>
+                    <input type="text" id="forum-author-input" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
+                    <select id="select-picker-forum" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-forum', 'forum-author-input')"></select>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label style="font-size: 12px; margin-bottom: 4px;">Chọn chủ đề hoặc tự nhập tiêu đề:</label>
+                    <select id="forum-title-select" class="form-control" onchange="kiemTraDoiTieuDeForum()" style="margin-bottom: 8px;">
+                        <option value="💬 Thảo luận chung về truyện">💬 Thảo luận chung về truyện</option>
+                        <option value="📚 Đề cử / Gợi ý truyện mới">📚 Đề cử / Gợi ý truyện mới</option>
+                        <option value="💌 Nhắn gửi / Góp ý tới tác giả">💌 Nhắn gửi / Góp ý tới tác giả</option>
+                        <option value="🎨 Góc khoe fanart / Sáng tạo">🎨 Góc khoe fanart / Sáng tạo</option>
+                        <option value="custom">✍️ Tự nhập tiêu đề khác...</option>
+                    </select>
+                    <input type="text" id="forum-title-input" class="form-control hidden" placeholder="Nhập tiêu đề thảo luận tùy chỉnh...">
+                </div>
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <textarea id="forum-content-input" class="form-control" placeholder="Nội dung bạn muốn chia sẻ..." style="height: 90px;"></textarea>
+                </div>
+                <button type="button" class="btn-submit" onclick="dangBaiVietForum()">Đăng bài thảo luận 🌸</button>
+            </div>
+
+            <div class="forum-container" id="forum-post-list"></div>
+        </div>
+
+        <div id="tab-tu-sach-offline" class="hidden">
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">🧳 Tủ Sách & Yêu Thích Của Bạn</h3>
+            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 20px;">Quản lý những bộ truyện yêu thích và các bộ đã lưu đọc ngoại tuyến.</p>
+            
+            <div class="mode-selector" style="margin-bottom: 15px;">
+                <button type="button" class="mode-btn active" id="btn-subtab-fav" onclick="doiSubTabTuSach('fav')">❤️ Truyện Yêu Thích</button>
+                <button type="button" class="mode-btn" id="btn-subtab-offline" onclick="doiSubTabTuSach('offline')">📥 Ngoại Tuyến (Offline)</button>
+            </div>
+
+            <div id="subtab-fav-content">
+                <div class="story-grid" id="fav-story-grid"></div>
+            </div>
+            <div id="subtab-offline-content" class="hidden">
+                <div class="story-grid" id="offline-story-grid"></div>
+            </div>
+        </div>
+
+        <div id="tab-quan-li" class="hidden">
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">🔐 Trung Tâm Thống Kê & Quản Lý</h3>
+            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 20px;">Bảng điều khiển toàn diện hệ thống dành riêng cho chủ tịch.</p>
+
+            <div class="admin-sub-tabs">
+                <button class="admin-sub-btn active" id="btn-admin-tab-tongquan" onclick="doiAdminSubTab('tongquan')">📊 Tổng quan</button>
+                <button class="admin-sub-btn" id="btn-admin-tab-truyen" onclick="doiAdminSubTab('truyen')">📚 Truyện & Chương</button>
+                <button class="admin-sub-btn" id="btn-admin-tab-view" onclick="doiAdminSubTab('view')">👁️ Lượt view</button>
+                <button class="admin-sub-btn" id="btn-admin-tab-tuongtac" onclick="doiAdminSubTab('tuongtac')">💬 Tương tác</button>
+                <button class="admin-sub-btn" id="btn-admin-tab-hethong" onclick="doiAdminSubTab('hethong')">⚙️ Hệ thống & Lịch</button>
+            </div>
+
+            <div id="admin-subcontent-tongquan">
+                <div class="stats-grid-dashboard">
+                    <div class="stat-card-item">
+                        <div class="stat-card-icon">📚</div>
+                        <div class="stat-card-label">Tổng số truyện</div>
+                        <div class="stat-card-number" id="stat-dash-stories">0</div>
+                    </div>
+                    <div class="stat-card-item">
+                        <div class="stat-card-icon">📖</div>
+                        <div class="stat-card-label">Tổng số chương</div>
+                        <div class="stat-card-number" id="stat-dash-chapters">0</div>
+                    </div>
+                    <div class="stat-card-item">
+                        <div class="stat-card-icon">👁️</div>
+                        <div class="stat-card-label">Tổng lượt xem</div>
+                        <div class="stat-card-number" id="stat-dash-views">0</div>
+                    </div>
+                    <div class="stat-card-item">
+                        <div class="stat-card-icon">💬</div>
+                        <div class="stat-card-label">Tổng bình luận</div>
+                        <div class="stat-card-number" id="stat-dash-comments">0</div>
+                    </div>
+                    <div class="stat-card-item">
+                        <div class="stat-card-icon">📌</div>
+                        <div class="stat-card-label">Thông báo đã đăng</div>
+                        <div class="stat-card-number" id="stat-dash-notices">0</div>
+                    </div>
+                    <div class="stat-card-item">
+                        <div class="stat-card-icon">⏰</div>
+                        <div class="stat-card-label">Lịch hẹn giờ chờ</div>
+                        <div class="stat-card-number" id="stat-dash-schedules">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="admin-subcontent-truyen" class="hidden">
+                <div class="section-title">✨ Thống Kê Chi Tiết Từng Bộ Truyện</div>
+                <div id="admin-story-status-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+            </div>
+
+            <div id="admin-subcontent-view" class="hidden">
+                <div class="section-title">📊 Xếp Hạng Lượt Đọc Chi Tiết</div>
+                <div id="admin-story-views-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+            </div>
+
+            <div id="admin-subcontent-tuongtac" class="hidden">
+                <div class="section-title">💬 Thống Kê Thảo Luận Diễn Đàn & Bình Luận</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 15px;">
+                    <div style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px solid var(--border-color); text-align: center;">
+                        <div style="font-size: 12px; color: var(--subtext-color); font-weight: bold;">Bài viết diễn đàn</div>
+                        <div id="stat-forum-posts-count" style="font-size: 20px; font-weight: 900; color: var(--primary-color); margin-top: 4px;">0</div>
+                    </div>
+                    <div style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px solid var(--border-color); text-align: center;">
+                        <div style="font-size: 12px; color: var(--subtext-color); font-weight: bold;">Tổng số bình luận chương</div>
+                        <div id="stat-total-comments-count" style="font-size: 20px; font-weight: 900; color: var(--primary-color); margin-top: 4px;">0</div>
+                    </div>
+                </div>
+                <div class="section-title">📝 Chủ Đề Diễn Đàn Gần Đây</div>
+                <div id="admin-forum-summary-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
+            </div>
+
+            <div id="admin-subcontent-hethong" class="hidden">
+                <div class="section-title">⏰ Lịch Hẹn Giờ Đăng Tự Động Đang Chờ</div>
+                <div id="admin-schedule-list" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;"></div>
+
+                <div class="section-title">🔔 Danh Sách Thông Báo Hiện Tại</div>
+                <div id="admin-notices-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
+            </div>
+        </div>
+
+        <div id="tab-dang-truyen" class="hidden">
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">✍️ Quản Lý Nội Dung Web</h3>
+            
+            <div class="mode-selector">
+                <button type="button" class="mode-btn active" id="btn-mode-truyen" onclick="doiCheDoDang('truyen')">✨ Tạo truyện mới</button>
+                <button type="button" class="mode-btn" id="btn-mode-sua" onclick="doiCheDoDang('sua')">✏️ Sửa / Xóa truyện</button>
+                <button type="button" class="mode-btn" id="btn-mode-chuong" onclick="doiCheDoDang('chuong')">📖 Thêm chương mới</button>
+                <button type="button" class="mode-btn" id="btn-mode-sua-chuong" onclick="doiCheDoDang('sua-chuong')">🛠️ Sửa / Xóa chương</button>
+                <button type="button" class="mode-btn" id="btn-mode-thongbao" onclick="doiCheDoDang('thongbao')">🔔 Đăng / Sửa thông báo</button>
+            </div>
+
+            <div id="group-truyen-moi">
+                <div class="form-group">
+                    <label>Tên Truyện (*)</label>
+                    <input type="text" id="new-title" class="form-control" placeholder="Ví dụ: [ĐM] Nhật Ký Nuôi Mèo">
+                </div>
+                <div class="form-group">
+                    <label>🔗 Link Ảnh Bìa (Dán Direct Link từ ImgBB / Imgur):</label>
+                    <input type="text" id="new-cover-url" class="form-control" placeholder="https://i.ibb.co/xxxx/bia.jpg">
+                </div>
+                <div class="form-group">
+                    <label>Trạng Thái Truyện (*)</label>
+                    <select id="new-status" class="form-control">
+                        <option value="Đang cập nhật">Đang cập nhật</option>
+                        <option value="Hoàn thành">Hoàn thành</option>
+                        <option value="Tạm ẩn">🔒 Tạm ẩn / Khóa truyện</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>✨ Tổng số chương Ô nhập liệu (*)</label>
+                    <input type="number" id="new-total-chapters" class="form-control" value="100" min="1" placeholder="100">
+                </div>
+                <div class="form-group">
+                    <label>Thẻ Tag (Cách nhau bằng dấu phẩy)</label>
+                    <input type="text" id="new-tags" class="form-control" placeholder="1v1, Ngọt sủng, Chủ thụ">
+                </div>
+                <div class="form-group">
+                    <label>Tóm Tắt Ngắn Ngọn (*)</label>
+                    <textarea id="new-summary" class="form-control" placeholder="Viết vài dòng giới thiệu truyện..."></textarea>
+                </div>
+                <div style="border-top: 1px dashed var(--border-color); padding-top: 15px; margin-top: 15px;">
+                    <div class="form-group">
+                        <label>Tên Chương Đầu Tiên (*)</label>
+                        <input type="text" id="new-chapter-title" class="form-control" placeholder="Ví dụ: Chương 1: Khởi đầu mới">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <input type="checkbox" id="new-chapter-18" style="width: 16px; height: 16px; accent-color: #e74c3c;"> 
+                            <span style="color: #e74c3c; font-weight: bold;">🔥 Đánh dấu chương này là 18+ / Bạo lực</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Nội Dung Chương Đầu Tiên (*)</label>
+                        <textarea id="new-chapter-content" class="form-control" placeholder="Dán nội dung chương truyện ở đây..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: var(--box-bg); padding: 12px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px;">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; margin-bottom: 8px;">
+                        <input type="checkbox" id="enable-schedule-story" style="width: 16px; height: 16px; accent-color: var(--primary-color);" onchange="toggleScheduleBox('story')">
+                        <span>⏰ Hẹn giờ đăng truyện tự động</span>
+                    </label>
+                    <div id="schedule-box-story" class="hidden">
+                        <label style="font-size: 11px; color: var(--subtext-color); margin-bottom: 3px;">Chọn thời gian xuất bản:</label>
+                        <input type="datetime-local" id="new-story-schedule-time" class="form-control">
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="button" class="btn-submit" onclick="xuLyLuuTruyenMoi()">✨ Đăng Truyện Mới</button>
+                </div>
+            </div>
+
+            <div id="group-sua-truyen" class="hidden">
+                <div class="form-group">
+                    <label>Chọn Truyện Cần Sửa Hoặc Xóa (*)</label>
+                    <select id="select-edit-story" class="form-control" onchange="dienThongTinSua()"></select>
+                </div>
+                <div class="form-group">
+                    <label>Sửa Tên Truyện</label>
+                    <input type="text" id="edit-title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>🔗 Đổi Link Ảnh Bìa Mới:</label>
+                    <input type="text" id="edit-cover-url" class="form-control" placeholder="https://i.ibb.co/xxxx/bia.jpg">
+                </div>
+                <div class="form-group">
+                    <label>Sửa Trạng Thái</label>
+                    <select id="edit-status" class="form-control">
+                        <option value="Đang cập nhật">Đang cập nhật</option>
+                        <option value="Hoàn thành">Hoàn thành</option>
+                        <option value="Tạm ẩn">🔒 Tạm ẩn / Khóa truyện</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>✨ Tổng số chương Ô nhập liệu</label>
+                    <input type="number" id="edit-total-chapters" class="form-control" min="1" placeholder="100">
+                </div>
+                <div class="form-group">
+                    <label>Sửa Thẻ Tag (Cách nhau bằng dấu phẩy)</label>
+                    <input type="text" id="edit-tags" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Sửa Tóm Tắt</label>
+                    <textarea id="edit-summary" class="form-control"></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                    <button type="button" class="btn-delete" onclick="xoaTruyenDangChon()">🗑️ Xóa Vĩnh Viễn</button>
+                    <button type="button" class="btn-submit" onclick="xuLyLuuSuaTruyen()">💾 Lưu Thay Đổi</button>
+                </div>
+            </div>
+
+            <div id="group-truyen-co-san" class="hidden">
+                <div class="form-group">
+                    <label>Chọn Truyện Cần Thêm Chương (*)</label>
+                    <select id="select-existing-story" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label>Tên Chương Mới (*)</label>
+                    <input type="text" id="append-chapter-title" class="form-control" placeholder="Ví dụ: Chương 2: Diễn biến mới">
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <input type="checkbox" id="append-chapter-18" style="width: 16px; height: 16px; accent-color: #e74c3c;"> 
+                        <span style="color: #e74c3c; font-weight: bold;">🔥 Đánh dấu chương này là 18+ / Bạo lực</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Nội Dung Chương Mới (*)</label>
+                    <textarea id="append-chapter-content" class="form-control" placeholder="Dán nội dung chương tiếp theo ở đây..."></textarea>
+                </div>
+
+                <div class="form-group" style="background: var(--box-bg); padding: 12px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px;">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; margin-bottom: 8px;">
+                        <input type="checkbox" id="enable-schedule-chapter" style="width: 16px; height: 16px; accent-color: var(--primary-color);" onchange="toggleScheduleBox('chapter')">
+                        <span>⏰ Hẹn giờ đăng chương tự động</span>
+                    </label>
+                    <div id="schedule-box-chapter" class="hidden">
+                        <label style="font-size: 11px; color: var(--subtext-color); margin-bottom: 3px;">Chọn thời gian xuất bản:</label>
+                        <input type="datetime-local" id="append-chapter-schedule-time" class="form-control">
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="button" class="btn-submit" onclick="xuLyLuuThemChuong()">📖 Thêm Chương Mới</button>
+                </div>
+            </div>
+
+            <div id="group-sua-chuong" class="hidden">
+                <div class="form-group">
+                    <label>Chọn Truyện (*)</label>
+                    <select id="select-edit-chapter-story" class="form-control" onchange="capNhatDanhSachChapterSua()"></select>
+                </div>
+                <div class="form-group">
+                    <label>Chọn Chương Cần Sửa/Xóa (*)</label>
+                    <select id="select-edit-chapter-item" class="form-control" onchange="dienThongTinChuongSua()"></select>
+                </div>
+                <div class="form-group">
+                    <label>Sửa Tên Chương</label>
+                    <input type="text" id="edit-chap-title-input" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <input type="checkbox" id="edit-chap-18-input" style="width: 16px; height: 16px; accent-color: #e74c3c;"> 
+                        <span style="color: #e74c3c; font-weight: bold;">🔥 Đánh dấu chương này là 18+ / Bạo lực</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Sửa Nội Dung Chương</label>
+                    <textarea id="edit-chap-content-input" class="form-control"></textarea>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                    <button type="button" class="btn-delete" onclick="xoaChuongDangChon()">🗑️ Xóa Chương Này</button>
+                    <button type="button" class="btn-submit" onclick="xuLyLuuSuaChuong()">💾 Lưu Sửa Chương</button>
+                </div>
+            </div>
+
+            <div id="group-dang-thong-bao" class="hidden">
+                <div class="form-group" style="background: var(--box-bg); padding: 12px; border-radius: 12px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
+                    <label style="color: var(--primary-color);">📌 Chọn thông báo cũ để Sửa/Xóa (hoặc để trống nếu tạo mới bên dưới)</label>
+                    <select id="select-edit-notice" class="form-control" onchange="dienThongTinSuaThongBao()" style="margin-top: 6px;"></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Chọn Loại Tiêu Đề Thông Báo Hoặc Tự Nhập (*)</label>
+                    <select id="notice-title-select" class="form-control" onchange="kiemTraDoiTieuDeThongBao()" style="margin-bottom: 8px;">
+                        <option value="📅 Lịch ra chương tuần này">📅 Lịch ra chương tuần này</option>
+                        <option value="✨ Truyện mới sắp ra mắt!">✨ Truyện mới sắp ra mắt!</option>
+                        <option value="🌸 Thông báo lịch nghỉ / Tạm ngưng">🌸 Thông báo lịch nghỉ / Tạm ngưng</option>
+                        <option value="🎉 Thông báo sự kiện / Quà tặng">🎉 Thông báo sự kiện / Quà tặng</option>
+                        <option value="📌 Thông báo chung">📌 Thông báo chung</option>
+                        <option value="💌 Góc tâm sự cùng tác giả">💌 Góc tâm sự cùng tác giả</option>
+                        <option value="custom">✍️ Tự nhập tiêu đề khác...</option>
+                    </select>
+                    <input type="text" id="notice-title-input" class="form-control hidden" placeholder="Nhập tiêu đề thông báo tùy chỉnh...">
+                </div>
+
+                <div class="form-group" style="background: var(--box-bg); padding: 12px; border-radius: 12px; border: 1.5px dashed var(--primary-color);">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0;">
+                        <input type="checkbox" id="notice-pin-checkbox" style="width: 18px; height: 18px; accent-color: #ff1493;">
+                        <span style="color: #ff1493; font-weight: bold;">📌 Ghim thông báo này lên đầu bảng (Thông báo quan trọng)</span>
+                    </label>
+                </div>
+
+                <div id="notice-builder-section" style="background: var(--box-bg); padding: 15px; border-radius: 14px; border: 1.5px solid var(--border-color); margin-bottom: 15px; margin-top: 15px;">
+                    <label style="font-weight: bold; color: var(--primary-color); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <span id="builder-section-label">📋 Danh sách truyện & Lịch trình</span>
+                        <button type="button" class="pass-btn" style="padding: 4px 10px; font-size: 11px;" onclick="themDongTruyenThongBao()">➕ Thêm truyện</button>
+                    </label>
+                    <div id="notice-story-rows-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                    <div style="margin-top: 12px; text-align: right;">
+                        <button type="button" class="pass-btn" style="padding: 6px 14px; font-size: 12px;" onclick="taoNoiDungTuDongChuyenNghiep()">✨ Tạo nội dung tự động</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Nội Dung Thông Báo (Có thể chỉnh sửa trực tiếp bên dưới) (*)</label>
+                    <textarea id="notice-content-input" class="form-control" placeholder="Viết nội dung thông báo gửi tới độc giả..."></textarea>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <button type="button" class="btn-delete" id="btn-xoa-thong-bao-nhanh" onclick="xoaThongBaoDangChon()" style="display: none;">🗑️ Xóa Thông Báo Này</button>
+                    <button type="button" class="btn-submit" id="btn-luu-thong-bao" onclick="xuLyDangThongBao()" style="margin-left: auto;">📢 Dán Lên Bảng Thông Báo</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-gioi-thieu" class="hidden about-author">
+            <div class="avatar" id="author-avatar-box">
+                <span>[ Ảnh ]</span>
+            </div>
+            
+            <div style="margin-top: -5px;">
+                <label style="font-size: 11px; color: var(--primary-color); cursor: pointer; text-decoration: underline;">
+                    📸 Đổi ảnh đại diện (Dán link URL)
+                    <input type="text" id="author-avatar-url-input" class="form-control" placeholder="Dán link ảnh đại diện..." style="margin-top: 5px; font-size: 12px;" onchange="thayAnhTacGiaUrl(this.value)">
+                </label>
+            </div>
+
+            <h3 style="color: var(--primary-color); margin: 5px 0;" contenteditable="true" id="author-name-text" oninput="luuThongTinGioiThieu()">Xin chào, tôi là Cầu Vồng!</h3>
+            
+            <div class="author-bio" contenteditable="true" id="author-bio-text" oninput="luuThongTinGioiThieu()">
+                🌸 <strong>Đôi dòng tự sự:</strong><br>
+                Chào mừng bạn đã ghé thăm góc nhỏ "<strong class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</strong>". Đây là nơi mình lưu giữ những bộ truyện ĐAM MỸ hay.<br><br>
+                ✨ <strong>Gu truyện:</strong> Ngược, cổ trang, và tất cả các thể loại nặng đô khác.<br>
+                📩 Cảm ơn bạn vì đã ghé qua và đồng hành cùng mình nhé!
+            </div>
+        </div>
+
+        <div id="tab-chi-tiet-truyen" class="hidden">
+            <button class="back-btn" onclick="quayLaiDanhSach()">‹ Quay lại</button>
+            <div class="story-detail-header">
+                <div class="story-detail-cover" id="detail-cover">[ Ảnh bìa ]</div>
+                <div style="flex-grow: 1;">
+                    <h3 id="detail-title" style="color: var(--primary-color); margin: 0 0 5px 0;"></h3>
+                    <div id="detail-tags"></div>
+                    <div style="font-size: 12px; color: var(--subtext-color); margin-top: 6px;">
+                        <strong>Tóm tắt:</strong>
+                        <p id="detail-summary" style="margin: 3px 0 0 0; line-height: 1.5; color: var(--text-color);"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons-group">
+                <button id="btn-toggle-fav" class="fav-btn" onclick="toggleYeuThichTruyen()">❤️ Thêm vào yêu thích</button>
+                <button id="btn-toggle-offline" class="offline-btn" onclick="toggleLuuTruyenOffline()">📥 Lưu đọc ngoại tuyến</button>
+            </div>
+
+            <div class="story-progress-box">
+                <div class="story-progress-header">
+                    <span>📝 Tiến độ Edit</span>
+                    <span id="story-progress-percent-text">0%</span>
+                </div>
+                <div class="story-progress-bar-bg">
+                    <div class="story-progress-bar-fill" id="story-progress-bar-fill"></div>
+                </div>
+                <div class="story-progress-footer">
+                    <span id="story-progress-chapters-text">Đã hoàn thành: 0 / 0 chương</span>
+                    <span id="story-progress-status-text">Đang tiến hành</span>
+                </div>
+            </div>
+
+            <h4 style="color: var(--primary-color); border-bottom: 2px dashed var(--border-color); padding-bottom: 6px; margin-bottom: 10px;">Danh sách chương (<span id="detail-count"></span>)</h4>
+            <ul class="chapter-list" id="detail-chapters"></ul>
+        </div>
+
+        <div id="tab-doc-chuong" class="hidden">
+            <button class="back-btn" onclick="quayLaiTruyen()">‹ Quay lại trang truyện</button>
+            
+            <div class="chapter-stats-bar">
+                <span id="chapter-views">👁️ Lượt xem: 0</span>
+                <span id="chapter-date">📅 Mới cập nhật</span>
+            </div>
+
+            <div class="reading-box" id="reading-content"></div>
+
+            <div class="reading-nav">
+                <button class="read-btn" id="btn-prev" onclick="chuyenChuong(-1)">‹ Chương trước</button>
+                <button class="read-btn" id="btn-next" onclick="chuyenChuong(1)">Chương sau ›</button>
+            </div>
+
+            <div class="comment-section">
+                <h4 style="color: var(--primary-color); margin-top: 0;">💬 Bình luận của bạn đọc</h4>
+                <div class="comment-input-box">
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label>Tên của bạn:</label>
+                        <input type="text" id="comment-name" class="comment-input" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới..." style="width:100%; border: 1.5px solid var(--border-color); border-radius: 12px; background: var(--box-bg); color: var(--text-color); padding: 10px; font-family: inherit; font-size: 13px;">
+                        <select id="select-picker-chapter-comment" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-chapter-comment', 'comment-name')"></select>
+                    </div>
+                    
+                    <div style="background: var(--box-bg); padding: 8px 12px; border-radius: 10px; border: 1.5px solid var(--border-color);">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; color: var(--primary-color); font-weight: bold; margin: 0;">
+                            <input type="checkbox" id="comment-anonymous-checkbox" style="width: 16px; height: 16px; accent-color: var(--primary-color);" onchange="toggleAnonymityInput()">
+                            <span>🕵️‍♂️ Bình luận ẩn danh (Hóa thân thành Người qua đường bí ẩn 🌸)</span>
+                        </label>
+                    </div>
+
+                    <textarea id="comment-content" class="comment-input" placeholder="Viết cảm nghĩ hoặc lời nhắn gửi cho tác giả..."></textarea>
+                    <div>
+                        <button class="pass-btn" onclick="guiBinhLuan()">Gửi bình luận 💌</button>
+                    </div>
+                </div>
+                <div class="comment-list" id="comment-list-box"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="wattpad-progress-bar-fixed hidden" id="wattpad-progress-bar-fixed" title="Kéo hoặc bấm để tua nhanh">
+        <div class="wattpad-progress-bar-fill" id="wattpad-progress-bar-fill"></div>
+    </div>
+
+    <div class="scroll-controls">
+        <button class="floating-menu-btn hidden" id="btn-floating-menu" onclick="moModalMucLuc()" title="Mục lục chương">📖</button>
+        <button class="scroll-btn" onclick="keoLenDauTrang()" title="Kéo lên đầu trang">▲</button>
+        <button class="scroll-btn" onclick="docDenCuoiTrang()" title="Đọc đến cuối trang">▼</button>
+    </div>
+
+    <footer class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</footer>
+
+    <script>
+        const MAT_KHAU_DUNG = "2026";
+        
+        // -----------------------------------------------------------------
+        // THAY ĐỔI: Dùng file data.json trực tiếp trên GitHub làm kho lưu trữ
+        // -----------------------------------------------------------------
+        const GITHUB_JSON_URL = "https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/data.json";
+        
+        window.cheDoDang = 'truyen'; 
+
+        const danhSachNicknames = [
+            "🍡 Mochi Trà Xanh",
+            "🍯 Hũ Mật Ong Nhỏ",
+            "🐾 Đệm Chân Mèo Nhỏ",
+            "🎐 Gió Hạ Thổi Qua",
+            "🐱 Mèo Ú Nu",
+            "🍓 Đá Bào Vị Dâu",
+            "🌊 Bọt Sóng Biển Xanh",
+            "🥞 Bánh Kếp Sốt Bơ"
+        ];
+
+        function taoThanhChonNhanhNickname(selectId, inputId) {
+            const selectEl = document.getElementById(selectId);
+            if (!selectEl) return;
+            selectEl.innerHTML = '<option value="" disabled selected>✨ Chọn nhanh danh hiệu / nickname có sẵn...</option>';
+            danhSachNicknames.forEach(nick => {
+                const opt = document.createElement('option');
+                opt.value = nick;
+                opt.innerText = nick;
+                selectEl.appendChild(opt);
+            });
+        }
+
+        function chonNicknameTuSelect(selectId, inputId) {
+            const selectEl = document.getElementById(selectId);
+            const inputEl = document.getElementById(inputId);
+            if (selectEl && inputEl && selectEl.value) {
+                inputEl.value = selectEl.value;
+                inputEl.focus();
+                selectEl.selectedIndex = 0; 
+            }
+        }
+
+        let defaultNotices = [
+            {
+                id: 1,
+                title: "🌸 Chào mừng đến với Gia đình cầu vồng!",
+                date: "02/08/2026",
+                content: "Web đã được chuyển sang kho lưu trữ GitHub vĩnh viễn, đọc mượt mà trên mọi thiết bị! ✨",
+                isPinned: true
+            }
+        ];
+
+        let defaultForumPosts = [
+            {
+                id: 1,
+                author: "[Tác Giả] Cầu Vồng",
+                isAuthor: true,
+                title: "Góc đề cử truyện chữa rách tâm hồn đã lành 💕",
+                date: "08/08/2026",
+                content: "Mọi người đang thích đọc thể loại ngược như thế nào nè? Cứ thảo luận thoải mái dưới bài viết này để mình lấy ý tưởng edit truyện tiếp theo nhé!",
+                replies: [
+                    { author: "Mèo Lười", isAuthor: false, text: "Thảo luận gì chấn động vậy." }
+                ]
+            }
+        ];
+
+        let defaultHomeChats = [
+            { id: 1, name: "Mèo Lười 🐱", text: "Chủ nhà ơi hóng chương mới quá đi mất thôi! Chúc web ngày càng đông khách nha ❤️" },
+            { id: 2, name: "🕵️‍♂️ Người qua đường bí ẩn", text: "Ghé nhà chung sưởi ấm, giao diện xinh xỉu dọc xỉu ngang luôn á >.<" }
+        ];
+
+        window.dữLiệuTruyện = {};
+        window.danhSachThongBao = defaultNotices;
+        window.danhSachHenGio = [];
+        window.danhSachDienDan = defaultForumPosts;
+        window.danhSachYeuThich = [];
+        window.danhSachLoiNhanTrangChu = defaultHomeChats;
+
+        const localFavRaw = localStorage.getItem('giadinhcauvong_favorites');
+        const localScheduleRaw = localStorage.getItem('giadinhcauvong_schedules');
+        if (localFavRaw) window.danhSachYeuThich = JSON.parse(localFavRaw);
+        if (localScheduleRaw) window.danhSachHenGio = JSON.parse(localScheduleRaw);
+
+        async function loadDataFromGitHub() {
+            try {
+                let response = await fetch(GITHUB_JSON_URL + "?_t=" + new Date().getTime());
+                if (!response.ok) throw new Error("Không tải được dữ liệu từ GitHub");
+                let data = await response.json();
+                
+                if (data.truyen_data) window.dữLiệuTruyện = data.truyen_data;
+                if (data.thongbao_data) window.danhSachThongBao = data.thongbao_data;
+                if (data.homechat_data) window.danhSachLoiNhanTrangChu = data.homechat_data;
+                if (data.forum_data) window.danhSachDienDan = data.forum_data;
+                
+                capNhatDropdownTag();
+                locTruyen();
+                hienThiBangThongBao();
+                hienThiXepHang();
+                hienThiDienDan();
+                hienThiLoiNhanTrangChu();
+                capNhatBadgeThongBao();
+            } catch (error) {
+                console.log("Khởi tạo dữ liệu trống hoặc lỗi kết nối GitHub:", error);
+                capNhatDropdownTag();
+            }
+        }
+
+        loadDataFromGitHub();
+        setInterval(kiemTraLichHenGio, 30000);
+
+        function kiemTraLichHenGio() {
+            if (!window.danhSachHenGio || window.danhSachHenGio.length === 0) return;
+            const now = new Date().getTime();
+            let conLai = [];
+            let daDang = false;
+
+            window.danhSachHenGio.forEach(item => {
+                if (now >= item.targetTime) {
+                    daDang = true;
+                    if (item.type === 'story') {
+                        window.dữLiệuTruyện[item.key] = item.storyData;
+                        if (item.storyData.status !== 'Tạm ẩn') {
+                            taoThongBaoTuDong(`✨ Truyện mới: "${item.storyData.title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${item.storyData.title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, item.key, false);
+                        }
+                    } else if (item.type === 'chapter') {
+                        if (window.dữLiệuTruyện[item.storyKey]) {
+                            window.dữLiệuTruyện[item.storyKey].chapters.push(item.chapterData);
+                            const truyen = window.dữLiệuTruyện[item.storyKey];
+                            if (truyen.status !== 'Tạm ẩn') {
+                                taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${item.chapterData.title}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${item.chapterData.title}". Đọc ngay thôi nào! ✨`, item.storyKey, false);
+                            }
+                        }
+                    }
+                } else {
+                    conLai.push(item);
+                }
+            });
+
+            if (daDang) {
+                window.danhSachHenGio = conLai;
+                localStorage.setItem('giadinhcauvong_schedules', JSON.stringify(window.danhSachHenGio));
+                luuVaoLocalStorage();
+                locTruyen();
+                hienThiXepHang();
+                hienThiBangThongBao();
+            }
+        }
+
+        function toggleScheduleBox(type) {
+            const isChecked = document.getElementById(`enable-schedule-${type}`).checked;
+            const box = document.getElementById(`schedule-box-${type}`);
+            if (isChecked) box.classList.remove('hidden');
+            else box.classList.add('hidden');
+        }
+
+        function capNhatDropdownTag() {
+            let tagsSet = new Set();
+            for (let key in window.dữLiệuTruyện) {
+                const tr = window.dữLiệuTruyện[key];
+                if (tr.tags && Array.isArray(tr.tags)) {
+                    tr.tags.forEach(t => { if(t.trim()) tagsSet.add(t.trim()); });
+                }
+            }
+
+            const homeTagSelect = document.getElementById('search-home-tag');
+            const allTagSelect = document.getElementById('search-all-tag');
+            if(!homeTagSelect || !allTagSelect) return;
+
+            const currentHomeVal = homeTagSelect.value;
+            const currentAllVal = allTagSelect.value;
+
+            let optionsHTML = `<option value="tat-ca">Tất cả Tag</option>`;
+            Array.from(tagsSet).sort().forEach(tag => {
+                optionsHTML += `<option value="${tag}">${tag}</option>`;
+            });
+
+            homeTagSelect.innerHTML = optionsHTML;
+            allTagSelect.innerHTML = optionsHTML;
+
+            if(homeTagSelect.querySelector(`option[value="${currentHomeVal}"]`)) homeTagSelect.value = currentHomeVal;
+            if(allTagSelect.querySelector(`option[value="${currentAllVal}"]`)) allTagSelect.value = currentAllVal;
+        }
+
+        // -----------------------------------------------------------------
+        // HƯỚNG DẪN LƯU TRỮ TRÊN GITHUB:
+        // Khi thay đổi nội dung (đăng truyện, thêm chương, bình luận...), 
+        // hệ thống sẽ tự động tạo một đoạn mã JSON hoàn chỉnh. 
+        // Cậu chỉ cần copy đoạn mã này dán đè vào file data.json trên GitHub.
+        // -----------------------------------------------------------------
+        function luuVaoLocalStorage() {
+            capNhatDropdownTag();
+            xuatFileDuLieuJSON();
+        }
+
+        function luuThongBaoVaoLocalStorage() {
+            xuatFileDuLieuJSON();
+        }
+
+        function luuDienDanVaoLocalStorage() {
+            xuatFileDuLieuJSON();
+        }
+
+        function luuYeuThichVaoLocalStorage() {
+            localStorage.setItem('giadinhcauvong_favorites', JSON.stringify(window.danhSachYeuThich));
+        }
+
+        function luuLoiNhanTrangChuVaoLocalStorage() {
+            xuatFileDuLieuJSON();
+        }
+
+        function xuatFileDuLieuJSON() {
+            const masterData = {
+                truyen_data: window.dữLiệuTruyện,
+                thongbao_data: window.danhSachThongBao,
+                homechat_data: window.danhSachLoiNhanTrangChu,
+                forum_data: window.danhSachDienDan
+            };
+            console.log("--- DỮ LIỆU JSON MỚI ĐỂ DÁN VÀO GITHUB ---");
+            console.log(JSON.stringify(masterData, null, 2));
+        }
+
+        function yeuCauMoTabQuanLi() {
+            const isUnlocked = sessionStorage.getItem('giadinhcauvong_admin_unlocked');
+            if (isUnlocked === 'true') {
+                chuyenTab('quan-li');
+            } else {
+                document.getElementById('admin-pass-input').value = '';
+                document.getElementById('admin-pass-error').style.display = 'none';
+                document.getElementById('admin-pass-modal').classList.remove('hidden');
+                document.getElementById('admin-pass-input').focus();
+            }
+        }
+
+        function dongModalAdmin() {
+            document.getElementById('admin-pass-modal').classList.add('hidden');
+        }
+
+        function xacNhanMatKhauAdmin() {
+            const val = document.getElementById('admin-pass-input').value;
+            if (val === MAT_KHAU_DUNG) {
+                sessionStorage.setItem('giadinhcauvong_admin_unlocked', 'true');
+                dongModalAdmin();
+                chuyenTab('quan-li');
+            } else {
+                document.getElementById('admin-pass-error').style.display = 'block';
+            }
+        }
+
+        function doiAdminSubTab(sub) {
+            document.getElementById('btn-admin-tab-tongquan').classList.toggle('active', sub === 'tongquan');
+            document.getElementById('btn-admin-tab-truyen').classList.toggle('active', sub === 'truyen');
+            document.getElementById('btn-admin-tab-view').classList.toggle('active', sub === 'view');
+            document.getElementById('btn-admin-tab-tuongtac').classList.toggle('active', sub === 'tuongtac');
+            document.getElementById('btn-admin-tab-hethong').classList.toggle('active', sub === 'hethong');
+
+            document.getElementById('admin-subcontent-tongquan').classList.toggle('hidden', sub !== 'tongquan');
+            document.getElementById('admin-subcontent-truyen').classList.toggle('hidden', sub !== 'truyen');
+            document.getElementById('admin-subcontent-view').classList.toggle('hidden', sub !== 'view');
+            document.getElementById('admin-subcontent-tuongtac').classList.toggle('hidden', sub !== 'tuongtac');
+            document.getElementById('admin-subcontent-hethong').classList.toggle('hidden', sub !== 'hethong');
+        }
+
+        function toggleYeuThichTruyen() {
+            if (!truyenHienTaiKey) return;
+            const index = window.danhSachYeuThich.indexOf(truyenHienTaiKey);
+            if (index > -1) {
+                window.danhSachYeuThich.splice(index, 1);
+                alert("💔 Đã xóa truyện khỏi danh sách yêu thích!");
+                capNhatNutYeuThich(false);
+            } else {
+                window.danhSachYeuThich.push(truyenHienTaiKey);
+                alert("❤️ Đã thêm truyện vào danh sách yêu thích thành công!");
+                capNhatNutYeuThich(true);
+            }
+            luuYeuThichVaoLocalStorage();
+        }
+
+        function capNhatNutYeuThich(isFav) {
+            const btn = document.getElementById('btn-toggle-fav');
+            if (isFav) {
+                btn.innerHTML = "❤️ Đã yêu thích (Bấm để gỡ)";
+                btn.classList.add('saved');
+            } else {
+                btn.innerHTML = "❤️ Thêm vào yêu thích";
+                btn.classList.remove('saved');
+            }
+        }
+
+        function hienThiYeuThich() {
+            const grid = document.getElementById('fav-story-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (!window.danhSachYeuThich || window.danhSachYeuThich.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Danh sách yêu thích trống. Hãy bấm "Thêm vào yêu thích" ở trang truyện nhé! ❤️</p>`;
+                return;
+            }
+
+            window.danhSachYeuThich.forEach(key => {
+                const truyen = window.dữLiệuTruyện[key];
+                if (truyen) {
+                    grid.innerHTML += taoCardHTML(key, truyen);
+                }
+            });
+        }
+
+        function doiSubTabTuSach(sub) {
+            const btnFav = document.getElementById('btn-subtab-fav');
+            const btnOff = document.getElementById('btn-subtab-offline');
+            const contentFav = document.getElementById('subtab-fav-content');
+            const contentOff = document.getElementById('subtab-offline-content');
+
+            if (sub === 'fav') {
+                btnFav.classList.add('active');
+                btnOff.classList.remove('active');
+                contentFav.classList.remove('hidden');
+                contentOff.classList.add('hidden');
+                hienThiYeuThich();
+            } else {
+                btnOff.classList.add('active');
+                btnFav.classList.remove('active');
+                contentOff.classList.remove('hidden');
+                contentFav.classList.add('hidden');
+                hienThiTuSachOffline();
+            }
+        }
+
+        function toggleHomeAnonymity() {
+            const isChecked = document.getElementById('home-chat-anon').checked;
+            const nameInput = document.getElementById('home-chat-name');
+            if (isChecked) {
+                nameInput.dataset.previousName = nameInput.value;
+                nameInput.value = "🕵️‍♂️ Người qua đường bí ẩn";
+                nameInput.disabled = true;
+                nameInput.style.opacity = "0.7";
+            } else {
+                nameInput.value = nameInput.dataset.previousName || "";
+                nameInput.disabled = false;
+                nameInput.style.opacity = "1";
+            }
+        }
+
+        window.guiLoiNhanTrangChu = function() {
+            const isAnon = document.getElementById('home-chat-anon').checked;
+            let name = document.getElementById('home-chat-name').value.trim();
+            if (isAnon || !name) {
+                name = "🕵️‍♂️ Người qua đường bí ẩn 🌸";
+            }
+            const text = document.getElementById('home-chat-text').value.trim();
+
+            if (!text) {
+                alert("Cậu chưa nhập nội dung lời nhắn nè! 💕");
+                return;
+            }
+
+            window.danhSachLoiNhanTrangChu.unshift({
+                id: Date.now(),
+                name: name,
+                text: text
+            });
+
+            luuLoiNhanTrangChuVaoLocalStorage();
+            hienThiLoiNhanTrangChu();
+
+            document.getElementById('home-chat-text').value = '';
+            if (isAnon) {
+                document.getElementById('home-chat-anon').checked = false;
+                toggleHomeAnonymity();
+            }
+        };
+
+        window.xoaLoiNhanTrangChu = function(id) {
+            if (confirm("Cậu muốn xóa lời nhắn này chứ?")) {
+                window.danhSachLoiNhanTrangChu = window.danhSachLoiNhanTrangChu.filter(item => item.id !== id);
+                luuLoiNhanTrangChuVaoLocalStorage();
+                hienThiLoiNhanTrangChu();
+            }
+        };
+
+        function hienThiLoiNhanTrangChu() {
+            const box = document.getElementById('home-chat-list-box');
+            if (!box) return;
+            box.innerHTML = '';
+
+            if (!window.danhSachLoiNhanTrangChu || window.danhSachLoiNhanTrangChu.length === 0) {
+                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có lời nhắn nào. Hãy gửi lời nhắn đầu tiên cho nhà chung nhé! 💌</p>`;
+                return;
+            }
+
+            window.danhSachLoiNhanTrangChu.forEach(item => {
+                box.innerHTML += `
+                    <div class="comment-item" style="position: relative;">
+                        <button class="pass-btn" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:16px; cursor:pointer; font-weight:bold; opacity:0.5;" onclick="xoaLoiNhanTrangChu(${item.id})" title="Xóa lời nhắn">×</button>
+                        <div class="comment-author">👤 ${item.name}</div>
+                        <div>${item.text}</div>
+                    </div>
+                `;
+            });
+        }
+
+        function kiemTraDoiTieuDeForum() {
+            const select = document.getElementById('forum-title-select');
+            const input = document.getElementById('forum-title-input');
+            if (select.value === 'custom') {
+                input.classList.remove('hidden');
+                input.focus();
+            } else {
+                input.classList.add('hidden');
+            }
+        }
+
+        window.dangBaiVietForum = function() {
+            const author = document.getElementById('forum-author-input').value.trim() || "Ẩn danh";
+            const selectVal = document.getElementById('forum-title-select').value;
+            let title = selectVal;
+            if (selectVal === 'custom') {
+                title = document.getElementById('forum-title-input').value.trim();
+            }
+            const content = document.getElementById('forum-content-input').value.trim();
+
+            if (!title || !content) { alert("Vui lòng điền đầy đủ tiêu đề và nội dung thảo luận!"); return; }
+
+            const now = new Date();
+            const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
+                            String(now.getMonth() + 1).padStart(2, '0') + '/' + 
+                            now.getFullYear();
+
+            const isAuthor = author.toLowerCase().includes('tác giả') || author.toLowerCase().includes('cầu vồng');
+
+            window.danhSachDienDan.unshift({
+                id: Date.now(),
+                author: author,
+                isAuthor: isAuthor,
+                title: title,
+                date: dateStr,
+                content: content,
+                replies: []
+            });
+
+            luuDienDanVaoLocalStorage();
+            hienThiDienDan();
+
+            document.getElementById('forum-title-select').selectedIndex = 0;
+            document.getElementById('forum-title-input').value = '';
+            document.getElementById('forum-title-input').classList.add('hidden');
+            document.getElementById('forum-content-input').value = '';
+            alert("🌸 Đã đăng bài viết lên diễn đàn thành công!");
+        };
+
+        window.guiPhanHoiForum = function(postId) {
+            const authorInput = prompt("Nhập tên của bạn (hoặc ghi [Tác Giả] Cầu Vồng):", "Độc giả");
+            if (authorInput === null) return;
+            const author = authorInput.trim() || "Ẩn danh";
+
+            const replyText = prompt("Nhập nội dung phản hồi của bạn:");
+            if (!replyText || !replyText.trim()) return;
+
+            const isAuthor = author.toLowerCase().includes('tác giả') || author.toLowerCase().includes('cầu vồng');
+
+            const post = window.danhSachDienDan.find(p => p.id === postId);
+            if (post) {
+                if (!post.replies) post.replies = [];
+                post.replies.push({
+                    author: author,
+                    isAuthor: isAuthor,
+                    text: replyText.trim()
+                });
+                luuDienDanVaoLocalStorage();
+                hienThiDienDan();
+            }
+        };
+
+        window.xoaBaiVietForum = function(postId) {
+            if (confirm("Cậu có che muốn xóa bài thảo luận này không?")) {
+                window.danhSachDienDan = window.danhSachDienDan.filter(p => p.id !== postId);
+                luuDienDanVaoLocalStorage();
+                hienThiDienDan();
+            }
+        };
+
+        function hienThiDienDan() {
+            const container = document.getElementById('forum-post-list');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (!window.danhSachDienDan || window.danhSachDienDan.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Diễn đàn hiện chưa có bài thảo luận nào. Hãy là người đầu tiên tạo chủ đề nhé! 💬</p>`;
+                return;
+            }
+
+            window.danhSachDienDan.forEach(post => {
+                let repliesHTML = '';
+                if (post.replies && post.replies.length > 0) {
+                    post.replies.forEach(r => {
+                        const replyBadge = r.isAuthor ? `<span class="forum-badge-author">Tác Giả</span>` : '';
+                        repliesHTML += `
+                            <div class="reply-item">
+                                <div class="reply-author">${r.author} ${replyBadge}</div>
+                                <div>${r.text}</div>
+                            </div>
+                        `;
+                    });
+                }
+
+                const postBadge = post.isAuthor ? `<span class="forum-badge-author">Tác Giả</span>` : '';
+                container.innerHTML += `
+                    <div class="forum-post-card">
+                        <button class="pass-btn" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:16px; cursor:pointer; font-weight:bold; opacity:0.6;" onclick="xoaBaiVietForum(${post.id})" title="Xóa bài viết">×</button>
+                        <div class="forum-header">
+                            <div class="forum-author">👤 ${post.author} ${postBadge}</div>
+                            <div class="forum-time">📅 ${post.date}</div>
+                        </div>
+                        <div class="forum-title">${post.title}</div>
+                        <div class="forum-content">${post.content.replace(/\n/g, '<br>')}</div>
+                        
+                        <div class="forum-footer-actions">
+                            <button class="forum-action-btn" onclick="guiPhanHoiForum(${post.id})">💬 Phản hồi thảo luận</button>
+                        </div>
+
+                        ${repliesHTML ? `<div class="reply-list">${repliesHTML}</div>` : ''}
+                    </div>
+                `;
+            });
+        }
+
+        function taoThongBaoTuDong(tieuDeThongBao, noiDungChiTiet, storyKey = null, isPinned = false) {
+            const now = new Date();
+            const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
+                            String(now.getMonth() + 1).padStart(2, '0') + '/' + 
+                            now.getFullYear();
+
+            const newNotice = {
+                id: Date.now(),
+                title: tieuDeThongBao,
+                date: dateStr,
+                content: noiDungChiTiet,
+                storyKey: storyKey,
+                isPinned: isPinned
+            };
+
+            window.danhSachThongBao.unshift(newNotice);
+            luuThongBaoVaoLocalStorage();
+            capNhatBadgeThongBao();
+        }
+
+        function capNhatBadgeThongBao() {
+            const lastReadId = parseInt(localStorage.getItem('giadinhcauvong_last_read_notice') || '0');
+            const chuaDoc = window.danhSachThongBao.filter(n => n.id > lastReadId).length;
+            const badge = document.getElementById('unread-badge');
+            
+            if (chuaDoc > 0) {
+                badge.innerText = chuaDoc;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function danhDauDaDocThongBao() {
+            if (window.danhSachThongBao.length > 0) {
+                const maxId = Math.max(...window.danhSachThongBao.map(n => n.id));
+                localStorage.setItem('giadinhcauvong_last_read_notice', maxId);
+                capNhatBadgeThongBao();
+            }
+        }
+
+        let db;
+        const dbRequest = indexedDB.open("GiaDinhCauVongOfflineDB", 1);
+        dbRequest.onsuccess = function(event) { db = event.target.result; };
+        dbRequest.onupgradeneeded = function(event) {
+            let database = event.target.result;
+            if (!database.objectStoreNames.contains("offlineStories")) {
+                database.createObjectStore("offlineStories", { keyPath: "key" });
+            }
+        };
+
+        function luuTruyenOffline(key, truyenObj) {
+            if (!db) return;
+            const transaction = db.transaction(["offlineStories"], "readwrite");
+            const store = transaction.objectStore("offlineStories");
+            store.put({ key: key, data: truyenObj });
+            transaction.oncomplete = function() {
+                alert("📥 Đã lưu truyện vào bộ nhớ ngoại tuyến thành công!");
+                capNhatNutOffline(true);
+            };
+        }
+
+        function xoaTruyenOffline(key) {
+            if (!db) return;
+            const transaction = db.transaction(["offlineStories"], "readwrite");
+            const store = transaction.objectStore("offlineStories");
+            store.delete(key);
+            transaction.oncomplete = function() {
+                alert("🗑️ Đã xóa truyện khỏi tủ sách ngoại tuyến!");
+                capNhatNutOffline(false);
+                if (!document.getElementById('tab-tu-sach-offline').classList.contains('hidden')) {
+                    hienThiTuSachOffline();
+                }
+            };
+        }
+
+        function kiemTraTruyenDaLuuOffline(key, callback) {
+            if (!db) { callback(false); return; }
+            const transaction = db.transaction(["offlineStories"], "readonly");
+            const store = transaction.objectStore("offlineStories");
+            const request = store.get(key);
+            request.onsuccess = function(event) { callback(!!event.target.result); };
+            request.onerror = function() { callback(false); };
+        }
+
+        function capNhatNutOffline(daLuu) {
+            const btn = document.getElementById('btn-toggle-offline');
+            if (daLuu) {
+                btn.innerHTML = "✅ Đã lưu ngoại tuyến (Bấm để gỡ)";
+                btn.classList.add('saved');
+            } else {
+                btn.innerHTML = "📥 Lưu đọc ngoại tuyến";
+                btn.classList.remove('saved');
+            }
+        }
+
+        function toggleLuuTruyenOffline() {
+            if (!truyenHienTaiKey) return;
+            kiemTraTruyenDaLuuOffline(truyenHienTaiKey, function(daLuu) {
+                if (daLuu) { xoaTruyenOffline(truyenHienTaiKey); } 
+                else { luuTruyenOffline(truyenHienTaiKey, window.dữLiệuTruyện[truyenHienTaiKey]); }
+            });
+        }
+
+        function hienThiTuSachOffline() {
+            if (!db) return;
+            const transaction = db.transaction(["offlineStories"], "readonly");
+            const store = transaction.objectStore("offlineStories");
+            const request = store.getAll();
+            request.onsuccess = function(event) {
+                const list = event.target.result;
+                const grid = document.getElementById('offline-story-grid');
+                grid.innerHTML = '';
+                if (list.length === 0) {
+                    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Tủ sách offline trống. Hãy chọn truyện và bấm lưu để đọc khi mất mạng nhé! 🧳</p>`;
+                    return;
+                }
+                list.forEach(item => {
+                    if (!window.dữLiệuTruyện[item.key]) { window.dữLiệuTruyện[item.key] = item.data; }
+                    grid.innerHTML += taoCardHTML(item.key, item.data);
+                });
+            };
+        }
+
+        function luuLichSuDoc(key, index) {
+            const historyObj = { storyKey: key, chapterIndex: index };
+            localStorage.setItem('giadinhcauvong_history', JSON.stringify(historyObj));
+            
+            let storyHistoryMap = JSON.parse(localStorage.getItem('giadinhcauvong_story_history') || '{}');
+            storyHistoryMap[key] = index;
+            localStorage.setItem('giadinhcauvong_story_history', JSON.stringify(storyHistoryMap));
+
+            kiemTraHienThiLichSu();
+        }
+
+        function kiemTraHienThiLichSu() {
+            const banner = document.getElementById('continue-banner-box');
+            const historyRaw = localStorage.getItem('giadinhcauvong_history');
+            if (!historyRaw) { banner.classList.add('hidden'); return; }
+            const history = JSON.parse(historyRaw);
+            const truyen = window.dữLiệuTruyện[history.storyKey];
+            if (!truyen || !truyen.chapters || !truyen.chapters[history.chapterIndex]) {
+                banner.classList.add('hidden');
+                return;
+            }
+            document.getElementById('continue-title').innerText = `${truyen.title} — ${truyen.chapters[history.chapterIndex].title}`;
+            banner.classList.remove('hidden');
+        }
+
+        window.tiepTucDocNgay = function() {
+            const historyRaw = localStorage.getItem('giadinhcauvong_history');
+            if (!historyRaw) return;
+            const history = JSON.parse(historyRaw);
+            if (window.dữLiệuTruyện[history.storyKey]) {
+                xemTruyen(history.storyKey, false);
+                kiemtraTruocKhiDoc(history.chapterIndex, true);
+            }
+        };
+
+        function kiemTraMatKhau() {
+            const nhap = document.getElementById('pass-input').value;
+            if (nhap === MAT_KHAU_DUNG) {
+                document.getElementById('pass-screen').style.display = 'none';
+            } else {
+                document.getElementById('pass-error').style.display = 'block';
+            }
+        }
+
+        function doiCheDoSangToi() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.innerText = document.body.classList.contains('dark-mode') ? '☀️ Sáng' : '🌙 Tối';
+        }
+
+        function troVeTrangChu() {
+            chuyenTab('trang-chu');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function keoLenDauTrang() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function docDenCuoiTrang() { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }
+
+        let truyenHienTaiKey = null;
+        let chuongHienTaiIndex = 0;
+        let tabTruocDo = 'trang-chu';
+        let choVaoIndexTam = 0;
+
+        window.onload = function() {
+            const savedAvatar = localStorage.getItem('author_avatar');
+            if (savedAvatar) { document.getElementById('author-avatar-box').innerHTML = `<img src="${savedAvatar}">`; }
+            const savedName = localStorage.getItem('author_name');
+            if (savedName) { document.getElementById('author-name-text').innerHTML = savedName; }
+            const savedBio = localStorage.getItem('author_bio');
+            if (savedBio) { document.getElementById('author-bio-text').innerHTML = savedBio; }
+
+            taoThanhChonNhanhNickname('select-picker-home-chat', 'home-chat-name');
+            taoThanhChonNhanhNickname('select-picker-forum', 'forum-author-input');
+            taoThanhChonNhanhNickname('select-picker-chapter-comment', 'comment-name');
+
+            kiemTraHienThiLichSu();
+            capNhatDropdownTag();
+            locTruyen();
+            hienThiBangThongBao();
+            hienThiXepHang();
+            hienThiDienDan();
+            hienThiLoiNhanTrangChu();
+            capNhatBadgeThongBao();
+            setupWattpadProgressBar();
+            lamMoiDongTruyenThongBao();
+            hienThiTrungTamQuanLy();
+            capNhatSelectSuaThongBao();
+        };
+
+        function thayAnhTacGiaUrl(url) {
+            if (url.trim()) {
+                document.getElementById('author-avatar-box').innerHTML = `<img src="${url.trim()}">`;
+                localStorage.setItem('author_avatar', url.trim());
+            }
+        }
+
+        function luuThongTinGioiThieu() {
+            localStorage.setItem('author_name', document.getElementById('author-name-text').innerHTML);
+            localStorage.setItem('author_bio', document.getElementById('author-bio-text').innerHTML);
+        }
+
+        function doiCheDoDang(mode) {
+            window.cheDoDang = mode;
+            document.getElementById('btn-mode-truyen').classList.toggle('active', mode === 'truyen');
+            document.getElementById('btn-mode-sua').classList.toggle('active', mode === 'sua');
+            document.getElementById('btn-mode-chuong').classList.toggle('active', mode === 'chuong');
+            document.getElementById('btn-mode-sua-chuong').classList.toggle('active', mode === 'sua-chuong');
+            document.getElementById('btn-mode-thongbao').classList.toggle('active', mode === 'thongbao');
+
+            document.getElementById('group-truyen-moi').classList.toggle('hidden', mode !== 'truyen');
+            document.getElementById('group-sua-truyen').classList.toggle('hidden', mode !== 'sua');
+            document.getElementById('group-truyen-co-san').classList.toggle('hidden', mode !== 'chuong');
+            document.getElementById('group-sua-chuong').classList.toggle('hidden', mode !== 'sua-chuong');
+            document.getElementById('group-dang-thong-bao').classList.toggle('hidden', mode !== 'thongbao');
+
+            if (mode === 'sua') capNhatDanhSachSelectSua();
+            else if (mode === 'chuong') capNhatDanhSachSelectChuong();
+            else if (mode === 'sua-chuong') capNhatDanhSachSelectSuaChuong();
+            else if (mode === 'thongbao') {
+                lamMoiDongTruyenThongBao();
+                capNhatSelectSuaThongBao();
+            }
+        }
+
+        function kiemTraDoiTieuDeThongBao() {
+            const select = document.getElementById('notice-title-select');
+            const input = document.getElementById('notice-title-input');
+            const builderSection = document.getElementById('notice-builder-section');
+            const builderLabel = document.getElementById('builder-section-label');
+            
+            if (select.value === 'custom') {
+                input.classList.remove('hidden');
+                input.focus();
+            } else {
+                input.classList.add('hidden');
+            }
+
+            if (select.value === '💌 Góc tâm sự cùng tác giả') {
+                builderSection.classList.add('hidden');
+            } else {
+                builderSection.classList.remove('hidden');
+                if (select.value === '🌸 Thông báo lịch nghỉ / Tạm ngưng') {
+                    builderLabel.innerText = "🌸 Truyện / Lịch nghỉ tạm ngưng tương ứng";
+                } else if (select.value === '🎉 Thông báo sự kiện / Quà tặng') {
+                    builderLabel.innerText = "🎉 Bộ truyện / Sự kiện áp dụng";
+                } else if (select.value === '✨ Truyện mới sắp ra mắt!') {
+                    builderLabel.innerText = "✨ Bộ truyện mới sắp ra mắt & Thời gian";
+                } else {
+                    builderLabel.innerText = "📋 Danh sách truyện & Lịch trình ra chương";
+                }
+                lamMoiDongTruyenThongBao();
+            }
+        }
+
+        function taoSelectOptionTruyen() {
+            let optionsHTML = `<option value="">-- Chọn truyện trên web --</option>`;
+            for (let key in window.dữLiệuTruyện) {
+                const tr = window.dữLiệuTruyện[key];
+                if (tr.status !== 'Tạm ẩn') {
+                    optionsHTML += `<option value="${tr.title}">${tr.title}</option>`;
+                }
+            }
+            return optionsHTML;
+        }
+
+        function formatNgayThangTuDong(datetimeVal) {
+            if (!datetimeVal) return "[Ngày/Tháng (Thứ) giờ]";
+            let dateObj = new Date(datetimeVal);
+            if (isNaN(dateObj.getTime())) return datetimeVal;
+
+            let d = String(dateObj.getDate()).padStart(2, '0');
+            let m = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const days = ["Chủ Nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
+            let thuStr = days[dateObj.getDay()];
+            let hours = String(dateObj.getHours()).padStart(2, '0');
+            let minutes = String(dateObj.getMinutes()).padStart(2, '0');
+
+            return `${d}/${m} (${thuStr}) ${hours}:${minutes}`;
+        }
+
+        function lamMoiDongTruyenThongBao() {
+            const container = document.getElementById('notice-story-rows-container');
+            if (!container) return;
+            
+            container.innerHTML = `
+                <div class="notice-story-row" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--container-bg); padding: 10px; border-radius: 10px; border: 1.5px solid var(--border-color);">
+                    <select class="form-control notice-story-select" style="flex: 2; margin: 0;">
+                        ${taoSelectOptionTruyen()}
+                    </select>
+                    <input type="datetime-local" class="form-control notice-time-input" oninput="taoNoiDungTuDongChuyenNghiep()" onchange="taoNoiDungTuDongChuyenNghiep()" style="flex: 2; margin: 0; background: var(--box-bg);">
+                    <button type="button" class="btn-delete" style="padding: 8px 12px; font-size: 11px;" onclick="xoaDongTruyenThongBao(this)">×</button>
+                </div>
+            `;
+            taoNoiDungTuDongChuyenNghiep();
+        }
+
+        function themDongTruyenThongBao() {
+            const container = document.getElementById('notice-story-rows-container');
+            if (!container) return;
+
+            const row = document.createElement('div');
+            row.className = "notice-story-row";
+            row.style.cssText = "display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--container-bg); padding: 10px; border-radius: 10px; border: 1.5px solid var(--border-color);";
+            row.innerHTML = `
+                <select class="form-control notice-story-select" style="flex: 2; margin: 0;">
+                    ${taoSelectOptionTruyen()}
+                </select>
+                <input type="datetime-local" class="form-control notice-time-input" oninput="taoNoiDungTuDongChuyenNghiep()" onchange="taoNoiDungTuDongChuyenNghiep()" style="flex: 2; margin: 0; background: var(--box-bg);">
+                <button type="button" class="btn-delete" style="padding: 8px 12px; font-size: 11px;" onclick="xoaDongTruyenThongBao(this)">×</button>
+            `;
+            container.appendChild(row);
+        }
+
+        function xoaDongTruyenThongBao(btn) {
+            const row = btn.closest('.notice-story-row');
+            const container = document.getElementById('notice-story-rows-container');
+            if (container.children.length > 1) {
+                row.remove();
+                taoNoiDungTuDongChuyenNghiep();
+            } else {
+                alert("Cần giữ ít nhất một bộ truyện trong thông báo!");
+            }
+        }
+
+        function taoNoiDungTuDongChuyenNghiep() {
+            const selectVal = document.getElementById('notice-title-select').value;
+            const rows = document.querySelectorAll('.notice-story-row');
+            const contentTextarea = document.getElementById('notice-content-input');
+            if (!contentTextarea) return;
+
+            let detailsArr = [];
+            rows.forEach(r => {
+                const storyTitle = r.querySelector('.notice-story-select').value || "[Tên Truyện]";
+                const rawTime = r.querySelector('.notice-time-input').value;
+                const timeText = formatNgayThangTuDong(rawTime);
+                
+                if (selectVal === '🌸 Thông báo lịch nghỉ / Tạm ngưng') {
+                    detailsArr.push(`- Bộ truyện **${storyTitle}**: Sẽ tạm nghỉ ra chương từ ngày **${timeText}**. Mong các cậu thông cảm nhé! Chúng mình sẽ sớm quay lại 🌸`);
+                } else if (selectVal === '🎉 Thông báo sự kiện / Quà tặng') {
+                    detailsArr.push(`- Tác phẩm **${storyTitle}**: Sẽ có sự kiện đặc biệt / Quà tặng vào **${timeText}**. Cùng đón chờ nha! 🎁`);
+                } else if (selectVal === '✨ Truyện mới sắp ra mắt!') {
+                    detailsArr.push(`- Tác phẩm mới **${storyTitle}**: Dự kiến sẽ chính thức lên kệ và ra mắt các độc giả vào lúc **${timeText}**. ✨`);
+                } else if (selectVal === '📌 Thông báo chung') {
+                    detailsArr.push(`- Cập nhật liên quan đến **${storyTitle}** vào **${timeText}**. ✨`);
+                } else {
+                    detailsArr.push(`- Truyện **${storyTitle}**: Sẽ có chương mới vào **${timeText}**! ✨`);
+                }
+            });
+
+            let templateStr = "";
+            if (selectVal === '📅 Lịch ra chương tuần này') {
+                templateStr = `📅 Lịch ra chương các bộ truyện trong tuần này như sau:\n` + detailsArr.join('\n') + `\nMời các độc giả yêu quý đón đọc nhé! 💕`;
+            } else if (selectVal === '✨ Truyện mới sắp ra mắt!') {
+                templateStr = `✨ Thông báo tin vui: Sắp ra mắt bộ truyện mới cực hấp dẫn, mọi người cùng lót dép hóng nha!\n` + detailsArr.join('\n') + `\nHy vọng mọi người sẽ đón nhận và ủng hộ nhiệt tình nhé! ❤️`;
+            } else if (selectVal === '🌸 Thông báo lịch nghỉ / Tạm ngưng') {
+                templateStr = `🌸 Thông báo lịch nghỉ & điều chỉnh thời gian:\n` + detailsArr.join('\n') + `\nCảm ơn mọi người luôn kiên nhẫn và đồng hành cùng tụi mình! 💕`;
+            } else if (selectVal === '🎉 Thông báo sự kiện / Quà tặng') {
+                templateStr = `🎉 Thông báo sự kiện & minigame tri ân:\n` + detailsArr.join('\n') + `\nChúc các cậu có những phút giây đọc truyện thật vui vẻ! ✨`;
+            } else if (selectVal === '📌 Thông báo chung') {
+                templateStr = `📌 Cập nhật thông tin quan trọng:\n` + detailsArr.join('\n') + `\nMọi người chú ý theo dõi để không bỏ lỡ thông tin nhé! 🌸`;
+            }
+
+            if (selectVal !== '💌 Góc tâm sự cùng tác giả') {
+                contentTextarea.value = templateStr;
+            }
+        }
+
+        function capNhatSelectSuaThongBao() {
+            const select = document.getElementById('select-edit-notice');
+            if (!select) return;
+            select.innerHTML = `<option value="">✨ -- Đăng thông báo mới hoàn toàn --</option>`;
+            window.danhSachThongBao.forEach(n => {
+                const opt = document.createElement('option');
+                opt.value = n.id;
+                opt.innerText = `${n.title} (${n.date})` + (n.isPinned ? " [📌 Đang ghim]" : "");
+                select.appendChild(opt);
+            });
+        }
+
+        function dienThongTinSuaThongBao() {
+            const idVal = document.getElementById('select-edit-notice').value;
+            const btnXoa = document.getElementById('btn-xoa-thong-bao-nhanh');
+            const btnLuu = document.getElementById('btn-luu-thong-bao');
+
+            if (!idVal) {
+                document.getElementById('notice-title-select').selectedIndex = 0;
+                document.getElementById('notice-title-input').value = '';
+                document.getElementById('notice-title-input').classList.add('hidden');
+                document.getElementById('notice-pin-checkbox').checked = false;
+                document.getElementById('notice-content-input').value = '';
+                btnXoa.style.display = 'none';
+                btnLuu.innerText = '📢 Dán Lên Bảng Thông Báo';
+                lamMoiDongTruyenThongBao();
+                return;
+            }
+
+            const id = parseInt(idVal);
+            const notice = window.danhSachThongBao.find(n => n.id === id);
+            if (notice) {
+                const selectTitle = document.getElementById('notice-title-select');
+                let found = false;
+                for (let i = 0; i < selectTitle.options.length; i++) {
+                    if (selectTitle.options[i].value === notice.title) {
+                        selectTitle.value = notice.title;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    selectTitle.value = 'custom';
+                    document.getElementById('notice-title-input').classList.remove('hidden');
+                    document.getElementById('notice-title-input').value = notice.title;
+                } else {
+                    document.getElementById('notice-title-input').classList.add('hidden');
+                }
+
+                document.getElementById('notice-pin-checkbox').checked = !!notice.isPinned;
+                document.getElementById('notice-content-input').value = notice.content || '';
+                
+                btnXoa.style.display = 'inline-block';
+                btnLuu.innerText = '💾 Lưu Thay Đổi Thông Báo';
+            }
+        }
+
+        window.xuLyDangThongBao = function() {
+            const idVal = document.getElementById('select-edit-notice').value;
+            const selectVal = document.getElementById('notice-title-select').value;
+            let title = selectVal;
+            if (selectVal === 'custom') {
+                title = document.getElementById('notice-title-input').value.trim();
+            }
+            const content = document.getElementById('notice-content-input').value.trim();
+            const isPinned = document.getElementById('notice-pin-checkbox').checked;
+
+            if (!title || !content) { alert("Vui lòng điền đầy đủ tiêu đề và nội dung thông báo!"); return; }
+
+            const now = new Date();
+            const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
+                            String(now.getMonth() + 1).padStart(2, '0') + '/' + 
+                            now.getFullYear();
+
+            if (idVal) {
+                const id = parseInt(idVal);
+                const notice = window.danhSachThongBao.find(n => n.id === id);
+                if (notice) {
+                    notice.title = title;
+                    notice.isPinned = isPinned;
+                    notice.content = content;
+                    luuThongBaoVaoLocalStorage();
+                    alert("💾 Đã cập nhật và lưu thay đổi thông báo thành công! (Hãy copy JSON cập nhật lên GitHub)");
+                }
+            } else {
+                window.danhSachThongBao.unshift({ id: Date.now(), title: title, date: dateStr, content: content, storyKey: null, isPinned: isPinned });
+                luuThongBaoVaoLocalStorage();
+                capNhatBadgeThongBao();
+                alert("📢 Đã đăng thông báo thành công! (Hãy copy JSON cập nhật lên GitHub)");
+            }
+
+            document.getElementById('select-edit-notice').value = '';
+            dienThongTinSuaThongBao();
+            capNhatSelectSuaThongBao();
+            hienThiBangThongBao();
+            hienThiTrungTamQuanLy();
+            chuyenTab('bang-thong-bao');
+        };
+
+        window.xoaThongBaoDangChon = function() {
+            const idVal = document.getElementById('select-edit-notice').value;
+            if (!idVal) return;
+
+            if (confirm("⚠️ Cậu có chắc muốn xóa thông báo này không?")) {
+                const id = parseInt(idVal);
+                window.danhSachThongBao = window.danhSachThongBao.filter(n => n.id !== id);
+                luuThongBaoVaoLocalStorage();
+                alert("🗑️ Đã xóa thông báo!");
+                document.getElementById('select-edit-notice').value = '';
+                dienThongTinSuaThongBao();
+                capNhatSelectSuaThongBao();
+                hienThiBangThongBao();
+                hienThiTrungTamQuanLy();
+                capNhatBadgeThongBao();
+            }
+        };
+
+        window.xuLyClickThongBao = function(noticeId) {
+            const notice = window.danhSachThongBao.find(n => n.id === noticeId);
+            if (!notice) return;
+
+            let foundStoryKey = notice.storyKey;
+
+            if (!foundStoryKey || !window.dữLiệuTruyện[foundStoryKey]) {
+                let tieuDeThongBao = notice.title;
+                let matchName = tieuDeThongBao.match(/["“](.*?)["“]/);
+                let searchKeyword = matchName ? matchName[1].toLowerCase() : "";
+
+                if (!searchKeyword && tieuDeThongBao.includes('—')) {
+                    let parts = tieuDeThongBao.split('—');
+                    searchKeyword = parts[0].replace('Chương mới:', '').replace('Truyện mới:', '').trim().toLowerCase();
+                }
+
+                if (!searchKeyword) {
+                    searchKeyword = tieuDeThongBao.toLowerCase();
+                }
+
+                for (let key in window.dữLiệuTruyện) {
+                    const truyen = window.dữLiệuTruyện[key];
+                    let fullTitle = truyen.title.toLowerCase();
+                    let cleanTitle = truyen.title.replace(/\[.*?\]/g, '').trim().toLowerCase();
+
+                    if (searchKeyword.includes(fullTitle) || fullTitle.includes(searchKeyword) || (cleanTitle.length > 2 && searchKeyword.includes(cleanTitle))) {
+                        foundStoryKey = key;
+                        break;
+                    }
+                }
+            }
+
+            if (!foundStoryKey || !window.dữLiệuTruyện[foundStoryKey]) {
+                alert("Không tìm thấy bộ truyện tương ứng với thông báo này! 📌");
+                return;
+            }
+
+            const truyen = window.dữLiệuTruyện[foundStoryKey];
+            const tieuDeThongBao = notice.title;
+
+            if (tieuDeThongBao.includes('Chương mới:')) {
+                let targetChapIndex = truyen.chapters.length - 1; 
+                for (let i = 0; i < truyen.chapters.length; i++) {
+                    if (tieuDeThongBao.includes(truyen.chapters[i].title)) {
+                        targetChapIndex = i;
+                        break;
+                    }
+                }
+                xemTruyen(foundStoryKey, false);
+                kiemtraTruocKhiDoc(targetChapIndex, false);
+            } else {
+                xemTruyen(foundStoryKey, false);
+            }
+        };
+
+        function hienThiBangThongBao() {
+            const container = document.getElementById('notice-board-list');
+            const searchKw = (document.getElementById('search-notice-input')?.value || '').toLowerCase();
+            const filterType = document.getElementById('filter-notice-select')?.value || 'tat-ca';
+            
+            if (!container) return;
+            container.innerHTML = '';
+            if (!window.danhSachThongBao || window.danhSachThongBao.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Bảng thông báo hiện chưa có nội dung nào! 📌</p>`;
+                return;
+            }
+
+            let filteredList = window.danhSachThongBao.filter(n => {
+                const matchKw = n.title.toLowerCase().includes(searchKw) || n.content.toLowerCase().includes(searchKw);
+                const isTruyenNoti = n.title.includes('Truyện mới') || n.title.includes('Chương mới') || n.title.includes('—');
+                
+                let matchType = true;
+                if (filterType === 'truyen') matchType = isTruyenNoti;
+                if (filterType === 'khac') matchType = !isTruyenNoti;
+
+                return matchKw && matchType;
+            });
+
+            filteredList.sort((a, b) => {
+                if (a.isPinned && !b.isPinned) return -1;
+                if (!a.isPinned && b.isPinned) return 1;
+                return b.id - a.id;
+            });
+
+            if (filteredList.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Không tìm thấy thông báo phù hợp! 🔍</p>`;
+                return;
+            }
+
+            filteredList.forEach(n => {
+                const pinnedClass = n.isPinned ? 'pinned' : '';
+                const pinnedBadgeHTML = n.isPinned ? `<div class="pinned-badge">📌 THÔNG BÁO QUAN TRỌNG</div>` : '';
+
+                container.innerHTML += `
+                    <div class="notice-card ${pinnedClass}" style="cursor: pointer;" onclick="xuLyClickThongBao(${n.id})">
+                        ${pinnedBadgeHTML}
+                        <div class="notice-date">📅 Ngày đăng: ${n.date}</div>
+                        <div class="notice-title">${n.title}</div>
+                        <div class="notice-content">${n.content.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
+            });
+        }
+
+        function hienThiTrungTamQuanLy() {
+            let totalStories = 0;
+            let totalChapters = 0;
+            let totalViews = 0;
+            let totalComments = 0;
+
+            for (let key in window.dữLiệuTruyện) {
+                totalStories++;
+                const tr = window.dữLiệuTruyện[key];
+                if (tr.chapters) {
+                    totalChapters += tr.chapters.length;
+                    tr.chapters.forEach(ch => {
+                        totalViews += (ch.views || 0);
+                        if (ch.comments) totalComments += ch.comments.length;
+                    });
+                }
+            }
+
+            document.getElementById('stat-dash-stories').innerText = totalStories;
+            document.getElementById('stat-dash-chapters').innerText = totalChapters;
+            document.getElementById('stat-dash-views').innerText = totalViews.toLocaleString();
+            document.getElementById('stat-dash-comments').innerText = totalComments;
+            document.getElementById('stat-dash-notices').innerText = window.danhSachThongBao.length;
+            document.getElementById('stat-dash-schedules').innerText = window.danhSachHenGio.length;
+
+            const storyStatusContainer = document.getElementById('admin-story-status-list');
+            if (storyStatusContainer) {
+                storyStatusContainer.innerHTML = '';
+                for (let key in window.dữLiệuTruyện) {
+                    const tr = window.dữLiệuTruyện[key];
+                    const chapCount = tr.chapters ? tr.chapters.length : 0;
+                    const v = tinhTongViewTruyen(tr);
+                    storyStatusContainer.innerHTML += `
+                        <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <div>
+                                <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${tr.title}</div>
+                                <div style="font-size: 12px; color: var(--subtext-color); margin-top: 3px;">Trạng thái: <strong>${tr.status}</strong> | Số chương: ${chapCount} | 👁️ ${v.toLocaleString()} views</div>
+                            </div>
+                            <button type="button" class="pass-btn" style="padding: 6px 14px; font-size: 11px; background: var(--header-bg);" onclick="xemTruyen('${key}', false)">📖 Xem truyện</button>
+                        </div>
+                    `;
+                }
+            }
+
+            const storyViewsContainer = document.getElementById('admin-story-views-list');
+            if (storyViewsContainer) {
+                storyViewsContainer.innerHTML = '';
+                let dsView = [];
+                for (let key in window.dữLiệuTruyện) {
+                    dsView.push({ key: key, title: window.dữLiệuTruyện[key].title, views: tinhTongViewTruyen(window.dữLiệuTruyện[key]) });
+                }
+                dsView.sort((a, b) => b.views - a.views);
+
+                dsView.forEach((item, index) => {
+                    storyViewsContainer.innerHTML += `
+                        <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="font-weight: 900; color: var(--primary-color);">#${index + 1}</div>
+                                <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${item.title}</div>
+                            </div>
+                            <div style="font-size: 13px; font-weight: bold; color: var(--primary-color);">👁️ ${item.views.toLocaleString()} lượt xem</div>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('stat-forum-posts-count').innerText = window.danhSachDienDan.length;
+            document.getElementById('stat-total-comments-count').innerText = totalComments;
+
+            const forumSummaryContainer = document.getElementById('admin-forum-summary-list');
+            if (forumSummaryContainer) {
+                forumSummaryContainer.innerHTML = '';
+                if (window.danhSachDienDan.length === 0) {
+                    forumSummaryContainer.innerHTML = `<p style="font-size: 12px; color: var(--subtext-color);">Chưa có bài thảo luận diễn đàn nào.</p>`;
+                } else {
+                    window.danhSachDienDan.slice(0, 5).forEach(p => {
+                        forumSummaryContainer.innerHTML += `
+                            <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 12px;">
+                                <strong style="color: var(--primary-color);">${p.author}:</strong> ${p.title} (${p.date})
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            const scheduleContainer = document.getElementById('admin-schedule-list');
+            if (scheduleContainer) {
+                scheduleContainer.innerHTML = '';
+                if (!window.danhSachHenGio || window.danhSachHenGio.length === 0) {
+                    scheduleContainer.innerHTML = `<p style="font-size: 12px; color: var(--subtext-color);">Không có lịch hẹn giờ nào đang chờ.</p>`;
+                } else {
+                    window.danhSachHenGio.forEach(sch => {
+                        let timeStr = new Date(sch.targetTime).toLocaleString('vi-VN');
+                        let label = sch.type === 'story' ? `Hẹn giờ đăng truyện mới (${sch.storyData.title})` : `Hẹn giờ đăng chương mới`;
+                        scheduleContainer.innerHTML += `
+                            <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 12px;">
+                                <strong style="color: var(--primary-color);">⏰ ${label}</strong> vào lúc <strong>${timeStr}</strong>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            const noticesContainer = document.getElementById('admin-notices-list');
+            if (noticesContainer) {
+                noticesContainer.innerHTML = '';
+                window.danhSachThongBao.forEach(n => {
+                    noticesContainer.innerHTML += `
+                        <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 12px;">
+                            <strong>${n.title}</strong> ${n.isPinned ? '[📌 Ghim]' : ''} — 📅 ${n.date}
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        function tinhTongViewTruyen(truyen) {
+            if (!truyen.chapters || truyen.chapters.length === 0) return 0;
+            return truyen.chapters.reduce((tong, ch) => tong + (ch.views || 0), 0);
+        }
+
+        function hienThiXepHang() {
+            const box = document.getElementById('ranking-list-box');
+            if (!box) return;
+            box.innerHTML = '';
+
+            let dsTruyen = [];
+            for (let key in window.dữLiệuTruyện) {
+                const truyen = window.dữLiệuTruyện[key];
+                if (truyen.status === 'Tạm ẩn') continue;
+                dsTruyen.push({ key: key, truyen: truyen, views: tinhTongViewTruyen(truyen) });
+            }
+
+            dsTruyen.sort((a, b) => b.views - a.views);
+
+            if (dsTruyen.length === 0) {
+                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có bộ truyện nào trên bảng xếp hạng! 🏆</p>`;
+                return;
+            }
+
+            dsTruyen.forEach((item, index) => {
+                box.innerHTML += `
+                    <div class="ranking-item" onclick="xemTruyen('${item.key}', false)">
+                        <div class="ranking-left">
+                            <div class="ranking-number">${index + 1}</div>
+                            <div>
+                                <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${item.truyen.title}</div>
+                                <div style="font-size: 11px; color: var(--subtext-color); margin-top: 3px;">Trạng thái: ${item.truyen.status}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 13px; font-weight: bold; color: var(--primary-color);">👁️ ${item.views.toLocaleString()} views</div>
+                    </div>
+                `;
+            });
+        }
+
+        function capNhatDanhSachSelectSua() {
+            const select = document.getElementById('select-edit-story');
+            if(!select) return;
+            select.innerHTML = '';
+            for (let key in window.dữLiệuTruyện) {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.innerText = window.dữLiệuTruyện[key].title + (window.dữLiệuTruyện[key].status === 'Tạm ẩn' ? ' [🔒 Đã ẩn]' : '');
+                select.appendChild(opt);
+            }
+            dienThongTinSua();
+        }
+
+        function dienThongTinSua() {
+            const key = document.getElementById('select-edit-story').value;
+            if (key && window.dữLiệuTruyện[key]) {
+                const truyen = window.dữLiệuTruyện[key];
+                document.getElementById('edit-title').value = truyen.title || '';
+                document.getElementById('edit-cover-url').value = truyen.cover || '';
+                document.getElementById('edit-status').value = truyen.status || 'Đang cập nhật';
+                document.getElementById('edit-total-chapters').value = truyen.totalChaptersInput || truyen.chapters.length || 100;
+                document.getElementById('edit-tags').value = truyen.tags ? truyen.tags.join(', ') : '';
+                document.getElementById('edit-summary').value = truyen.summary || truyen.desc || '';
+            }
+        }
+
+        window.xoaTruyenDangChon = function() {
+            const key = document.getElementById('select-edit-story').value;
+            if (!key || !window.dữLiệuTruyện[key]) { alert("Chưa chọn truyện nào để xóa!"); return; }
+
+            if (confirm(`⚠️ Cậu có CHẮC CẮN muốn xóa vĩnh viễn bộ truyện "${window.dữLiệuTruyện[key].title}" không?`)) {
+                delete window.dữLiệuTruyện[key];
+                luuVaoLocalStorage();
+                xoaTruyenOffline(key);
+                const favIdx = window.danhSachYeuThich.indexOf(key);
+                if (favIdx > -1) { window.danhSachYeuThich.splice(favIdx, 1); luuYeuThichVaoLocalStorage(); }
+                alert(`🗑️ Đã xóa truyện thành công! (Hãy copy JSON cập nhật lên GitHub)`);
+                locTruyen();
+                chuyenTab('trang-chu');
+            }
+        };
+
+        function capNhatDanhSachSelectChuong() {
+            const select = document.getElementById('select-existing-story');
+            if(!select) return;
+            select.innerHTML = '';
+            for (let key in window.dữLiệuTruyện) {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.innerText = window.dữLiệuTruyện[key].title;
+                select.appendChild(opt);
+            }
+        }
+
+        function capNhatDanhSachSelectSuaChuong() {
+            const selectStory = document.getElementById('select-edit-chapter-story');
+            if(!selectStory) return;
+            selectStory.innerHTML = '';
+            for (let key in window.dữLiệuTruyện) {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.innerText = window.dữLiệuTruyện[key].title;
+                selectStory.appendChild(opt);
+            }
+            capNhatDanhSachChapterSua();
+        }
+
+        function capNhatDanhSachChapterSua() {
+            const storyKey = document.getElementById('select-edit-chapter-story').value;
+            const selectChap = document.getElementById('select-edit-chapter-item');
+            if(!selectChap) return;
+            selectChap.innerHTML = '';
+
+            if (!storyKey || !window.dữLiệuTruyện[storyKey]) return;
+            window.dữLiệuTruyện[storyKey].chapters.forEach((ch, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.innerText = ch.title + (ch.is18 ? " [18+]" : "");
+                selectChap.appendChild(opt);
+            });
+            dienThongTinChuongSua();
+        }
+
+        function dienThongTinChuongSua() {
+            const storyKey = document.getElementById('select-edit-chapter-story').value;
+            const chapIndex = document.getElementById('select-edit-chapter-item').value;
+
+            if (!storyKey || chapIndex === "" || !window.dữLiệuTruyện[storyKey]) return;
+            const chap = window.dữLiệuTruyện[storyKey].chapters[chapIndex];
+
+            if (chap) {
+                document.getElementById('edit-chap-title-input').value = chap.title || '';
+                document.getElementById('edit-chap-18-input').checked = !!chap.is18;
+                document.getElementById('edit-chap-content-input').value = chap.content ? chap.content.replace(/<\/?p>/g, '\n').trim() : '';
+            }
+        }
+
+        window.xuLyLuuSuaChuong = function() {
+            const storyKey = document.getElementById('select-edit-chapter-story').value;
+            const chapIndex = document.getElementById('select-edit-chapter-item').value;
+            const newTitle = document.getElementById('edit-chap-title-input').value.trim();
+            const is18 = document.getElementById('edit-chap-18-input').checked;
+            const rawContent = document.getElementById('edit-chap-content-input').value.trim();
+
+            if (!storyKey || chapIndex === "" || !newTitle || !rawContent) { alert("Vui lòng điền đủ thông tin!"); return; }
+
+            const truyen = window.dữLiệuTruyện[storyKey];
+            truyen.chapters[chapIndex].title = newTitle;
+            truyen.chapters[chapIndex].is18 = is18;
+            truyen.chapters[chapIndex].content = `<p>${rawContent.replace(/\n/g, '</p><p>')}</p>`;
+
+            luuVaoLocalStorage();
+            alert("💾 Đã lưu thay đổi chương thành công! (Hãy copy JSON cập nhật lên GitHub)");
+            capNhatDanhSachChapterSua();
+            locTruyen();
+        };
+
+        window.xoaChuongDangChon = function() {
+            const storyKey = document.getElementById('select-edit-chapter-story').value;
+            const chapIndex = document.getElementById('select-edit-chapter-item').value;
+
+            if (!storyKey || chapIndex === "" || !window.dữLiệuTruyện[storyKey]) { alert("Chưa chọn chương!"); return; }
+
+            const truyen = window.dữLiệuTruyện[storyKey];
+            if (truyen.chapters.length <= 1) { alert("⚠️ Truyện phải có ít nhất 1 chương!"); return; }
+
+            if (confirm(`⚠️ Cậu có chắc muốn xóa chương này không?`)) {
+                truyen.chapters.splice(chapIndex, 1);
+                luuVaoLocalStorage();
+                alert("🗑️ Đã xóa chương! (Hãy copy JSON cập nhật lên GitHub)");
+                capNhatDanhSachChapterSua();
+                locTruyen();
+            }
+        };
+
+        function getStatusClass(st) {
+            if (st === "Hoàn thành") return "hoan-thanh";
+            if (st === "Tạm ẩn") return "tam-an";
+            return "dang-cap-nhat";
+        }
+
+        window.xuLyLuuTruyenMoi = function() {
+            const title = document.getElementById('new-title').value.trim();
+            const status = document.getElementById('new-status').value;
+            const totalChaptersInput = parseInt(document.getElementById('new-total-chapters').value) || 100;
+            const tagsRaw = document.getElementById('new-tags').value;
+            const summary = document.getElementById('new-summary').value.trim();
+            const coverUrl = document.getElementById('new-cover-url').value.trim();
+            const chapTitle = document.getElementById('new-chapter-title').value.trim();
+            const chapContent = document.getElementById('new-chapter-content').value.trim();
+            const is18 = document.getElementById('new-chapter-18').checked;
+
+            const isScheduled = document.getElementById('enable-schedule-story').checked;
+            const scheduleTimeStr = document.getElementById('new-story-schedule-time').value;
+
+            if (!title || !summary || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin!"); return; }
+
+            const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()) : ["Đam Mỹ"];
+            const newKey = "truyen-" + Date.now();
+
+            const storyObj = {
+                title: title,
+                status: status,
+                statusClass: getStatusClass(status),
+                cover: coverUrl || "",
+                totalChaptersInput: totalChaptersInput,
+                desc: summary,
+                summary: summary,
+                tags: tags,
+                chapters: [{ 
+                    title: chapTitle, 
+                    content: `<p>${chapContent.replace(/\n/g, '</p><p>')}</p>`, 
+                    is18: is18,
+                    views: Math.floor(Math.random() * 500) + 100,
+                    comments: []
+                }]
+            };
+
+            if (isScheduled && scheduleTimeStr) {
+                const targetTime = new Date(scheduleTimeStr).getTime();
+                if (targetTime <= new Date().getTime()) {
+                    alert("⚠️ Thời gian hẹn giờ phải lớn hơn thời gian hiện tại!");
+                    return;
+                }
+                window.danhSachHenGio.push({
+                    type: 'story',
+                    key: newKey,
+                    storyData: storyObj,
+                    targetTime: targetTime
+                });
+                localStorage.setItem('giadinhcauvong_schedules', JSON.stringify(window.danhSachHenGio));
+                alert("⏰ Đã lên lịch hẹn giờ đăng truyện thành công!");
+            } else {
+                window.dữLiệuTruyện[newKey] = storyObj;
+                luuVaoLocalStorage();
+                if (status !== 'Tạm ẩn') {
+                    taoThongBaoTuDong(`✨ Truyện mới: "${title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, newKey, false);
+                }
+
+                alert("✨ Đăng truyện mới thành công! Nhớ copy đoạn JSON hiện ra ở F12 (Console) dán vào file data.json trên GitHub nhé!");
+
+                document.getElementById('new-title').value = '';
+                document.getElementById('new-total-chapters').value = '100';
+                document.getElementById('new-tags').value = '';
+                document.getElementById('new-summary').value = '';
+                document.getElementById('new-cover-url').value = '';
+                document.getElementById('new-chapter-title').value = '';
+                document.getElementById('new-chapter-content').value = '';
+                document.getElementById('new-chapter-18').checked = false;
+                document.getElementById('enable-schedule-story').checked = false;
+                document.getElementById('schedule-box-story').classList.add('hidden');
+
+                locTruyen();
+                hienThiXepHang();
+                chuyenTab('trang-chu');
+            }
+        };
+
+        window.xuLyLuuSuaTruyen = function() {
+            const selectedKey = document.getElementById('select-edit-story').value;
+            if (!selectedKey) { alert("Chưa chọn truyện!"); return; }
+
+            const title = document.getElementById('edit-title').value.trim();
+            const status = document.getElementById('edit-status').value;
+            const totalChaptersInput = parseInt(document.getElementById('edit-total-chapters').value) || 100;
+            const tags = document.getElementById('edit-tags').value ? document.getElementById('edit-tags').value.split(',').map(t => t.trim()) : [];
+            const summary = document.getElementById('edit-summary').value.trim();
+            const coverUrl = document.getElementById('edit-cover-url').value.trim();
+            const currentTruyen = window.dữLiệuTruyện[selectedKey];
+
+            currentTruyen.title = title;
+            currentTruyen.status = status;
+            currentTruyen.statusClass = getStatusClass(status);
+            currentTruyen.totalChaptersInput = totalChaptersInput;
+            if (coverUrl) currentTruyen.cover = coverUrl;
+            currentTruyen.tags = tags;
+            currentTruyen.summary = summary;
+            currentTruyen.desc = summary;
+
+            luuVaoLocalStorage();
+            alert("✏️ Đã lưu thay đổi thông tin truyện! (Hãy copy JSON cập nhật lên GitHub)");
+            locTruyen();
+            hienThiXepHang();
+            chuyenTab('trang-chu');
+        };
+
+        window.xuLyLuuThemChuong = function() {
+            const selectedKey = document.getElementById('select-existing-story').value;
+            const chapTitle = document.getElementById('append-chapter-title').value.trim();
+            const chapContent = document.getElementById('append-chapter-content').value.trim();
+            const is18 = document.getElementById('append-chapter-18').checked;
+
+            const isScheduled = document.getElementById('enable-schedule-chapter').checked;
+            const scheduleTimeStr = document.getElementById('append-chapter-schedule-time').value;
+
+            if (!selectedKey || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin!"); return; }
+
+            const chapterObj = { 
+                title: chapTitle, 
+                content: `<p>${chapContent.replace(/\n/g, '</p><p>')}</p>`, 
+                is18: is18,
+                views: Math.floor(Math.random() * 300) + 50,
+                comments: []
+            };
+
+            if (isScheduled && scheduleTimeStr) {
+                const targetTime = new Date(scheduleTimeStr).getTime();
+                if (targetTime <= new Date().getTime()) {
+                    alert("⚠️ Thời gian hẹn giờ phải lớn hơn thời gian hiện tại!");
+                    return;
+                }
+                window.danhSachHenGio.push({
+                    type: 'chapter',
+                    storyKey: selectedKey,
+                    chapterData: chapterObj,
+                    targetTime: targetTime
+                });
+                localStorage.setItem('giadinhcauvong_schedules', JSON.stringify(window.danhSachHenGio));
+                alert("⏰ Đã lên lịch hẹn giờ đăng chương tự động thành công!");
+            } else {
+                const truyen = window.dữLiệuTruyện[selectedKey];
+                truyen.chapters.push(chapterObj);
+                
+                luuVaoLocalStorage();
+                
+                if (truyen.status !== 'Tạm ẩn') {
+                    taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${chapTitle}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${chapTitle}". Đọc ngay thôi nào! ✨`, selectedKey, false);
+                }
+
+                alert(`📖 Đã thêm chương mới thành công! Hãy copy đoạn JSON hiện ra ở F12 (Console) dán vào file data.json trên GitHub nhé! 💕`);
+                
+                document.getElementById('append-chapter-title').value = '';
+                document.getElementById('append-chapter-content').value = '';
+                document.getElementById('append-chapter-18').checked = false;
+                document.getElementById('enable-schedule-chapter').checked = false;
+                document.getElementById('schedule-box-chapter').classList.add('hidden');
+
+                locTruyen();
+                hienThiXepHang();
+                chuyenTab('trang-chu');
+            }
+        };
+
+        function handleStoryCardClick(key) {
+            const currentTab = document.getElementById('tab-tu-sach-offline');
+            const isInTuSach = currentTab && !currentTab.classList.contains('hidden');
+
+            if (isInTuSach) {
+                let storyHistoryMap = JSON.parse(localStorage.getItem('giadinhcauvong_story_history') || '{}');
+                let lastChapIdx = storyHistoryMap[key];
+                
+                const truyen = window.dữLiệuTruyện[key];
+                if (truyen && truyen.chapters && lastChapIdx !== undefined && truyen.chapters[lastChapIdx]) {
+                    xemTruyen(key, true); 
+                    kiemtraTruocKhiDoc(lastChapIdx, true);
+                    return;
+                }
+            }
+            xemTruyen(key, false);
+        }
+
+        function taoCardHTML(key, truyen) {
+            const tagsHTML = truyen.tags ? truyen.tags.map(t => `<span class="mini-tag">${t}</span>`).join('') : '';
+            const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh Bìa ]`;
+
+            return `
+                <div class="story-card" onclick="handleStoryCardClick('${key}')">
+                    <div class="story-card-cover-wrapper">
+                        <span class="badge ${truyen.statusClass}">${truyen.status}</span>
+                        <div class="story-card-cover">${coverHTML}</div>
+                    </div>
+                    <div class="story-card-info">
+                        <div class="story-card-title">${truyen.title}</div>
+                        <div class="story-card-desc">${truyen.desc || ''}</div>
+                        <div class="story-card-tags">${tagsHTML}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.locTruyen = function() {
+            const homeGrid = document.getElementById('home-story-grid');
+            const allGrid = document.getElementById('danh-sach-truyen');
+            const latestList = document.getElementById('home-latest-list');
+            if(!homeGrid || !allGrid || !latestList) return;
+
+            const isHome = !document.getElementById('tab-trang-chu').classList.contains('hidden');
+            const kw = (isHome ? document.getElementById('search-home-input').value : document.getElementById('search-all-input').value).toLowerCase();
+            const selectedTag = isHome ? document.getElementById('search-home-tag').value : document.getElementById('search-all-tag').value;
+            const st = isHome ? document.getElementById('search-home-status').value : document.getElementById('search-all-status').value;
+            const sortType = isHome ? document.getElementById('search-home-sort').value : document.getElementById('search-all-sort').value;
+            
+            homeGrid.innerHTML = ''; allGrid.innerHTML = ''; latestList.innerHTML = '';
+
+            let dsTruyenThm = [];
+            for (let key in window.dữLiệuTruyện) {
+                const truyen = window.dữLiệuTruyện[key];
+                if (truyen.status === 'Tạm ẩn') continue;
+
+                const matchKw = truyen.title.toLowerCase().includes(kw) || (truyen.desc && truyen.desc.toLowerCase().includes(kw));
+                
+                let matchTag = true;
+                if (selectedTag && selectedTag !== 'tat-ca') {
+                    matchTag = truyen.tags && truyen.tags.map(t => t.trim()).includes(selectedTag);
+                }
+
+                const matchSt = (st === 'tat-ca') || (truyen.status === st);
+
+                const totalChapCount = truyen.chapters ? truyen.chapters.length : 0;
+                let matchLength = true;
+                if (sortType === 'dai-nhat') {
+                    matchLength = totalChapCount > 50;
+                } else if (sortType === 'ngan-nhat') {
+                    matchLength = totalChapCount <= 50;
+                }
+
+                if (matchKw && matchTag && matchSt && matchLength) {
+                    const totalViews = tinhTongViewTruyen(truyen);
+                    dsTruyenThm.push({ key: key, truyen: truyen, views: totalViews, count: totalChapCount });
+                }
+            }
+
+            if (sortType === 'az') {
+                dsTruyenThm.sort((a, b) => a.truyen.title.localeCompare(b.truyen.title));
+            } else {
+                dsTruyenThm.sort((a, b) => b.views - a.views);
+            }
+
+            if (dsTruyenThm.length === 0) {
+                homeGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có truyện nào trên hệ thống. Hãy đăng truyện mới nhé! 🌸</p>`;
+                allGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có truyện nào trên hệ thống.</p>`;
+                latestList.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có cập nhật mới.</p>`;
+                return;
+            }
+
+            dsTruyenThm.forEach(item => {
+                const html = taoCardHTML(item.key, item.truyen);
+                homeGrid.innerHTML += html;
+                allGrid.innerHTML += html;
+
+                const lastChapter = item.truyen.chapters && item.truyen.chapters.length > 0 ? item.truyen.chapters[item.truyen.chapters.length - 1] : null;
+                latestList.innerHTML += `
+                    <div class="latest-item" onclick="handleStoryCardClick('${item.key}')">
+                        <div>
+                            <div class="latest-title">${item.truyen.title}</div>
+                            <div class="latest-chapter">${lastChapter ? lastChapter.title : 'Mới cập nhật'} — 👁️ ${item.views.toLocaleString()} views</div>
+                        </div>
+                        <div class="latest-time">Mới đăng</div>
+                    </div>
+                `;
+            });
+        };
+
+        window.chuyenTab = function(tabName) {
+            if (['trang-chu', 'tat-ca-truyen', 'xep-hang', 'bang-thong-bao', 'dien-dan', 'tu-sach-offline', 'gioi-thieu', 'dang-truyen', 'quan-li'].includes(tabName)) { tabTruocDo = tabName; }
+
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-dang-truyen', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+
+            ['btn-tab-trang-chu', 'btn-tab-tat-ca-truyen', 'btn-tab-xep-hang', 'btn-tab-bang-thong-bao', 'btn-tab-dien-dan', 'btn-tab-tu-sach-offline', 'btn-tab-gioi-thieu', 'btn-tab-dang-truyen', 'btn-tab-quan-li'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('active');
+            });
+
+            if (tabName === 'trang-chu') {
+                document.getElementById('tab-trang-chu').classList.remove('hidden');
+                document.getElementById('btn-tab-trang-chu').classList.add('active');
+                kiemTraHienThiLichSu();
+                hienThiLoiNhanTrangChu();
+            } else if (tabName === 'tat-ca-truyen') {
+                document.getElementById('tab-tat-ca-truyen').classList.remove('hidden');
+                document.getElementById('btn-tab-tat-ca-truyen').classList.add('active');
+            } else if (tabName === 'xep-hang') {
+                document.getElementById('tab-xep-hang').classList.remove('hidden');
+                document.getElementById('btn-tab-xep-hang').classList.add('active');
+                hienThiXepHang();
+            } else if (tabName === 'bang-thong-bao') {
+                document.getElementById('tab-bang-thong-bao').classList.remove('hidden');
+                document.getElementById('btn-tab-bang-thong-bao').classList.add('active');
+                hienThiBangThongBao();
+                danhDauDaDocThongBao();
+            } else if (tabName === 'dien-dan') {
+                document.getElementById('tab-dien-dan').classList.remove('hidden');
+                document.getElementById('btn-tab-dien-dan').classList.add('active');
+                hienThiDienDan();
+            } else if (tabName === 'tu-sach-offline') {
+                document.getElementById('tab-tu-sach-offline').classList.remove('hidden');
+                document.getElementById('btn-tab-tu-sach-offline').classList.add('active');
+                hienThiYeuThich();
+            } else if (tabName === 'gioi-thieu') {
+                document.getElementById('tab-gioi-thieu').classList.remove('hidden');
+                document.getElementById('btn-tab-gioi-thieu').classList.add('active');
+            } else if (tabName === 'dang-truyen') {
+                document.getElementById('tab-dang-truyen').classList.remove('hidden');
+                document.getElementById('btn-tab-dang-truyen').classList.add('active');
+            } else if (tabName === 'quan-li') {
+                document.getElementById('tab-quan-li').classList.remove('hidden');
+                document.getElementById('btn-tab-quan-li').classList.add('active');
+                hienThiTrungTamQuanLy();
+            }
+            window.locTruyen();
+        };
+
+        window.xemTruyen = function(key, skipDetail = false) {
+            truyenHienTaiKey = key;
+            const truyen = window.dữLiệuTruyện[key];
+            document.getElementById('detail-title').innerText = truyen.title;
+            document.getElementById('detail-summary').innerText = truyen.summary || truyen.desc;
+            document.getElementById('detail-count').innerText = `${truyen.chapters ? truyen.chapters.length : 0} chương`;
+
+            document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh bìa ]`;
+            document.getElementById('detail-tags').innerHTML = truyen.tags ? truyen.tags.map(t => `<span class="tag">${t}</span>`).join('') : '';
+
+            const soChuongDaHoanThanh = truyen.chapters ? truyen.chapters.length : 0;
+            const tongSoChuong = truyen.totalChaptersInput || Math.max(soChuongDaHoanThanh, 100);
+            let percent = Math.round((soChuongDaHoanThanh / tongSoChuong) * 100);
+            if (percent > 100) percent = 100;
+
+            document.getElementById('story-progress-bar-fill').style.width = percent + '%';
+            document.getElementById('story-progress-percent-text').innerText = percent + '%';
+            document.getElementById('story-progress-chapters-text').innerText = `Đã hoàn thành: ${soChuongDaHoanThanh} / ${tongSoChuong} chương`;
+            document.getElementById('story-progress-status-text').innerText = (percent >= 100 || truyen.status === 'Hoàn thành') ? '🎉 Hoàn thành' : '🚀 Đang tiến hành';
+
+            const isFav = window.danhSachYeuThich.includes(key);
+            capNhatNutYeuThich(isFav);
+
+            kiemTraTruyenDaLuuOffline(key, function(daLuu) { capNhatNutOffline(daLuu); });
+
+            const chapterList = document.getElementById('detail-chapters');
+            chapterList.innerHTML = '';
+            if (truyen.chapters) {
+                truyen.chapters.forEach((ch, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'chapter-item';
+                    const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold; margin-right:5px;">[18+]</span>` : '';
+                    li.innerHTML = `<span>${badge18}${ch.title}</span> <span style="font-size:11px; color:var(--subtext-color);">👁️ ${ch.views || 0}</span>`;
+                    li.onclick = () => kiemtraTruocKhiDoc(index, false);
+                    chapterList.appendChild(li);
+                });
+            }
+
+            if (!skipDetail) {
+                ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add('hidden');
+                });
+                document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
+            }
+        };
+
+        function kiemtraTruocKhiDoc(index, restoreScroll = false) {
+            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            choVaoIndexTam = index;
+            window.dangPhucHoiCuon = restoreScroll;
+            if (truyen.chapters[index].is18) {
+                document.getElementById('warning-modal').classList.remove('hidden');
+            } else {
+                docChuong(index, restoreScroll);
+            }
+        }
+
+        window.xacNhanVaoDoc = function(dongY) {
+            document.getElementById('warning-modal').classList.add('hidden');
+            if (dongY) { docChuong(choVaoIndexTam, window.dangPhucHoiCuon); }
+        };
+
+        function docChuong(index, restoreScroll = false) {
+            chuongHienTaiIndex = index;
+            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            const chuong = truyen.chapters[index];
+
+            luuLichSuDoc(truyenHienTaiKey, index);
+
+            if (!chuong.views) chuong.views = 100;
+            chuong.views += Math.floor(Math.random() * 3) + 1;
+            luuVaoLocalStorage();
+
+            document.getElementById('chapter-views').innerText = `👁️ Lượt xem: ${chuong.views}`;
+            document.getElementById('reading-content').innerHTML = `
+                <h3 style="color: var(--primary-color); text-align: center; margin-top: 0;">${chuong.title}</h3>
+                <hr style="border: none; border-top: 1px dashed var(--header-bg); margin-bottom: 15px;">
+                ${chuong.content}
+            `;
+
+            document.getElementById('btn-prev').disabled = (index === 0);
+            document.getElementById('btn-next').disabled = (index === truyen.chapters.length - 1);
+
+            hienThiBinhLuan();
+
+            document.getElementById('btn-floating-menu').classList.remove('hidden');
+            document.getElementById('wattpad-progress-bar-fixed').classList.remove('hidden');
+
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-dang-truyen', 'tab-quan-li', 'tab-chi-tiet-truyen'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            document.getElementById('tab-doc-chuong').classList.remove('hidden');
+            
+            const scrollKey = `scroll_${truyenHienTaiKey}_${chuongHienTaiIndex}`;
+            const savedScrollPos = localStorage.getItem(scrollKey);
+
+            if (restoreScroll && savedScrollPos) {
+                window.scrollTo({ top: parseInt(savedScrollPos), behavior: 'smooth' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function setupWattpadProgressBar() {
+            const container = document.getElementById('wattpad-progress-bar-fixed');
+            const bar = document.getElementById('wattpad-progress-bar-fill');
+            if(!container || !bar) return;
+
+            let isDragging = false;
+
+            function updateProgressByClientX(clientX) {
+                const rect = container.getBoundingClientRect();
+                let clickX = clientX - rect.left;
+                if (clickX < 0) clickX = 0;
+                if (clickX > rect.width) clickX = rect.width;
+                const percent = clickX / rect.width;
+
+                bar.style.width = (percent * 100) + '%';
+
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (docHeight > 0) {
+                    window.scrollTo({ top: docHeight * percent, behavior: 'auto' });
+                }
+            }
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                updateProgressByClientX(e.clientX);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    updateProgressByClientX(e.clientX);
+                }
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            container.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                if(e.touches.length > 0) updateProgressByClientX(e.touches[0].clientX);
+            }, {passive: true});
+
+            window.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches.length > 0) {
+                    updateProgressByClientX(e.touches[0].clientX);
+                }
+            }, {passive: true});
+
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!document.getElementById('tab-doc-chuong').classList.contains('hidden') && truyenHienTaiKey !== null) {
+                const scrollKey = `scroll_${truyenHienTaiKey}_${chuongHienTaiIndex}`;
+                localStorage.setItem(scrollKey, window.scrollY);
+
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (docHeight > 0) {
+                    const scrollPercent = (window.scrollY / docHeight) * 100;
+                    const bar = document.getElementById('wattpad-progress-bar-fill');
+                    if(bar) bar.style.width = scrollPercent + '%';
+                }
+            }
+        });
+
+        function moModalMucLuc() {
+            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            if (!truyen || !truyen.chapters) return;
+
+            const box = document.getElementById('modal-chapter-list-box');
+            box.innerHTML = '';
+
+            truyen.chapters.forEach((ch, index) => {
+                const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold; margin-right:5px;">[18+]</span>` : '';
+                const isActive = (index === chuongHienTaiIndex) ? 'active' : '';
+                box.innerHTML += `
+                    <div class="chapter-modal-item ${isActive}" onclick="chonChuongTuModal(${index})">
+                        <span>${badge18}${ch.title}</span>
+                        ${index === chuongHienTaiIndex ? '<span>✨</span>' : ''}
+                    </div>
+                `;
+            });
+
+            document.getElementById('chapter-modal-overlay').classList.remove('hidden');
+        }
+
+        function dongModalMucLuc() {
+            document.getElementById('chapter-modal-overlay').classList.add('hidden');
+        }
+
+        window.chonChuongTuModal = function(index) {
+            dongModalMucLuc();
+            kiemtraTruocKhiDoc(index, false);
+        };
+
+        window.quayLaiTrangGioiThieuTuModal = function() {
+            dongModalMucLuc();
+            document.getElementById('btn-floating-menu').classList.add('hidden');
+            document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
+            document.getElementById('tab-doc-chuong').classList.add('hidden');
+            document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
+        };
+
+        function hienThiBinhLuan() {
+            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            const chuong = truyen.chapters[chuongHienTaiIndex];
+            if (!chuong.comments) chuong.comments = [];
+
+            const box = document.getElementById('comment-list-box');
+            if (!box) return;
+            box.innerHTML = '';
+
+            if (chuong.comments.length === 0) {
+                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 12px; margin: 10px 0;">Chưa có bình luận nào. Hãy là người đầu tiên để lại lời nhắn nhé! 💕</p>`;
+                return;
+            }
+
+            chuong.comments.forEach(c => {
+                box.innerHTML += `
+                    <div class="comment-item">
+                        <div class="comment-author">${c.name}</div>
+                        <div>${c.text}</div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleAnonymityInput() {
+            const isChecked = document.getElementById('comment-anonymous-checkbox').checked;
+            const nameInput = document.getElementById('comment-name');
+            if (isChecked) {
+                nameInput.dataset.previousName = nameInput.value;
+                nameInput.value = "🕵️‍♂️ Người qua đường bí ẩn";
+                nameInput.disabled = true;
+                nameInput.style.opacity = "0.7";
+            } else {
+                nameInput.value = nameInput.dataset.previousName || "";
+                nameInput.disabled = false;
+                nameInput.style.opacity = "1";
+            }
+        }
+
+        window.guiBinhLuan = function() {
+            const isAnonymous = document.getElementById('comment-anonymous-checkbox').checked;
+            let name = document.getElementById('comment-name').value.trim();
+            if (isAnonymous || !name) {
+                name = "🕵️‍♂️ Người qua đường bí ẩn 🌸";
+            }
+            const text = document.getElementById('comment-content').value.trim();
+
+            if (!text) { alert("Vui lòng nhập nội dung bình luận!"); return; }
+
+            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            const chuong = truyen.chapters[chuongHienTaiIndex];
+            if (!chuong.comments) chuong.comments = [];
+
+            chuong.comments.push({ name: name, text: text });
+            luuVaoLocalStorage();
+
+            document.getElementById('comment-content').value = '';
+            if (isAnonymous) {
+                document.getElementById('comment-anonymous-checkbox').checked = false;
+                toggleAnonymityInput();
+            }
+            hienThiBinhLuan();
+        };
+
+        window.chuyenChuong = function(huong) { kiemtraTruocKhiDoc(chuongHienTaiIndex + huong, false); };
+        window.quayLaiTruyen = function() {
+            document.getElementById('btn-floating-menu').classList.add('hidden');
+            document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
+            document.getElementById('tab-doc-chuong').classList.add('hidden');
+            document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
+        };
+        window.quayLaiDanhSach = function() {
+            document.getElementById('btn-floating-menu').classList.add('hidden');
+            document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
+            window.chuyenTab(tabTruocDo);
+        };
+
+        window.addEventListener('popstate', function() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) { xuLyChuyenTabTuURL(hash); } 
+            else { xuLyChuyenTabTuURL('trang-chu'); }
+        });
+
+        function xuLyChuyenTabTuURL(tabName) {
+            document.getElementById('btn-floating-menu').classList.add('hidden');
+            document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+
+            ['btn-tab-trang-chu', 'btn-tab-tat-ca-truyen', 'btn-tab-xep-hang', 'btn-tab-bang-thong-bao', 'btn-tab-dien-dan', 'btn-tab-tu-sach-offline', 'btn-tab-gioi-thieu', 'btn-tab-quan-li'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('active');
+            });
+
+            const targetTabID = 'tab-' + tabName;
+            const targetElement = document.getElementById(targetTabID);
+            
+            if (targetElement) {
+                targetElement.classList.remove('hidden');
+                const activeBtn = document.getElementById('btn-tab-' + tabName);
+                if (activeBtn) activeBtn.classList.add('active');
+            } else {
+                document.getElementById('tab-trang-chu').classList.remove('hidden');
+                document.getElementById('btn-tab-trang-chu').classList.add('active');
+            }
+
+            if (tabName === 'xep-hang') hienThiXepHang();
+            if (tabName === 'bang-thong-bao') {
+                hienThiBangThongBao();
+                danhDauDaDocThongBao();
+            }
+            if (tabName === 'dien-dan') hienThiDienDan();
+            if (tabName === 'tu-sach-offline') hienThiYeuThich();
+            if (tabName === 'quan-li') hienThiTrungTamQuanLy();
+            if (tabName === 'trang-chu') {
+                kiemTraHienThiLichSu();
+                hienThiLoiNhanTrangChu();
+            }
+            
+            window.locTruyen();
+        }
+
+        const oldChuyenTab = window.chuyenTab;
+        window.chuyenTab = function(tabName) {
+            oldChuyenTab(tabName);
+            history.pushState({ tab: tabName }, '', '#' + tabName);
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialHash = window.location.hash.replace('#', '');
+            if (initialHash) { xuLyChuyenTabTuURL(initialHash); }
+        });
+    </script>
+</body>
+</html>
