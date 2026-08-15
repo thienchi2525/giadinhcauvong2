@@ -46,7 +46,7 @@
             position: absolute; top: 15px; right: 15px;
             background: var(--container-bg); border: 2px solid var(--primary-color);
             color: var(--primary-color); padding: 6px 12px; border-radius: 20px;
-            cursor: pointer; font-family: inherit; font-size: 13px; font-weight: bold;
+            cursor: pointer; font-family: inherit; font-size: 14px; font-weight: bold;
             z-index: 10;
         }
 
@@ -70,12 +70,12 @@
 
         .pass-box {
             background: var(--container-bg); padding: 30px; border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); text-align: center; max-width: 320px; width: 85%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); text-align: center; max-width: 340px; width: 85%;
             border: 2px solid var(--header-bg);
         }
 
         .pass-input {
-            width: 80%; padding: 10px; margin: 15px 0;
+            width: 80%; padding: 12px; margin: 15px 0;
             border: 2px solid var(--header-bg); background: var(--box-bg);
             color: var(--text-color); border-radius: 15px;
             text-align: center; font-family: inherit; font-size: 16px; outline: none;
@@ -84,12 +84,12 @@
         .pass-btn {
             background-color: var(--primary-color); color: white; border: none;
             padding: 10px 20px; border-radius: 20px; cursor: pointer;
-            font-family: inherit; font-weight: bold;
+            font-family: inherit; font-weight: bold; font-size: 14px;
         }
 
         .continue-reading-banner {
             background: linear-gradient(135deg, var(--header-bg), var(--primary-color));
-            color: white; padding: 15px 20px; border-radius: 15px; margin-bottom: 20px;
+            color: white; padding: 16px 20px; border-radius: 15px; margin-bottom: 20px;
             display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
@@ -99,15 +99,15 @@
             box-sizing: border-box;
         }
 
-        header h1 { margin: 0; color: #ffffff; font-size: 28px; }
-        .slogan { margin-top: 8px; color: #ffffff; font-size: 13px; line-height: 1.6; }
+        header h1 { margin: 0; color: #ffffff; font-size: 30px; }
+        .slogan { margin-top: 8px; color: #ffffff; font-size: 14px; line-height: 1.6; }
 
         .nav-menu { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
 
         .nav-btn {
             background-color: var(--container-bg); color: var(--primary-color);
-            border: 2px solid var(--header-bg); padding: 8px 16px; border-radius: 25px;
-            cursor: pointer; font-weight: bold; font-family: inherit; transition: all 0.3s ease; font-size: 13px;
+            border: 2px solid var(--header-bg); padding: 9px 18px; border-radius: 25px;
+            cursor: pointer; font-weight: bold; font-family: inherit; transition: all 0.3s ease; font-size: 14px;
             position: relative;
         }
 
@@ -117,44 +117,91 @@
 
         .notification-badge {
             position: absolute; top: -6px; right: -6px;
-            background-color: #ff4d4d; color: white; font-size: 10px; font-weight: bold;
+            background-color: #ff4d4d; color: white; font-size: 11px; font-weight: bold;
             padding: 2px 6px; border-radius: 10px; border: 2px solid var(--container-bg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .container {
             width: 95%; max-width: 960px; background: var(--container-bg);
-            margin: 20px 0 40px 0; padding: 20px; border-radius: 20px;
+            margin: 20px 0 40px 0; padding: 22px; border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.06); box-sizing: border-box;
         }
 
         .section-title {
-            color: var(--primary-color); font-size: 18px; margin: 25px 0 15px 0;
-            display: flex; align-items: center; gap: 8px;
+            color: var(--primary-color); font-size: 19px; margin: 25px 0 15px 0;
+            display: flex; align-items: center; gap: 8px; font-weight: bold;
             border-bottom: 2px dashed var(--border-color); padding-bottom: 8px;
         }
 
+        /* --- SLIDER / CAROUSEL TRUYỆN HOT --- */
+        .hot-slider-container {
+            position: relative; width: 100%; height: 280px; background: var(--box-bg);
+            border-radius: 18px; overflow: hidden; border: 2px solid var(--border-color);
+            margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .hot-slide-track {
+            display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out;
+        }
+        .hot-slide-item {
+            min-width: 100%; height: 100%; display: flex; align-items: center;
+            padding: 20px; box-sizing: border-box; gap: 20px; cursor: pointer;
+        }
+        .hot-slide-cover {
+            width: 150px; height: 220px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15); background: var(--border-color);
+        }
+        .hot-slide-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .hot-slide-info { display: flex; flex-direction: column; justify-content: center; flex-grow: 1; }
+        .hot-slide-tag {
+            background: var(--primary-color); color: white; font-size: 11px; font-weight: bold;
+            padding: 3px 10px; border-radius: 10px; width: fit-content; margin-bottom: 8px;
+        }
+        .hot-slide-title { font-size: 20px; font-weight: bold; color: var(--text-color); margin-bottom: 8px; line-height: 1.4; }
+        .hot-slide-desc { font-size: 13px; color: var(--subtext-color); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 12px; }
+        .hot-slide-btn {
+            background: var(--primary-color); color: white; border: none; padding: 8px 16px;
+            border-radius: 15px; font-weight: bold; font-family: inherit; font-size: 13px; width: fit-content; cursor: pointer;
+        }
+        .slider-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4); color: white; border: none; width: 36px; height: 36px;
+            border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; z-index: 5;
+            transition: background 0.2s;
+        }
+        .slider-arrow:hover { background: var(--primary-color); }
+        .slider-prev { left: 12px; }
+        .slider-next { right: 12px; }
+        .slider-dots {
+            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 6px; z-index: 5;
+        }
+        .slider-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: var(--border-color); cursor: pointer; transition: background 0.3s;
+        }
+        .slider-dot.active { background: var(--primary-color); width: 20px; border-radius: 4px; }
+
         .search-box {
-            display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;
-            background: var(--box-bg); padding: 12px; border-radius: 15px; border: 1px solid var(--border-color);
+            display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;
+            background: var(--box-bg); padding: 14px; border-radius: 16px; border: 1px solid var(--border-color);
         }
         .search-input {
-            flex-grow: 1; padding: 8px 12px; border: 1.5px solid var(--border-color);
-            border-radius: 10px; font-family: inherit; font-size: 13px; outline: none;
+            flex-grow: 1; padding: 10px 14px; border: 1.5px solid var(--border-color);
+            border-radius: 12px; font-family: inherit; font-size: 14px; outline: none;
             background: var(--container-bg); color: var(--text-color);
         }
         .search-input:focus { border-color: var(--primary-color); }
         .filter-select {
-            padding: 8px; border: 1.5px solid var(--border-color);
-            border-radius: 10px; font-family: inherit; font-size: 13px; outline: none;
+            padding: 10px; border: 1.5px solid var(--border-color);
+            border-radius: 12px; font-family: inherit; font-size: 14px; outline: none;
             background: var(--container-bg); color: var(--text-color);
         }
 
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 13px; color: var(--primary-color); }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 14px; color: var(--primary-color); }
         .form-control {
-            width: 100%; padding: 10px; border: 1.5px solid var(--border-color);
-            border-radius: 12px; font-family: inherit; font-size: 13px;
+            width: 100%; padding: 12px; border: 1.5px solid var(--border-color);
+            border-radius: 14px; font-family: inherit; font-size: 14px;
             background: var(--box-bg); color: var(--text-color); box-sizing: border-box; outline: none;
         }
         .form-control:focus { border-color: var(--primary-color); }
@@ -162,10 +209,10 @@
         textarea.form-control { resize: none; height: 150px; }
 
         .nickname-select {
-            width: 100%; padding: 8px 12px; margin-top: 6px; margin-bottom: 4px;
-            border: 1.5px solid var(--border-color); border-radius: 10px;
+            width: 100%; padding: 10px 12px; margin-top: 6px; margin-bottom: 4px;
+            border: 1.5px solid var(--border-color); border-radius: 12px;
             background: var(--box-bg); color: var(--primary-color);
-            font-family: inherit; font-size: 12px; font-weight: bold; outline: none;
+            font-family: inherit; font-size: 13px; font-weight: bold; outline: none;
             cursor: pointer;
         }
         .nickname-select:focus { border-color: var(--primary-color); }
@@ -173,8 +220,8 @@
         .mode-selector { display: flex; gap: 8px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
         .mode-btn {
             background: var(--box-bg); border: 2px solid var(--border-color);
-            padding: 8px 14px; border-radius: 20px; cursor: pointer;
-            font-family: inherit; font-size: 12px; font-weight: bold; color: var(--text-color);
+            padding: 9px 16px; border-radius: 20px; cursor: pointer;
+            font-family: inherit; font-size: 13px; font-weight: bold; color: var(--text-color);
         }
         .mode-btn.active { border-color: var(--primary-color); background: var(--primary-color); color: white; }
 
@@ -185,8 +232,8 @@
         }
         .admin-sub-btn {
             background: var(--container-bg); border: 2px solid var(--border-color);
-            padding: 8px 16px; border-radius: 20px; cursor: pointer;
-            font-family: inherit; font-size: 12px; font-weight: bold; color: var(--text-color);
+            padding: 9px 16px; border-radius: 20px; cursor: pointer;
+            font-family: inherit; font-size: 13px; font-weight: bold; color: var(--text-color);
             transition: all 0.2s ease;
         }
         .admin-sub-btn.active {
@@ -203,20 +250,20 @@
             transition: transform 0.2s ease;
         }
         .stat-card-item:hover { transform: translateY(-3px); border-color: var(--primary-color); }
-        .stat-card-icon { font-size: 22px; margin-bottom: 6px; }
-        .stat-card-label { font-size: 12px; font-weight: bold; color: var(--subtext-color); }
-        .stat-card-number { font-size: 22px; font-weight: 900; color: var(--primary-color); margin-top: 4px; }
+        .stat-card-icon { font-size: 24px; margin-bottom: 6px; }
+        .stat-card-label { font-size: 13px; font-weight: bold; color: var(--subtext-color); }
+        .stat-card-number { font-size: 24px; font-weight: 900; color: var(--primary-color); margin-top: 4px; }
 
         .btn-submit {
-            background: var(--primary-color); color: white; border: none; padding: 10px 24px;
-            border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 13px;
+            background: var(--primary-color); color: white; border: none; padding: 11px 24px;
+            border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 14px;
             transition: all 0.2s ease;
         }
         .btn-submit:hover { opacity: 0.9; transform: scale(1.02); }
 
         .btn-delete {
-            background: #ff4d4d; color: white; border: none; padding: 10px 20px;
-            border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 13px;
+            background: #ff4d4d; color: white; border: none; padding: 11px 20px;
+            border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 14px;
             transition: all 0.2s ease;
         }
         .btn-delete:hover { background: #e03e3e; transform: scale(1.02); }
@@ -224,48 +271,42 @@
         .forum-container { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
         .forum-post-card {
             background: var(--box-bg); border: 1px solid var(--border-color);
-            padding: 16px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            padding: 18px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             position: relative; transition: transform 0.2s ease;
         }
         .forum-post-card:hover { border-color: var(--primary-color); }
         .forum-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .forum-author { font-weight: bold; color: var(--primary-color); font-size: 14px; display: flex; align-items: center; gap: 6px; }
-        .forum-badge-author { background: var(--primary-color); color: white; font-size: 9px; padding: 2px 6px; border-radius: 6px; }
-        .forum-time { font-size: 11px; color: var(--subtext-color); }
-        .forum-title { font-size: 15px; font-weight: bold; margin-bottom: 6px; color: var(--text-color); }
-        .forum-content { font-size: 13px; line-height: 1.6; margin-bottom: 12px; }
-        .forum-footer-actions { display: flex; gap: 12px; align-items: center; font-size: 12px; border-top: 1px dashed var(--border-color); padding-top: 10px; }
+        .forum-author { font-weight: bold; color: var(--primary-color); font-size: 15px; display: flex; align-items: center; gap: 6px; }
+        .forum-badge-author { background: var(--primary-color); color: white; font-size: 10px; padding: 2px 6px; border-radius: 6px; }
+        .forum-time { font-size: 12px; color: var(--subtext-color); }
+        .forum-title { font-size: 16px; font-weight: bold; margin-bottom: 6px; color: var(--text-color); }
+        .forum-content { font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
+        .forum-footer-actions { display: flex; gap: 12px; align-items: center; font-size: 13px; border-top: 1px dashed var(--border-color); padding-top: 10px; }
         .forum-action-btn { background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; font-family: inherit; padding: 0; display: flex; align-items: center; gap: 4px; }
         .forum-action-btn:hover { text-decoration: underline; }
 
         .reply-list { 
-            margin-top: 10px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 8px; 
-            padding-left: 15px; 
-            border-left: 2.5px solid var(--border-color);
-            max-height: 220px; 
-            overflow-y: auto;  
-            padding-right: 6px; 
+            margin-top: 10px; display: flex; flex-direction: column; gap: 8px; 
+            padding-left: 15px; border-left: 2.5px solid var(--border-color);
+            max-height: 220px; overflow-y: auto; padding-right: 6px; 
         }
-        .reply-item { background: var(--container-bg); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 12px; }
+        .reply-item { background: var(--container-bg); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 13px; }
         .reply-author { font-weight: bold; color: var(--primary-color); margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
 
         .latest-list { display: flex; flex-direction: column; gap: 10px; }
         .latest-item {
             background: var(--box-bg); border: 1px solid var(--border-color);
-            padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+            padding: 14px 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
         }
         .latest-item:hover { border-color: var(--primary-color); transform: translateX(4px); }
-        .latest-title { font-weight: bold; font-size: 13px; color: var(--text-color); }
-        .latest-chapter { font-size: 12px; color: var(--primary-color); margin-top: 3px; }
-        .latest-time { font-size: 11px; color: var(--subtext-color); }
+        .latest-title { font-weight: bold; font-size: 14px; color: var(--text-color); }
+        .latest-chapter { font-size: 13px; color: var(--primary-color); margin-top: 3px; }
+        .latest-time { font-size: 12px; color: var(--subtext-color); }
 
         .notice-board-container { display: flex; flex-direction: column; gap: 14px; margin-top: 15px; }
         .notice-card {
             border: 1px solid rgba(0,0,0,0.06);
-            padding: 14px 18px; border-radius: 14px; position: relative;
+            padding: 16px 20px; border-radius: 14px; position: relative;
             box-shadow: 0 2px 10px rgba(0,0,0,0.02); transition: transform 0.2s ease, box-shadow 0.2s ease;
             cursor: pointer;
         }
@@ -294,24 +335,24 @@
         }
         .pinned-badge {
             display: inline-flex; align-items: center; gap: 4px;
-            background: #ff1493; color: white; font-size: 10px; font-weight: bold;
+            background: #ff1493; color: white; font-size: 11px; font-weight: bold;
             padding: 3px 8px; border-radius: 8px; margin-bottom: 6px;
             box-shadow: 0 2px 5px rgba(255,20,147,0.3);
         }
 
-        .notice-date { font-size: 11px; font-weight: bold; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; opacity: 0.8; }
-        .notice-title { font-size: 14px; font-weight: bold; margin-bottom: 6px; }
-        .notice-content { font-size: 12px; line-height: 1.6; }
+        .notice-date { font-size: 12px; font-weight: bold; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; opacity: 0.8; }
+        .notice-title { font-size: 15px; font-weight: bold; margin-bottom: 6px; }
+        .notice-content { font-size: 13px; line-height: 1.6; }
         
         .story-progress-box {
             background: var(--box-bg); border: 1.5px dashed var(--primary-color);
-            padding: 14px 20px; border-radius: 14px; margin: 15px 0;
+            padding: 16px 20px; border-radius: 14px; margin: 15px 0;
             max-width: 100%; width: 100%; box-sizing: border-box;
             box-shadow: 0 4px 12px rgba(255, 105, 180, 0.08);
         }
         .story-progress-header {
             display: flex; justify-content: space-between; align-items: center;
-            font-size: 13px; font-weight: bold; color: var(--primary-color); margin-bottom: 8px;
+            font-size: 14px; font-weight: bold; color: var(--primary-color); margin-bottom: 8px;
         }
         .story-progress-bar-bg {
             width: 100%; height: 12px; background: var(--border-color);
@@ -323,19 +364,19 @@
         }
         .story-progress-footer {
             display: flex; justify-content: space-between; align-items: center;
-            font-size: 12px; color: var(--subtext-color); margin-top: 8px; font-weight: 600;
+            font-size: 13px; color: var(--subtext-color); margin-top: 8px; font-weight: 600;
         }
 
         .ranking-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
         .ranking-item {
             background: var(--box-bg); border: 1px solid var(--border-color);
-            padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+            padding: 14px 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
             transition: all 0.2s ease;
         }
         .ranking-item:hover { border-color: var(--primary-color); transform: translateX(4px); }
         .ranking-left { display: flex; align-items: center; gap: 15px; }
         .ranking-number {
-            font-size: 16px; font-weight: 900; width: 28px; height: 28px;
+            font-size: 16px; font-weight: 900; width: 30px; height: 30px;
             background: var(--border-color); color: var(--primary-color); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
@@ -343,50 +384,50 @@
         .ranking-item:nth-child(2) .ranking-number { background: #c0c0c0; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
         .ranking-item:nth-child(3) .ranking-number { background: #cd7f32; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 
-        .story-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 18px; margin-top: 15px; }
+        .story-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px; margin-top: 15px; }
         .story-card { background: var(--container-bg); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: all 0.3s ease; position: relative; }
         .story-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .story-card-cover-wrapper { position: relative; width: 100%; padding-top: 135%; background-color: var(--border-color); }
-        .story-card-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 12px; font-weight: bold; }
+        .story-card-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 13px; font-weight: bold; }
         .story-card-cover img { width: 100%; height: 100%; object-fit: cover; }
         .badge { position: absolute; top: 8px; right: 8px; color: white; font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: bold; z-index: 2; }
         .badge.hoan-thanh { background-color: var(--badge-completed); }
         .badge.dang-cap-nhat { background-color: var(--badge-updating); }
         .badge.tam-an { background-color: var(--badge-hidden); }
         
-        .story-card-info { padding: 10px; display: flex; flex-direction: column; flex-grow: 1; }
-        .story-card-title { font-size: 13px; font-weight: 700; color: var(--text-color); margin-bottom: 5px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .story-card-desc { font-size: 11px; color: var(--subtext-color); margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .story-card-info { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
+        .story-card-title { font-size: 14px; font-weight: 700; color: var(--text-color); margin-bottom: 5px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .story-card-desc { font-size: 12px; color: var(--subtext-color); margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .story-card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; }
-        .mini-tag { background-color: var(--box-bg); color: var(--subtext-color); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 8px; font-size: 9px; }
+        .mini-tag { background-color: var(--box-bg); color: var(--subtext-color); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 8px; font-size: 10px; }
 
         .about-author { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; max-width: 600px; margin: 0 auto; }
         .avatar { width: 100px; height: 100px; border-radius: 50%; background-color: var(--border-color); border: 3px solid var(--header-bg); display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 12px; overflow: hidden; }
         .avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .author-bio { background-color: var(--box-bg); padding: 18px; border-radius: 15px; border-left: 4px solid var(--header-bg); text-align: left; line-height: 1.8; font-size: 13px; width: 100%; box-sizing: border-box; }
+        .author-bio { background-color: var(--box-bg); padding: 18px; border-radius: 15px; border-left: 4px solid var(--header-bg); text-align: left; line-height: 1.8; font-size: 14px; width: 100%; box-sizing: border-box; }
 
-        .back-btn { background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; font-family: inherit; margin-bottom: 12px; padding: 0; }
+        .back-btn { background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; font-family: inherit; margin-bottom: 12px; padding: 0; font-size: 14px; }
         .story-detail-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap; }
         
         .story-detail-cover { width: 220px; height: 310px; background-color: var(--border-color); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 13px; font-weight: bold; flex-shrink: 0; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.1); border: 2px solid var(--border-color); }
         .story-detail-cover img { width: 100%; height: 100%; object-fit: cover; }
         
-        .tag { display: inline-block; background-color: var(--border-color); color: var(--primary-color); padding: 2px 8px; border-radius: 10px; font-size: 11px; margin: 2px 2px 5px 0; }
+        .tag { display: inline-block; background-color: var(--border-color); color: var(--primary-color); padding: 3px 10px; border-radius: 10px; font-size: 12px; margin: 2px 2px 5px 0; font-weight: bold; }
         
         .action-buttons-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
         .offline-btn, .fav-btn {
             background-color: var(--box-bg); color: var(--primary-color); border: 2px solid var(--primary-color);
-            padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 12px;
+            padding: 9px 18px; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 13px;
             display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;
         }
         .offline-btn:hover, .fav-btn:hover { background-color: var(--primary-color); color: white; }
         .offline-btn.saved, .fav-btn.saved { background-color: var(--primary-color); color: white; }
 
         .chapter-list { list-style: none; padding: 0; margin-top: 12px; }
-        .chapter-item { background-color: var(--box-bg); border: 1px solid var(--border-color); padding: 10px 15px; margin-bottom: 8px; border-radius: 10px; cursor: pointer; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+        .chapter-item { background-color: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 16px; margin-bottom: 8px; border-radius: 12px; cursor: pointer; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
         .chapter-item:hover { background-color: var(--border-color); color: var(--primary-color); font-weight: bold; }
         
-        .reading-box { line-height: 1.8; font-size: 14px; background: var(--box-bg); padding: 18px; border-radius: 12px; border: 1px solid var(--border-color); position: relative; }
+        .reading-box { line-height: 1.9; font-size: 16px; background: var(--box-bg); padding: 22px; border-radius: 14px; border: 1px solid var(--border-color); position: relative; }
         
         .wattpad-progress-bar-fixed {
             position: fixed; bottom: 0; left: 0; width: 100%; height: 6px;
@@ -399,41 +440,14 @@
 
         .chapter-stats-bar {
             display: flex; justify-content: space-between; align-items: center;
-            font-size: 12px; color: var(--subtext-color); margin: 15px 0 5px 0; padding: 0 5px;
+            font-size: 13px; color: var(--subtext-color); margin: 15px 0 8px 0; padding: 0 5px; font-weight: bold;
         }
 
         .reading-nav { display: flex; justify-content: space-between; margin-top: 25px; }
-        .read-btn { background-color: var(--header-bg); color: white; border: none; padding: 8px 14px; border-radius: 12px; cursor: pointer; font-family: inherit; font-weight: bold; }
+        .read-btn { background-color: var(--header-bg); color: white; border: none; padding: 10px 18px; border-radius: 14px; cursor: pointer; font-family: inherit; font-weight: bold; font-size: 14px; }
         .read-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .comment-section { margin-top: 35px; border-top: 2px dashed var(--border-color); padding-top: 20px; }
-        .comment-input-box { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-        .comment-input { width: 100%; padding: 10px; border: 1.5px solid var(--border-color); border-radius: 12px; background: var(--box-bg); color: var(--text-color); font-family: inherit; font-size: 13px; box-sizing: border-box; outline: none; }
-        .comment-input:focus { border-color: var(--primary-color); }
-        
-        textarea.comment-input { resize: none; height: 120px; }
-
-        .comment-list { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px;
-            max-height: 300px;
-            overflow-y: auto;
-            background: var(--container-bg);
-            border: 1.5px solid var(--border-color);
-            padding: 14px;
-            border-radius: 16px;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .comment-item { 
-            background: var(--box-bg); 
-            border: 1px solid var(--border-color); 
-            padding: 12px 14px; 
-            border-radius: 12px; 
-            font-size: 13px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .comment-author { font-weight: bold; color: var(--primary-color); margin-bottom: 4px; font-size: 12px; }
 
         #warning-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -452,7 +466,7 @@
         }
         .scroll-btn {
             background: var(--primary-color); color: white; border: none;
-            width: 40px; height: 40px; border-radius: 50%;
+            width: 42px; height: 42px; border-radius: 50%;
             cursor: pointer; font-weight: bold; font-size: 16px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.2s ease;
             display: flex; align-items: center; justify-content: center;
@@ -461,7 +475,7 @@
 
         .floating-menu-btn {
             background: var(--header-bg); color: white; border: none;
-            width: 40px; height: 40px; border-radius: 50%;
+            width: 42px; height: 42px; border-radius: 50%;
             cursor: pointer; font-weight: bold; font-size: 16px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.2s ease;
             display: flex; align-items: center; justify-content: center;
@@ -487,8 +501,8 @@
             overflow-y: auto; flex-grow: 1; display: flex; flex-direction: column; gap: 6px; padding-right: 4px;
         }
         .chapter-modal-item {
-            background: var(--box-bg); border: 1px solid var(--border-color); padding: 10px 12px;
-            border-radius: 10px; cursor: pointer; font-size: 13px; display: flex; justify-content: space-between; align-items: center;
+            background: var(--box-bg); border: 1px solid var(--border-color); padding: 11px 14px;
+            border-radius: 10px; cursor: pointer; font-size: 14px; display: flex; justify-content: space-between; align-items: center;
             transition: all 0.2s;
         }
         .chapter-modal-item:hover, .chapter-modal-item.active {
@@ -496,28 +510,35 @@
         }
 
         .hidden { display: none !important; }
-        footer { margin-top: auto; padding: 15px; color: var(--primary-color); font-size: 12px; text-align: center; }
+        footer { margin-top: auto; padding: 15px; color: var(--primary-color); font-size: 13px; text-align: center; font-weight: bold; }
 
         @media (max-width: 768px) {
-            header h1 { font-size: 22px; }
-            .slogan { font-size: 11px; padding: 0 10px; }
+            header h1 { font-size: 24px; }
+            .slogan { font-size: 12px; padding: 0 10px; }
             header { padding: 20px 10px 15px 10px; }
             
-            .nav-menu { gap: 5px; margin-top: 12px; padding: 0 5px; }
-            .nav-btn { padding: 6px 10px; font-size: 11px; }
+            .nav-menu { gap: 6px; margin-top: 12px; padding: 0 5px; }
+            .nav-btn { padding: 7px 12px; font-size: 12px; }
 
-            .container { width: 98%; padding: 12px; margin: 10px 0 30px 0; border-radius: 14px; }
+            .container { width: 98%; padding: 15px; margin: 10px 0 30px 0; border-radius: 14px; }
 
-            .search-box { padding: 8px; gap: 6px; }
-            .search-input, .filter-select { font-size: 12px; padding: 7px 10px; }
+            .search-box { padding: 10px; gap: 8px; }
+            .search-input, .filter-select { font-size: 13px; padding: 8px 12px; }
 
-            .story-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .story-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             
             .story-detail-header { flex-direction: column; align-items: center; text-align: center; }
             .story-detail-cover { width: 160px; height: 220px; margin: 0 auto; }
             
+            .hot-slider-container { height: 240px; }
+            .hot-slide-item { padding: 12px; gap: 12px; }
+            .hot-slide-cover { width: 100px; height: 140px; }
+            .hot-slide-title { font-size: 15px; }
+            .hot-slide-desc { font-size: 11px; }
+
             .scroll-controls { bottom: 25px; right: 15px; }
-            .scroll-btn, .floating-menu-btn { width: 35px; height: 35px; font-size: 14px; }
+            .scroll-btn, .floating-menu-btn { width: 38px; height: 38px; font-size: 15px; }
+            .reading-box { font-size: 15px; padding: 16px; }
         }
     </style>
 </head>
@@ -526,25 +547,25 @@
     <div id="pass-screen">
         <div class="pass-box">
             <h3 class="brand-title" style="color: var(--primary-color); margin-top: 0;" onclick="troVeTrangChu()">Gia đình cầu vồng</h3>
-            <p style="font-size: 13px; color: var(--subtext-color);">Nhập mật khẩu để vào xem truyện nhé!</p>
+            <p style="font-size: 14px; color: var(--subtext-color);">Nhập mật khẩu để vào xem truyện nhé!</p>
             <input type="password" id="pass-input" class="pass-input" placeholder="Mật khẩu...">
             <br>
             <button class="pass-btn" onclick="kiemTraMatKhau()">Mở khóa 💕</button>
-            <p id="pass-error" style="color: #ff4d4d; font-size: 12px; margin-top: 10px; display: none;">Mật khẩu chưa đúng rồi nè!</p>
+            <p id="pass-error" style="color: #ff4d4d; font-size: 13px; margin-top: 10px; display: none;">Mật khẩu chưa đúng rồi nè!</p>
         </div>
     </div>
 
     <div id="admin-pass-modal" class="hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 9999;">
         <div class="pass-box">
             <h3 style="color: var(--primary-color); margin-top: 0;">🔐 Xác Thực Chủ Tịch</h3>
-            <p style="font-size: 13px; color: var(--subtext-color);">Nhập mật khẩu quản lý:</p>
+            <p style="font-size: 14px; color: var(--subtext-color);">Nhập mật khẩu quản lý:</p>
             <input type="password" id="admin-pass-input" class="pass-input" placeholder="Mật khẩu...">
             <br>
             <div style="display: flex; gap: 8px; justify-content: center;">
                 <button class="pass-btn" onclick="xacNhanMatKhauAdmin()">Vào Thống Kê ✨</button>
                 <button class="pass-btn" style="background: var(--subtext-color);" onclick="dongModalAdmin()">Đóng</button>
             </div>
-            <p id="admin-pass-error" style="color: #ff4d4d; font-size: 12px; margin-top: 10px; display: none;">Mật khẩu quản lý chưa đúng!</p>
+            <p id="admin-pass-error" style="color: #ff4d4d; font-size: 13px; margin-top: 10px; display: none;">Mật khẩu quản lý chưa đúng!</p>
         </div>
     </div>
 
@@ -553,8 +574,8 @@
             <div class="chapter-modal-header">
                 <h4 style="color: var(--primary-color); margin: 0;">📑 Danh Sách Chương</h4>
                 <div style="display: flex; gap: 8px; align-items: center;">
-                    <button class="pass-btn" style="padding: 4px 10px; font-size: 11px;" onclick="quayLaiTrangGioiThieuTuModal()">📖 Giới thiệu</button>
-                    <button class="pass-btn" style="background: none; border: none; font-size: 18px; color: var(--text-color); cursor: pointer;" onclick="dongModalMucLuc()">×</button>
+                    <button class="pass-btn" style="padding: 5px 12px; font-size: 12px;" onclick="quayLaiTrangGioiThieuTuModal()">📖 Giới thiệu</button>
+                    <button class="pass-btn" style="background: none; border: none; font-size: 20px; color: var(--text-color); cursor: pointer;" onclick="dongModalMucLuc()">×</button>
                 </div>
             </div>
             <div class="chapter-modal-list" id="modal-chapter-list-box"></div>
@@ -564,7 +585,7 @@
     <div id="warning-modal" class="hidden">
         <div class="warning-box">
             <h3 style="color: #e74c3c; margin-top: 0;">⚠️ CẢNH BÁO NỘI DUNG</h3>
-            <p style="font-size: 13px; line-height: 1.6;">Chương truyện này có chứa yếu tố **18+, bạo lực hoặc nhạy cảm**. Bạn đã đủ 18 tuổi và sẵn sàng tâm lý để đọc chứ?</p>
+            <p style="font-size: 14px; line-height: 1.6;">Chương truyện này có chứa yếu tố **18+, bạo lực hoặc nhạy cảm**. Bạn đã đủ 18 tuổi và sẵn sàng tâm lý để đọc chứ?</p>
             <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
                 <button class="pass-btn" style="background-color: #e74c3c;" onclick="xacNhanVaoDoc(true)">Tôi đã đủ 18+</button>
                 <button class="pass-btn" style="background-color: var(--subtext-color);" onclick="xacNhanVaoDoc(false)">Chạy ngay đi</button>
@@ -601,10 +622,18 @@
         <div id="tab-trang-chu">
             <div id="continue-banner-box" class="hidden continue-reading-banner">
                 <div>
-                    <div style="font-size: 11px; opacity: 0.9;">📖 ĐỌC TIẾP CHƯƠNG GẦN NHẤT</div>
-                    <div id="continue-title" style="font-weight: bold; font-size: 14px; margin-top: 2px;">Tên truyện - Chương</div>
+                    <div style="font-size: 12px; opacity: 0.9;">📖 ĐỌC TIẾP CHƯƠNG GẦN NHẤT</div>
+                    <div id="continue-title" style="font-weight: bold; font-size: 15px; margin-top: 2px;">Tên truyện - Chương</div>
                 </div>
                 <button class="pass-btn" style="background: white; color: var(--primary-color);" onclick="tiepTucDocNgay()">Đọc ngay ›</button>
+            </div>
+
+            <!-- SLIDER / CAROUSEL TRUYỆN HOT -->
+            <div class="hot-slider-container" id="home-hot-slider">
+                <div class="hot-slide-track" id="hot-slide-track"></div>
+                <button class="slider-arrow slider-prev" onclick="chuyenSlide(-1)">❮</button>
+                <button class="slider-arrow slider-next" onclick="chuyenSlide(1)">❯</button>
+                <div class="slider-dots" id="slider-dots"></div>
             </div>
 
             <div class="search-box">
@@ -632,9 +661,9 @@
             <div class="story-grid" id="home-story-grid"></div>
 
             <div class="section-title" style="margin-top: 35px;">💌 Lời nhắn nhà chung</div>
-            <p style="font-size: 12px; color: var(--subtext-color); margin-top: -8px; margin-bottom: 12px;">Góc nhỏ để các cậu thả lời nhắn nhanh, hóng chương hoặc cảm ơn chủ nhà nhé! ✨</p>
+            <p style="font-size: 13px; color: var(--subtext-color); margin-top: -8px; margin-bottom: 12px;">Góc nhỏ để các cậu thả lời nhắn nhanh, hóng chương hoặc cảm ơn chủ nhà nhé! ✨</p>
             
-            <div style="background: var(--box-bg); padding: 16px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
+            <div style="background: var(--box-bg); padding: 18px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
                 <div class="form-group" style="margin-bottom: 10px;">
                     <label>Tên của bạn:</label>
                     <input type="text" id="home-chat-name" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
@@ -642,9 +671,9 @@
                 </div>
 
                 <div class="form-group" style="margin-bottom: 10px;">
-                    <div style="background: var(--container-bg); padding: 8px 12px; border-radius: 10px; border: 1.5px solid var(--border-color);">
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; color: var(--primary-color); font-weight: bold; margin: 0;">
-                            <input type="checkbox" id="home-chat-anon" style="width: 16px; height: 16px; accent-color: var(--primary-color);" onchange="toggleHomeAnonymity()">
+                    <div style="background: var(--container-bg); padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--border-color);">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: var(--primary-color); font-weight: bold; margin: 0;">
+                            <input type="checkbox" id="home-chat-anon" style="width: 17px; height: 17px; accent-color: var(--primary-color);" onchange="toggleHomeAnonymity()">
                             <span>🕵️‍♂️ Bình luận ẩn danh (Hóa thân thành Người qua đường bí ẩn 🌸)</span>
                         </label>
                     </div>
@@ -656,11 +685,11 @@
                 <button type="button" class="btn-submit" onclick="guiLoiNhanTrangChu()">Gửi lời nhắn 🌸</button>
             </div>
 
-            <div class="comment-list" id="home-chat-list-box"></div>
+            <div id="home-chat-list-box" style="display: flex; flex-direction: column; gap: 12px;"></div>
         </div>
 
         <div id="tab-tat-ca-truyen" class="hidden">
-            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">📚 Danh Sách Tất Cả Truyện</h3>
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">📚 Danh Sách Tất Cả Truyện</h3>
             
             <div class="search-box">
                 <input type="text" id="search-all-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện..." oninput="locTruyen()">
@@ -684,14 +713,14 @@
         </div>
 
         <div id="tab-xep-hang" class="hidden">
-            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">🏆 Bảng Xếp Hạng Lượt Xem</h3>
-            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 25px;">Những bộ truyện có tổng lượt đọc cao nhất được yêu thích nhất.</p>
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🏆 Bảng Xếp Hạng Lượt Xem</h3>
+            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 25px;">Những bộ truyện có tổng lượt đọc cao nhất được yêu thích nhất.</p>
             <div class="ranking-list" id="ranking-list-box"></div>
         </div>
 
         <div id="tab-bang-thong-bao" class="hidden">
-            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">🔔 Bảng Thông Báo & Sự Kiện</h3>
-            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 15px;">Góc nhỏ thông báo lịch ra chương và lời nhắn gửi từ tác giả.</p>
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🔔 Bảng Thông Báo & Sự Kiện</h3>
+            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 15px;">Góc nhỏ thông báo lịch ra chương và lời nhắn gửi từ tác giả.</p>
             
             <div class="search-box">
                 <input type="text" id="search-notice-input" class="search-input" placeholder="🔎 Tìm kiếm thông báo..." oninput="hienThiBangThongBao()">
@@ -706,18 +735,18 @@
         </div>
 
         <div id="tab-dien-dan" class="hidden">
-            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">💬 Diễn Đàn Trò Chuyện & Góp Ý</h3>
-            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 20px;">Nơi bàn luận gu truyện, đề cử tác phẩm hoặc gửi lời nhắn nhủ tới tác giả! ✨</p>
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">💬 Diễn Đàn Trò Chuyện & Góp Ý</h3>
+            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 20px;">Nơi bàn luận gu truyện, đề cử tác phẩm hoặc gửi lời nhắn nhủ tới tác giả! ✨</p>
 
-            <div style="background: var(--box-bg); padding: 16px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 25px;">
-                <h4 style="color: var(--primary-color); margin-top: 0; margin-bottom: 12px;">✍️ Tạo chủ đề thảo luận mới</h4>
+            <div style="background: var(--box-bg); padding: 18px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 25px;">
+                <h4 style="color: var(--primary-color); margin-top: 0; margin-bottom: 12px; font-size: 16px;">✍️ Tạo chủ đề thảo luận mới</h4>
                 <div class="form-group" style="margin-bottom: 10px;">
                     <label>Tên của bạn:</label>
                     <input type="text" id="forum-author-input" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
                     <select id="select-picker-forum" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-forum', 'forum-author-input')"></select>
                 </div>
                 <div class="form-group" style="margin-bottom: 10px;">
-                    <label style="font-size: 12px; margin-bottom: 4px;">Chọn chủ đề hoặc tự nhập tiêu đề:</label>
+                    <label style="font-size: 13px; margin-bottom: 4px;">Chọn chủ đề hoặc tự nhập tiêu đề:</label>
                     <select id="forum-title-select" class="form-control" onchange="kiemTraDoiTieuDeForum()" style="margin-bottom: 8px;">
                         <option value="💬 Thảo luận chung về truyện">💬 Thảo luận chung về truyện</option>
                         <option value="📚 Đề cử / Gợi ý truyện mới">📚 Đề cử / Gợi ý truyện mới</option>
@@ -737,8 +766,8 @@
         </div>
 
         <div id="tab-tu-sach-offline" class="hidden">
-            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">🧳 Tủ Sách & Yêu Thích Của Bạn</h3>
-            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 20px;">Quản lý những bộ truyện yêu thích và các bộ đã lưu đọc ngoại tuyến.</p>
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🧳 Tủ Sách & Yêu Thích Của Bạn</h3>
+            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 20px;">Quản lý những bộ truyện yêu thích và các bộ đã lưu đọc ngoại tuyến.</p>
             
             <div class="mode-selector" style="margin-bottom: 15px;">
                 <button type="button" class="mode-btn active" id="btn-subtab-fav" onclick="doiSubTabTuSach('fav')">❤️ Truyện Yêu Thích</button>
@@ -754,8 +783,8 @@
         </div>
 
         <div id="tab-quan-li" class="hidden">
-            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">🔐 Trung Tâm Thống Kê & Quản Lý</h3>
-            <p style="text-align: center; font-size: 13px; color: var(--subtext-color); margin-bottom: 20px;">Bảng điều khiển toàn diện hệ thống dành riêng cho chủ tịch.</p>
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🔐 Trung Tâm Thống Kê & Quản Lý</h3>
+            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 20px;">Bảng điều khiển toàn diện hệ thống dành riêng cho chủ tịch.</p>
 
             <div class="admin-sub-tabs">
                 <button class="admin-sub-btn active" id="btn-admin-tab-tongquan" onclick="doiAdminSubTab('tongquan')">📊 Tổng quan</button>
@@ -814,12 +843,12 @@
                 <div class="section-title">💬 Thống Kê Thảo Luận Diễn Đàn & Bình Luận</div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 15px;">
                     <div style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px solid var(--border-color); text-align: center;">
-                        <div style="font-size: 12px; color: var(--subtext-color); font-weight: bold;">Bài viết diễn đàn</div>
-                        <div id="stat-forum-posts-count" style="font-size: 20px; font-weight: 900; color: var(--primary-color); margin-top: 4px;">0</div>
+                        <div style="font-size: 13px; color: var(--subtext-color); font-weight: bold;">Bài viết diễn đàn</div>
+                        <div id="stat-forum-posts-count" style="font-size: 22px; font-weight: 900; color: var(--primary-color); margin-top: 4px;">0</div>
                     </div>
                     <div style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px solid var(--border-color); text-align: center;">
-                        <div style="font-size: 12px; color: var(--subtext-color); font-weight: bold;">Tổng số bình luận chương</div>
-                        <div id="stat-total-comments-count" style="font-size: 20px; font-weight: 900; color: var(--primary-color); margin-top: 4px;">0</div>
+                        <div style="font-size: 13px; color: var(--subtext-color); font-weight: bold;">Tổng số bình luận chương</div>
+                        <div id="stat-total-comments-count" style="font-size: 22px; font-weight: 900; color: var(--primary-color); margin-top: 4px;">0</div>
                     </div>
                 </div>
                 <div class="section-title">📝 Chủ Đề Diễn Đàn Gần Đây</div>
@@ -836,7 +865,7 @@
         </div>
 
         <div id="tab-dang-truyen" class="hidden">
-            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0;">✍️ Quản Lý Nội Dung Web</h3>
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">✍️ Quản Lý Nội Dung Web</h3>
             
             <div class="mode-selector">
                 <button type="button" class="mode-btn active" id="btn-mode-truyen" onclick="doiCheDoDang('truyen')">✨ Tạo truyện mới</button>
@@ -882,7 +911,7 @@
                     </div>
                     <div class="form-group">
                         <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                            <input type="checkbox" id="new-chapter-18" style="width: 16px; height: 16px; accent-color: #e74c3c;"> 
+                            <input type="checkbox" id="new-chapter-18" style="width: 17px; height: 17px; accent-color: #e74c3c;"> 
                             <span style="color: #e74c3c; font-weight: bold;">🔥 Đánh dấu chương này là 18+ / Bạo lực</span>
                         </label>
                     </div>
@@ -892,13 +921,13 @@
                     </div>
                 </div>
 
-                <div class="form-group" style="background: var(--box-bg); padding: 12px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px;">
+                <div class="form-group" style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px;">
                     <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; margin-bottom: 8px;">
-                        <input type="checkbox" id="enable-schedule-story" style="width: 16px; height: 16px; accent-color: var(--primary-color);" onchange="toggleScheduleBox('story')">
+                        <input type="checkbox" id="enable-schedule-story" style="width: 17px; height: 17px; accent-color: var(--primary-color);" onchange="toggleScheduleBox('story')">
                         <span>⏰ Hẹn giờ đăng truyện tự động</span>
                     </label>
                     <div id="schedule-box-story" class="hidden">
-                        <label style="font-size: 11px; color: var(--subtext-color); margin-bottom: 3px;">Chọn thời gian xuất bản:</label>
+                        <label style="font-size: 12px; color: var(--subtext-color); margin-bottom: 3px;">Chọn thời gian xuất bản:</label>
                         <input type="datetime-local" id="new-story-schedule-time" class="form-control">
                     </div>
                 </div>
@@ -959,7 +988,7 @@
                 </div>
                 <div class="form-group">
                     <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                        <input type="checkbox" id="append-chapter-18" style="width: 16px; height: 16px; accent-color: #e74c3c;"> 
+                        <input type="checkbox" id="append-chapter-18" style="width: 17px; height: 17px; accent-color: #e74c3c;"> 
                         <span style="color: #e74c3c; font-weight: bold;">🔥 Đánh dấu chương này là 18+ / Bạo lực</span>
                     </label>
                 </div>
@@ -968,13 +997,13 @@
                     <textarea id="append-chapter-content" class="form-control" placeholder="Dán nội dung chương tiếp theo ở đây..."></textarea>
                 </div>
 
-                <div class="form-group" style="background: var(--box-bg); padding: 12px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px;">
+                <div class="form-group" style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px;">
                     <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; margin-bottom: 8px;">
-                        <input type="checkbox" id="enable-schedule-chapter" style="width: 16px; height: 16px; accent-color: var(--primary-color);" onchange="toggleScheduleBox('chapter')">
+                        <input type="checkbox" id="enable-schedule-chapter" style="width: 17px; height: 17px; accent-color: var(--primary-color);" onchange="toggleScheduleBox('chapter')">
                         <span>⏰ Hẹn giờ đăng chương tự động</span>
                     </label>
                     <div id="schedule-box-chapter" class="hidden">
-                        <label style="font-size: 11px; color: var(--subtext-color); margin-bottom: 3px;">Chọn thời gian xuất bản:</label>
+                        <label style="font-size: 12px; color: var(--subtext-color); margin-bottom: 3px;">Chọn thời gian xuất bản:</label>
                         <input type="datetime-local" id="append-chapter-schedule-time" class="form-control">
                     </div>
                 </div>
@@ -999,7 +1028,7 @@
                 </div>
                 <div class="form-group">
                     <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                        <input type="checkbox" id="edit-chap-18-input" style="width: 16px; height: 16px; accent-color: #e74c3c;"> 
+                        <input type="checkbox" id="edit-chap-18-input" style="width: 17px; height: 17px; accent-color: #e74c3c;"> 
                         <span style="color: #e74c3c; font-weight: bold;">🔥 Đánh dấu chương này là 18+ / Bạo lực</span>
                     </label>
                 </div>
@@ -1014,7 +1043,7 @@
             </div>
 
             <div id="group-dang-thong-bao" class="hidden">
-                <div class="form-group" style="background: var(--box-bg); padding: 12px; border-radius: 12px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
+                <div class="form-group" style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
                     <label style="color: var(--primary-color);">📌 Chọn thông báo cũ để Sửa/Xóa (hoặc để trống nếu tạo mới bên dưới)</label>
                     <select id="select-edit-notice" class="form-control" onchange="dienThongTinSuaThongBao()" style="margin-top: 6px;"></select>
                 </div>
@@ -1033,21 +1062,21 @@
                     <input type="text" id="notice-title-input" class="form-control hidden" placeholder="Nhập tiêu đề thông báo tùy chỉnh...">
                 </div>
 
-                <div class="form-group" style="background: var(--box-bg); padding: 12px; border-radius: 12px; border: 1.5px dashed var(--primary-color);">
+                <div class="form-group" style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px dashed var(--primary-color);">
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0;">
                         <input type="checkbox" id="notice-pin-checkbox" style="width: 18px; height: 18px; accent-color: #ff1493;">
                         <span style="color: #ff1493; font-weight: bold;">📌 Ghim thông báo này lên đầu bảng (Thông báo quan trọng)</span>
                     </label>
                 </div>
 
-                <div id="notice-builder-section" style="background: var(--box-bg); padding: 15px; border-radius: 14px; border: 1.5px solid var(--border-color); margin-bottom: 15px; margin-top: 15px;">
+                <div id="notice-builder-section" style="background: var(--box-bg); padding: 16px; border-radius: 14px; border: 1.5px solid var(--border-color); margin-bottom: 15px; margin-top: 15px;">
                     <label style="font-weight: bold; color: var(--primary-color); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
                         <span id="builder-section-label">📋 Danh sách truyện & Lịch trình</span>
-                        <button type="button" class="pass-btn" style="padding: 4px 10px; font-size: 11px;" onclick="themDongTruyenThongBao()">➕ Thêm truyện</button>
+                        <button type="button" class="pass-btn" style="padding: 5px 12px; font-size: 12px;" onclick="themDongTruyenThongBao()">➕ Thêm truyện</button>
                     </label>
                     <div id="notice-story-rows-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
                     <div style="margin-top: 12px; text-align: right;">
-                        <button type="button" class="pass-btn" style="padding: 6px 14px; font-size: 12px;" onclick="taoNoiDungTuDongChuyenNghiep()">✨ Tạo nội dung tự động</button>
+                        <button type="button" class="pass-btn" style="padding: 7px 16px; font-size: 13px;" onclick="taoNoiDungTuDongChuyenNghiep()">✨ Tạo nội dung tự động</button>
                     </div>
                 </div>
 
@@ -1069,13 +1098,13 @@
             </div>
             
             <div style="margin-top: -5px;">
-                <label style="font-size: 11px; color: var(--primary-color); cursor: pointer; text-decoration: underline;">
+                <label style="font-size: 12px; color: var(--primary-color); cursor: pointer; text-decoration: underline;">
                     📸 Đổi ảnh đại diện (Dán link URL)
-                    <input type="text" id="author-avatar-url-input" class="form-control" placeholder="Dán link ảnh đại diện..." style="margin-top: 5px; font-size: 12px;" onchange="thayAnhTacGiaUrl(this.value)">
+                    <input type="text" id="author-avatar-url-input" class="form-control" placeholder="Dán link ảnh đại diện..." style="margin-top: 5px; font-size: 13px;" onchange="thayAnhTacGiaUrl(this.value)">
                 </label>
             </div>
 
-            <h3 style="color: var(--primary-color); margin: 5px 0;" contenteditable="true" id="author-name-text" oninput="luuThongTinGioiThieu()">Xin chào, tôi là Cầu Vồng!</h3>
+            <h3 style="color: var(--primary-color); margin: 5px 0; font-size: 22px;" contenteditable="true" id="author-name-text" oninput="luuThongTinGioiThieu()">Xin chào, tôi là Cầu Vồng!</h3>
             
             <div class="author-bio" contenteditable="true" id="author-bio-text" oninput="luuThongTinGioiThieu()">
                 🌸 <strong>Đôi dòng tự sự:</strong><br>
@@ -1090,11 +1119,11 @@
             <div class="story-detail-header">
                 <div class="story-detail-cover" id="detail-cover">[ Ảnh bìa ]</div>
                 <div style="flex-grow: 1;">
-                    <h3 id="detail-title" style="color: var(--primary-color); margin: 0 0 5px 0;"></h3>
+                    <h3 id="detail-title" style="color: var(--primary-color); margin: 0 0 5px 0; font-size: 24px;"></h3>
                     <div id="detail-tags"></div>
-                    <div style="font-size: 12px; color: var(--subtext-color); margin-top: 6px;">
+                    <div style="font-size: 13px; color: var(--subtext-color); margin-top: 8px;">
                         <strong>Tóm tắt:</strong>
-                        <p id="detail-summary" style="margin: 3px 0 0 0; line-height: 1.5; color: var(--text-color);"></p>
+                        <p id="detail-summary" style="margin: 4px 0 0 0; line-height: 1.6; color: var(--text-color); font-size: 14px;"></p>
                     </div>
                 </div>
             </div>
@@ -1118,7 +1147,7 @@
                 </div>
             </div>
 
-            <h4 style="color: var(--primary-color); border-bottom: 2px dashed var(--border-color); padding-bottom: 6px; margin-bottom: 10px;">Danh sách chương (<span id="detail-count"></span>)</h4>
+            <h4 style="color: var(--primary-color); border-bottom: 2px dashed var(--border-color); padding-bottom: 6px; margin-bottom: 10px; font-size: 17px;">Danh sách chương (<span id="detail-count"></span>)</h4>
             <ul class="chapter-list" id="detail-chapters"></ul>
         </div>
 
@@ -1137,28 +1166,33 @@
                 <button class="read-btn" id="btn-next" onclick="chuyenChuong(1)">Chương sau ›</button>
             </div>
 
+            <!-- KHUNG BÌNH LUẬN TRỰC TIẾP (ĐỘC GIẢ KHÔNG CẦN TÀI KHOẢN, GÕ TÊN LÀ GỬI ĐƯỢC NGAY) -->
             <div class="comment-section">
-                <h4 style="color: var(--primary-color); margin-top: 0;">💬 Bình luận của bạn đọc</h4>
-                <div class="comment-input-box">
+                <h4 style="color: var(--primary-color); margin-top: 0; margin-bottom: 15px; font-size: 18px;">💬 Bình luận của bạn đọc</h4>
+                
+                <div style="background: var(--box-bg); padding: 18px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
                     <div class="form-group" style="margin-bottom: 10px;">
                         <label>Tên của bạn:</label>
-                        <input type="text" id="comment-name" class="comment-input" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới..." style="width:100%; border: 1.5px solid var(--border-color); border-radius: 12px; background: var(--box-bg); color: var(--text-color); padding: 10px; font-family: inherit; font-size: 13px;">
-                        <select id="select-picker-chapter-comment" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-chapter-comment', 'comment-name')"></select>
-                    </div>
-                    
-                    <div style="background: var(--box-bg); padding: 8px 12px; border-radius: 10px; border: 1.5px solid var(--border-color);">
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; color: var(--primary-color); font-weight: bold; margin: 0;">
-                            <input type="checkbox" id="comment-anonymous-checkbox" style="width: 16px; height: 16px; accent-color: var(--primary-color);" onchange="toggleAnonymityInput()">
-                            <span>🕵️‍♂️ Bình luận ẩn danh (Hóa thân thành Người qua đường bí ẩn 🌸)</span>
-                        </label>
+                        <input type="text" id="chapter-comment-name" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
+                        <select id="select-picker-chapter-comment" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-chapter-comment', 'chapter-comment-name')"></select>
                     </div>
 
-                    <textarea id="comment-content" class="comment-input" placeholder="Viết cảm nghĩ hoặc lời nhắn gửi cho tác giả..."></textarea>
-                    <div>
-                        <button class="pass-btn" onclick="guiBinhLuan()">Gửi bình luận 💌</button>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <div style="background: var(--container-bg); padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--border-color);">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: var(--primary-color); font-weight: bold; margin: 0;">
+                                <input type="checkbox" id="chapter-comment-anon" style="width: 17px; height: 17px; accent-color: var(--primary-color);" onchange="toggleChapterCommentAnonymity()">
+                                <span>🕵️‍♂️ Bình luận ẩn danh (Hóa thân thành Người qua đường bí ẩn 🌸)</span>
+                            </label>
+                        </div>
                     </div>
+
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <textarea id="chapter-comment-text" class="form-control" placeholder="Cảm nhận của bạn về chương truyện này..." style="height: 90px;"></textarea>
+                    </div>
+                    <button type="button" class="btn-submit" onclick="guiBinhLuanChuong()">Gửi bình luận 🌸</button>
                 </div>
-                <div class="comment-list" id="comment-list-box"></div>
+
+                <div id="chapter-comments-list-box" style="display: flex; flex-direction: column; gap: 12px;"></div>
             </div>
         </div>
 
@@ -1178,13 +1212,11 @@
 
     <script>
         const MAT_KHAU_DUNG = "2026";
-        
-        // -----------------------------------------------------------------
-        // THAY ĐỔI: Dùng file data.json trực tiếp trên GitHub làm kho lưu trữ
-        // -----------------------------------------------------------------
         const GITHUB_JSON_URL = "https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/data.json";
         
         window.cheDoDang = 'truyen'; 
+        let slideIndex = 0;
+        let slideInterval = null;
 
         const danhSachNicknames = [
             "🍡 Mochi Trà Xanh",
@@ -1197,7 +1229,7 @@
             "🥞 Bánh Kếp Sốt Bơ"
         ];
 
-        function taoThanhChonNhanhNickname(selectId, inputId) {
+        function taoThanhChonNhanhNickname(selectId) {
             const selectEl = document.getElementById(selectId);
             if (!selectEl) return;
             selectEl.innerHTML = '<option value="" disabled selected>✨ Chọn nhanh danh hiệu / nickname có sẵn...</option>';
@@ -1224,7 +1256,7 @@
                 id: 1,
                 title: "🌸 Chào mừng đến với Gia đình cầu vồng!",
                 date: "02/08/2026",
-                content: "Web đã được chuyển sang kho lưu trữ GitHub vĩnh viễn, đọc mượt mà trên mọi thiết bị! ✨",
+                content: "Web đã nâng cấp hệ thống bình luận trực tiếp siêu mượt, độc giả chỉ cần gõ tên là tha hồ trò chuyện không cần tài khoản! ✨",
                 isPinned: true
             }
         ];
@@ -1273,6 +1305,7 @@
                 
                 capNhatDropdownTag();
                 locTruyen();
+                khoiTaoSliderHot();
                 hienThiBangThongBao();
                 hienThiXepHang();
                 hienThiDienDan();
@@ -1281,11 +1314,98 @@
             } catch (error) {
                 console.log("Khởi tạo dữ liệu trống hoặc lỗi kết nối GitHub:", error);
                 capNhatDropdownTag();
+                khoiTaoSliderHot();
             }
         }
 
         loadDataFromGitHub();
         setInterval(kiemTraLichHenGio, 30000);
+
+        function khoiTaoSliderHot() {
+            const track = document.getElementById('hot-slide-track');
+            const dotsContainer = document.getElementById('slider-dots');
+            if (!track || !dotsContainer) return;
+
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            let hotList = [];
+            for (let key in window.dữLiệuTruyện) {
+                const tr = window.dữLiệuTruyện[key];
+                if (tr.status !== 'Tạm ẩn') {
+                    hotList.push({ key: key, truyen: tr });
+                }
+            }
+
+            if (hotList.length === 0) {
+                document.getElementById('home-hot-slider').classList.add('hidden');
+                return;
+            } else {
+                document.getElementById('home-hot-slider').classList.remove('hidden');
+            }
+
+            hotList = hotList.slice(0, 5);
+
+            hotList.forEach((item, index) => {
+                const tr = item.truyen;
+                const coverHTML = tr.cover ? `<img src="${tr.cover}">` : `[ Bìa ]`;
+                const firstTag = tr.tags && tr.tags.length > 0 ? tr.tags[0] : 'Đam Mỹ';
+
+                track.innerHTML += `
+                    <div class="hot-slide-item" onclick="xemTruyen('${item.key}', false)">
+                        <div class="hot-slide-cover">${coverHTML}</div>
+                        <div class="hot-slide-info">
+                            <div class="hot-slide-tag">🔥 ${firstTag}</div>
+                            <div class="hot-slide-title">${tr.title}</div>
+                            <div class="hot-slide-desc">${tr.desc || tr.summary || ''}</div>
+                            <button class="hot-slide-btn">Đọc ngay ›</button>
+                        </div>
+                    </div>
+                `;
+
+                dotsContainer.innerHTML += `<div class="slider-dot ${index === 0 ? 'active' : ''}" onclick="chuyenDenSlide(${index})"></div>`;
+            });
+
+            slideIndex = 0;
+            batDauTuChuyenSlide();
+        }
+
+        function chuyenSlide(n) {
+            const track = document.getElementById('hot-slide-track');
+            const items = track.getElementsByClassName('hot-slide-item');
+            if (items.length === 0) return;
+
+            slideIndex += n;
+            if (slideIndex >= items.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = items.length - 1;
+
+            capNhatTrangThaiSlide();
+        }
+
+        function chuyenDenSlide(index) {
+            slideIndex = index;
+            capNhatTrangThaiSlide();
+        }
+
+        function capNhatTrangThaiSlide() {
+            const track = document.getElementById('hot-slide-track');
+            const dots = document.getElementById('slider-dots').getElementsByClassName('slider-dot');
+            const items = track.getElementsByClassName('hot-slide-item');
+            if (items.length === 0) return;
+
+            track.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === slideIndex);
+            }
+        }
+
+        function batDauTuChuyenSlide() {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                chuyenSlide(1);
+            }, 5000);
+        }
 
         function kiemTraLichHenGio() {
             if (!window.danhSachHenGio || window.danhSachHenGio.length === 0) return;
@@ -1320,6 +1440,7 @@
                 localStorage.setItem('giadinhcauvong_schedules', JSON.stringify(window.danhSachHenGio));
                 luuVaoLocalStorage();
                 locTruyen();
+                khoiTaoSliderHot();
                 hienThiXepHang();
                 hienThiBangThongBao();
             }
@@ -1465,7 +1586,7 @@
             grid.innerHTML = '';
 
             if (!window.danhSachYeuThich || window.danhSachYeuThich.length === 0) {
-                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Danh sách yêu thích trống. Hãy bấm "Thêm vào yêu thích" ở trang truyện nhé! ❤️</p>`;
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Danh sách yêu thích trống. Hãy bấm "Thêm vào yêu thích" ở trang truyện nhé! ❤️</p>`;
                 return;
             }
 
@@ -1501,6 +1622,21 @@
         function toggleHomeAnonymity() {
             const isChecked = document.getElementById('home-chat-anon').checked;
             const nameInput = document.getElementById('home-chat-name');
+            if (isChecked) {
+                nameInput.dataset.previousName = nameInput.value;
+                nameInput.value = "🕵️‍♂️ Người qua đường bí ẩn";
+                nameInput.disabled = true;
+                nameInput.style.opacity = "0.7";
+            } else {
+                nameInput.value = nameInput.dataset.previousName || "";
+                nameInput.disabled = false;
+                nameInput.style.opacity = "1";
+            }
+        }
+
+        function toggleChapterCommentAnonymity() {
+            const isChecked = document.getElementById('chapter-comment-anon').checked;
+            const nameInput = document.getElementById('chapter-comment-name');
             if (isChecked) {
                 nameInput.dataset.previousName = nameInput.value;
                 nameInput.value = "🕵️‍♂️ Người qua đường bí ẩn";
@@ -1556,16 +1692,88 @@
             box.innerHTML = '';
 
             if (!window.danhSachLoiNhanTrangChu || window.danhSachLoiNhanTrangChu.length === 0) {
-                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có lời nhắn nào. Hãy gửi lời nhắn đầu tiên cho nhà chung nhé! 💌</p>`;
+                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có lời nhắn nào. Hãy gửi lời nhắn đầu tiên cho nhà chung nhé! 💌</p>`;
                 return;
             }
 
             window.danhSachLoiNhanTrangChu.forEach(item => {
                 box.innerHTML += `
-                    <div class="comment-item" style="position: relative;">
+                    <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 14px 16px; border-radius: 14px; font-size: 14px; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
                         <button class="pass-btn" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:16px; cursor:pointer; font-weight:bold; opacity:0.5;" onclick="xoaLoiNhanTrangChu(${item.id})" title="Xóa lời nhắn">×</button>
-                        <div class="comment-author">👤 ${item.name}</div>
+                        <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 4px; font-size: 13px;">👤 ${item.name}</div>
                         <div>${item.text}</div>
+                    </div>
+                `;
+            });
+        }
+
+        window.guiBinhLuanChuong = function() {
+            if (!truyenHienTaiKey) return;
+            const isAnon = document.getElementById('chapter-comment-anon').checked;
+            let name = document.getElementById('chapter-comment-name').value.trim();
+            if (isAnon || !name) {
+                name = "🕵️‍♂️ Người qua đường bí ẩn 🌸";
+            }
+            const text = document.getElementById('chapter-comment-text').value.trim();
+
+            if (!text) {
+                alert("Cậu chưa nhập nội dung bình luận nè! 💕");
+                return;
+            }
+
+            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            const chuong = truyen.chapters[chuongHienTaiIndex];
+            if (!chuong.comments) chuong.comments = [];
+
+            chuong.comments.unshift({
+                id: Date.now(),
+                name: name,
+                text: text
+            });
+
+            luuVaoLocalStorage();
+            hienThiBinhLuanChuong();
+
+            document.getElementById('chapter-comment-text').value = '';
+            if (isAnon) {
+                document.getElementById('chapter-comment-anon').checked = false;
+                toggleChapterCommentAnonymity();
+            }
+        };
+
+        window.xoaBinhLuanChuong = function(commentId) {
+            if (!truyenHienTaiKey) return;
+            if (confirm("Xóa bình luận này chứ?")) {
+                const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+                const chuong = truyen.chapters[chuongHienTaiIndex];
+                if (chuong.comments) {
+                    chuong.comments = chuong.comments.filter(c => c.id !== commentId);
+                    luuVaoLocalStorage();
+                    hienThiBinhLuanChuong();
+                }
+            }
+        };
+
+        function hienThiBinhLuanChuong() {
+            const box = document.getElementById('chapter-comments-list-box');
+            if (!box || !truyenHienTaiKey) return;
+            box.innerHTML = '';
+
+            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            const chuong = truyen.chapters[chuongHienTaiIndex];
+            const comments = chuong.comments || [];
+
+            if (comments.length === 0) {
+                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có bình luận nào ở chương này. Hãy là người đầu tiên bình luận nhé! 🌸</p>`;
+                return;
+            }
+
+            comments.forEach(c => {
+                box.innerHTML += `
+                    <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 14px 16px; border-radius: 14px; font-size: 14px; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+                        <button class="pass-btn" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:16px; cursor:pointer; font-weight:bold; opacity:0.5;" onclick="xoaBinhLuanChuong(${c.id})" title="Xóa bình luận">×</button>
+                        <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 4px; font-size: 13px;">👤 ${c.name}</div>
+                        <div>${c.text}</div>
                     </div>
                 `;
             });
@@ -1644,7 +1852,7 @@
         };
 
         window.xoaBaiVietForum = function(postId) {
-            if (confirm("Cậu có che muốn xóa bài thảo luận này không?")) {
+            if (confirm("Cậu có muốn xóa bài thảo luận này không?")) {
                 window.danhSachDienDan = window.danhSachDienDan.filter(p => p.id !== postId);
                 luuDienDanVaoLocalStorage();
                 hienThiDienDan();
@@ -1657,7 +1865,7 @@
             container.innerHTML = '';
 
             if (!window.danhSachDienDan || window.danhSachDienDan.length === 0) {
-                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Diễn đàn hiện chưa có bài thảo luận nào. Hãy là người đầu tiên tạo chủ đề nhé! 💬</p>`;
+                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Diễn đàn hiện chưa có bài thảo luận nào. Hãy là người đầu tiên tạo chủ đề nhé! 💬</p>`;
                 return;
             }
 
@@ -1810,7 +2018,7 @@
                 const grid = document.getElementById('offline-story-grid');
                 grid.innerHTML = '';
                 if (list.length === 0) {
-                    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Tủ sách offline trống. Hãy chọn truyện và bấm lưu để đọc khi mất mạng nhé! 🧳</p>`;
+                    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Tủ sách offline trống. Hãy chọn truyện và bấm lưu để đọc khi mất mạng nhé! 🧳</p>`;
                     return;
                 }
                 list.forEach(item => {
@@ -1891,13 +2099,14 @@
             const savedBio = localStorage.getItem('author_bio');
             if (savedBio) { document.getElementById('author-bio-text').innerHTML = savedBio; }
 
-            taoThanhChonNhanhNickname('select-picker-home-chat', 'home-chat-name');
-            taoThanhChonNhanhNickname('select-picker-forum', 'forum-author-input');
-            taoThanhChonNhanhNickname('select-picker-chapter-comment', 'comment-name');
+            taoThanhChonNhanhNickname('select-picker-home-chat');
+            taoThanhChonNhanhNickname('select-picker-forum');
+            taoThanhChonNhanhNickname('select-picker-chapter-comment');
 
             kiemTraHienThiLichSu();
             capNhatDropdownTag();
             locTruyen();
+            khoiTaoSliderHot();
             hienThiBangThongBao();
             hienThiXepHang();
             hienThiDienDan();
@@ -2169,13 +2378,13 @@
                     notice.isPinned = isPinned;
                     notice.content = content;
                     luuThongBaoVaoLocalStorage();
-                    alert("💾 Đã cập nhật và lưu thay đổi thông báo thành công! (Hãy copy JSON cập nhật lên GitHub)");
+                    alert("💾 Đã cập nhật và lưu thay đổi thông báo thành công!");
                 }
             } else {
                 window.danhSachThongBao.unshift({ id: Date.now(), title: title, date: dateStr, content: content, storyKey: null, isPinned: isPinned });
                 luuThongBaoVaoLocalStorage();
                 capNhatBadgeThongBao();
-                alert("📢 Đã đăng thông báo thành công! (Hãy copy JSON cập nhật lên GitHub)");
+                alert("📢 Đã đăng thông báo thành công!");
             }
 
             document.getElementById('select-edit-notice').value = '';
@@ -2190,7 +2399,7 @@
             const idVal = document.getElementById('select-edit-notice').value;
             if (!idVal) return;
 
-            if (confirm("⚠️ Cậu có chắc muốn xóa thông báo này không?")) {
+            if (confirm("⚠️ Cậu có chắc muốn xóa thông báo này không?")) {
                 const id = parseInt(idVal);
                 window.danhSachThongBao = window.danhSachThongBao.filter(n => n.id !== id);
                 luuThongBaoVaoLocalStorage();
@@ -2267,7 +2476,7 @@
             if (!container) return;
             container.innerHTML = '';
             if (!window.danhSachThongBao || window.danhSachThongBao.length === 0) {
-                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Bảng thông báo hiện chưa có nội dung nào! 📌</p>`;
+                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Bảng thông báo hiện chưa có nội dung nào! 📌</p>`;
                 return;
             }
 
@@ -2289,7 +2498,7 @@
             });
 
             if (filteredList.length === 0) {
-                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Không tìm thấy thông báo phù hợp! 🔍</p>`;
+                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Không tìm thấy thông báo phù hợp! 🔍</p>`;
                 return;
             }
 
@@ -2344,9 +2553,9 @@
                         <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
                             <div>
                                 <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${tr.title}</div>
-                                <div style="font-size: 12px; color: var(--subtext-color); margin-top: 3px;">Trạng thái: <strong>${tr.status}</strong> | Số chương: ${chapCount} | 👁️ ${v.toLocaleString()} views</div>
+                                <div style="font-size: 13px; color: var(--subtext-color); margin-top: 3px;">Trạng thái: <strong>${tr.status}</strong> | Số chương: ${chapCount} | 👁️ ${v.toLocaleString()} views</div>
                             </div>
-                            <button type="button" class="pass-btn" style="padding: 6px 14px; font-size: 11px; background: var(--header-bg);" onclick="xemTruyen('${key}', false)">📖 Xem truyện</button>
+                            <button type="button" class="pass-btn" style="padding: 6px 14px; font-size: 12px; background: var(--header-bg);" onclick="xemTruyen('${key}', false)">📖 Xem truyện</button>
                         </div>
                     `;
                 }
@@ -2381,11 +2590,11 @@
             if (forumSummaryContainer) {
                 forumSummaryContainer.innerHTML = '';
                 if (window.danhSachDienDan.length === 0) {
-                    forumSummaryContainer.innerHTML = `<p style="font-size: 12px; color: var(--subtext-color);">Chưa có bài thảo luận diễn đàn nào.</p>`;
+                    forumSummaryContainer.innerHTML = `<p style="font-size: 13px; color: var(--subtext-color);">Chưa có bài thảo luận diễn đàn nào.</p>`;
                 } else {
                     window.danhSachDienDan.slice(0, 5).forEach(p => {
                         forumSummaryContainer.innerHTML += `
-                            <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 12px;">
+                            <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 13px;">
                                 <strong style="color: var(--primary-color);">${p.author}:</strong> ${p.title} (${p.date})
                             </div>
                         `;
@@ -2397,13 +2606,13 @@
             if (scheduleContainer) {
                 scheduleContainer.innerHTML = '';
                 if (!window.danhSachHenGio || window.danhSachHenGio.length === 0) {
-                    scheduleContainer.innerHTML = `<p style="font-size: 12px; color: var(--subtext-color);">Không có lịch hẹn giờ nào đang chờ.</p>`;
+                    scheduleContainer.innerHTML = `<p style="font-size: 13px; color: var(--subtext-color);">Không có lịch hẹn giờ nào đang chờ.</p>`;
                 } else {
                     window.danhSachHenGio.forEach(sch => {
                         let timeStr = new Date(sch.targetTime).toLocaleString('vi-VN');
                         let label = sch.type === 'story' ? `Hẹn giờ đăng truyện mới (${sch.storyData.title})` : `Hẹn giờ đăng chương mới`;
                         scheduleContainer.innerHTML += `
-                            <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 12px;">
+                            <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 13px;">
                                 <strong style="color: var(--primary-color);">⏰ ${label}</strong> vào lúc <strong>${timeStr}</strong>
                             </div>
                         `;
@@ -2416,7 +2625,7 @@
                 noticesContainer.innerHTML = '';
                 window.danhSachThongBao.forEach(n => {
                     noticesContainer.innerHTML += `
-                        <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 12px;">
+                        <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 13px;">
                             <strong>${n.title}</strong> ${n.isPinned ? '[📌 Ghim]' : ''} — 📅 ${n.date}
                         </div>
                     `;
@@ -2444,7 +2653,7 @@
             dsTruyen.sort((a, b) => b.views - a.views);
 
             if (dsTruyen.length === 0) {
-                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có bộ truyện nào trên bảng xếp hạng! 🏆</p>`;
+                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có bộ truyện nào trên bảng xếp hạng! 🏆</p>`;
                 return;
             }
 
@@ -2454,11 +2663,11 @@
                         <div class="ranking-left">
                             <div class="ranking-number">${index + 1}</div>
                             <div>
-                                <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${item.truyen.title}</div>
-                                <div style="font-size: 11px; color: var(--subtext-color); margin-top: 3px;">Trạng thái: ${item.truyen.status}</div>
+                                <div style="font-weight: bold; font-size: 15px; color: var(--text-color);">${item.truyen.title}</div>
+                                <div style="font-size: 12px; color: var(--subtext-color); margin-top: 3px;">Trạng thái: ${item.truyen.status}</div>
                             </div>
                         </div>
-                        <div style="font-size: 13px; font-weight: bold; color: var(--primary-color);">👁️ ${item.views.toLocaleString()} views</div>
+                        <div style="font-size: 14px; font-weight: bold; color: var(--primary-color);">👁️ ${item.views.toLocaleString()} views</div>
                     </div>
                 `;
             });
@@ -2500,8 +2709,9 @@
                 xoaTruyenOffline(key);
                 const favIdx = window.danhSachYeuThich.indexOf(key);
                 if (favIdx > -1) { window.danhSachYeuThich.splice(favIdx, 1); luuYeuThichVaoLocalStorage(); }
-                alert(`🗑️ Đã xóa truyện thành công! (Hãy copy JSON cập nhật lên GitHub)`);
+                alert(`🗑️ Đã xóa truyện thành công!`);
                 locTruyen();
+                khoiTaoSliderHot();
                 chuyenTab('trang-chu');
             }
         };
@@ -2578,7 +2788,7 @@
             truyen.chapters[chapIndex].content = `<p>${rawContent.replace(/\n/g, '</p><p>')}</p>`;
 
             luuVaoLocalStorage();
-            alert("💾 Đã lưu thay đổi chương thành công! (Hãy copy JSON cập nhật lên GitHub)");
+            alert("💾 Đã lưu thay đổi chương thành công!");
             capNhatDanhSachChapterSua();
             locTruyen();
         };
@@ -2592,10 +2802,10 @@
             const truyen = window.dữLiệuTruyện[storyKey];
             if (truyen.chapters.length <= 1) { alert("⚠️ Truyện phải có ít nhất 1 chương!"); return; }
 
-            if (confirm(`⚠️ Cậu có chắc muốn xóa chương này không?`)) {
+            if (confirm(`⚠️ Cậu có chắc muốn xóa chương này không?`)) {
                 truyen.chapters.splice(chapIndex, 1);
                 luuVaoLocalStorage();
-                alert("🗑️ Đã xóa chương! (Hãy copy JSON cập nhật lên GitHub)");
+                alert("🗑️ Đã xóa chương!");
                 capNhatDanhSachChapterSua();
                 locTruyen();
             }
@@ -2667,7 +2877,7 @@
                     taoThongBaoTuDong(`✨ Truyện mới: "${title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, newKey, false);
                 }
 
-                alert("✨ Đăng truyện mới thành công! Nhớ copy đoạn JSON hiện ra ở F12 (Console) dán vào file data.json trên GitHub nhé!");
+                alert("✨ Đăng truyện mới thành công!");
 
                 document.getElementById('new-title').value = '';
                 document.getElementById('new-total-chapters').value = '100';
@@ -2681,6 +2891,7 @@
                 document.getElementById('schedule-box-story').classList.add('hidden');
 
                 locTruyen();
+                khoiTaoSliderHot();
                 hienThiXepHang();
                 chuyenTab('trang-chu');
             }
@@ -2708,8 +2919,9 @@
             currentTruyen.desc = summary;
 
             luuVaoLocalStorage();
-            alert("✏️ Đã lưu thay đổi thông tin truyện! (Hãy copy JSON cập nhật lên GitHub)");
+            alert("✏️ Đã lưu thay đổi thông tin truyện!");
             locTruyen();
+            khoiTaoSliderHot();
             hienThiXepHang();
             chuyenTab('trang-chu');
         };
@@ -2759,7 +2971,7 @@
                     taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${chapTitle}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${chapTitle}". Đọc ngay thôi nào! ✨`, selectedKey, false);
                 }
 
-                alert(`📖 Đã thêm chương mới thành công! Hãy copy đoạn JSON hiện ra ở F12 (Console) dán vào file data.json trên GitHub nhé! 💕`);
+                alert(`📖 Đã thêm chương mới thành công! 💕`);
                 
                 document.getElementById('append-chapter-title').value = '';
                 document.getElementById('append-chapter-content').value = '';
@@ -2859,9 +3071,9 @@
             }
 
             if (dsTruyenThm.length === 0) {
-                homeGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có truyện nào trên hệ thống. Hãy đăng truyện mới nhé! 🌸</p>`;
-                allGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có truyện nào trên hệ thống.</p>`;
-                latestList.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có cập nhật mới.</p>`;
+                homeGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có truyện nào trên hệ thống. Hãy đăng truyện mới nhé! 🌸</p>`;
+                allGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có truyện nào trên hệ thống.</p>`;
+                latestList.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có cập nhật mới.</p>`;
                 return;
             }
 
@@ -2901,6 +3113,7 @@
                 document.getElementById('btn-tab-trang-chu').classList.add('active');
                 kiemTraHienThiLichSu();
                 hienThiLoiNhanTrangChu();
+                khoiTaoSliderHot();
             } else if (tabName === 'tat-ca-truyen') {
                 document.getElementById('tab-tat-ca-truyen').classList.remove('hidden');
                 document.getElementById('btn-tab-tat-ca-truyen').classList.add('active');
@@ -2967,7 +3180,7 @@
                     const li = document.createElement('li');
                     li.className = 'chapter-item';
                     const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold; margin-right:5px;">[18+]</span>` : '';
-                    li.innerHTML = `<span>${badge18}${ch.title}</span> <span style="font-size:11px; color:var(--subtext-color);">👁️ ${ch.views || 0}</span>`;
+                    li.innerHTML = `<span>${badge18}${ch.title}</span> <span style="font-size:12px; color:var(--subtext-color);">👁️ ${ch.views || 0}</span>`;
                     li.onclick = () => kiemtraTruocKhiDoc(index, false);
                     chapterList.appendChild(li);
                 });
@@ -3011,15 +3224,15 @@
 
             document.getElementById('chapter-views').innerText = `👁️ Lượt xem: ${chuong.views}`;
             document.getElementById('reading-content').innerHTML = `
-                <h3 style="color: var(--primary-color); text-align: center; margin-top: 0;">${chuong.title}</h3>
-                <hr style="border: none; border-top: 1px dashed var(--header-bg); margin-bottom: 15px;">
+                <h3 style="color: var(--primary-color); text-align: center; margin-top: 0; font-size: 22px;">${chuong.title}</h3>
+                <hr style="border: none; border-top: 1px dashed var(--header-bg); margin-bottom: 20px;">
                 ${chuong.content}
             `;
 
+            hienThiBinhLuanChuong();
+
             document.getElementById('btn-prev').disabled = (index === 0);
             document.getElementById('btn-next').disabled = (index === truyen.chapters.length - 1);
-
-            hienThiBinhLuan();
 
             document.getElementById('btn-floating-menu').classList.remove('hidden');
             document.getElementById('wattpad-progress-bar-fixed').classList.remove('hidden');
@@ -3145,70 +3358,6 @@
             document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
         };
 
-        function hienThiBinhLuan() {
-            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
-            const chuong = truyen.chapters[chuongHienTaiIndex];
-            if (!chuong.comments) chuong.comments = [];
-
-            const box = document.getElementById('comment-list-box');
-            if (!box) return;
-            box.innerHTML = '';
-
-            if (chuong.comments.length === 0) {
-                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 12px; margin: 10px 0;">Chưa có bình luận nào. Hãy là người đầu tiên để lại lời nhắn nhé! 💕</p>`;
-                return;
-            }
-
-            chuong.comments.forEach(c => {
-                box.innerHTML += `
-                    <div class="comment-item">
-                        <div class="comment-author">${c.name}</div>
-                        <div>${c.text}</div>
-                    </div>
-                `;
-            });
-        }
-
-        function toggleAnonymityInput() {
-            const isChecked = document.getElementById('comment-anonymous-checkbox').checked;
-            const nameInput = document.getElementById('comment-name');
-            if (isChecked) {
-                nameInput.dataset.previousName = nameInput.value;
-                nameInput.value = "🕵️‍♂️ Người qua đường bí ẩn";
-                nameInput.disabled = true;
-                nameInput.style.opacity = "0.7";
-            } else {
-                nameInput.value = nameInput.dataset.previousName || "";
-                nameInput.disabled = false;
-                nameInput.style.opacity = "1";
-            }
-        }
-
-        window.guiBinhLuan = function() {
-            const isAnonymous = document.getElementById('comment-anonymous-checkbox').checked;
-            let name = document.getElementById('comment-name').value.trim();
-            if (isAnonymous || !name) {
-                name = "🕵️‍♂️ Người qua đường bí ẩn 🌸";
-            }
-            const text = document.getElementById('comment-content').value.trim();
-
-            if (!text) { alert("Vui lòng nhập nội dung bình luận!"); return; }
-
-            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
-            const chuong = truyen.chapters[chuongHienTaiIndex];
-            if (!chuong.comments) chuong.comments = [];
-
-            chuong.comments.push({ name: name, text: text });
-            luuVaoLocalStorage();
-
-            document.getElementById('comment-content').value = '';
-            if (isAnonymous) {
-                document.getElementById('comment-anonymous-checkbox').checked = false;
-                toggleAnonymityInput();
-            }
-            hienThiBinhLuan();
-        };
-
         window.chuyenChuong = function(huong) { kiemtraTruocKhiDoc(chuongHienTaiIndex + huong, false); };
         window.quayLaiTruyen = function() {
             document.getElementById('btn-floating-menu').classList.add('hidden');
@@ -3264,6 +3413,7 @@
             if (tabName === 'trang-chu') {
                 kiemTraHienThiLichSu();
                 hienThiLoiNhanTrangChu();
+                khoiTaoSliderHot();
             }
             
             window.locTruyen();
