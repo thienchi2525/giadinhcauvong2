@@ -1360,12 +1360,6 @@
             if(allTagSelect.querySelector(`option[value="${currentAllVal}"]`)) allTagSelect.value = currentAllVal;
         }
 
-        // -----------------------------------------------------------------
-        // HƯỚNG DẪN LƯU TRỮ TRÊN GITHUB:
-        // Khi thay đổi nội dung (đăng truyện, thêm chương, bình luận...), 
-        // hệ thống sẽ tự động tạo một đoạn mã JSON hoàn chỉnh. 
-        // Cậu chỉ cần copy đoạn mã này dán đè vào file data.json trên GitHub.
-        // -----------------------------------------------------------------
         function luuVaoLocalStorage() {
             capNhatDropdownTag();
             xuatFileDuLieuJSON();
@@ -2572,9 +2566,11 @@
             const chapIndex = document.getElementById('select-edit-chapter-item').value;
             const newTitle = document.getElementById('edit-chap-title-input').value.trim();
             const is18 = document.getElementById('edit-chap-18-input').checked;
-            const rawContent = document.getElementById('edit-chap-content-input').value.trim();
+            let rawContent = document.getElementById('edit-chap-content-input').value.trim();
 
             if (!storyKey || chapIndex === "" || !newTitle || !rawContent) { alert("Vui lòng điền đủ thông tin!"); return; }
+
+            rawContent = rawContent.replace(/"/g, "'");
 
             const truyen = window.dữLiệuTruyện[storyKey];
             truyen.chapters[chapIndex].title = newTitle;
@@ -2616,16 +2612,18 @@
             const status = document.getElementById('new-status').value;
             const totalChaptersInput = parseInt(document.getElementById('new-total-chapters').value) || 100;
             const tagsRaw = document.getElementById('new-tags').value;
-            const summary = document.getElementById('new-summary').value.trim();
+            const summary = document.getElementById('new-summary').value.trim().replace(/"/g, "'");
             const coverUrl = document.getElementById('new-cover-url').value.trim();
             const chapTitle = document.getElementById('new-chapter-title').value.trim();
-            const chapContent = document.getElementById('new-chapter-content').value.trim();
+            let chapContent = document.getElementById('new-chapter-content').value.trim();
             const is18 = document.getElementById('new-chapter-18').checked;
 
             const isScheduled = document.getElementById('enable-schedule-story').checked;
             const scheduleTimeStr = document.getElementById('new-story-schedule-time').value;
 
             if (!title || !summary || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin!"); return; }
+
+            chapContent = chapContent.replace(/"/g, "'");
 
             const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()) : ["Đam Mỹ"];
             const newKey = "truyen-" + Date.now();
@@ -2696,7 +2694,7 @@
             const status = document.getElementById('edit-status').value;
             const totalChaptersInput = parseInt(document.getElementById('edit-total-chapters').value) || 100;
             const tags = document.getElementById('edit-tags').value ? document.getElementById('edit-tags').value.split(',').map(t => t.trim()) : [];
-            const summary = document.getElementById('edit-summary').value.trim();
+            const summary = document.getElementById('edit-summary').value.trim().replace(/"/g, "'");
             const coverUrl = document.getElementById('edit-cover-url').value.trim();
             const currentTruyen = window.dữLiệuTruyện[selectedKey];
 
@@ -2719,13 +2717,15 @@
         window.xuLyLuuThemChuong = function() {
             const selectedKey = document.getElementById('select-existing-story').value;
             const chapTitle = document.getElementById('append-chapter-title').value.trim();
-            const chapContent = document.getElementById('append-chapter-content').value.trim();
+            let chapContent = document.getElementById('append-chapter-content').value.trim();
             const is18 = document.getElementById('append-chapter-18').checked;
 
             const isScheduled = document.getElementById('enable-schedule-chapter').checked;
             const scheduleTimeStr = document.getElementById('append-chapter-schedule-time').value;
 
             if (!selectedKey || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin!"); return; }
+
+            chapContent = chapContent.replace(/"/g, "'");
 
             const chapterObj = { 
                 title: chapTitle, 
