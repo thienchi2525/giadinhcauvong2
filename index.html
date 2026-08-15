@@ -19,7 +19,6 @@
             --badge-completed: #7c4dff;
             --badge-updating: #ff4081;
             --badge-hidden: #7f8c8d;
-            --badge-18: #e74c3c;
         }
 
         body.dark-mode {
@@ -198,7 +197,6 @@
 
         textarea.form-control { resize: none; height: 150px; }
 
-        /* THANH CÔNG CỤ SOẠN THẢO (RICH TEXT TOOLBAR) */
         .rich-editor-toolbar {
             display: flex; gap: 6px; flex-wrap: wrap; background: var(--container-bg);
             padding: 8px; border: 1.5px solid var(--border-color); border-bottom: none;
@@ -215,6 +213,7 @@
             border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;
             min-height: 140px; max-height: 250px; overflow-y: auto; padding: 12px;
             font-family: inherit; font-size: 14px; color: var(--text-color); outline: none;
+            white-space: pre-wrap; word-break: break-word;
         }
 
         .nickname-select {
@@ -349,11 +348,15 @@
             box-shadow: 0 2px 5px rgba(255,20,147,0.3);
         }
 
+        .notice-type-tag {
+            display: inline-block; background: var(--primary-color); color: white;
+            font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 8px; margin-bottom: 6px;
+        }
+
         .notice-date { font-size: 12px; font-weight: bold; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; opacity: 0.8; }
         .notice-title { font-size: 15px; font-weight: bold; margin-bottom: 6px; }
         .notice-content { font-size: 13px; line-height: 1.6; }
         
-        /* --- KHÔI PHỤC THANH TIẾN ĐỘ EDIT GỐC THANH LỊCH --- */
         .story-progress-box {
             background: var(--box-bg); border: 1.5px solid var(--border-color);
             padding: 16px 20px; border-radius: 14px; margin: 20px 0;
@@ -448,12 +451,15 @@
             font-size: 12px; color: var(--subtext-color); margin-bottom: 8px;
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
         }
-        .story-card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; margin-bottom: 8px; }
+        .story-card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; margin-bottom: 8px; }
         .mini-tag {
             background-color: var(--box-bg); color: var(--primary-color);
-            border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 8px;
-            font-size: 10px; font-weight: bold;
+            border: 1px solid var(--border-color); padding: 3px 10px; border-radius: 15px;
+            font-size: 11px; font-weight: bold;
+            cursor: pointer;
         }
+        .mini-tag:hover { opacity: 0.8; background-color: var(--primary-color); color: white; }
+
         .read-story-link {
             font-size: 12px; font-weight: bold; color: var(--primary-color);
             display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;
@@ -468,34 +474,104 @@
 
         .back-btn { background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; font-family: inherit; margin-bottom: 12px; padding: 0; font-size: 14px; }
         
-        /* --- TRANG CHI TIẾT TRUYỆN LINH HOẠT --- */
-        .story-detail-card-styled {
+        .story-decor-card {
             background: var(--box-bg);
-            border: 1.5px dashed var(--primary-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 20px;
             padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.08);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: relative;
         }
-        .story-detail-header-new {
-            display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-bottom: 20px;
-        }
-        .story-detail-cover { 
-            width: 180px; height: 250px; background-color: var(--border-color); border-radius: 14px; 
-            display: flex; align-items: center; justify-content: center; color: var(--primary-color); 
-            font-size: 14px; font-weight: bold; flex-shrink: 0; overflow: hidden; 
-            box-shadow: 0 6px 18px rgba(0,0,0,0.12); border: 2px solid var(--border-color); 
-        }
-        .story-detail-cover img { width: 100%; height: 100%; object-fit: cover; }
 
-        .detail-title-highlight {
-            font-size: 24px; font-weight: 900; color: var(--primary-color); margin: 0 0 12px 0;
-            border-bottom: 1px dashed var(--border-color); padding-bottom: 8px;
+        .story-cover-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .story-decor-cover {
+            width: 200px;
+            height: 280px;
+            background-color: var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: bold;
+            overflow: hidden;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+            border: 3px solid var(--container-bg);
+            margin: 0 auto;
+        }
+        .story-decor-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+        .decor-section-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0 15px 0;
+        }
+
+        .decor-number-badge {
+            background: var(--container-bg);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            font-weight: 900;
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .decor-title-text {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--primary-color);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .decor-line {
+            flex-grow: 1;
+            height: 1.5px;
+            background: dashed var(--border-color);
+        }
+
+        .decor-box-content {
+            background: var(--container-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .tag { 
+            display: inline-block; 
+            background-color: var(--box-bg); 
+            color: var(--primary-color); 
+            padding: 4px 12px; 
+            border-radius: 20px; 
+            font-size: 12px; 
+            margin: 2px; 
+            font-weight: bold; 
+            border: 1.5px solid var(--border-color); 
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
         }
         
-        .tag { display: inline-block; background-color: var(--container-bg); color: var(--primary-color); padding: 3px 10px; border-radius: 10px; font-size: 12px; margin: 2px 2px 5px 0; font-weight: 900; border: 1px solid var(--border-color); }
-        
-        .action-buttons-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+        .action-buttons-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
         .offline-btn, .fav-btn {
             background-color: var(--box-bg); color: var(--primary-color); border: 2px solid var(--primary-color);
             padding: 9px 18px; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 13px;
@@ -504,10 +580,49 @@
         .offline-btn:hover, .fav-btn:hover { background-color: var(--primary-color); color: white; }
         .offline-btn.saved, .fav-btn.saved { background-color: var(--primary-color); color: white; }
 
-        .chapter-list { list-style: none; padding: 0; margin-top: 12px; }
-        .chapter-item { background-color: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 16px; margin-bottom: 8px; border-radius: 12px; cursor: pointer; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
-        .chapter-item:hover { background-color: var(--border-color); color: var(--primary-color); font-weight: bold; }
-        
+        .chapter-list-vertical { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+        .chapter-item-v { background-color: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: 12px; cursor: pointer; font-size: 14px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+        .chapter-item-v:hover { background-color: var(--border-color); color: var(--primary-color); font-weight: bold; }
+
+        /* KHUNG MỤC LỤC Ô VUÔNG CỐ ĐỊNH CHIỀU CAO, ẨN SCROLLBAR VÀ TĂNG ĐỘ ĐẬM VIỀN */
+        .chapter-grid-view { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); 
+            gap: 8px; 
+            max-height: 280px; 
+            overflow-y: auto; 
+            padding: 6px; 
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .chapter-grid-view::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chapter-grid-item {
+            background: var(--container-bg); 
+            border: 2px solid var(--primary-color); /* Tăng độ đậm viền chương */
+            border-radius: 10px; 
+            height: 42px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-weight: 700; 
+            font-size: 13px; 
+            cursor: pointer; 
+            color: var(--text-color);
+            transition: all 0.2s; 
+            position: relative; 
+            box-shadow: none;
+        }
+        .chapter-grid-item:hover, .chapter-grid-item.active {
+            background: var(--primary-color); 
+            color: white; 
+            border-color: var(--primary-color);
+            transform: translateY(-2px); 
+            box-shadow: none;
+        }
+
         .reading-box { line-height: 1.9; font-size: 16px; background: var(--box-bg); padding: 22px; border-radius: 14px; border: 1px solid var(--border-color); position: relative; }
         
         .wattpad-progress-bar-fixed {
@@ -608,9 +723,7 @@
 
             .story-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             
-            .story-detail-header-new { flex-direction: column; align-items: center; text-align: center; }
-            .story-detail-cover { width: 160px; height: 220px; margin: 0 auto; }
-            
+            .story-decor-cover { width: 170px; height: 230px; }
             .hot-slider-container { height: 280px; }
             .hot-slide-cover { width: 160px; height: 230px; }
 
@@ -681,17 +794,17 @@
     </header>
 
     <div class="nav-menu">
-        <button class="nav-btn active" id="btn-tab-trang-chu" onclick="chuyenTab('trang-chu')">🏠 Trang chủ</button>
-        <button class="nav-btn" id="btn-tab-tat-ca-truyen" onclick="chuyenTab('tat-ca-truyen')">📚 Tất cả truyện</button>
-        <button class="nav-btn" id="btn-tab-xep-hang" onclick="chuyenTab('xep-hang')">🏆 Xếp Hạng</button>
-        <button class="nav-btn" id="btn-tab-bang-thong-bao" onclick="chuyenTab('bang-thong-bao')">
+        <button class="nav-btn active" id="btn-tab-trang-chu" onclick="chuyenTab('trang-chu', true)">🏠 Trang chủ</button>
+        <button class="nav-btn" id="btn-tab-tat-ca-truyen" onclick="chuyenTab('tat-ca-truyen', true)">📚 Tất cả truyện</button>
+        <button class="nav-btn" id="btn-tab-xep-hang" onclick="chuyenTab('xep-hang', true)">🏆 Xếp Hạng</button>
+        <button class="nav-btn" id="btn-tab-bang-thong-bao" onclick="chuyenTab('bang-thong-bao', true)">
             🔔 Bảng Thông Báo 
             <span id="unread-badge" class="notification-badge hidden">0</span>
         </button>
-        <button class="nav-btn" id="btn-tab-dien-dan" onclick="chuyenTab('dien-dan')">💬 Diễn đàn</button>
-        <button class="nav-btn" id="btn-tab-tu-sach-offline" onclick="chuyenTab('tu-sach-offline')">🧳 Tủ Sách</button>
+        <button class="nav-btn" id="btn-tab-dien-dan" onclick="chuyenTab('dien-dan', true)">💬 Diễn đàn</button>
+        <button class="nav-btn" id="btn-tab-tu-sach-offline" onclick="chuyenTab('tu-sach-offline', true)">🧳 Tủ Sách</button>
         <button class="nav-btn" id="btn-tab-quan-li" onclick="yeuCauMoTabQuanLi()" style="background: var(--header-bg); color: white; border-color: var(--primary-color);">🔐 Quản Lý</button>
-        <button class="nav-btn" id="btn-tab-gioi-thieu" onclick="chuyenTab('gioi-thieu')">🎀 Giới thiệu</button>
+        <button class="nav-btn" id="btn-tab-gioi-thieu" onclick="chuyenTab('gioi-thieu', true)">🎀 Giới thiệu</button>
     </div>
 
     <div class="container">
@@ -798,11 +911,15 @@
             <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🔔 Bảng Thông Báo & Sự Kiện</h3>
             <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 15px;">Góc nhỏ thông báo lịch ra chương và lời nhắn gửi từ tác giả.</p>
             
-            <div class="mode-selector" style="margin-bottom: 20px;">
+            <div class="mode-selector" style="margin-bottom: 15px;">
                 <button type="button" class="mode-btn active" id="btn-notice-subtab-tatca" onclick="doiNoticeSubTab('tat-ca')">📌 Tất cả</button>
                 <button type="button" class="mode-btn" id="btn-notice-subtab-hethong" onclick="doiNoticeSubTab('hethong')">⚙️ Hệ thống</button>
                 <button type="button" class="mode-btn" id="btn-notice-subtab-chuong" onclick="doiNoticeSubTab('chuong')">📖 Chương mới</button>
-                <button type="button" class="mode-btn" id="btn-notice-subtab-chung" onclick="doiNoticeSubTab('chung')">🌸 Chung</button>
+                <button type="button" class="mode-btn" id="btn-notice-subtab-tamsulich" onclick="doiNoticeSubTab('tamsulich')">🌸 Tâm sự</button>
+            </div>
+
+            <div style="margin-bottom: 12px; text-align: left;">
+                <span style="font-size: 13px; color: var(--primary-color); font-weight: bold; text-decoration: underline; cursor: pointer;" onclick="danhDauDaDocTatCaThongBao()">✨ Đánh dấu đã đọc tất cả</span>
             </div>
 
             <div class="search-box">
@@ -888,9 +1005,22 @@
                         <input type="text" id="new-title" class="form-control" placeholder="Ví dụ: [ĐM] Nhật Ký Nuôi Mèo">
                     </div>
                     <div class="form-group">
+                        <label>Tác Giả (*)</label>
+                        <input type="text" id="new-author" class="form-control" placeholder="Ví dụ: Cầu Vồng">
+                    </div>
+                    <div class="form-group">
                         <label>🔗 Link Ảnh Bìa (Dán Direct Link từ ImgBB / Imgur):</label>
                         <input type="text" id="new-cover-url" class="form-control" placeholder="https://i.ibb.co/xxxx/bia.jpg">
                     </div>
+                    
+                    <div class="form-group">
+                        <label>📖 Kiểu Mục Lục Mặc Định:</label>
+                        <select id="new-default-layout" class="form-control">
+                            <option value="grid">🔲 Ô vuông</option>
+                            <option value="list">📜 Danh sách</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label>Trạng Thái Truyện (*)</label>
                         <select id="new-status" class="form-control">
@@ -900,15 +1030,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>✨ Tổng số chương Ô nhập liệu (*)</label>
-                        <input type="number" id="new-total-chapters" class="form-control" value="100" min="1" placeholder="100">
+                        <label>✨ Tổng số chương của truyện (*)</label>
+                        <input type="number" id="new-total-chapters" class="form-control" value="42" min="1" placeholder="42">
                     </div>
                     <div class="form-group">
                         <label>Thẻ Tag (Cách nhau bằng dấu phẩy)</label>
                         <input type="text" id="new-tags" class="form-control" placeholder="1v1, Ngọt sủng, Chủ thụ">
                     </div>
 
-                    <!-- Ô SOẠN THẢO GIỚI THIỆU CÓ HỖ TRỢ IN ĐẬM, HIGHLIGHT TÙY THÍCH -->
                     <div class="form-group">
                         <label>Tóm Tắt / Giới Thiệu (Có thể in đậm, đổi màu, highlight tùy thích) (*)</label>
                         <div class="rich-editor-toolbar">
@@ -920,7 +1049,7 @@
                             <button type="button" class="toolbar-btn" onclick="formatText('foreColor', '#7c4dff')" style="color: #7c4dff;">💜 Tím</button>
                             <button type="button" class="toolbar-btn" onclick="formatText('removeFormat')">✨ Xóa định dạng</button>
                         </div>
-                        <div id="new-summary" class="rich-textarea-box" contenteditable="true" placeholder="Viết vài dòng giới thiệu truyện, bôi đen từ nào muốn in đậm hoặc đổi màu..."></div>
+                        <div id="new-summary" class="rich-textarea-box" contenteditable="true" placeholder="Viết vài dòng giới thiệu truyện..."></div>
                     </div>
 
                     <div style="border-top: 1px dashed var(--border-color); padding-top: 15px; margin-top: 15px;">
@@ -966,9 +1095,22 @@
                         <input type="text" id="edit-title" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>Sửa Tác Giả</label>
+                        <input type="text" id="edit-author" class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label>🔗 Đổi Link Ảnh Bìa Mới:</label>
                         <input type="text" id="edit-cover-url" class="form-control" placeholder="https://i.ibb.co/xxxx/bia.jpg">
                     </div>
+
+                    <div class="form-group">
+                        <label>📖 Kiểu Mục Lục Mặc Định:</label>
+                        <select id="edit-default-layout" class="form-control">
+                            <option value="grid">🔲 Ô vuông</option>
+                            <option value="list">📜 Danh sách</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label>Sửa Trạng Thái</label>
                         <select id="edit-status" class="form-control">
@@ -978,15 +1120,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>✨ Tổng số chương Ô nhập liệu</label>
-                        <input type="number" id="edit-total-chapters" class="form-control" min="1" placeholder="100">
+                        <label>✨ Tổng số chương của truyện</label>
+                        <input type="number" id="edit-total-chapters" class="form-control" min="1" placeholder="42">
                     </div>
                     <div class="form-group">
                         <label>Sửa Thẻ Tag (Cách nhau bằng dấu phẩy)</label>
                         <input type="text" id="edit-tags" class="form-control">
                     </div>
 
-                    <!-- Ô SOẠN THẢO SỬA TÓM TẮT CÓ HỖ TRỢ IN ĐẬM, HIGHLIGHT TÙY THÍCH -->
                     <div class="form-group">
                         <label>Sửa Tóm Tắt / Giới Thiệu (In đậm, đổi màu, highlight tùy thích)</label>
                         <div class="rich-editor-toolbar">
@@ -1214,23 +1355,50 @@
             </div>
         </div>
 
-        <!-- TRANG CHI TIẾT TRUYỆN ĐÃ ĐƯỢC MỞ KHÓA HOÀN TOÀN -->
+        <!-- TRANG CHI TIẾT TRUYỆN -->
         <div id="tab-chi-tiet-truyen" class="hidden">
             <button class="back-btn" onclick="quayLaiDanhSach()">‹ Quay lại</button>
             
-            <div class="story-detail-card-styled">
-                <div class="story-detail-header-new">
-                    <div class="story-detail-cover" id="detail-cover">[ Ảnh bìa ]</div>
-                    <div style="flex-grow: 1;">
-                        <h3 id="detail-title" class="detail-title-highlight"></h3>
-                        <div style="margin-bottom: 8px; font-size: 14px;"><strong>Tác giả:</strong> <span id="detail-author-text">Đang cập nhật</span></div>
-                        <div style="margin-bottom: 8px; font-size: 14px;"><strong>Số chương:</strong> <span id="detail-count-info">0</span></div>
-                        <div style="margin-bottom: 8px; font-size: 14px;"><strong>Thể loại / Thẻ:</strong> <span id="detail-tags"></span></div>
-                        <div style="margin-bottom: 8px; font-size: 14px;"><strong>Tình trạng:</strong> <span id="detail-status-text">Đang cập nhật</span></div>
+            <div class="story-decor-card" id="story-decor-card-box">
+                <div style="text-align: center;">
+                    <h2 class="story-cover-title" id="detail-top-title">[ Tên Truyện ]</h2>
+                    <div style="position: relative; display: inline-block; margin: 0 auto 20px auto;">
+                        <div class="story-decor-cover" id="detail-cover">[ Ảnh bìa ]</div>
                     </div>
                 </div>
-                <div style="font-size: 14px; border-top: 1px dashed var(--border-color); padding-top: 14px; margin-top: 10px;">
-                    <div id="detail-summary" style="margin: 0; line-height: 1.8; color: var(--text-color);"></div>
+
+                <!-- KHUNG 01: THÔNG TIN -->
+                <div class="decor-section-heading">
+                    <div class="decor-number-badge">01</div>
+                    <div class="decor-title-text">Thông tin</div>
+                    <div class="decor-line"></div>
+                </div>
+                <div class="decor-box-content">
+                    <div id="detail-info-box" style="font-size: 14px; line-height: 2.0; color: var(--text-color);"></div>
+                </div>
+
+                <!-- KHUNG 02: GIỚI THIỆU -->
+                <div class="decor-section-heading">
+                    <div class="decor-number-badge">02</div>
+                    <div class="decor-title-text">Giới thiệu</div>
+                    <div class="decor-line"></div>
+                </div>
+                <div class="decor-box-content">
+                    <div id="detail-summary" style="font-size: 14px; line-height: 1.8; color: var(--text-color); white-space: pre-wrap; word-break: break-word;"></div>
+                </div>
+
+                <div class="story-progress-box" style="margin-top: 25px; margin-bottom: 0;">
+                    <div class="story-progress-header">
+                        <span>📝 Tiến độ edit</span>
+                        <span id="story-progress-percent-text">0%</span>
+                    </div>
+                    <div class="story-progress-bar-bg">
+                        <div class="story-progress-bar-fill" id="story-progress-bar-fill"></div>
+                    </div>
+                    <div class="story-progress-footer">
+                        <span id="story-progress-chapters-text">Đã hoàn thành: 0 / 0 chương</span>
+                        <span id="story-progress-status-text">Đang tiến hành</span>
+                    </div>
                 </div>
             </div>
 
@@ -1239,23 +1407,16 @@
                 <button id="btn-toggle-offline" class="offline-btn" onclick="toggleLuuTruyenOffline()">📥 Lưu đọc ngoại tuyến</button>
             </div>
 
-            <!-- THANH TIẾN ĐỘ EDIT GỐC -->
-            <div class="story-progress-box">
-                <div class="story-progress-header">
-                    <span>Tiến độ edit</span>
-                    <span id="story-progress-percent-text">0%</span>
+            <!-- KHUNG 03: MỤC LỤC -->
+            <div class="story-decor-card">
+                <div class="decor-section-heading" style="margin-top: 0;">
+                    <div class="decor-number-badge">03</div>
+                    <div class="decor-title-text">Mục lục</div>
+                    <div class="decor-line"></div>
                 </div>
-                <div class="story-progress-bar-bg">
-                    <div class="story-progress-bar-fill" id="story-progress-bar-fill"></div>
-                </div>
-                <div class="story-progress-footer">
-                    <span id="story-progress-chapters-text">Đã hoàn thành: 0 / 0 chương</span>
-                    <span id="story-progress-status-text">Đang tiến hành</span>
-                </div>
+                
+                <div id="detail-chapters-container"></div>
             </div>
-
-            <h4 style="color: var(--primary-color); border-bottom: 2px dashed var(--border-color); padding-bottom: 6px; margin: 25px 0 10px 0; font-size: 17px; font-weight: 900;">Danh sách chương</h4>
-            <ul class="chapter-list" id="detail-chapters"></ul>
 
             <div class="comment-section">
                 <h4 style="color: var(--primary-color); margin-top: 0; margin-bottom: 15px; font-size: 18px;">💬 Thảo luận & Cảm nhận về truyện</h4>
@@ -1352,6 +1513,7 @@
         let slideIndex = 0;
         let slideInterval = null;
         let currentNoticeSubTab = 'tat-ca';
+        let currentChapterLayout = 'grid';
 
         const danhSachNicknames = [
             "🍡 Mochi Trà Xanh",
@@ -1401,7 +1563,7 @@
                 id: 1,
                 title: "🌸 Chào mừng đến với Gia đình cầu vồng!",
                 date: "02/08/2026",
-                content: "Web đã nâng cấp hệ thống bình luận trực tiếp siêu mượt, độc giả chỉ cần gõ tên là tha hồ trò chuyện không cần tài khoản! ✨",
+                content: "Web đã nâng cấp giao diện decor mới siêu nghệ thuật giống tiểu thuyết WordPress, tha hồ trải nghiệm nhé! ✨",
                 isPinned: true
             }
         ];
@@ -1422,7 +1584,7 @@
 
         let defaultHomeChats = [
             { id: 1, name: "Mèo Lười 🐱", text: "Chủ nhà ơi hóng chương mới quá đi mất thôi! Chúc web ngày càng đông khách nha ❤️" },
-            { id: 2, name: "🕵️‍♂️ Người qua đường bí ẩn", text: "Ghé nhà chung sưởi ấm, giao diện xinh xỉu dọc xỉu ngang luôn á >.<" }
+            { id: 2, name: "🕵️‍♂️ Người qua đường bí ẩn", text: "Giao diện mới decor tông xẹt tông xinh xỉu dọc xỉu ngang luôn á >.<" }
         ];
 
         window.dữLiệuTruyện = {};
@@ -1619,6 +1781,15 @@
             if(allTagSelect.querySelector(`option[value="${currentAllVal}"]`)) allTagSelect.value = currentAllVal;
         }
 
+        window.timTheoTag = function(tagName) {
+            chuyenTab('tat-ca-truyen', true);
+            const allTagSelect = document.getElementById('search-all-tag');
+            if (allTagSelect) {
+                allTagSelect.value = tagName;
+                locTruyen();
+            }
+        };
+
         function luuVaoLocalStorage() {
             capNhatDropdownTag();
             xuatFileDuLieuJSON();
@@ -1654,7 +1825,7 @@
         function yeuCauMoTabQuanLi() {
             const isUnlocked = sessionStorage.getItem('giadinhcauvong_admin_unlocked');
             if (isUnlocked === 'true') {
-                chuyenTab('quan-li');
+                chuyenTab('quan-li', true);
             } else {
                 document.getElementById('admin-pass-input').value = '';
                 document.getElementById('admin-pass-error').style.display = 'none';
@@ -1672,7 +1843,7 @@
             if (val === MAT_KHAU_DUNG) {
                 sessionStorage.setItem('giadinhcauvong_admin_unlocked', 'true');
                 dongModalAdmin();
-                chuyenTab('quan-li');
+                chuyenTab('quan-li', true);
             } else {
                 document.getElementById('admin-pass-error').style.display = 'block';
             }
@@ -2169,6 +2340,12 @@
             }
         }
 
+        window.danhDauDaDocTatCaThongBao = function() {
+            danhDauDaDocThongBao();
+            hienThiBangThongBao();
+            alert("✨ Đánh dấu đã đọc tất cả thông báo thành công!");
+        };
+
         let db;
         const dbRequest = indexedDB.open("GiaDinhCauVongOfflineDB", 1);
         dbRequest.onsuccess = function(event) { db = event.target.result; };
@@ -2282,8 +2459,8 @@
             if (!historyRaw) return;
             const history = JSON.parse(historyRaw);
             if (window.dữLiệuTruyện[history.storyKey]) {
-                xemTruyen(history.storyKey, false);
-                kiemtraTruocKhiDoc(history.chapterIndex, true);
+                xemTruyen(history.storyKey, false, true);
+                kiemtraTruocKhiDoc(history.chapterIndex, true, true);
             }
         };
 
@@ -2303,7 +2480,7 @@
         }
 
         function troVeTrangChu() {
-            chuyenTab('trang-chu');
+            chuyenTab('trang-chu', true);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -2341,6 +2518,23 @@
             lamMoiDongTruyenThongBao();
             hienThiTrungTamQuanLy();
             capNhatSelectSuaThongBao();
+            
+            // Xử lý nút Back trên trình duyệt
+            window.addEventListener('popstate', function(event) {
+                if (event.state) {
+                    if (event.state.page === 'doc-chuong') {
+                        truyenHienTaiKey = event.state.key;
+                        docChuong(event.state.chapIndex, true, true);
+                    } else if (event.state.page === 'chi-tiet') {
+                        truyenHienTaiKey = event.state.key;
+                        xemTruyen(truyenHienTaiKey, false, true);
+                    } else if (event.state.page === 'tab') {
+                        chuyenTab(event.state.tabName, true);
+                    }
+                } else {
+                    chuyenTab('trang-chu', true);
+                }
+            });
         };
 
         function thayAnhTacGiaUrl(url) {
@@ -2617,7 +2811,7 @@
             capNhatSelectSuaThongBao();
             hienThiBangThongBao();
             hienThiTrungTamQuanLy();
-            chuyenTab('bang-thong-bao');
+            chuyenTab('bang-thong-bao', true);
         };
 
         window.xoaThongBaoDangChon = function() {
@@ -2695,7 +2889,7 @@
 
         function doiNoticeSubTab(sub) {
             currentNoticeSubTab = sub;
-            ['tat-ca', 'hethong', 'chuong', 'chung'].forEach(s => {
+            ['tat-ca', 'hethong', 'chuong', 'tamsulich'].forEach(s => {
                 const btn = document.getElementById(`btn-notice-subtab-${s}`);
                 if (btn) btn.classList.toggle('active', s === sub);
             });
@@ -2717,13 +2911,13 @@
                 const matchKw = n.title.toLowerCase().includes(searchKw) || n.content.toLowerCase().includes(searchKw);
                 
                 const isChuongMoi = n.title.includes('Chương mới');
-                const isHeThong = n.title.includes('Hệ thống') || n.title.includes('Chào mừng') || n.title.includes('sự kiện') || n.title.includes('lịch nghỉ');
-                const isChung = !isChuongMoi && !isHeThong;
+                const isHeThong = n.title.includes('Hệ thống') || n.title.includes('Chào mừng');
+                const isTamSuLich = n.title.includes('Lịch ra chương') || n.title.includes('lịch nghỉ') || n.title.includes('sự kiện') || n.title.includes('tâm sự') || n.title.includes('Truyện mới');
 
                 let matchSubTab = true;
                 if (currentNoticeSubTab === 'hethong') matchSubTab = isHeThong;
                 if (currentNoticeSubTab === 'chuong') matchSubTab = isChuongMoi;
-                if (currentNoticeSubTab === 'chung') matchSubTab = isChung;
+                if (currentNoticeSubTab === 'tamsulich') matchSubTab = isTamSuLich;
 
                 return matchKw && matchSubTab;
             });
@@ -2743,9 +2937,17 @@
                 const pinnedClass = n.isPinned ? 'pinned' : '';
                 const pinnedBadgeHTML = n.isPinned ? `<div class="pinned-badge">📌 THÔNG BÁO QUAN TRỌNG</div>` : '';
 
+                let typeTagHTML = `<div class="notice-type-tag">🌸 TÂM SỰ</div>`;
+                if (n.title.includes('Chương mới')) {
+                    typeTagHTML = `<div class="notice-type-tag" style="background: #ff4081;">📖 CHƯƠNG MỚI</div>`;
+                } else if (n.title.includes('Hệ thống') || n.title.includes('Chào mừng')) {
+                    typeTagHTML = `<div class="notice-type-tag" style="background: #7c4dff;">⚙️ HỆ THỐNG</div>`;
+                }
+
                 container.innerHTML += `
                     <div class="notice-card ${pinnedClass}" style="cursor: pointer;" onclick="xuLyClickThongBao(${n.id})">
                         ${pinnedBadgeHTML}
+                        ${typeTagHTML}
                         <div class="notice-date">📅 Ngày đăng: ${n.date}</div>
                         <div class="notice-title">${n.title}</div>
                         <div class="notice-content">${n.content.replace(/\n/g, '<br>')}</div>
@@ -2793,7 +2995,7 @@
                         <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
                             <div>
                                 <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${tr.title}</div>
-                                <div style="font-size: 13px; color: var(--subtext-color); margin-top: 3px;">Trạng thái: <strong>${tr.status}</strong> | Số chương: ${chapCount} | 👁️ ${v.toLocaleString()} views</div>
+                                <div style="font-size: 13px; color: var(--subtext-color); margin-top: 3px;">Tác giả: ${tr.author || 'Đang cập nhật'} | Trạng thái: <strong>${tr.status}</strong> | Số chương: ${chapCount} | 👁️ ${v.toLocaleString()} views</div>
                             </div>
                             <button type="button" class="pass-btn" style="padding: 6px 14px; font-size: 12px; background: var(--header-bg);" onclick="xemTruyen('${key}', false)">📖 Xem truyện</button>
                         </div>
@@ -2904,7 +3106,7 @@
                             <div class="ranking-number">${index + 1}</div>
                             <div>
                                 <div style="font-weight: bold; font-size: 15px; color: var(--text-color);">${item.truyen.title}</div>
-                                <div style="font-size: 12px; color: var(--subtext-color); margin-top: 3px;">Trạng thái: ${item.truyen.status}</div>
+                                <div style="font-size: 12px; color: var(--subtext-color); margin-top: 3px;">Tác giả: ${item.truyen.author || 'Đang cập nhật'} | Trạng thái: ${item.truyen.status}</div>
                             </div>
                         </div>
                         <div style="font-size: 14px; font-weight: bold; color: var(--primary-color);">👁️ ${item.views.toLocaleString()} views</div>
@@ -2931,9 +3133,11 @@
             if (key && window.dữLiệuTruyện[key]) {
                 const truyen = window.dữLiệuTruyện[key];
                 document.getElementById('edit-title').value = truyen.title || '';
+                document.getElementById('edit-author').value = truyen.author || '';
                 document.getElementById('edit-cover-url').value = truyen.cover || '';
+                document.getElementById('edit-default-layout').value = truyen.defaultLayout || 'grid';
                 document.getElementById('edit-status').value = truyen.status || 'Đang cập nhật';
-                document.getElementById('edit-total-chapters').value = truyen.totalChaptersInput || truyen.chapters.length || 100;
+                document.getElementById('edit-total-chapters').value = truyen.totalChaptersInput || truyen.chapters.length || 42;
                 document.getElementById('edit-tags').value = truyen.tags ? truyen.tags.join(', ') : '';
                 document.getElementById('edit-summary').innerHTML = truyen.summary || truyen.desc || '';
             }
@@ -2952,7 +3156,7 @@
                 alert(`🗑️ Đã xóa truyện thành công!`);
                 locTruyen();
                 khoiTaoSliderHot();
-                chuyenTab('trang-chu');
+                chuyenTab('trang-chu', true);
             }
         };
 
@@ -3042,7 +3246,7 @@
             const truyen = window.dữLiệuTruyện[storyKey];
             if (truyen.chapters.length <= 1) { alert("⚠️ Truyện phải có ít nhất 1 chương!"); return; }
 
-            if (confirm(`⚠️ Cậu có chắc muốn xóa chương này không?`)) {
+            if (confirm(`⚠️ Cậu có chăng muốn xóa chương này không?`)) {
                 truyen.chapters.splice(chapIndex, 1);
                 luuVaoLocalStorage();
                 alert("🗑️ Đã xóa chương!");
@@ -3059,11 +3263,13 @@
 
         window.xuLyLuuTruyenMoi = function() {
             const title = document.getElementById('new-title').value.trim();
+            const author = document.getElementById('new-author').value.trim();
             const status = document.getElementById('new-status').value;
-            const totalChaptersInput = parseInt(document.getElementById('new-total-chapters').value) || 100;
+            const totalChaptersInput = parseInt(document.getElementById('new-total-chapters').value) || 42;
             const tagsRaw = document.getElementById('new-tags').value;
             const summaryHTML = document.getElementById('new-summary').innerHTML.trim();
             const coverUrl = document.getElementById('new-cover-url').value.trim();
+            const defaultLayout = document.getElementById('new-default-layout').value || 'grid';
             const chapTitle = document.getElementById('new-chapter-title').value.trim();
             let chapContent = document.getElementById('new-chapter-content').value.trim();
             const is18 = document.getElementById('new-chapter-18').checked;
@@ -3071,7 +3277,7 @@
             const isScheduled = document.getElementById('enable-schedule-story').checked;
             const scheduleTimeStr = document.getElementById('new-story-schedule-time').value;
 
-            if (!title || !summaryHTML || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin!"); return; }
+            if (!title || !author || !summaryHTML || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin bắt buộc!"); return; }
 
             chapContent = chapContent.replace(/"/g, "'");
 
@@ -3080,9 +3286,11 @@
 
             const storyObj = {
                 title: title,
+                author: author,
                 status: status,
                 statusClass: getStatusClass(status),
                 cover: coverUrl || "",
+                defaultLayout: defaultLayout,
                 totalChaptersInput: totalChaptersInput,
                 desc: document.getElementById('new-summary').innerText,
                 summary: summaryHTML,
@@ -3121,7 +3329,8 @@
                 alert("✨ Đăng truyện mới thành công!");
 
                 document.getElementById('new-title').value = '';
-                document.getElementById('new-total-chapters').value = '100';
+                document.getElementById('new-author').value = '';
+                document.getElementById('new-total-chapters').value = '42';
                 document.getElementById('new-tags').value = '';
                 document.getElementById('new-summary').innerHTML = '';
                 document.getElementById('new-cover-url').value = '';
@@ -3134,7 +3343,7 @@
                 locTruyen();
                 khoiTaoSliderHot();
                 hienThiXepHang();
-                chuyenTab('trang-chu');
+                chuyenTab('trang-chu', true);
             }
         };
 
@@ -3143,16 +3352,20 @@
             if (!selectedKey) { alert("Chưa chọn truyện!"); return; }
 
             const title = document.getElementById('edit-title').value.trim();
+            const author = document.getElementById('edit-author').value.trim();
             const status = document.getElementById('edit-status').value;
-            const totalChaptersInput = parseInt(document.getElementById('edit-total-chapters').value) || 100;
+            const totalChaptersInput = parseInt(document.getElementById('edit-total-chapters').value) || 42;
             const tags = document.getElementById('edit-tags').value ? document.getElementById('edit-tags').value.split(',').map(t => t.trim()) : [];
             const summaryHTML = document.getElementById('edit-summary').innerHTML.trim();
             const coverUrl = document.getElementById('edit-cover-url').value.trim();
+            const defaultLayout = document.getElementById('edit-default-layout').value || 'grid';
             const currentTruyen = window.dữLiệuTruyện[selectedKey];
 
             currentTruyen.title = title;
+            currentTruyen.author = author;
             currentTruyen.status = status;
             currentTruyen.statusClass = getStatusClass(status);
+            currentTruyen.defaultLayout = defaultLayout;
             currentTruyen.totalChaptersInput = totalChaptersInput;
             if (coverUrl) currentTruyen.cover = coverUrl;
             currentTruyen.tags = tags;
@@ -3164,7 +3377,7 @@
             locTruyen();
             khoiTaoSliderHot();
             hienThiXepHang();
-            chuyenTab('trang-chu');
+            chuyenTab('trang-chu', true);
         };
 
         window.xuLyLuuThemChuong = function() {
@@ -3222,7 +3435,7 @@
 
                 locTruyen();
                 hienThiXepHang();
-                chuyenTab('trang-chu');
+                chuyenTab('trang-chu', true);
             }
         };
 
@@ -3236,8 +3449,8 @@
                 
                 const truyen = window.dữLiệuTruyện[key];
                 if (truyen && truyen.chapters && lastChapIdx !== undefined && truyen.chapters[lastChapIdx]) {
-                    xemTruyen(key, true); 
-                    kiemtraTruocKhiDoc(lastChapIdx, true);
+                    xemTruyen(key, false); 
+                    kiemtraTruocKhiDoc(lastChapIdx, true, false);
                     return;
                 }
             }
@@ -3248,7 +3461,7 @@
             let tagsHTML = '';
             if (truyen.tags && Array.isArray(truyen.tags)) {
                 const limitedTags = truyen.tags.slice(0, 3);
-                tagsHTML = limitedTags.map(t => `<span class="mini-tag">${t}</span>`).join('');
+                tagsHTML = limitedTags.map(t => `<span class="mini-tag" onclick="event.stopPropagation(); timTheoTag('${t}')">${t}</span>`).join('');
             }
             const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh Bìa ]`;
 
@@ -3287,7 +3500,7 @@
                 const truyen = window.dữLiệuTruyện[key];
                 if (truyen.status === 'Tạm ẩn') continue;
 
-                const matchKw = truyen.title.toLowerCase().includes(kw) || (truyen.desc && truyen.desc.toLowerCase().includes(kw));
+                const matchKw = truyen.title.toLowerCase().includes(kw) || (truyen.desc && truyen.desc.toLowerCase().includes(kw)) || (truyen.author && truyen.author.toLowerCase().includes(kw));
                 
                 let matchTag = true;
                 if (selectedTag && selectedTag !== 'tat-ca') {
@@ -3341,7 +3554,7 @@
             });
         };
 
-        window.chuyenTab = function(tabName) {
+        window.chuyenTab = function(tabName, pushHistory = true) {
             if (['trang-chu', 'tat-ca-truyen', 'xep-hang', 'bang-thong-bao', 'dien-dan', 'tu-sach-offline', 'gioi-thieu', 'quan-li'].includes(tabName)) { tabTruocDo = tabName; }
 
             ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong'].forEach(id => {
@@ -3389,24 +3602,76 @@
                 hienThiTrungTamQuanLy();
             }
             window.locTruyen();
+
+            if (pushHistory) {
+                history.pushState({ page: 'tab', tabName: tabName }, "", "#" + tabName);
+            }
         };
 
-        window.xemTruyen = function(key, skipDetail = false) {
+        function renderDanhSachChươngTrangChiTiet() {
+            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            const container = document.getElementById('detail-chapters-container');
+            if (!container || !truyen || !truyen.chapters) return;
+
+            container.innerHTML = '';
+
+            if (currentChapterLayout === 'grid') {
+                let gridDiv = document.createElement('div');
+                gridDiv.className = 'chapter-grid-view';
+                truyen.chapters.forEach((ch, index) => {
+                    let item = document.createElement('div');
+                    item.className = 'chapter-grid-item';
+                    item.innerHTML = (index + 1) + (ch.is18 ? ' 🔥' : '');
+                    item.title = ch.title;
+                    item.onclick = () => kiemtraTruocKhiDoc(index, false);
+                    gridDiv.appendChild(item);
+                });
+                container.appendChild(gridDiv);
+            } else {
+                let listUl = document.createElement('ul');
+                listUl.className = 'chapter-list-vertical';
+                truyen.chapters.forEach((ch, index) => {
+                    let li = document.createElement('li');
+                    li.className = 'chapter-item-v';
+                    const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold; margin-right:5px;">[18+]</span>` : '';
+                    li.innerHTML = `<span>${badge18}${ch.title}</span> <span style="font-size:12px; color:var(--subtext-color);">👁️ ${ch.views || 0}</span>`;
+                    li.onclick = () => kiemtraTruocKhiDoc(index, false);
+                    listUl.appendChild(li);
+                });
+                container.appendChild(listUl);
+            }
+        }
+
+        window.xemTruyen = function(key, pushHistory = true) {
             truyenHienTaiKey = key;
             const truyen = window.dữLiệuTruyện[key];
-            
-            document.getElementById('detail-title').innerText = truyen.title;
-            document.getElementById('detail-summary').innerHTML = truyen.summary || truyen.desc || 'Đang cập nhật...';
-            
-            const soChuongDaHoanThanh = truyen.chapters ? truyen.chapters.length : 0;
-            const tongSoChuong = truyen.totalChaptersInput || Math.max(soChuongDaHoanThanh, 100);
-            
-            document.getElementById('detail-author-text').innerText = truyen.author || 'Cầu Vồng';
-            document.getElementById('detail-count-info').innerText = `${soChuongDaHoanThanh} chương`;
-            document.getElementById('detail-status-text').innerText = truyen.status;
 
+            if (truyen.defaultLayout) {
+                currentChapterLayout = truyen.defaultLayout;
+            } else {
+                currentChapterLayout = 'grid';
+            }
+
+            document.getElementById('detail-top-title').innerText = truyen.title || 'Đang cập nhật';
+
+            let cleanTitleForInfo = truyen.title ? truyen.title.replace(/\[.*?\]/g, '').trim() : 'Đang cập nhật';
+            if (!cleanTitleForInfo) cleanTitleForInfo = truyen.title;
+
+            const soChuongDaHoanThanh = truyen.chapters ? truyen.chapters.length : 0;
+            const tongSoChuong = truyen.totalChaptersInput || 42;
+
+            let tagsHTML = truyen.tags ? truyen.tags.map(t => `<span class="tag" onclick="timTheoTag('${t}')">${t}</span>`).join('') : '<span class="tag">Đam Mỹ</span>';
+            
+            document.getElementById('detail-info-box').innerHTML = `
+                <div><strong style="color: var(--primary-color);">Tên truyện:</strong> ${cleanTitleForInfo}</div>
+                <div><strong style="color: var(--primary-color);">Tác giả:</strong> ${truyen.author || 'Đang cập nhật'}</div>
+                <div><strong style="color: var(--primary-color);">Tình trạng:</strong> ${truyen.status || 'Đang cập nhật'}</div>
+                <div><strong style="color: var(--primary-color);">Số chương:</strong> ${tongSoChuong} chương</div>
+                <div><strong style="color: var(--primary-color);">Thể loại / Thẻ:</strong> ${tagsHTML}</div>
+            `;
+
+            document.getElementById('detail-summary').innerHTML = truyen.summary || truyen.desc || 'Đang cập nhật...';
             document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh bìa ]`;
-            document.getElementById('detail-tags').innerHTML = truyen.tags ? truyen.tags.map(t => `<span class="tag">${t}</span>`).join('') : '<span class="tag">Đam Mỹ</span>';
 
             let percent = Math.round((soChuongDaHoanThanh / tongSoChuong) * 100);
             if (percent > 100) percent = 100;
@@ -3421,47 +3686,39 @@
 
             kiemTraTruyenDaLuuOffline(key, function(daLuu) { capNhatNutOffline(daLuu); });
 
-            const chapterList = document.getElementById('detail-chapters');
-            chapterList.innerHTML = '';
-            if (truyen.chapters) {
-                truyen.chapters.forEach((ch, index) => {
-                    const li = document.createElement('li');
-                    li.className = 'chapter-item';
-                    const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold; margin-right:5px;">[18+]</span>` : '';
-                    li.innerHTML = `<span>${badge18}${ch.title}</span> <span style="font-size:12px; color:var(--subtext-color);">👁️ ${ch.views || 0}</span>`;
-                    li.onclick = () => kiemtraTruocKhiDoc(index, false);
-                    chapterList.appendChild(li);
-                });
-            }
-
+            renderDanhSachChươngTrangChiTiet();
             hienThiBinhLuanTruyen();
 
-            if (!skipDetail) {
-                ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.classList.add('hidden');
-                });
-                document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-doc-chuong'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (pushHistory) {
+                history.pushState({ page: 'chi-tiet', key: key }, "", "#truyen=" + key);
             }
         };
 
-        function kiemtraTruocKhiDoc(index, restoreScroll = false) {
+        function kiemtraTruocKhiDoc(index, restoreScroll = false, pushHistory = true) {
             const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
             choVaoIndexTam = index;
             window.dangPhucHoiCuon = restoreScroll;
+            window.tamPushHistory = pushHistory;
             if (truyen.chapters[index].is18) {
                 document.getElementById('warning-modal').classList.remove('hidden');
             } else {
-                docChuong(index, restoreScroll);
+                docChuong(index, restoreScroll, pushHistory);
             }
         }
 
         window.xacNhanVaoDoc = function(dongY) {
             document.getElementById('warning-modal').classList.add('hidden');
-            if (dongY) { docChuong(choVaoIndexTam, window.dangPhucHoiCuon); }
+            if (dongY) { docChuong(choVaoIndexTam, window.dangPhucHoiCuon, window.tamPushHistory); }
         };
 
-        function docChuong(index, restoreScroll = false) {
+        function docChuong(index, restoreScroll = false, pushHistory = true) {
             chuongHienTaiIndex = index;
             const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
             const chuong = truyen.chapters[index];
@@ -3500,6 +3757,10 @@
                 window.scrollTo({ top: parseInt(savedScrollPos), behavior: 'smooth' });
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            if (pushHistory) {
+                history.pushState({ page: 'doc-chuong', key: truyenHienTaiKey, chapIndex: index }, "", "#doc=" + truyenHienTaiKey + "-c" + index);
             }
         }
 
@@ -3597,88 +3858,25 @@
 
         window.chonChuongTuModal = function(index) {
             dongModalMucLuc();
-            kiemtraTruocKhiDoc(index, false);
+            kiemtraTruocKhiDoc(index, false, true);
         };
 
         window.quayLaiTrangGioiThieuTuModal = function() {
             dongModalMucLuc();
-            document.getElementById('btn-floating-menu').classList.add('hidden');
-            document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
-            document.getElementById('tab-doc-chuong').classList.add('hidden');
-            document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
+            xemTruyen(truyenHienTaiKey, true);
         };
 
-        window.chuyenChuong = function(huong) { kiemtraTruocKhiDoc(chuongHienTaiIndex + huong, false); };
+        window.chuyenChuong = function(huong) { kiemtraTruocKhiDoc(chuongHienTaiIndex + huong, false, true); };
         window.quayLaiTruyen = function() {
             document.getElementById('btn-floating-menu').classList.add('hidden');
             document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
-            document.getElementById('tab-doc-chuong').classList.add('hidden');
-            document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
+            xemTruyen(truyenHienTaiKey, true);
         };
         window.quayLaiDanhSach = function() {
             document.getElementById('btn-floating-menu').classList.add('hidden');
             document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
-            window.chuyenTab(tabTruocDo);
+            window.chuyenTab(tabTruocDo, true);
         };
-
-        window.addEventListener('popstate', function() {
-            const hash = window.location.hash.replace('#', '');
-            if (hash) { xuLyChuyenTabTuURL(hash); } 
-            else { xuLyChuyenTabTuURL('trang-chu'); }
-        });
-
-        function xuLyChuyenTabTuURL(tabName) {
-            document.getElementById('btn-floating-menu').classList.add('hidden');
-            document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
-            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.classList.add('hidden');
-            });
-
-            ['btn-tab-trang-chu', 'btn-tab-tat-ca-truyen', 'btn-tab-xep-hang', 'btn-tab-bang-thong-bao', 'btn-tab-dien-dan', 'btn-tab-tu-sach-offline', 'btn-tab-gioi-thieu', 'btn-tab-quan-li'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.classList.remove('active');
-            });
-
-            const targetTabID = 'tab-' + tabName;
-            const targetElement = document.getElementById(targetTabID);
-            
-            if (targetElement) {
-                targetElement.classList.remove('hidden');
-                const activeBtn = document.getElementById('btn-tab-' + tabName);
-                if (activeBtn) activeBtn.classList.add('active');
-            } else {
-                document.getElementById('tab-trang-chu').classList.remove('hidden');
-                document.getElementById('btn-tab-trang-chu').classList.add('active');
-            }
-
-            if (tabName === 'xep-hang') hienThiXepHang();
-            if (tabName === 'bang-thong-bao') {
-                hienThiBangThongBao();
-                danhDauDaDocThongBao();
-            }
-            if (tabName === 'dien-dan') hienThiDienDan();
-            if (tabName === 'tu-sach-offline') hienThiYeuThich();
-            if (tabName === 'quan-li') hienThiTrungTamQuanLy();
-            if (tabName === 'trang-chu') {
-                kiemTraHienThiLichSu();
-                hienThiLoiNhanTrangChu();
-                khoiTaoSliderHot();
-            }
-            
-            window.locTruyen();
-        }
-
-        const oldChuyenTab = window.chuyenTab;
-        window.chuyenTab = function(tabName) {
-            oldChuyenTab(tabName);
-            history.pushState({ tab: tabName }, '', '#' + tabName);
-        };
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const initialHash = window.location.hash.replace('#', '');
-            if (initialHash) { xuLyChuyenTabTuURL(initialHash); }
-        });
     </script>
 </body>
 </html>
