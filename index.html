@@ -41,12 +41,22 @@
             min-height: 100vh; transition: all 0.3s ease;
         }
 
-        .theme-toggle {
+        .sfx-toggle-btn {
+            background: var(--box-bg); border: 2px solid var(--primary-color);
+            color: var(--primary-color); padding: 5px 14px; border-radius: 18px;
+            cursor: pointer; font-size: 15px; font-weight: bold; font-family: inherit;
+        }
+        .sfx-toggle-btn:hover { background: var(--primary-color); color: white; }
+
+        .header-top-controls {
             position: absolute; top: 15px; right: 15px;
+            display: flex; gap: 8px; z-index: 10;
+        }
+
+        .theme-toggle, .menu-style-toggle {
             background: var(--container-bg); border: 2px solid var(--primary-color);
             color: var(--primary-color); padding: 6px 12px; border-radius: 20px;
             cursor: pointer; font-family: inherit; font-size: 14px; font-weight: bold;
-            z-index: 10;
         }
 
         .brand-title {
@@ -101,7 +111,26 @@
         header h1 { margin: 0; color: #ffffff; font-size: 30px; }
         .slogan { margin-top: 8px; color: #ffffff; font-size: 14px; line-height: 1.6; }
 
-        .nav-menu { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+        .nav-menu { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; justify-content: center; transition: all 0.3s ease; }
+        .nav-menu.collapsed { display: none; }
+
+        .hamburger-menu-container {
+            position: relative; margin-top: 15px; display: flex; justify-content: center;
+        }
+        .hamburger-btn {
+            background-color: var(--container-bg); color: var(--primary-color);
+            border: 2px solid var(--primary-color); padding: 10px 24px; border-radius: 25px;
+            cursor: pointer; font-weight: bold; font-family: inherit; font-size: 15px;
+            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        .hamburger-dropdown {
+            position: absolute; top: 50px; background: var(--container-bg);
+            border: 2px solid var(--primary-color); border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); display: flex; flex-direction: column;
+            gap: 6px; padding: 12px; z-index: 999; min-width: 240px; box-sizing: border-box;
+        }
+        .hamburger-dropdown.hidden { display: none; }
+        .hamburger-dropdown .nav-btn { width: 100%; text-align: left; border-radius: 12px; }
 
         .nav-btn {
             background-color: var(--container-bg); color: var(--primary-color);
@@ -584,7 +613,6 @@
         .chapter-item-v { background-color: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: 12px; cursor: pointer; font-size: 14px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
         .chapter-item-v:hover { background-color: var(--border-color); color: var(--primary-color); font-weight: bold; }
 
-        /* KHUNG MỤC LỤC Ô VUÔNG CỐ ĐỊNH CHIỀU CAO, ẨN SCROLLBAR VÀ TĂNG ĐỘ ĐẬM VIỀN */
         .chapter-grid-view { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); 
@@ -595,13 +623,11 @@
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
-        .chapter-grid-view::-webkit-scrollbar {
-            display: none;
-        }
+        .chapter-grid-view::-webkit-scrollbar { display: none; }
 
         .chapter-grid-item {
             background: var(--container-bg); 
-            border: 2px solid var(--primary-color); /* Tăng độ đậm viền chương */
+            border: 2px solid var(--primary-color);
             border-radius: 10px; 
             height: 42px; 
             display: flex; 
@@ -613,14 +639,12 @@
             color: var(--text-color);
             transition: all 0.2s; 
             position: relative; 
-            box-shadow: none;
         }
         .chapter-grid-item:hover, .chapter-grid-item.active {
             background: var(--primary-color); 
             color: white; 
             border-color: var(--primary-color);
             transform: translateY(-2px); 
-            box-shadow: none;
         }
 
         .reading-box { line-height: 1.9; font-size: 16px; background: var(--box-bg); padding: 22px; border-radius: 14px; border: 1px solid var(--border-color); position: relative; }
@@ -731,6 +755,39 @@
             .scroll-btn, .floating-menu-btn { width: 38px; height: 38px; font-size: 15px; }
             .reading-box { font-size: 15px; padding: 16px; }
         }
+
+        /* Othello CSS (Quân cờ nhỏ gọn hơn một chút xíu, đổ bóng tự nhiên) */
+        .othello-board {
+            display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px;
+            background: #ffb6c1; padding: 8px; border-radius: 16px;
+            width: 340px; height: 340px; margin: 15px auto;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.25);
+        }
+        .othello-cell {
+            width: 100%; height: 100%; background: #fff0f3;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border-radius: 6px; transition: background 0.2s;
+        }
+        .othello-cell:hover { background: #ffe4e1; }
+        .othello-cell.valid-move::after {
+            content: ''; width: 30%; height: 30%; background: var(--primary-color);
+            border-radius: 50%; opacity: 0.6; box-shadow: 0 0 8px var(--primary-color);
+        }
+        .othello-piece {
+            width: 66%; height: 66%; border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .piece-black { 
+            background: radial-gradient(circle at 35% 35%, #4a4555, #161220); 
+            border: 1px solid #2d263f; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        }
+        .piece-white { 
+            background: radial-gradient(circle at 35% 35%, #ffffff, #ffccd5); 
+            border: 1px solid #ffb6c1; 
+            box-shadow: 0 2px 4px rgba(255, 105, 180, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -785,7 +842,10 @@
     </div>
 
     <header>
-        <button class="theme-toggle" onclick="doiCheDoSangToi()">🌙 Tối</button>
+        <div class="header-top-controls">
+            <button class="menu-style-toggle" onclick="doiKieuMenu()" title="Đổi kiểu menu hiển thị">☰</button>
+            <button class="theme-toggle" onclick="doiCheDoSangToi()">🌙 Tối</button>
+        </div>
         <h1 class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</h1>
         <div class="slogan">
             Chẳng sợ lãng phí năm tháng thanh xuân<br>
@@ -793,7 +853,7 @@
         </div>
     </header>
 
-    <div class="nav-menu">
+    <div class="nav-menu" id="nav-menu-buttons">
         <button class="nav-btn active" id="btn-tab-trang-chu" onclick="chuyenTab('trang-chu', true)">🏠 Trang chủ</button>
         <button class="nav-btn" id="btn-tab-tat-ca-truyen" onclick="chuyenTab('tat-ca-truyen', true)">📚 Tất cả truyện</button>
         <button class="nav-btn" id="btn-tab-xep-hang" onclick="chuyenTab('xep-hang', true)">🏆 Xếp Hạng</button>
@@ -803,8 +863,26 @@
         </button>
         <button class="nav-btn" id="btn-tab-dien-dan" onclick="chuyenTab('dien-dan', true)">💬 Diễn đàn</button>
         <button class="nav-btn" id="btn-tab-tu-sach-offline" onclick="chuyenTab('tu-sach-offline', true)">🧳 Tủ Sách</button>
+        <button class="nav-btn" id="btn-tab-quay-thu-gian" onclick="chuyenTab('quay-thu-gian', true)">🍵 Quầy Thư Giãn</button>
         <button class="nav-btn" id="btn-tab-quan-li" onclick="yeuCauMoTabQuanLi()" style="background: var(--header-bg); color: white; border-color: var(--primary-color);">🔐 Quản Lý</button>
         <button class="nav-btn" id="btn-tab-gioi-thieu" onclick="chuyenTab('gioi-thieu', true)">🎀 Giới thiệu</button>
+    </div>
+
+    <div class="hamburger-menu-container hidden" id="hamburger-menu-container">
+        <button class="hamburger-btn" onclick="toggleHamburgerDropdown()">
+            <span>☰</span> <span>Menu</span>
+        </button>
+        <div class="hamburger-dropdown hidden" id="hamburger-dropdown">
+            <button class="nav-btn" onclick="chuyenTab('trang-chu', true); toggleHamburgerDropdown();">🏠 Trang chủ</button>
+            <button class="nav-btn" onclick="chuyenTab('tat-ca-truyen', true); toggleHamburgerDropdown();">📚 Tất cả truyện</button>
+            <button class="nav-btn" onclick="chuyenTab('xep-hang', true); toggleHamburgerDropdown();">🏆 Xếp Hạng</button>
+            <button class="nav-btn" onclick="chuyenTab('bang-thong-bao', true); toggleHamburgerDropdown();">🔔 Bảng Thông Báo</button>
+            <button class="nav-btn" onclick="chuyenTab('dien-dan', true); toggleHamburgerDropdown();">💬 Diễn đàn</button>
+            <button class="nav-btn" onclick="chuyenTab('tu-sach-offline', true); toggleHamburgerDropdown();">🧳 Tủ Sách</button>
+            <button class="nav-btn" onclick="chuyenTab('quay-thu-gian', true); toggleHamburgerDropdown();">🍵 Quầy Thư Giãn</button>
+            <button class="nav-btn" onclick="yeuCauMoTabQuanLi(); toggleHamburgerDropdown();" style="background: var(--header-bg); color: white; border-color: var(--primary-color);">🔐 Quản Lý</button>
+            <button class="nav-btn" onclick="chuyenTab('gioi-thieu', true); toggleHamburgerDropdown();">🎀 Giới thiệu</button>
+        </div>
     </div>
 
     <div class="container">
@@ -855,19 +933,8 @@
             <div style="background: var(--box-bg); padding: 18px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
                 <div class="form-group" style="margin-bottom: 10px;">
                     <label>Tên của bạn:</label>
-                    <input type="text" id="home-chat-name" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
-                    <select id="select-picker-home-chat" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-home-chat', 'home-chat-name')"></select>
+                    <input type="text" id="home-chat-name" class="form-control" placeholder="Nhập tên hoặc nickname của cậu...">
                 </div>
-
-                <div class="form-group" style="margin-bottom: 10px;">
-                    <div style="background: var(--container-bg); padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--border-color);">
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: var(--primary-color); font-weight: bold; margin: 0;">
-                            <input type="checkbox" id="home-chat-anon" style="width: 17px; height: 17px; accent-color: var(--primary-color);" onchange="toggleHomeAnonymity()">
-                            <span>🕵️‍♂️ Bình luận ẩn danh (Hóa thân thành Người qua đường bí ẩn 🌸)</span>
-                        </label>
-                    </div>
-                </div>
-
                 <div class="form-group" style="margin-bottom: 12px;">
                     <textarea id="home-chat-text" class="form-control" placeholder="Ví dụ: Hóng chương mới quá đi tác giả ơi, 10 điểm không có nhưng! 💕" style="height: 90px;"></textarea>
                 </div>
@@ -977,6 +1044,96 @@
             </div>
         </div>
 
+        <div id="tab-quay-thu-gian" class="hidden">
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🍵 Quầy Thư Giãn</h3>
+            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 25px;">Góc nhỏ giải trí, xả stress giữa những trang truyện ~ </p>
+            
+            <div id="quay-game-list-view">
+                <div class="story-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px;">
+                    
+                    <!-- Game 2048 -->
+                    <div class="story-card" onclick="moGiaoDienGame('2048')" style="padding: 10px; border-radius: 18px;">
+                        <div class="story-card-cover-wrapper" style="padding-top: 100%; background: linear-gradient(135deg, #ffb6c1, #ff69b4); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.25); position: relative;">
+                            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 38px; color: white; font-weight: 900; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">2048</span>
+                        </div>
+                        <div class="story-card-info" style="padding: 8px 4px 4px 4px;">
+                            <div class="story-card-title" style="font-size: 13px; margin-bottom: 3px;">2048 Phiên Bản Màu Hồng 💕</div>
+                            <div class="story-card-desc" style="font-size: 11px; margin-bottom: 6px; -webkit-line-clamp: 2;">Trò chơi ghép số tone hồng ngọt ngào...</div>
+                            <div class="read-story-link" style="font-size: 11px;">Vào chơi ngay →</div>
+                        </div>
+                    </div>
+
+                    <!-- Game Othello mới -->
+                    <div class="story-card" onclick="moGiaoDienGame('othello')" style="padding: 10px; border-radius: 18px;">
+                        <div class="story-card-cover-wrapper" style="padding-top: 100%; background: linear-gradient(135deg, #ff85c0, #ff69b4); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.25); position: relative;">
+                            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 36px;">⚪⚫</span>
+                        </div>
+                        <div class="story-card-info" style="padding: 8px 4px 4px 4px;">
+                            <div class="story-card-title" style="font-size: 13px; margin-bottom: 3px;">Othello (Cờ Lật) 💕</div>
+                            <div class="story-card-desc" style="font-size: 11px; margin-bottom: 6px; -webkit-line-clamp: 2;">Thử thách cờ lật tone hồng đấu AI...</div>
+                            <div class="read-story-link" style="font-size: 11px;">Vào chơi ngay →</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Giao diện Game 2048 -->
+            <div id="quay-game-2048-view" class="hidden">
+                <button class="back-btn" onclick="quayLaiQuayThuGian()">‹ Quay lại Quầy thư giãn</button>
+                
+                <div style="max-width: 360px; margin: 0 auto; text-align: center;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 12px;">
+                        <h3 style="color: var(--primary-color); margin: 0; font-size: 22px; font-weight: 900; letter-spacing: 0.5px;">2048</h3>
+                        <button class="sfx-toggle-btn" id="sfx-btn-2048" onclick="toggleSfx('2048')">🔊</button>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-weight: bold; font-size: 14px; padding: 0 4px;">
+                        <div style="background: var(--box-bg); padding: 8px 16px; border-radius: 14px; border: 1.5px solid var(--border-color);">Điểm: <span id="game-score" style="color: var(--primary-color);">0</span></div>
+                        <button class="pass-btn" style="padding: 8px 16px; font-size: 13px;" onclick="batDauGame2048()">Chơi Lại 🎮</button>
+                    </div>
+
+                    <div id="game-2048-board" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 10px; background: linear-gradient(135deg, #3b2d4a, #262035); padding: 12px; border-radius: 20px; width: 100%; aspect-ratio: 1; box-sizing: border-box; box-shadow: 0 10px 25px rgba(59, 45, 74, 0.3); border: 2px solid var(--border-color); touch-action: none;"></div>
+                    
+                    <div style="background: var(--box-bg); border: 1.5px solid var(--border-color); padding: 12px 16px; border-radius: 14px; margin-top: 16px; text-align: left; font-size: 12px; color: var(--subtext-color); line-height: 1.6;">
+                        <strong style="color: var(--primary-color); display: block; margin-bottom: 4px;">💡 Hướng dẫn cách chơi:</strong>
+                        • 💻 <strong>Máy tính:</strong> Dùng các phím mũi tên trên bàn phím, hoặc <i>click giữ và vuốt bằng chuột</i> theo hướng muốn đi.<br>
+                        • 📱 <strong>Điện thoại:</strong> Vuốt trực tiếp trên màn hình theo các hướng để di chuyển các ô số.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giao diện Game Othello Mới -->
+            <div id="quay-game-othello-view" class="hidden">
+                <button class="back-btn" onclick="quayLaiQuayThuGian()">‹ Quay lại Quầy thư giãn</button>
+                
+                <div style="max-width: 380px; margin: 0 auto; text-align: center;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 12px;">
+                        <h3 style="color: var(--primary-color); margin: 0; font-size: 20px; font-weight: 900;">Othello (Cờ Lật) 💕</h3>
+                        <button class="sfx-toggle-btn" id="sfx-btn-othello" onclick="toggleSfx('othello')">🔊</button>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: bold; font-size: 13px; padding: 0 4px;">
+                        <div style="background: var(--box-bg); padding: 6px 12px; border-radius: 12px; border: 1.5px solid var(--border-color);">⚫ Đen: <span id="othello-score-black" style="color: var(--primary-color);">2</span></div>
+                        <div id="othello-turn-text" style="color: var(--primary-color);">Lượt: Bạn (Đen)</div>
+                        <div style="background: var(--box-bg); padding: 6px 12px; border-radius: 12px; border: 1.5px solid var(--border-color);">⚪ Trắng: <span id="othello-score-white" style="color: var(--primary-color);">2</span></div>
+                    </div>
+
+                    <div id="othello-board" class="othello-board"></div>
+
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 12px;">
+                        <button class="pass-btn" style="padding: 8px 18px; font-size: 13px;" onclick="batDauGameOthello()">Chơi Lại 🎮</button>
+                    </div>
+                    
+                    <div style="background: var(--box-bg); border: 1.5px solid var(--border-color); padding: 12px 16px; border-radius: 14px; margin-top: 14px; text-align: left; font-size: 12px; color: var(--subtext-color); line-height: 1.6;">
+                        <strong style="color: var(--primary-color); display: block; margin-bottom: 4px;">💡 Hướng dẫn cách chơi Othello:</strong>
+                        • 🖱️ <strong>Cách đánh:</strong> Click vào các ô có dấu chấm hồng sáng (nước đi hợp lệ) để đặt quân cờ kẹp quân đối thủ và lật ngược chúng.<br>
+                        • 🤖 Bạn cầm quân Đen đi trước, đấu với AI (Trắng). Người có nhiều quân hơn khi hết bàn cờ sẽ thắng!
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="tab-quan-li" class="hidden">
             <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🔐 Trung Tâm Quản Lý & Đăng Truyện</h3>
             <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 20px;">Bảng điều khiển toàn diện hệ thống dành riêng cho chủ web.</p>
@@ -986,7 +1143,7 @@
                 <button class="admin-sub-btn" id="btn-admin-tab-tongquan" onclick="doiAdminSubTab('tongquan')">📊 Thống kê</button>
                 <button class="admin-sub-btn" id="btn-admin-tab-truyen" onclick="doiAdminSubTab('truyen')">📚 Truyện & Chương</button>
                 <button class="admin-sub-btn" id="btn-admin-tab-view" onclick="doiAdminSubTab('view')">👁️ Lượt view</button>
-                <button class="admin-sub-btn" id="btn-admin-tab-tuongtac" onclick="doiAdminSubTab('tuongtac')">💬 Tương tác</button>
+                <button class="admin-sub-btn" id="btn-admin-tab-tuongtac" onclick="doiAdminSubTab('tuongtac')">💬 Tương tác & Lấy JSON Comment</button>
                 <button class="admin-sub-btn" id="btn-admin-tab-hethong" onclick="doiAdminSubTab('hethong')">⚙️ Lịch trình</button>
             </div>
 
@@ -1309,18 +1466,19 @@
             </div>
 
             <div id="admin-subcontent-tuongtac" class="hidden">
-                <div class="section-title">💬 Thống Kê Thảo Luận Diễn Đàn & Bình Luận</div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 15px;">
-                    <div style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px solid var(--border-color); text-align: center;">
-                        <div style="font-size: 13px; color: var(--subtext-color); font-weight: bold;">Bài viết diễn đàn</div>
-                        <div id="stat-forum-posts-count" style="font-size: 22px; font-weight: 900; color: var(--primary-color); margin-top: 4px;">0</div>
-                    </div>
-                    <div style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px solid var(--border-color); text-align: center;">
-                        <div style="font-size: 13px; color: var(--subtext-color); font-weight: bold;">Tổng số bình luận chương</div>
-                        <div id="stat-total-comments-count" style="font-size: 22px; font-weight: 900; color: var(--primary-color); margin-top: 4px;">0</div>
-                    </div>
+                <div class="section-title">💬 Quản Lý & Tổng Hợp Mã JSON Comment</div>
+                <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 15px;">Bấm nút bên dưới để hệ thống gom toàn bộ bình luận thành một đoạn mã JSON duy nhất, sau đó copy dán đè thẳng vào file <code>comment.json</code> trên GitHub!</p>
+                
+                <div style="background: var(--box-bg); padding: 16px; border-radius: 14px; border: 1.5px solid var(--border-color); margin-bottom: 20px; text-align: center;">
+                    <button type="button" class="btn-submit" onclick="taoMaJsonCommentDeCopy()" style="padding: 12px 28px; font-size: 15px;">📦 Tổng hợp toàn bộ Comment thành mã JSON</button>
                 </div>
-                <div class="section-title">📝 Chủ Đề Diễn Đàn Gần Đây</div>
+
+                <div class="form-group">
+                    <label>Mã JSON kết quả (Copy toàn bộ đoạn dưới đây dán vào comment.json):</label>
+                    <textarea id="output-json-comment-box" class="form-control" style="height: 200px; font-family: monospace; font-size: 12px; background: var(--container-bg);" readonly placeholder="Bấm nút tổng hợp ở trên để hiển thị mã..."></textarea>
+                </div>
+
+                <div class="section-title" style="margin-top: 30px;">📝 Chủ Đề Diễn Đàn Gần Đây</div>
                 <div id="admin-forum-summary-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
             </div>
 
@@ -1355,7 +1513,6 @@
             </div>
         </div>
 
-        <!-- TRANG CHI TIẾT TRUYỆN -->
         <div id="tab-chi-tiet-truyen" class="hidden">
             <button class="back-btn" onclick="quayLaiDanhSach()">‹ Quay lại</button>
             
@@ -1367,7 +1524,6 @@
                     </div>
                 </div>
 
-                <!-- KHUNG 01: THÔNG TIN -->
                 <div class="decor-section-heading">
                     <div class="decor-number-badge">01</div>
                     <div class="decor-title-text">Thông tin</div>
@@ -1377,7 +1533,6 @@
                     <div id="detail-info-box" style="font-size: 14px; line-height: 2.0; color: var(--text-color);"></div>
                 </div>
 
-                <!-- KHUNG 02: GIỚI THIỆU -->
                 <div class="decor-section-heading">
                     <div class="decor-number-badge">02</div>
                     <div class="decor-title-text">Giới thiệu</div>
@@ -1407,7 +1562,6 @@
                 <button id="btn-toggle-offline" class="offline-btn" onclick="toggleLuuTruyenOffline()">📥 Lưu đọc ngoại tuyến</button>
             </div>
 
-            <!-- KHUNG 03: MỤC LỤC -->
             <div class="story-decor-card">
                 <div class="decor-section-heading" style="margin-top: 0;">
                     <div class="decor-number-badge">03</div>
@@ -1424,19 +1578,8 @@
                 <div style="background: var(--box-bg); padding: 18px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
                     <div class="form-group" style="margin-bottom: 10px;">
                         <label>Tên của bạn:</label>
-                        <input type="text" id="story-comment-name" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
-                        <select id="select-picker-story-comment" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-story-comment', 'story-comment-name')"></select>
+                        <input type="text" id="story-comment-name" class="form-control" placeholder="Nhập tên của cậu...">
                     </div>
-
-                    <div class="form-group" style="margin-bottom: 10px;">
-                        <div style="background: var(--container-bg); padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--border-color);">
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: var(--primary-color); font-weight: bold; margin: 0;">
-                                <input type="checkbox" id="story-comment-anon" style="width: 17px; height: 17px; accent-color: var(--primary-color);" onchange="toggleStoryCommentAnonymity()">
-                                <span>🕵️‍♂️ Bình luận ẩn danh (Hóa thân thành Người qua đường bí ẩn 🌸)</span>
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="form-group" style="margin-bottom: 12px;">
                         <textarea id="story-comment-text" class="form-control" placeholder="Cảm nhận tổng quan của bạn về bộ truyện này..." style="height: 90px;"></textarea>
                     </div>
@@ -1468,19 +1611,8 @@
                 <div style="background: var(--box-bg); padding: 18px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 20px;">
                     <div class="form-group" style="margin-bottom: 10px;">
                         <label>Tên của bạn:</label>
-                        <input type="text" id="chapter-comment-name" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
-                        <select id="select-picker-chapter-comment" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-chapter-comment', 'chapter-comment-name')"></select>
+                        <input type="text" id="chapter-comment-name" class="form-control" placeholder="Nhập tên của cậu...">
                     </div>
-
-                    <div class="form-group" style="margin-bottom: 10px;">
-                        <div style="background: var(--container-bg); padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--border-color);">
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: var(--primary-color); font-weight: bold; margin: 0;">
-                                <input type="checkbox" id="chapter-comment-anon" style="width: 17px; height: 17px; accent-color: var(--primary-color);" onchange="toggleChapterCommentAnonymity()">
-                                <span>🕵️‍♂️ Bình luận ẩn danh (Hóa thân thành Người qua đường bí ẩn 🌸)</span>
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="form-group" style="margin-bottom: 12px;">
                         <textarea id="chapter-comment-text" class="form-control" placeholder="Cảm nhận của bạn về chương truyện này..." style="height: 90px;"></textarea>
                     </div>
@@ -1508,12 +1640,76 @@
     <script>
         const MAT_KHAU_DUNG = "2026";
         const GITHUB_JSON_URL = "https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/data.json";
+        const GITHUB_COMMENT_JSON_URL = "https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/comment.json";
         
         window.cheDoDang = 'truyen'; 
         let slideIndex = 0;
         let slideInterval = null;
         let currentNoticeSubTab = 'tat-ca';
         let currentChapterLayout = 'grid';
+
+        // --- HỆ THỐNG ÂM THANH (SFX) CHỈ KHI THAO TÁC TRONG GAME ---
+        window.isSfxEnabled2048 = true;
+        window.isSfxEnabledOthello = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSfxClick() {
+            try {
+                let ctx = getAudioContext();
+                let osc = ctx.createOscillator();
+                let gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.08);
+            } catch(e) {}
+        }
+
+        function playSfxWin() {
+            try {
+                let ctx = getAudioContext();
+                let now = ctx.currentTime;
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                    let osc = ctx.createOscillator();
+                    let gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+                    gain.gain.setValueAtTime(0.15, now + idx * 0.1);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.2);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now + idx * 0.1);
+                    osc.stop(now + idx * 0.1 + 0.2);
+                });
+            } catch(e) {}
+        }
+
+        function toggleSfx(game) {
+            playSfxClick();
+            if (game === '2048') {
+                window.isSfxEnabled2048 = !window.isSfxEnabled2048;
+                document.getElementById('sfx-btn-2048').innerHTML = window.isSfxEnabled2048 ? "🔊" : "🔇";
+            } else {
+                window.isSfxEnabledOthello = !window.isSfxEnabledOthello;
+                document.getElementById('sfx-btn-othello').innerHTML = window.isSfxEnabledOthello ? "🔊" : "🔇";
+            }
+        }
+        // -------------------------------------------------------------
 
         const danhSachNicknames = [
             "🍡 Mochi Trà Xanh",
@@ -1525,6 +1721,37 @@
             "🌊 Bọt Sóng Biển Xanh",
             "🥞 Bánh Kếp Sốt Bơ"
         ];
+
+        function doiKieuMenu() {
+            const btnContainer = document.getElementById('nav-menu-buttons');
+            const hamburgerContainer = document.getElementById('hamburger-menu-container');
+            const menuToggleBtn = document.querySelector('.menu-style-toggle');
+
+            if (btnContainer.classList.contains('hidden')) {
+                btnContainer.classList.remove('hidden');
+                hamburgerContainer.classList.add('hidden');
+                menuToggleBtn.innerText = '☰';
+                localStorage.setItem('menu_style', 'buttons');
+            } else {
+                btnContainer.classList.add('hidden');
+                hamburgerContainer.classList.remove('hidden');
+                menuToggleBtn.innerText = '🔹';
+                localStorage.setItem('menu_style', 'hamburger');
+            }
+        }
+
+        function toggleHamburgerDropdown() {
+            const dropdown = document.getElementById('hamburger-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', function(e) {
+            const container = document.getElementById('hamburger-menu-container');
+            const dropdown = document.getElementById('hamburger-dropdown');
+            if (container && !container.contains(e.target)) {
+                if (dropdown) dropdown.classList.add('hidden');
+            }
+        });
 
         function formatText(command, value = null) {
             document.execCommand(command, false, value);
@@ -1593,22 +1820,31 @@
         window.danhSachDienDan = defaultForumPosts;
         window.danhSachYeuThich = [];
         window.danhSachLoiNhanTrangChu = defaultHomeChats;
+        window.danhSachBinhLuanTruyen = {}; 
+        window.danhSachBinhLuanChuong = {}; 
 
         const localFavRaw = localStorage.getItem('giadinhcauvong_favorites');
         const localScheduleRaw = localStorage.getItem('giadinhcauvong_schedules');
+        
         if (localFavRaw) window.danhSachYeuThich = JSON.parse(localFavRaw);
         if (localScheduleRaw) window.danhSachHenGio = JSON.parse(localScheduleRaw);
 
         async function loadDataFromGitHub() {
             try {
                 let response = await fetch(GITHUB_JSON_URL + "?_t=" + new Date().getTime());
-                if (!response.ok) throw new Error("Không tải được dữ liệu từ GitHub");
-                let data = await response.json();
-                
-                if (data.truyen_data) window.dữLiệuTruyện = data.truyen_data;
-                if (data.thongbao_data) window.danhSachThongBao = data.thongbao_data;
-                if (data.homechat_data) window.danhSachLoiNhanTrangChu = data.homechat_data;
-                if (data.forum_data) window.danhSachDienDan = data.forum_data;
+                if (response.ok) {
+                    let data = await response.json();
+                    if (data.truyen_data) window.dữLiệuTruyện = data.truyen_data;
+                    if (data.thongbao_data) window.danhSachThongBao = data.thongbao_data;
+                }
+
+                let commentRes = await fetch(GITHUB_COMMENT_JSON_URL + "?_t=" + new Date().getTime());
+                if (commentRes.ok) {
+                    let cData = await commentRes.json();
+                    if (cData.homechat_data && cData.homechat_data.length > 0) window.danhSachLoiNhanTrangChu = cData.homechat_data;
+                    if (cData.forum_data && cData.forum_data.length > 0) window.danhSachDienDan = cData.forum_data;
+                    if (cData.stories_comments) window.danhSachBinhLuanTruyen = cData.stories_comments;
+                }
                 
                 capNhatDropdownTag();
                 locTruyen();
@@ -1619,9 +1855,10 @@
                 hienThiLoiNhanTrangChu();
                 capNhatBadgeThongBao();
             } catch (error) {
-                console.log("Khởi tạo dữ liệu trống hoặc lỗi kết nối GitHub:", error);
+                console.log("Khởi tạo dữ liệu từ bộ nhớ cục bộ:", error);
                 capNhatDropdownTag();
                 khoiTaoSliderHot();
+                hienThiLoiNhanTrangChu();
             }
         }
 
@@ -1807,20 +2044,30 @@
             localStorage.setItem('giadinhcauvong_favorites', JSON.stringify(window.danhSachYeuThich));
         }
 
-        function luuLoiNhanTrangChuVaoLocalStorage() {
-            xuatFileDuLieuJSON();
-        }
-
         function xuatFileDuLieuJSON() {
             const masterData = {
                 truyen_data: window.dữLiệuTruyện,
-                thongbao_data: window.danhSachThongBao,
-                homechat_data: window.danhSachLoiNhanTrangChu,
-                forum_data: window.danhSachDienDan
+                thongbao_data: window.danhSachThongBao
             };
-            console.log("--- DỮ LIỆU JSON MỚI ĐỂ DÁN VÀO GITHUB ---");
+            console.log("--- DỮ LIỆU TRUYỆN JSON ĐỂ DÁN VÀO data.json ---");
             console.log(JSON.stringify(masterData, null, 2));
         }
+
+        window.taoMaJsonCommentDeCopy = function() {
+            const commentMaster = {
+                homechat_data: window.danhSachLoiNhanTrangChu,
+                forum_data: window.danhSachDienDan,
+                stories_comments: window.danhSachBinhLuanTruyen
+            };
+            const jsonString = JSON.stringify(commentMaster, null, 2);
+            const box = document.getElementById('output-json-comment-box');
+            if (box) {
+                box.value = jsonString;
+                box.select();
+                document.execCommand('copy');
+                alert("✨ Đã tổng hợp và sao chép toàn bộ mã JSON comment vào bộ nhớ tạm! Cậu chỉ cần dán đè vào file comment.json trên GitHub nhé!");
+            }
+        };
 
         function yeuCauMoTabQuanLi() {
             const isUnlocked = sessionStorage.getItem('giadinhcauvong_admin_unlocked');
@@ -1930,86 +2177,16 @@
             }
         }
 
-        function toggleHomeAnonymity() {
-            const isChecked = document.getElementById('home-chat-anon').checked;
-            const nameInput = document.getElementById('home-chat-name');
-            if (isChecked) {
-                nameInput.dataset.previousName = nameInput.value;
-                nameInput.value = "🕵️‍♂️ Người qua đường bí ẩn";
-                nameInput.disabled = true;
-                nameInput.style.opacity = "0.7";
-            } else {
-                nameInput.value = nameInput.dataset.previousName || "";
-                nameInput.disabled = false;
-                nameInput.style.opacity = "1";
-            }
-        }
-
-        function toggleChapterCommentAnonymity() {
-            const isChecked = document.getElementById('chapter-comment-anon').checked;
-            const nameInput = document.getElementById('chapter-comment-name');
-            if (isChecked) {
-                nameInput.dataset.previousName = nameInput.value;
-                nameInput.value = "🕵️‍♂️ Người qua đường bí ẩn";
-                nameInput.disabled = true;
-                nameInput.style.opacity = "0.7";
-            } else {
-                nameInput.value = nameInput.dataset.previousName || "";
-                nameInput.disabled = false;
-                nameInput.style.opacity = "1";
-            }
-        }
-
-        function toggleStoryCommentAnonymity() {
-            const isChecked = document.getElementById('story-comment-anon').checked;
-            const nameInput = document.getElementById('story-comment-name');
-            if (isChecked) {
-                nameInput.dataset.previousName = nameInput.value;
-                nameInput.value = "🕵️‍♂️ Người qua đường bí ẩn";
-                nameInput.disabled = true;
-                nameInput.style.opacity = "0.7";
-            } else {
-                nameInput.value = nameInput.dataset.previousName || "";
-                nameInput.disabled = false;
-                nameInput.style.opacity = "1";
-            }
-        }
-
         window.guiLoiNhanTrangChu = function() {
-            const isAnon = document.getElementById('home-chat-anon').checked;
-            let name = document.getElementById('home-chat-name').value.trim();
-            if (isAnon || !name) {
-                name = "🕵️‍♂️ Người qua đường bí ẩn 🌸";
-            }
+            const name = document.getElementById('home-chat-name').value.trim();
             const text = document.getElementById('home-chat-text').value.trim();
+            if (!name || !text) { alert("Vui lòng điền đầy đủ tên và lời nhắn!"); return; }
 
-            if (!text) {
-                alert("Cậu chưa nhập nội dung lời nhắn nè! 💕");
-                return;
-            }
-
-            window.danhSachLoiNhanTrangChu.unshift({
-                id: Date.now(),
-                name: name,
-                text: text
-            });
-
-            luuLoiNhanTrangChuVaoLocalStorage();
-            hienThiLoiNhanTrangChu();
-
+            window.danhSachLoiNhanTrangChu.unshift({ id: Date.now(), name: name, text: text });
+            document.getElementById('home-chat-name').value = '';
             document.getElementById('home-chat-text').value = '';
-            if (isAnon) {
-                document.getElementById('home-chat-anon').checked = false;
-                toggleHomeAnonymity();
-            }
-        };
-
-        window.xoaLoiNhanTrangChu = function(id) {
-            if (confirm("Cậu muốn xóa lời nhắn này chứ?")) {
-                window.danhSachLoiNhanTrangChu = window.danhSachLoiNhanTrangChu.filter(item => item.id !== id);
-                luuLoiNhanTrangChuVaoLocalStorage();
-                hienThiLoiNhanTrangChu();
-            }
+            hienThiLoiNhanTrangChu();
+            alert("🌸 Đã gửi lời nhắn thành công! Đừng quên vào Quản lý để lấy JSON cập nhật vào comment.json nhé.");
         };
 
         function hienThiLoiNhanTrangChu() {
@@ -2025,7 +2202,6 @@
             window.danhSachLoiNhanTrangChu.forEach(item => {
                 box.innerHTML += `
                     <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 14px 16px; border-radius: 14px; font-size: 14px; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
-                        <button class="pass-btn" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:16px; cursor:pointer; font-weight:bold; opacity:0.5;" onclick="xoaLoiNhanTrangChu(${item.id})" title="Xóa lời nhắn">×</button>
                         <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 4px; font-size: 13px;">👤 ${item.name}</div>
                         <div>${item.text}</div>
                     </div>
@@ -2034,48 +2210,22 @@
         }
 
         window.guiBinhLuanTruyen = function() {
-            if (!truyenHienTaiKey) return;
-            const isAnon = document.getElementById('story-comment-anon').checked;
-            let name = document.getElementById('story-comment-name').value.trim();
-            if (isAnon || !name) {
-                name = "🕵️‍♂️ Người qua đường bí ẩn 🌸";
-            }
+            const name = document.getElementById('story-comment-name').value.trim();
             const text = document.getElementById('story-comment-text').value.trim();
+            if (!name || !text) { alert("Vui lòng điền đủ tên và nội dung bình luận!"); return; }
 
-            if (!text) {
-                alert("Cậu chưa nhập nội dung bình luận nè! 💕");
-                return;
+            if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey]) {
+                window.danhSachBinhLuanTruyen[truyenHienTaiKey] = { general: [], chapters: {} };
+            }
+            if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey].general) {
+                window.danhSachBinhLuanTruyen[truyenHienTaiKey].general = [];
             }
 
-            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
-            if (!truyen.storyComments) truyen.storyComments = [];
-
-            truyen.storyComments.unshift({
-                id: Date.now(),
-                name: name,
-                text: text
-            });
-
-            luuVaoLocalStorage();
-            hienThiBinhLuanTruyen();
-
+            window.danhSachBinhLuanTruyen[truyenHienTaiKey].general.unshift({ name: name, text: text, date: new Date().toLocaleDateString('vi-VN') });
+            document.getElementById('story-comment-name').value = '';
             document.getElementById('story-comment-text').value = '';
-            if (isAnon) {
-                document.getElementById('story-comment-anon').checked = false;
-                toggleStoryCommentAnonymity();
-            }
-        };
-
-        window.xoaBinhLuanTruyen = function(commentId) {
-            if (!truyenHienTaiKey) return;
-            if (confirm("Xóa bình luận này chứ?")) {
-                const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
-                if (truyen.storyComments) {
-                    truyen.storyComments = truyen.storyComments.filter(c => c.id !== commentId);
-                    luuVaoLocalStorage();
-                    hienThiBinhLuanTruyen();
-                }
-            }
+            hienThiBinhLuanTruyen();
+            alert("🌸 Đã gửi bình luận thành công! Đừng quên vào Quản lý để lấy JSON cập nhật vào comment.json nhé.");
         };
 
         function hienThiBinhLuanTruyen() {
@@ -2083,70 +2233,44 @@
             if (!box || !truyenHienTaiKey) return;
             box.innerHTML = '';
 
-            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
-            const comments = truyen.storyComments || [];
+            const storyCommObj = window.danhSachBinhLuanTruyen[truyenHienTaiKey];
+            const list = (storyCommObj && storyCommObj.general) ? storyCommObj.general : [];
 
-            if (comments.length === 0) {
-                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có bình luận nào cho bộ truyện này. Hãy để lại cảm nhận đầu tiên nhé! 🌸</p>`;
+            if (list.length === 0) {
+                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có bình luận nào cho bộ truyện này.</p>`;
                 return;
             }
 
-            comments.forEach(c => {
+            list.forEach(item => {
                 box.innerHTML += `
-                    <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 14px 16px; border-radius: 14px; font-size: 14px; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
-                        <button class="pass-btn" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:16px; cursor:pointer; font-weight:bold; opacity:0.5;" onclick="xoaBinhLuanTruyen(${c.id})" title="Xóa bình luận">×</button>
-                        <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 4px; font-size: 13px;">👤 ${c.name}</div>
-                        <div>${c.text}</div>
+                    <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 14px; border-radius: 12px; font-size: 13px;">
+                        <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 3px;">👤 ${item.name} <span style="font-weight:normal; font-size:11px; color:var(--subtext-color); float:right;">${item.date || ''}</span></div>
+                        <div>${item.text}</div>
                     </div>
                 `;
             });
         }
 
         window.guiBinhLuanChuong = function() {
-            if (!truyenHienTaiKey) return;
-            const isAnon = document.getElementById('chapter-comment-anon').checked;
-            let name = document.getElementById('chapter-comment-name').value.trim();
-            if (isAnon || !name) {
-                name = "🕵️‍♂️ Người qua đường bí ẩn 🌸";
-            }
+            const name = document.getElementById('chapter-comment-name').value.trim();
             const text = document.getElementById('chapter-comment-text').value.trim();
+            if (!name || !text) { alert("Vui lòng điền đủ tên và nội dung bình luận!"); return; }
 
-            if (!text) {
-                alert("Cậu chưa nhập nội dung bình luận nè! 💕");
-                return;
+            if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey]) {
+                window.danhSachBinhLuanTruyen[truyenHienTaiKey] = { general: [], chapters: {} };
+            }
+            if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey].chapters) {
+                window.danhSachBinhLuanTruyen[truyenHienTaiKey].chapters = {};
+            }
+            if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey].chapters[chuongHienTaiIndex]) {
+                window.danhSachBinhLuanTruyen[truyenHienTaiKey].chapters[chuongHienTaiIndex] = [];
             }
 
-            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
-            const chuong = truyen.chapters[chuongHienTaiIndex];
-            if (!chuong.comments) chuong.comments = [];
-
-            chuong.comments.unshift({
-                id: Date.now(),
-                name: name,
-                text: text
-            });
-
-            luuVaoLocalStorage();
-            hienThiBinhLuanChuong();
-
+            window.danhSachBinhLuanTruyen[truyenHienTaiKey].chapters[chuongHienTaiIndex].unshift({ name: name, text: text, date: new Date().toLocaleDateString('vi-VN') });
+            document.getElementById('chapter-comment-name').value = '';
             document.getElementById('chapter-comment-text').value = '';
-            if (isAnon) {
-                document.getElementById('chapter-comment-anon').checked = false;
-                toggleChapterCommentAnonymity();
-            }
-        };
-
-        window.xoaBinhLuanChuong = function(commentId) {
-            if (!truyenHienTaiKey) return;
-            if (confirm("Xóa bình luận này chứ?")) {
-                const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
-                const chuong = truyen.chapters[chuongHienTaiIndex];
-                if (chuong.comments) {
-                    chuong.comments = chuong.comments.filter(c => c.id !== commentId);
-                    luuVaoLocalStorage();
-                    hienThiBinhLuanChuong();
-                }
-            }
+            hienThiBinhLuanChuong();
+            alert("🌸 Đã gửi bình luận chương thành công! Đừng quên vào Quản lý để lấy JSON cập nhật vào comment.json nhé.");
         };
 
         function hienThiBinhLuanChuong() {
@@ -2154,21 +2278,19 @@
             if (!box || !truyenHienTaiKey) return;
             box.innerHTML = '';
 
-            const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
-            const chuong = truyen.chapters[chuongHienTaiIndex];
-            const comments = chuong.comments || [];
+            const storyCommObj = window.danhSachBinhLuanTruyen[truyenHienTaiKey];
+            const list = (storyCommObj && storyCommObj.chapters && storyCommObj.chapters[chuongHienTaiIndex]) ? storyCommObj.chapters[chuongHienTaiIndex] : [];
 
-            if (comments.length === 0) {
-                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có bình luận nào ở chương này. Hãy là người đầu tiên bình luận nhé! 🌸</p>`;
+            if (list.length === 0) {
+                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có bình luận nào cho chương này.</p>`;
                 return;
             }
 
-            comments.forEach(c => {
+            list.forEach(item => {
                 box.innerHTML += `
-                    <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 14px 16px; border-radius: 14px; font-size: 14px; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
-                        <button class="pass-btn" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:16px; cursor:pointer; font-weight:bold; opacity:0.5;" onclick="xoaBinhLuanChuong(${c.id})" title="Xóa bình luận">×</button>
-                        <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 4px; font-size: 13px;">👤 ${c.name}</div>
-                        <div>${c.text}</div>
+                    <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 14px; border-radius: 12px; font-size: 13px;">
+                        <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 3px;">👤 ${item.name} <span style="font-weight:normal; font-size:11px; color:var(--subtext-color); float:right;">${item.date || ''}</span></div>
+                        <div>${item.text}</div>
                     </div>
                 `;
             });
@@ -2213,14 +2335,13 @@
                 replies: []
             });
 
-            luuDienDanVaoLocalStorage();
             hienThiDienDan();
 
             document.getElementById('forum-title-select').selectedIndex = 0;
             document.getElementById('forum-title-input').value = '';
             document.getElementById('forum-title-input').classList.add('hidden');
             document.getElementById('forum-content-input').value = '';
-            alert("🌸 Đã đăng bài viết lên diễn đàn thành công!");
+            alert("🌸 Đã đăng bài viết lên diễn đàn thành công! Đừng quên vào Quản lý để lấy JSON cập nhật vào comment.json nhé.");
         };
 
         window.guiPhanHoiForum = function(postId) {
@@ -2241,15 +2362,14 @@
                     isAuthor: isAuthor,
                     text: replyText.trim()
                 });
-                luuDienDanVaoLocalStorage();
                 hienThiDienDan();
+                alert("🌸 Đã gửi phản hồi thành công! Hãy vào Quản lý để lấy JSON cập nhật vào comment.json nhé.");
             }
         };
 
         window.xoaBaiVietForum = function(postId) {
             if (confirm("Cậu có muốn xóa bài thảo luận này không?")) {
                 window.danhSachDienDan = window.danhSachDienDan.filter(p => p.id !== postId);
-                luuDienDanVaoLocalStorage();
                 hienThiDienDan();
             }
         };
@@ -2477,6 +2597,7 @@
             document.body.classList.toggle('dark-mode');
             const btn = document.querySelector('.theme-toggle');
             btn.innerText = document.body.classList.contains('dark-mode') ? '☀️ Sáng' : '🌙 Tối';
+            localStorage.setItem('dark_mode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
         }
 
         function troVeTrangChu() {
@@ -2500,10 +2621,19 @@
             const savedBio = localStorage.getItem('author_bio');
             if (savedBio) { document.getElementById('author-bio-text').innerHTML = savedBio; }
 
-            taoThanhChonNhanhNickname('select-picker-home-chat');
+            const savedMenuStyle = localStorage.getItem('menu_style');
+            if (savedMenuStyle === 'hamburger') {
+                doiKieuMenu();
+            }
+
+            const savedDarkMode = localStorage.getItem('dark_mode');
+            if (savedDarkMode === 'true') {
+                document.body.classList.add('dark-mode');
+                const btn = document.querySelector('.theme-toggle');
+                if (btn) btn.innerText = '☀️ Sáng';
+            }
+
             taoThanhChonNhanhNickname('select-picker-forum');
-            taoThanhChonNhanhNickname('select-picker-story-comment');
-            taoThanhChonNhanhNickname('select-picker-chapter-comment');
 
             kiemTraHienThiLichSu();
             capNhatDropdownTag();
@@ -2519,7 +2649,6 @@
             hienThiTrungTamQuanLy();
             capNhatSelectSuaThongBao();
             
-            // Xử lý nút Back trên trình duyệt
             window.addEventListener('popstate', function(event) {
                 if (event.state) {
                     if (event.state.page === 'doc-chuong') {
@@ -2969,11 +3098,26 @@
                     totalChapters += tr.chapters.length;
                     tr.chapters.forEach(ch => {
                         totalViews += (ch.views || 0);
-                        if (ch.comments) totalComments += ch.comments.length;
                     });
                 }
-                if (tr.storyComments) {
-                    totalComments += tr.storyComments.length;
+            }
+
+            if (window.danhSachLoiNhanTrangChu) totalComments += window.danhSachLoiNhanTrangChu.length;
+            if (window.danhSachDienDan) {
+                window.danhSachDienDan.forEach(p => {
+                    totalComments++;
+                    if (p.replies) totalComments += p.replies.length;
+                });
+            }
+            if (window.danhSachBinhLuanTruyen) {
+                for (let sKey in window.danhSachBinhLuanTruyen) {
+                    const scObj = window.danhSachBinhLuanTruyen[sKey];
+                    if (scObj.general) totalComments += scObj.general.length;
+                    if (scObj.chapters) {
+                        for (let cIdx in scObj.chapters) {
+                            if (scObj.chapters[cIdx]) totalComments += scObj.chapters[cIdx].length;
+                        }
+                    }
                 }
             }
 
@@ -3024,9 +3168,6 @@
                     `;
                 });
             }
-
-            document.getElementById('stat-forum-posts-count').innerText = window.danhSachDienDan.length;
-            document.getElementById('stat-total-comments-count').innerText = totalComments;
 
             const forumSummaryContainer = document.getElementById('admin-forum-summary-list');
             if (forumSummaryContainer) {
@@ -3299,10 +3440,8 @@
                     title: chapTitle, 
                     content: `<p>${chapContent.replace(/\n/g, '</p><p>')}</p>`, 
                     is18: is18,
-                    views: Math.floor(Math.random() * 500) + 100,
-                    comments: []
-                }],
-                storyComments: []
+                    views: Math.floor(Math.random() * 500) + 100
+                }]
             };
 
             if (isScheduled && scheduleTimeStr) {
@@ -3397,8 +3536,7 @@
                 title: chapTitle, 
                 content: `<p>${chapContent.replace(/\n/g, '</p><p>')}</p>`, 
                 is18: is18,
-                views: Math.floor(Math.random() * 300) + 50,
-                comments: []
+                views: Math.floor(Math.random() * 300) + 50
             };
 
             if (isScheduled && scheduleTimeStr) {
@@ -3555,14 +3693,14 @@
         };
 
         window.chuyenTab = function(tabName, pushHistory = true) {
-            if (['trang-chu', 'tat-ca-truyen', 'xep-hang', 'bang-thong-bao', 'dien-dan', 'tu-sach-offline', 'gioi-thieu', 'quan-li'].includes(tabName)) { tabTruocDo = tabName; }
+            if (['trang-chu', 'tat-ca-truyen', 'xep-hang', 'bang-thong-bao', 'dien-dan', 'tu-sach-offline', 'gioi-thieu', 'quan-li', 'quay-thu-gian'].includes(tabName)) { tabTruocDo = tabName; }
 
-            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong'].forEach(id => {
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
 
-            ['btn-tab-trang-chu', 'btn-tab-tat-ca-truyen', 'btn-tab-xep-hang', 'btn-tab-bang-thong-bao', 'btn-tab-dien-dan', 'btn-tab-tu-sach-offline', 'btn-tab-gioi-thieu', 'btn-tab-quan-li'].forEach(id => {
+            ['btn-tab-trang-chu', 'btn-tab-tat-ca-truyen', 'btn-tab-xep-hang', 'btn-tab-bang-thong-bao', 'btn-tab-dien-dan', 'btn-tab-tu-sach-offline', 'btn-tab-gioi-thieu', 'btn-tab-quan-li', 'btn-tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.remove('active');
             });
@@ -3593,6 +3731,9 @@
                 document.getElementById('tab-tu-sach-offline').classList.remove('hidden');
                 document.getElementById('btn-tab-tu-sach-offline').classList.add('active');
                 hienThiYeuThich();
+            } else if (tabName === 'quay-thu-gian') {
+                document.getElementById('tab-quay-thu-gian').classList.remove('hidden');
+                document.getElementById('btn-tab-quay-thu-gian').classList.add('active');
             } else if (tabName === 'gioi-thieu') {
                 document.getElementById('tab-gioi-thieu').classList.remove('hidden');
                 document.getElementById('btn-tab-gioi-thieu').classList.add('active');
@@ -3689,7 +3830,7 @@
             renderDanhSachChươngTrangChiTiet();
             hienThiBinhLuanTruyen();
 
-            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-doc-chuong'].forEach(id => {
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
@@ -3744,7 +3885,7 @@
             document.getElementById('btn-floating-menu').classList.remove('hidden');
             document.getElementById('wattpad-progress-bar-fixed').classList.remove('hidden');
 
-            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-chi-tiet-truyen'].forEach(id => {
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
@@ -3877,6 +4018,387 @@
             document.getElementById('wattpad-progress-bar-fixed').classList.add('hidden');
             window.chuyenTab(tabTruocDo, true);
         };
+
+        function moGiaoDienGame(tenGame) {
+            document.getElementById('quay-game-list-view').classList.add('hidden');
+            if (tenGame === '2048') {
+                document.getElementById('quay-game-2048-view').classList.remove('hidden');
+                batDauGame2048();
+            } else if (tenGame === 'othello') {
+                document.getElementById('quay-game-othello-view').classList.remove('hidden');
+                batDauGameOthello();
+            }
+        }
+
+        function quayLaiQuayThuGian() {
+            document.getElementById('quay-game-2048-view').classList.add('hidden');
+            document.getElementById('quay-game-othello-view').classList.add('hidden');
+            document.getElementById('quay-game-list-view').classList.remove('hidden');
+        }
+
+        /* --- Othello Logic --- */
+        let othelloBoard = [];
+        let othelloTurn = 1; 
+        const BLACK = 1;
+        const WHITE = 2;
+
+        function batDauGameOthello() {
+            othelloBoard = Array(8).fill(null).map(() => Array(8).fill(0));
+            othelloBoard[3][3] = WHITE;
+            othelloBoard[3][4] = BLACK;
+            othelloBoard[4][3] = BLACK;
+            othelloBoard[4][4] = WHITE;
+            othelloTurn = BLACK;
+            veVaCapNhatOthello();
+        }
+
+        function getFlips(r, c, player, board) {
+            if (board[r][c] !== 0) return [];
+            let opponent = player === BLACK ? WHITE : BLACK;
+            let directions = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
+            let totalFlips = [];
+
+            for (let [dr, dc] of directions) {
+                let tempFlips = [];
+                let currR = r + dr;
+                let currC = c + dc;
+                while (currR >= 0 && currR < 8 && currC >= 0 && currC < 8 && board[currR][currC] === opponent) {
+                    tempFlips.push({r: currR, c: currC});
+                    currR += dr;
+                    currC += dc;
+                }
+                if (tempFlips.length > 0 && currR >= 0 && currR < 8 && currC >= 0 && currC < 8 && board[currR][currC] === player) {
+                    totalFlips = totalFlips.concat(tempFlips);
+                }
+            }
+            return totalFlips;
+        }
+
+        function getValidMoves(player, board) {
+            let moves = [];
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    if (getFlips(r, c, player, board).length > 0) {
+                        moves.push({r, c});
+                    }
+                }
+            }
+            return moves;
+        }
+
+        function veVaCapNhatOthello() {
+            const boardEl = document.getElementById('othello-board');
+            if (!boardEl) return;
+            boardEl.innerHTML = '';
+
+            let blackCount = 0;
+            let whiteCount = 0;
+            let validMoves = othelloTurn === BLACK ? getValidMoves(BLACK, othelloBoard) : [];
+
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    let cell = document.createElement('div');
+                    cell.className = 'othello-cell';
+
+                    let val = othelloBoard[r][c];
+                    if (val === BLACK) {
+                        blackCount++;
+                        cell.innerHTML = '<div class="othello-piece piece-black"></div>';
+                    } else if (val === WHITE) {
+                        whiteCount++;
+                        cell.innerHTML = '<div class="othello-piece piece-white"></div>';
+                    } else {
+                        let isValid = validMoves.some(m => m.r === r && m.c === c);
+                        if (isValid && othelloTurn === BLACK) {
+                            cell.classList.add('valid-move');
+                            cell.onclick = () => thucHienNuocDi(r, c);
+                        }
+                    }
+
+                    if (val === 0 && othelloTurn === BLACK && cell.onclick === null) {
+                        cell.onclick = () => {
+                            alert("⚠️ Ô này không hợp lệ! Hãy chọn ô có dấu chấm hồng nhé.");
+                        };
+                    }
+
+                    boardEl.appendChild(cell);
+                }
+            }
+
+            document.getElementById('othello-score-black').innerText = blackCount;
+            document.getElementById('othello-score-white').innerText = whiteCount;
+
+            const turnText = document.getElementById('othello-turn-text');
+            let blackMoves = getValidMoves(BLACK, othelloBoard);
+            let whiteMoves = getValidMoves(WHITE, othelloBoard);
+
+            if (blackMoves.length === 0 && whiteMoves.length === 0) {
+                if (window.isSfxEnabledOthello) playSfxWin();
+                if (blackCount > whiteCount) turnText.innerText = "🎉 Bạn thắng rồi! 💕";
+                else if (whiteCount > blackCount) turnText.innerText = "😢 AI Thắng mất rồi!";
+                else turnText.innerText = "🤝 Hòa nhau!";
+                return;
+            }
+
+            if (othelloTurn === BLACK && blackMoves.length === 0) {
+                alert("Bạn không có nước đi hợp lệ, đổi lượt cho AI!");
+                othelloTurn = WHITE;
+                setTimeout(aiNuocDi, 600);
+                return;
+            } else if (othelloTurn === WHITE && whiteMoves.length === 0) {
+                alert("AI không có nước đi hợp lệ, đến lượt bạn!");
+                othelloTurn = BLACK;
+                veVaCapNhatOthello();
+                return;
+            }
+
+            if (othelloTurn === BLACK) {
+                turnText.innerText = "Lượt: Bạn (Den)";
+            } else {
+                turnText.innerText = "Lượt: AI (Trắng)...";
+            }
+        }
+
+        function thucHienNuocDi(r, c) {
+            if (window.isSfxEnabledOthello) playSfxClick();
+            let flips = getFlips(r, c, othelloTurn, othelloBoard);
+            if (flips.length === 0) return;
+
+            othelloBoard[r][c] = othelloTurn;
+            flips.forEach(f => {
+                othelloBoard[f.r][f.c] = othelloTurn;
+            });
+
+            if (othelloTurn === BLACK) {
+                othelloTurn = WHITE;
+                veVaCapNhatOthello();
+                setTimeout(aiNuocDi, 800);
+            } else {
+                othelloTurn = BLACK;
+                veVaCapNhatOthello();
+            }
+        }
+
+        function aiNuocDi() {
+            let validMoves = getValidMoves(WHITE, othelloBoard);
+            if (validMoves.length === 0) {
+                othelloTurn = BLACK;
+                veVaCapNhatOthello();
+                return;
+            }
+
+            let bestMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+            let maxFlips = -1;
+            validMoves.forEach(m => {
+                let fCount = getFlips(m.r, m.c, WHITE, othelloBoard).length;
+                if (fCount > maxFlips) {
+                    maxFlips = fCount;
+                    bestMove = m;
+                }
+            });
+
+            thucHienNuocDi(bestMove.r, bestMove.c);
+        }
+
+        /* --- Game 2048 Logic --- */
+        let board2048 = [];
+        let score2048 = 0;
+
+        function batDauGame2048() {
+            board2048 = [
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+            ];
+            score2048 = 0;
+            themSoNgauNhien2048();
+            themSoNgauNhien2048();
+            veBang2048();
+        }
+
+        function themSoNgauNhien2048() {
+            let trong = [];
+            for (let r = 0; r < 4; r++) {
+                for (let c = 0; c < 4; c++) {
+                    if (board2048[r][c] === 0) trong.push({r, c});
+                }
+            }
+            if (trong.length > 0) {
+                let randomCell = trong[Math.floor(Math.random() * trong.length)];
+                board2048[randomCell.r][randomCell.c] = Math.random() < 0.9 ? 2 : 4;
+            }
+        }
+
+        function veBang2048() {
+            const boardEl = document.getElementById('game-2048-board');
+            if (!boardEl) return;
+            boardEl.innerHTML = '';
+            document.getElementById('game-score').innerText = score2048;
+
+            for (let r = 0; r < 4; r++) {
+                for (let c = 0; c < 4; c++) {
+                    let val = board2048[r][c];
+                    let cell = document.createElement('div');
+                    cell.style.cssText = `
+                        background: ${getMauO2048(val)};
+                        color: ${val <= 4 ? '#555' : '#fff'};
+                        font-weight: 900;
+                        font-size: ${val >= 1024 ? '18px' : '22px'};
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 12px;
+                        user-select: none;
+                        width: 100%;
+                        height: 100%;
+                        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                        transition: all 0.1s ease;
+                    `;
+                    cell.innerText = val === 0 ? '' : val;
+                    boardEl.appendChild(cell);
+                }
+            }
+        }
+
+        function getMauO2048(val) {
+            switch(val) {
+                case 0: return 'rgba(255, 255, 255, 0.08)';
+                case 2: return '#ffe4e1'; 
+                case 4: return '#ffc0cb'; 
+                case 8: return '#ffb6c1'; 
+                case 16: return '#ff69b4'; 
+                case 32: return '#ff1493'; 
+                case 64: return '#c71585'; 
+                case 128: return '#dda0dd'; 
+                case 256: return '#ba55d3'; 
+                case 512: return '#9932cc'; 
+                case 1024: return '#8b008b'; 
+                case 2048: return '#ff4500'; 
+                default: return '#333';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('tab-quay-thu-gian').classList.contains('hidden') || 
+                document.getElementById('quay-game-2048-view').classList.contains('hidden')) return;
+
+            let moved = false;
+            if (e.key === 'ArrowLeft') { moved = diChuyenTrai(); }
+            else if (e.key === 'ArrowRight') { moved = diChuyenPhai(); }
+            else if (e.key === 'ArrowUp') { moved = diChuyenLen(); }
+            else if (e.key === 'ArrowDown') { moved = diChuyenXuong(); }
+
+            if (moved) {
+                if (window.isSfxEnabled2048) playSfxClick();
+                e.preventDefault();
+                themSoNgauNhien2048();
+                veBang2048();
+            }
+        });
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        const boardEl = document.getElementById('game-2048-board');
+        if (boardEl) {
+            boardEl.addEventListener('pointerdown', (e) => {
+                touchStartX = e.clientX;
+                touchStartY = e.clientY;
+                e.preventDefault();
+            });
+
+            boardEl.addEventListener('pointerup', (e) => {
+                let touchEndX = e.clientX;
+                let touchEndY = e.clientY;
+                xuLySuKienVuot(touchStartX, touchStartY, touchEndX, touchEndY);
+                e.preventDefault();
+            });
+        }
+
+        function xuLySuKienVuot(startX, startY, endX, endY) {
+            let diffX = endX - startX;
+            let diffY = endY - startY;
+            let minDistance = 30;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (Math.abs(diffX) > minDistance) {
+                    let moved = false;
+                    if (diffX > 0) moved = diChuyenPhai();
+                    else moved = diChuyenTrai();
+                    if (moved) {
+                        if (window.isSfxEnabled2048) playSfxClick();
+                        themSoNgauNhien2048();
+                        veBang2048();
+                    }
+                }
+            } else {
+                if (Math.abs(diffY) > minDistance) {
+                    let moved = false;
+                    if (diffY > 0) moved = diChuyenXuong();
+                    else moved = diChuyenLen();
+                    if (moved) {
+                        if (window.isSfxEnabled2048) playSfxClick();
+                        themSoNgauNhien2048();
+                        veBang2048();
+                    }
+                }
+            }
+        }
+
+        function locSo(row) { return row.filter(num => num !== 0); }
+
+        function gopHang(row) {
+            let arr = locSo(row);
+            for (let i = 0; i < arr.length - 1; i++) {
+                if (arr[i] === arr[i+1]) {
+                    arr[i] *= 2;
+                    score2048 += arr[i];
+                    arr[i+1] = 0;
+                }
+            }
+            arr = locSo(arr);
+            while(arr.length < 4) arr.push(0);
+            return arr;
+        }
+
+        function diChuyenTrai() {
+            let oldBoard = JSON.stringify(board2048);
+            for (let r = 0; r < 4; r++) {
+                board2048[r] = gopHang(board2048[r]);
+            }
+            return oldBoard !== JSON.stringify(board2048);
+        }
+
+        function diChuyenPhai() {
+            let oldBoard = JSON.stringify(board2048);
+            for (let r = 0; r < 4; r++) {
+                let row = board2048[r].slice().reverse();
+                row = gopHang(row);
+                board2048[r] = row.reverse();
+            }
+            return oldBoard !== JSON.stringify(board2048);
+        }
+
+        function diChuyenLen() {
+            let oldBoard = JSON.stringify(board2048);
+            for (let c = 0; c < 4; c++) {
+                let col = [board2048[0][c], board2048[1][c], board2048[2][c], board2048[3][c]];
+                col = gopHang(col);
+                for (let r = 0; r < 4; r++) { board2048[r][c] = col[r]; }
+            }
+            return oldBoard !== JSON.stringify(board2048);
+        }
+
+        function diChuyenXuong() {
+            let oldBoard = JSON.stringify(board2048);
+            for (let c = 0; c < 4; c++) {
+                let col = [board2048[0][c], board2048[1][c], board2048[2][c], board2048[3][c]].reverse();
+                col = gopHang(col).reverse();
+                for (let r = 0; r < 4; r++) { board2048[r][c] = col[r]; }
+            }
+            return oldBoard !== JSON.stringify(board2048);
+        }
     </script>
 </body>
 </html>
