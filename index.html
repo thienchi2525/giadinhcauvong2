@@ -756,37 +756,381 @@
             .reading-box { font-size: 15px; padding: 16px; }
         }
 
-        /* Othello CSS (Quân cờ nhỏ gọn hơn một chút xíu, đổ bóng tự nhiên) */
+        /* --- GAME CARD STYLES (Quầy thư giãn) --- */
+        .game-card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .game-card-item {
+            background: var(--box-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .game-card-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 14px rgba(255, 105, 180, 0.12);
+        }
+
+        .game-card-icon {
+            font-size: 34px;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .game-card-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-color);
+            letter-spacing: 0.2px;
+        }
+
+        @media (max-width: 480px) {
+            .game-card-item {
+                min-height: 90px;
+                padding: 10px 8px;
+                border-radius: 12px;
+            }
+            .game-card-icon {
+                font-size: 28px;
+                margin-bottom: 4px;
+            }
+            .game-card-name {
+                font-size: 12px;
+            }
+            .game-card-grid {
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .game-card-item {
+                min-height: 80px;
+                padding: 8px 6px;
+            }
+            .game-card-icon {
+                font-size: 24px;
+            }
+            .game-card-name {
+                font-size: 11px;
+            }
+        }
+
+        /* --- OTHELLO & 2048 SIZE SELECTOR BUTTONS --- */
+        .size-selector-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 12px 0 16px 0;
+        }
+
+        .size-btn {
+            background: var(--box-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 52px;
+            text-align: center;
+        }
+
+        .size-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--border-color);
+        }
+
+        .size-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(255, 105, 180, 0.25);
+        }
+
+        /* --- OTHELLO BOARD --- */
+        .othello-board-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 8px 0;
+        }
+
         .othello-board {
-            display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px;
-            background: #ffb6c1; padding: 8px; border-radius: 16px;
-            width: 340px; height: 340px; margin: 15px auto;
+            display: grid;
+            gap: 3px;
+            background: #ffb6c1;
+            padding: 8px;
+            border-radius: 16px;
             border: 4px solid var(--primary-color);
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.25);
+            width: 340px;
+            height: 340px;
+            flex-shrink: 0;
+            box-sizing: border-box;
         }
+
         .othello-cell {
-            width: 100%; height: 100%; background: #fff0f3;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; border-radius: 6px; transition: background 0.2s;
+            width: 100%;
+            height: 100%;
+            background: #fff0f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            border-radius: 6px;
+            transition: background 0.2s;
+            aspect-ratio: 1 / 1;
+            min-width: 0;
+            min-height: 0;
         }
-        .othello-cell:hover { background: #ffe4e1; }
+
+        .othello-cell.clickable {
+            cursor: pointer;
+        }
+
+        .othello-cell.clickable:hover {
+            background: #ffe4e1;
+        }
+
         .othello-cell.valid-move::after {
-            content: ''; width: 30%; height: 30%; background: var(--primary-color);
-            border-radius: 50%; opacity: 0.6; box-shadow: 0 0 8px var(--primary-color);
+            content: '';
+            width: 30%;
+            height: 30%;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.6;
+            box-shadow: 0 0 8px var(--primary-color);
         }
+
         .othello-piece {
-            width: 66%; height: 66%; border-radius: 50%;
+            width: 66%;
+            height: 66%;
+            border-radius: 50%;
             transition: transform 0.3s ease;
         }
-        .piece-black { 
-            background: radial-gradient(circle at 35% 35%, #4a4555, #161220); 
-            border: 1px solid #2d263f; 
+
+        .piece-black {
+            background: radial-gradient(circle at 35% 35%, #4a4555, #161220);
+            border: 1px solid #2d263f;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
         }
-        .piece-white { 
-            background: radial-gradient(circle at 35% 35%, #ffffff, #ffccd5); 
-            border: 1px solid #ffb6c1; 
+
+        .piece-white {
+            background: radial-gradient(circle at 35% 35%, #ffffff, #ffccd5);
+            border: 1px solid #ffb6c1;
             box-shadow: 0 2px 4px rgba(255, 105, 180, 0.2);
+        }
+
+        /* Game container center alignment */
+        .game-center-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .game-header-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 6px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 6px;
+            position: relative;
+        }
+
+        .game-title-center {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin: 0;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .game-sfx-btn {
+            background: var(--box-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 18px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: inherit;
+            flex-shrink: 0;
+            position: absolute;
+            right: 0;
+        }
+
+        .game-sfx-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .game-control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 6px 0 10px 0;
+        }
+
+        .game-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .game-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .game-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .game-btn-outline {
+            background: var(--box-bg);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .game-btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .game-score-display {
+            background: var(--box-bg);
+            padding: 6px 14px;
+            border-radius: 14px;
+            border: 1.5px solid var(--border-color);
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        .game-score-display span {
+            color: var(--primary-color);
+        }
+
+        /* 2048 board */
+        #game-2048-board {
+            display: grid;
+            gap: 10px;
+            background: linear-gradient(135deg, #3b2d4a, #262035);
+            padding: 12px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1 / 1;
+            box-sizing: border-box;
+            box-shadow: 0 10px 25px rgba(59, 45, 74, 0.3);
+            border: 2px solid var(--border-color);
+            touch-action: none;
+            margin: 0 auto;
+        }
+
+        .game-2048-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            user-select: none;
+            font-weight: 900;
+            transition: all 0.1s ease;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            min-width: 0;
+            min-height: 0;
+        }
+
+        /* Responsive cho game */
+        @media (max-width: 480px) {
+            .othello-board {
+                width: 280px;
+                height: 280px;
+                padding: 6px;
+                gap: 2px;
+            }
+            #game-2048-board {
+                gap: 6px;
+                padding: 8px;
+                max-width: 320px;
+            }
+            .game-title-center {
+                font-size: 18px;
+            }
+            .game-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+                min-width: 80px;
+            }
+            .size-btn {
+                padding: 4px 12px;
+                font-size: 12px;
+                min-width: 44px;
+            }
+            .game-sfx-btn {
+                font-size: 13px;
+                padding: 3px 10px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .othello-board {
+                width: 240px;
+                height: 240px;
+                padding: 4px;
+                gap: 2px;
+            }
+            #game-2048-board {
+                gap: 4px;
+                padding: 6px;
+                max-width: 260px;
+            }
+            .game-title-center {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -1049,32 +1393,18 @@
             <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 25px;">Góc nhỏ giải trí, xả stress giữa những trang truyện ~ </p>
             
             <div id="quay-game-list-view">
-                <div class="story-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px;">
-                    
-                    <!-- Game 2048 -->
-                    <div class="story-card" onclick="moGiaoDienGame('2048')" style="padding: 10px; border-radius: 18px;">
-                        <div class="story-card-cover-wrapper" style="padding-top: 100%; background: linear-gradient(135deg, #ffb6c1, #ff69b4); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.25); position: relative;">
-                            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 38px; color: white; font-weight: 900; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">2048</span>
-                        </div>
-                        <div class="story-card-info" style="padding: 8px 4px 4px 4px;">
-                            <div class="story-card-title" style="font-size: 13px; margin-bottom: 3px;">2048 Phiên Bản Màu Hồng 💕</div>
-                            <div class="story-card-desc" style="font-size: 11px; margin-bottom: 6px; -webkit-line-clamp: 2;">Trò chơi ghép số tone hồng ngọt ngào...</div>
-                            <div class="read-story-link" style="font-size: 11px;">Vào chơi ngay →</div>
-                        </div>
+                <div class="game-card-grid">
+                    <!-- Game 2048 Card -->
+                    <div class="game-card-item" onclick="moGiaoDienGame('2048')">
+                        <div class="game-card-icon">🎮</div>
+                        <div class="game-card-name">2048</div>
                     </div>
 
-                    <!-- Game Othello mới -->
-                    <div class="story-card" onclick="moGiaoDienGame('othello')" style="padding: 10px; border-radius: 18px;">
-                        <div class="story-card-cover-wrapper" style="padding-top: 100%; background: linear-gradient(135deg, #ff85c0, #ff69b4); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.25); position: relative;">
-                            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 36px;">⚪⚫</span>
-                        </div>
-                        <div class="story-card-info" style="padding: 8px 4px 4px 4px;">
-                            <div class="story-card-title" style="font-size: 13px; margin-bottom: 3px;">Othello (Cờ Lật) 💕</div>
-                            <div class="story-card-desc" style="font-size: 11px; margin-bottom: 6px; -webkit-line-clamp: 2;">Thử thách cờ lật tone hồng đấu AI...</div>
-                            <div class="read-story-link" style="font-size: 11px;">Vào chơi ngay →</div>
-                        </div>
+                    <!-- Game Othello Card -->
+                    <div class="game-card-item" onclick="moGiaoDienGame('othello')">
+                        <div class="game-card-icon">⚪⚫</div>
+                        <div class="game-card-name">Othello (Cờ Lật)</div>
                     </div>
-
                 </div>
             </div>
 
@@ -1082,20 +1412,27 @@
             <div id="quay-game-2048-view" class="hidden">
                 <button class="back-btn" onclick="quayLaiQuayThuGian()">‹ Quay lại Quầy thư giãn</button>
                 
-                <div style="max-width: 360px; margin: 0 auto; text-align: center;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 12px;">
-                        <h3 style="color: var(--primary-color); margin: 0; font-size: 22px; font-weight: 900; letter-spacing: 0.5px;">2048</h3>
-                        <button class="sfx-toggle-btn" id="sfx-btn-2048" onclick="toggleSfx('2048')">🔊</button>
-                    </div>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-weight: bold; font-size: 14px; padding: 0 4px;">
-                        <div style="background: var(--box-bg); padding: 8px 16px; border-radius: 14px; border: 1.5px solid var(--border-color);">Điểm: <span id="game-score" style="color: var(--primary-color);">0</span></div>
-                        <button class="pass-btn" style="padding: 8px 16px; font-size: 13px;" onclick="batDauGame2048()">Chơi Lại 🎮</button>
+                <div class="game-center-container">
+                    <div class="game-header-row">
+                        <h3 class="game-title-center">2048</h3>
+                        <button class="game-sfx-btn" id="sfx-btn-2048" onclick="toggleSfx('2048')">🔊</button>
                     </div>
 
-                    <div id="game-2048-board" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 10px; background: linear-gradient(135deg, #3b2d4a, #262035); padding: 12px; border-radius: 20px; width: 100%; aspect-ratio: 1; box-sizing: border-box; box-shadow: 0 10px 25px rgba(59, 45, 74, 0.3); border: 2px solid var(--border-color); touch-action: none;"></div>
-                    
-                    <div style="background: var(--box-bg); border: 1.5px solid var(--border-color); padding: 12px 16px; border-radius: 14px; margin-top: 16px; text-align: left; font-size: 12px; color: var(--subtext-color); line-height: 1.6;">
+                    <!-- Size selector cho 2048 -->
+                    <div class="size-selector-group" id="size-selector-2048">
+                        <button class="size-btn active" data-size="4" onclick="chonKichThuoc2048(4)">4×4</button>
+                        <button class="size-btn" data-size="5" onclick="chonKichThuoc2048(5)">5×5</button>
+                        <button class="size-btn" data-size="6" onclick="chonKichThuoc2048(6)">6×6</button>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; width:100%; max-width:400px; margin-bottom: 12px; font-weight: bold; font-size: 14px; padding: 0 4px;">
+                        <div class="game-score-display">Điểm: <span id="game-score">0</span></div>
+                        <button class="game-btn" onclick="batDauGame2048()">Chơi Lại 🎮</button>
+                    </div>
+
+                    <div id="game-2048-board"></div>
+
+                    <div style="background: var(--box-bg); border: 1.5px solid var(--border-color); padding: 12px 16px; border-radius: 14px; margin-top: 16px; text-align: left; font-size: 12px; color: var(--subtext-color); line-height: 1.6; width:100%; max-width:400px; box-sizing:border-box;">
                         <strong style="color: var(--primary-color); display: block; margin-bottom: 4px;">💡 Hướng dẫn cách chơi:</strong>
                         • 💻 <strong>Máy tính:</strong> Dùng các phím mũi tên trên bàn phím, hoặc <i>click giữ và vuốt bằng chuột</i> theo hướng muốn đi.<br>
                         • 📱 <strong>Điện thoại:</strong> Vuốt trực tiếp trên màn hình theo các hướng để di chuyển các ô số.
@@ -1103,29 +1440,39 @@
                 </div>
             </div>
 
-            <!-- Giao diện Game Othello Mới -->
+            <!-- Giao diện Game Othello -->
             <div id="quay-game-othello-view" class="hidden">
                 <button class="back-btn" onclick="quayLaiQuayThuGian()">‹ Quay lại Quầy thư giãn</button>
                 
-                <div style="max-width: 380px; margin: 0 auto; text-align: center;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 12px;">
-                        <h3 style="color: var(--primary-color); margin: 0; font-size: 20px; font-weight: 900;">Othello (Cờ Lật) 💕</h3>
-                        <button class="sfx-toggle-btn" id="sfx-btn-othello" onclick="toggleSfx('othello')">🔊</button>
-                    </div>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: bold; font-size: 13px; padding: 0 4px;">
-                        <div style="background: var(--box-bg); padding: 6px 12px; border-radius: 12px; border: 1.5px solid var(--border-color);">⚫ Đen: <span id="othello-score-black" style="color: var(--primary-color);">2</span></div>
-                        <div id="othello-turn-text" style="color: var(--primary-color);">Lượt: Bạn (Đen)</div>
-                        <div style="background: var(--box-bg); padding: 6px 12px; border-radius: 12px; border: 1.5px solid var(--border-color);">⚪ Trắng: <span id="othello-score-white" style="color: var(--primary-color);">2</span></div>
+                <div class="game-center-container">
+                    <div class="game-header-row">
+                        <h3 class="game-title-center">Othello (Cờ Lật) 💕</h3>
+                        <button class="game-sfx-btn" id="sfx-btn-othello" onclick="toggleSfx('othello')">🔊</button>
                     </div>
 
-                    <div id="othello-board" class="othello-board"></div>
-
-                    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 12px;">
-                        <button class="pass-btn" style="padding: 8px 18px; font-size: 13px;" onclick="batDauGameOthello()">Chơi Lại 🎮</button>
+                    <!-- Size selector cho Othello -->
+                    <div class="size-selector-group" id="size-selector-othello">
+                        <button class="size-btn active" data-size="8" onclick="chonKichThuocOthello(8)">8×8</button>
+                        <button class="size-btn" data-size="10" onclick="chonKichThuocOthello(10)">10×10</button>
+                        <button class="size-btn" data-size="12" onclick="chonKichThuocOthello(12)">12×12</button>
                     </div>
-                    
-                    <div style="background: var(--box-bg); border: 1.5px solid var(--border-color); padding: 12px 16px; border-radius: 14px; margin-top: 14px; text-align: left; font-size: 12px; color: var(--subtext-color); line-height: 1.6;">
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; width:100%; max-width:400px; margin-bottom: 8px; font-weight: bold; font-size: 13px; padding: 0 4px; flex-wrap: wrap; gap:4px;">
+                        <div class="game-score-display">⚫ Đen: <span id="othello-score-black">2</span></div>
+                        <div id="othello-turn-text" style="color: var(--primary-color); font-weight:700; font-size:13px; text-align:center;">Lượt: Bạn (Đen)</div>
+                        <div class="game-score-display">⚪ Trắng: <span id="othello-score-white">2</span></div>
+                    </div>
+
+                    <div class="othello-board-wrapper">
+                        <div id="othello-board" class="othello-board"></div>
+                    </div>
+
+                    <div class="game-control-row">
+                        <button class="game-btn" id="othello-start-btn" onclick="batDauGameOthello()">Bắt đầu</button>
+                        <button class="game-btn game-btn-outline" onclick="resetGameOthello()">Chơi lại</button>
+                    </div>
+
+                    <div style="background: var(--box-bg); border: 1.5px solid var(--border-color); padding: 12px 16px; border-radius: 14px; margin-top: 14px; text-align: left; font-size: 12px; color: var(--subtext-color); line-height: 1.6; width:100%; max-width:400px; box-sizing:border-box;">
                         <strong style="color: var(--primary-color); display: block; margin-bottom: 4px;">💡 Hướng dẫn cách chơi Othello:</strong>
                         • 🖱️ <strong>Cách đánh:</strong> Click vào các ô có dấu chấm hồng sáng (nước đi hợp lệ) để đặt quân cờ kẹp quân đối thủ và lật ngược chúng.<br>
                         • 🤖 Bạn cầm quân Đen đi trước, đấu với AI (Trắng). Người có nhiều quân hơn khi hết bàn cờ sẽ thắng!
@@ -2648,6 +2995,10 @@
             lamMoiDongTruyenThongBao();
             hienThiTrungTamQuanLy();
             capNhatSelectSuaThongBao();
+
+            // --- Khởi tạo game ---
+            batDauGame2048();
+            khoiTaoGameOthello();
             
             window.addEventListener('popstate', function(event) {
                 if (event.state) {
@@ -3734,6 +4085,10 @@
             } else if (tabName === 'quay-thu-gian') {
                 document.getElementById('tab-quay-thu-gian').classList.remove('hidden');
                 document.getElementById('btn-tab-quay-thu-gian').classList.add('active');
+                // Reset game views
+                document.getElementById('quay-game-list-view').classList.remove('hidden');
+                document.getElementById('quay-game-2048-view').classList.add('hidden');
+                document.getElementById('quay-game-othello-view').classList.add('hidden');
             } else if (tabName === 'gioi-thieu') {
                 document.getElementById('tab-gioi-thieu').classList.remove('hidden');
                 document.getElementById('btn-tab-gioi-thieu').classList.add('active');
@@ -4026,7 +4381,7 @@
                 batDauGame2048();
             } else if (tenGame === 'othello') {
                 document.getElementById('quay-game-othello-view').classList.remove('hidden');
-                batDauGameOthello();
+                resetGameOthello();
             }
         }
 
@@ -4036,181 +4391,24 @@
             document.getElementById('quay-game-list-view').classList.remove('hidden');
         }
 
-        /* --- Othello Logic --- */
-        let othelloBoard = [];
-        let othelloTurn = 1; 
-        const BLACK = 1;
-        const WHITE = 2;
-
-        function batDauGameOthello() {
-            othelloBoard = Array(8).fill(null).map(() => Array(8).fill(0));
-            othelloBoard[3][3] = WHITE;
-            othelloBoard[3][4] = BLACK;
-            othelloBoard[4][3] = BLACK;
-            othelloBoard[4][4] = WHITE;
-            othelloTurn = BLACK;
-            veVaCapNhatOthello();
-        }
-
-        function getFlips(r, c, player, board) {
-            if (board[r][c] !== 0) return [];
-            let opponent = player === BLACK ? WHITE : BLACK;
-            let directions = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
-            let totalFlips = [];
-
-            for (let [dr, dc] of directions) {
-                let tempFlips = [];
-                let currR = r + dr;
-                let currC = c + dc;
-                while (currR >= 0 && currR < 8 && currC >= 0 && currC < 8 && board[currR][currC] === opponent) {
-                    tempFlips.push({r: currR, c: currC});
-                    currR += dr;
-                    currC += dc;
-                }
-                if (tempFlips.length > 0 && currR >= 0 && currR < 8 && currC >= 0 && currC < 8 && board[currR][currC] === player) {
-                    totalFlips = totalFlips.concat(tempFlips);
-                }
-            }
-            return totalFlips;
-        }
-
-        function getValidMoves(player, board) {
-            let moves = [];
-            for (let r = 0; r < 8; r++) {
-                for (let c = 0; c < 8; c++) {
-                    if (getFlips(r, c, player, board).length > 0) {
-                        moves.push({r, c});
-                    }
-                }
-            }
-            return moves;
-        }
-
-        function veVaCapNhatOthello() {
-            const boardEl = document.getElementById('othello-board');
-            if (!boardEl) return;
-            boardEl.innerHTML = '';
-
-            let blackCount = 0;
-            let whiteCount = 0;
-            let validMoves = othelloTurn === BLACK ? getValidMoves(BLACK, othelloBoard) : [];
-
-            for (let r = 0; r < 8; r++) {
-                for (let c = 0; c < 8; c++) {
-                    let cell = document.createElement('div');
-                    cell.className = 'othello-cell';
-
-                    let val = othelloBoard[r][c];
-                    if (val === BLACK) {
-                        blackCount++;
-                        cell.innerHTML = '<div class="othello-piece piece-black"></div>';
-                    } else if (val === WHITE) {
-                        whiteCount++;
-                        cell.innerHTML = '<div class="othello-piece piece-white"></div>';
-                    } else {
-                        let isValid = validMoves.some(m => m.r === r && m.c === c);
-                        if (isValid && othelloTurn === BLACK) {
-                            cell.classList.add('valid-move');
-                            cell.onclick = () => thucHienNuocDi(r, c);
-                        }
-                    }
-
-                    if (val === 0 && othelloTurn === BLACK && cell.onclick === null) {
-                        cell.onclick = () => {
-                            alert("⚠️ Ô này không hợp lệ! Hãy chọn ô có dấu chấm hồng nhé.");
-                        };
-                    }
-
-                    boardEl.appendChild(cell);
-                }
-            }
-
-            document.getElementById('othello-score-black').innerText = blackCount;
-            document.getElementById('othello-score-white').innerText = whiteCount;
-
-            const turnText = document.getElementById('othello-turn-text');
-            let blackMoves = getValidMoves(BLACK, othelloBoard);
-            let whiteMoves = getValidMoves(WHITE, othelloBoard);
-
-            if (blackMoves.length === 0 && whiteMoves.length === 0) {
-                if (window.isSfxEnabledOthello) playSfxWin();
-                if (blackCount > whiteCount) turnText.innerText = "🎉 Bạn thắng rồi! 💕";
-                else if (whiteCount > blackCount) turnText.innerText = "😢 AI Thắng mất rồi!";
-                else turnText.innerText = "🤝 Hòa nhau!";
-                return;
-            }
-
-            if (othelloTurn === BLACK && blackMoves.length === 0) {
-                alert("Bạn không có nước đi hợp lệ, đổi lượt cho AI!");
-                othelloTurn = WHITE;
-                setTimeout(aiNuocDi, 600);
-                return;
-            } else if (othelloTurn === WHITE && whiteMoves.length === 0) {
-                alert("AI không có nước đi hợp lệ, đến lượt bạn!");
-                othelloTurn = BLACK;
-                veVaCapNhatOthello();
-                return;
-            }
-
-            if (othelloTurn === BLACK) {
-                turnText.innerText = "Lượt: Bạn (Den)";
-            } else {
-                turnText.innerText = "Lượt: AI (Trắng)...";
-            }
-        }
-
-        function thucHienNuocDi(r, c) {
-            if (window.isSfxEnabledOthello) playSfxClick();
-            let flips = getFlips(r, c, othelloTurn, othelloBoard);
-            if (flips.length === 0) return;
-
-            othelloBoard[r][c] = othelloTurn;
-            flips.forEach(f => {
-                othelloBoard[f.r][f.c] = othelloTurn;
-            });
-
-            if (othelloTurn === BLACK) {
-                othelloTurn = WHITE;
-                veVaCapNhatOthello();
-                setTimeout(aiNuocDi, 800);
-            } else {
-                othelloTurn = BLACK;
-                veVaCapNhatOthello();
-            }
-        }
-
-        function aiNuocDi() {
-            let validMoves = getValidMoves(WHITE, othelloBoard);
-            if (validMoves.length === 0) {
-                othelloTurn = BLACK;
-                veVaCapNhatOthello();
-                return;
-            }
-
-            let bestMove = validMoves[Math.floor(Math.random() * validMoves.length)];
-            let maxFlips = -1;
-            validMoves.forEach(m => {
-                let fCount = getFlips(m.r, m.c, WHITE, othelloBoard).length;
-                if (fCount > maxFlips) {
-                    maxFlips = fCount;
-                    bestMove = m;
-                }
-            });
-
-            thucHienNuocDi(bestMove.r, bestMove.c);
-        }
-
-        /* --- Game 2048 Logic --- */
+        // ============================================================
+        // 2048 GAME - Full logic with size support
+        // ============================================================
         let board2048 = [];
         let score2048 = 0;
+        let currentSize2048 = 4;
+
+        function chonKichThuoc2048(size) {
+            currentSize2048 = size;
+            document.querySelectorAll('#size-selector-2048 .size-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.size) === size);
+            });
+            batDauGame2048();
+        }
 
         function batDauGame2048() {
-            board2048 = [
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
-            ];
+            const n = currentSize2048;
+            board2048 = Array.from({ length: n }, () => Array(n).fill(0));
             score2048 = 0;
             themSoNgauNhien2048();
             themSoNgauNhien2048();
@@ -4218,9 +4416,10 @@
         }
 
         function themSoNgauNhien2048() {
+            const n = currentSize2048;
             let trong = [];
-            for (let r = 0; r < 4; r++) {
-                for (let c = 0; c < 4; c++) {
+            for (let r = 0; r < n; r++) {
+                for (let c = 0; c < n; c++) {
                     if (board2048[r][c] === 0) trong.push({r, c});
                 }
             }
@@ -4233,28 +4432,20 @@
         function veBang2048() {
             const boardEl = document.getElementById('game-2048-board');
             if (!boardEl) return;
+            const n = currentSize2048;
+            boardEl.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+            boardEl.style.gridTemplateRows = `repeat(${n}, 1fr)`;
             boardEl.innerHTML = '';
             document.getElementById('game-score').innerText = score2048;
 
-            for (let r = 0; r < 4; r++) {
-                for (let c = 0; c < 4; c++) {
+            for (let r = 0; r < n; r++) {
+                for (let c = 0; c < n; c++) {
                     let val = board2048[r][c];
                     let cell = document.createElement('div');
-                    cell.style.cssText = `
-                        background: ${getMauO2048(val)};
-                        color: ${val <= 4 ? '#555' : '#fff'};
-                        font-weight: 900;
-                        font-size: ${val >= 1024 ? '18px' : '22px'};
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        border-radius: 12px;
-                        user-select: none;
-                        width: 100%;
-                        height: 100%;
-                        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-                        transition: all 0.1s ease;
-                    `;
+                    cell.className = 'game-2048-cell';
+                    cell.style.background = getMauO2048(val);
+                    cell.style.color = val <= 4 ? '#555' : '#fff';
+                    cell.style.fontSize = val >= 1024 ? '18px' : '22px';
                     cell.innerText = val === 0 ? '' : val;
                     boardEl.appendChild(cell);
                 }
@@ -4279,15 +4470,91 @@
             }
         }
 
+        function locSo2048(row) { return row.filter(num => num !== 0); }
+
+        function gopHang2048(row) {
+            let arr = locSo2048(row);
+            let scoreGain = 0;
+            for (let i = 0; i < arr.length - 1; i++) {
+                if (arr[i] === arr[i+1]) {
+                    arr[i] *= 2;
+                    scoreGain += arr[i];
+                    arr[i+1] = 0;
+                }
+            }
+            arr = locSo2048(arr);
+            const n = currentSize2048;
+            while(arr.length < n) arr.push(0);
+            return { row: arr, gain: scoreGain };
+        }
+
+        function diChuyenTrai2048() {
+            let oldBoard = JSON.stringify(board2048);
+            let totalGain = 0;
+            for (let r = 0; r < currentSize2048; r++) {
+                let result = gopHang2048(board2048[r]);
+                board2048[r] = result.row;
+                totalGain += result.gain;
+            }
+            score2048 += totalGain;
+            return oldBoard !== JSON.stringify(board2048);
+        }
+
+        function diChuyenPhai2048() {
+            let oldBoard = JSON.stringify(board2048);
+            let totalGain = 0;
+            for (let r = 0; r < currentSize2048; r++) {
+                let row = board2048[r].slice().reverse();
+                let result = gopHang2048(row);
+                board2048[r] = result.row.reverse();
+                totalGain += result.gain;
+            }
+            score2048 += totalGain;
+            return oldBoard !== JSON.stringify(board2048);
+        }
+
+        function diChuyenLen2048() {
+            let oldBoard = JSON.stringify(board2048);
+            let totalGain = 0;
+            const n = currentSize2048;
+            for (let c = 0; c < n; c++) {
+                let col = [];
+                for (let r = 0; r < n; r++) col.push(board2048[r][c]);
+                let result = gopHang2048(col);
+                for (let r = 0; r < n; r++) board2048[r][c] = result.row[r];
+                totalGain += result.gain;
+            }
+            score2048 += totalGain;
+            return oldBoard !== JSON.stringify(board2048);
+        }
+
+        function diChuyenXuong2048() {
+            let oldBoard = JSON.stringify(board2048);
+            let totalGain = 0;
+            const n = currentSize2048;
+            for (let c = 0; c < n; c++) {
+                let col = [];
+                for (let r = 0; r < n; r++) col.push(board2048[r][c]);
+                col.reverse();
+                let result = gopHang2048(col);
+                col = result.row.reverse();
+                for (let r = 0; r < n; r++) board2048[r][c] = col[r];
+                totalGain += result.gain;
+            }
+            score2048 += totalGain;
+            return oldBoard !== JSON.stringify(board2048);
+        }
+
+        // Keyboard controls for 2048
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('tab-quay-thu-gian').classList.contains('hidden') || 
                 document.getElementById('quay-game-2048-view').classList.contains('hidden')) return;
 
             let moved = false;
-            if (e.key === 'ArrowLeft') { moved = diChuyenTrai(); }
-            else if (e.key === 'ArrowRight') { moved = diChuyenPhai(); }
-            else if (e.key === 'ArrowUp') { moved = diChuyenLen(); }
-            else if (e.key === 'ArrowDown') { moved = diChuyenXuong(); }
+            if (e.key === 'ArrowLeft') { moved = diChuyenTrai2048(); }
+            else if (e.key === 'ArrowRight') { moved = diChuyenPhai2048(); }
+            else if (e.key === 'ArrowUp') { moved = diChuyenLen2048(); }
+            else if (e.key === 'ArrowDown') { moved = diChuyenXuong2048(); }
 
             if (moved) {
                 if (window.isSfxEnabled2048) playSfxClick();
@@ -4297,26 +4564,27 @@
             }
         });
 
-        let touchStartX = 0;
-        let touchStartY = 0;
+        // Touch controls for 2048
+        let touchStartX2048 = 0;
+        let touchStartY2048 = 0;
 
-        const boardEl = document.getElementById('game-2048-board');
-        if (boardEl) {
-            boardEl.addEventListener('pointerdown', (e) => {
-                touchStartX = e.clientX;
-                touchStartY = e.clientY;
+        const boardEl2048 = document.getElementById('game-2048-board');
+        if (boardEl2048) {
+            boardEl2048.addEventListener('pointerdown', (e) => {
+                touchStartX2048 = e.clientX;
+                touchStartY2048 = e.clientY;
                 e.preventDefault();
             });
 
-            boardEl.addEventListener('pointerup', (e) => {
+            boardEl2048.addEventListener('pointerup', (e) => {
                 let touchEndX = e.clientX;
                 let touchEndY = e.clientY;
-                xuLySuKienVuot(touchStartX, touchStartY, touchEndX, touchEndY);
+                xuLySuKienVuot2048(touchStartX2048, touchStartY2048, touchEndX, touchEndY);
                 e.preventDefault();
             });
         }
 
-        function xuLySuKienVuot(startX, startY, endX, endY) {
+        function xuLySuKienVuot2048(startX, startY, endX, endY) {
             let diffX = endX - startX;
             let diffY = endY - startY;
             let minDistance = 30;
@@ -4324,8 +4592,8 @@
             if (Math.abs(diffX) > Math.abs(diffY)) {
                 if (Math.abs(diffX) > minDistance) {
                     let moved = false;
-                    if (diffX > 0) moved = diChuyenPhai();
-                    else moved = diChuyenTrai();
+                    if (diffX > 0) moved = diChuyenPhai2048();
+                    else moved = diChuyenTrai2048();
                     if (moved) {
                         if (window.isSfxEnabled2048) playSfxClick();
                         themSoNgauNhien2048();
@@ -4335,8 +4603,8 @@
             } else {
                 if (Math.abs(diffY) > minDistance) {
                     let moved = false;
-                    if (diffY > 0) moved = diChuyenXuong();
-                    else moved = diChuyenLen();
+                    if (diffY > 0) moved = diChuyenXuong2048();
+                    else moved = diChuyenLen2048();
                     if (moved) {
                         if (window.isSfxEnabled2048) playSfxClick();
                         themSoNgauNhien2048();
@@ -4346,58 +4614,295 @@
             }
         }
 
-        function locSo(row) { return row.filter(num => num !== 0); }
+        // ============================================================
+        // OTHELLO GAME - Full logic with size support, Start/Reset, random turn
+        // ============================================================
+        let othelloBoard = [];
+        let othelloTurn = 1; // 1 = player (Black), 2 = AI (White)
+        let othelloSize = 8;
+        let othelloGameActive = false;
+        let othelloFirstMoveRandom = true;
 
-        function gopHang(row) {
-            let arr = locSo(row);
-            for (let i = 0; i < arr.length - 1; i++) {
-                if (arr[i] === arr[i+1]) {
-                    arr[i] *= 2;
-                    score2048 += arr[i];
-                    arr[i+1] = 0;
+        const BLACK_OTHELLO = 1;
+        const WHITE_OTHELLO = 2;
+
+        function chonKichThuocOthello(size) {
+            othelloSize = size;
+            document.querySelectorAll('#size-selector-othello .size-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.size) === size);
+            });
+            resetGameOthello();
+        }
+
+        function khoiTaoGameOthello() {
+            resetGameOthello();
+        }
+
+        function resetGameOthello() {
+            othelloGameActive = false;
+            const startBtn = document.getElementById('othello-start-btn');
+            if (startBtn) {
+                startBtn.innerText = 'Bắt đầu';
+                startBtn.disabled = false;
+            }
+            othelloBoard = createEmptyBoard(othelloSize);
+            initOthelloBoard(othelloBoard);
+            othelloTurn = BLACK_OTHELLO;
+            veVaCapNhatOthello();
+            // Enable click but no moves until start
+        }
+
+        function createEmptyBoard(size) {
+            return Array.from({ length: size }, () => Array(size).fill(0));
+        }
+
+        function initOthelloBoard(board) {
+            const size = board.length;
+            const mid = Math.floor(size / 2);
+            board[mid-1][mid-1] = WHITE_OTHELLO;
+            board[mid-1][mid] = BLACK_OTHELLO;
+            board[mid][mid-1] = BLACK_OTHELLO;
+            board[mid][mid] = WHITE_OTHELLO;
+        }
+
+        function batDauGameOthello() {
+            if (othelloGameActive) {
+                // If already active, just reset
+                resetGameOthello();
+                // Then start fresh
+                setTimeout(() => {
+                    batDauGameOthello();
+                }, 50);
+                return;
+            }
+            
+            othelloGameActive = true;
+            const startBtn = document.getElementById('othello-start-btn');
+            if (startBtn) {
+                startBtn.innerText = 'Bắt đầu';
+                startBtn.disabled = true;
+            }
+
+            // Reset board
+            othelloBoard = createEmptyBoard(othelloSize);
+            initOthelloBoard(othelloBoard);
+            
+            // Random first turn
+            othelloTurn = Math.random() < 0.5 ? BLACK_OTHELLO : WHITE_OTHELLO;
+            othelloFirstMoveRandom = true;
+            
+            veVaCapNhatOthello();
+            
+            // If AI goes first
+            if (othelloTurn === WHITE_OTHELLO) {
+                setTimeout(() => {
+                    if (othelloGameActive) {
+                        aiNuocDiOthello();
+                    }
+                }, 600);
+            }
+        }
+
+        function getFlipsOthello(r, c, player, board) {
+            if (board[r][c] !== 0) return [];
+            let opponent = player === BLACK_OTHELLO ? WHITE_OTHELLO : BLACK_OTHELLO;
+            let directions = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
+            let totalFlips = [];
+
+            for (let [dr, dc] of directions) {
+                let tempFlips = [];
+                let currR = r + dr;
+                let currC = c + dc;
+                const size = board.length;
+                while (currR >= 0 && currR < size && currC >= 0 && currC < size && board[currR][currC] === opponent) {
+                    tempFlips.push({r: currR, c: currC});
+                    currR += dr;
+                    currC += dc;
+                }
+                if (tempFlips.length > 0 && currR >= 0 && currR < size && currC >= 0 && currC < size && board[currR][currC] === player) {
+                    totalFlips = totalFlips.concat(tempFlips);
                 }
             }
-            arr = locSo(arr);
-            while(arr.length < 4) arr.push(0);
-            return arr;
+            return totalFlips;
         }
 
-        function diChuyenTrai() {
-            let oldBoard = JSON.stringify(board2048);
-            for (let r = 0; r < 4; r++) {
-                board2048[r] = gopHang(board2048[r]);
+        function getValidMovesOthello(player, board) {
+            let moves = [];
+            const size = board.length;
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    if (getFlipsOthello(r, c, player, board).length > 0) {
+                        moves.push({r, c});
+                    }
+                }
             }
-            return oldBoard !== JSON.stringify(board2048);
+            return moves;
         }
 
-        function diChuyenPhai() {
-            let oldBoard = JSON.stringify(board2048);
-            for (let r = 0; r < 4; r++) {
-                let row = board2048[r].slice().reverse();
-                row = gopHang(row);
-                board2048[r] = row.reverse();
+        function veVaCapNhatOthello() {
+            const boardEl = document.getElementById('othello-board');
+            if (!boardEl) return;
+            
+            const size = othelloBoard.length;
+            boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+            boardEl.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+            boardEl.innerHTML = '';
+
+            let blackCount = 0;
+            let whiteCount = 0;
+            let validMoves = othelloGameActive ? getValidMovesOthello(othelloTurn, othelloBoard) : [];
+
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    let cell = document.createElement('div');
+                    cell.className = 'othello-cell';
+                    
+                    let val = othelloBoard[r][c];
+                    if (val === BLACK_OTHELLO) {
+                        blackCount++;
+                        cell.innerHTML = '<div class="othello-piece piece-black"></div>';
+                    } else if (val === WHITE_OTHELLO) {
+                        whiteCount++;
+                        cell.innerHTML = '<div class="othello-piece piece-white"></div>';
+                    } else {
+                        let isValid = validMoves.some(m => m.r === r && m.c === c);
+                        if (isValid && othelloGameActive) {
+                            cell.classList.add('valid-move');
+                            cell.classList.add('clickable');
+                            cell.onclick = () => {
+                                if (othelloGameActive && othelloTurn === BLACK_OTHELLO) {
+                                    thucHienNuocDiOthello(r, c);
+                                }
+                            };
+                        } else if (othelloGameActive && othelloTurn === BLACK_OTHELLO && val === 0) {
+                            // Still make it clickable to show feedback
+                            cell.classList.add('clickable');
+                            cell.onclick = () => {
+                                if (othelloGameActive && othelloTurn === BLACK_OTHELLO) {
+                                    alert("⚠️ Ô này không hợp lệ! Hãy chọn ô có dấu chấm hồng nhé.");
+                                }
+                            };
+                        }
+                    }
+                    boardEl.appendChild(cell);
+                }
             }
-            return oldBoard !== JSON.stringify(board2048);
+
+            document.getElementById('othello-score-black').innerText = blackCount;
+            document.getElementById('othello-score-white').innerText = whiteCount;
+
+            const turnText = document.getElementById('othello-turn-text');
+            
+            if (!othelloGameActive) {
+                turnText.innerText = "🔒 Nhấn 'Bắt đầu' để chơi!";
+                return;
+            }
+
+            let blackMoves = getValidMovesOthello(BLACK_OTHELLO, othelloBoard);
+            let whiteMoves = getValidMovesOthello(WHITE_OTHELLO, othelloBoard);
+
+            // Check game over
+            if (blackMoves.length === 0 && whiteMoves.length === 0) {
+                if (window.isSfxEnabledOthello) playSfxWin();
+                if (blackCount > whiteCount) turnText.innerText = "🎉 Bạn thắng rồi! 💕";
+                else if (whiteCount > blackCount) turnText.innerText = "😢 AI Thắng mất rồi!";
+                else turnText.innerText = "🤝 Hòa nhau!";
+                othelloGameActive = false;
+                const startBtn = document.getElementById('othello-start-btn');
+                if (startBtn) {
+                    startBtn.innerText = 'Bắt đầu';
+                    startBtn.disabled = false;
+                }
+                return;
+            }
+
+            // Check if current player has moves
+            if (othelloTurn === BLACK_OTHELLO && blackMoves.length === 0) {
+                // No moves for player, switch to AI
+                othelloTurn = WHITE_OTHELLO;
+                veVaCapNhatOthello();
+                setTimeout(() => {
+                    if (othelloGameActive && othelloTurn === WHITE_OTHELLO) {
+                        aiNuocDiOthello();
+                    }
+                }, 500);
+                return;
+            } else if (othelloTurn === WHITE_OTHELLO && whiteMoves.length === 0) {
+                // No moves for AI, switch to player
+                othelloTurn = BLACK_OTHELLO;
+                veVaCapNhatOthello();
+                return;
+            }
+
+            if (othelloTurn === BLACK_OTHELLO) {
+                turnText.innerText = "Lượt: Bạn (Đen)";
+            } else {
+                turnText.innerText = "Lượt: AI (Trắng)...";
+            }
         }
 
-        function diChuyenLen() {
-            let oldBoard = JSON.stringify(board2048);
-            for (let c = 0; c < 4; c++) {
-                let col = [board2048[0][c], board2048[1][c], board2048[2][c], board2048[3][c]];
-                col = gopHang(col);
-                for (let r = 0; r < 4; r++) { board2048[r][c] = col[r]; }
-            }
-            return oldBoard !== JSON.stringify(board2048);
+        function thucHienNuocDiOthello(r, c) {
+            if (!othelloGameActive) return;
+            if (othelloTurn !== BLACK_OTHELLO) return;
+            
+            if (window.isSfxEnabledOthello) playSfxClick();
+            
+            let flips = getFlipsOthello(r, c, othelloTurn, othelloBoard);
+            if (flips.length === 0) return;
+
+            othelloBoard[r][c] = othelloTurn;
+            flips.forEach(f => {
+                othelloBoard[f.r][f.c] = othelloTurn;
+            });
+
+            // Switch to AI
+            othelloTurn = WHITE_OTHELLO;
+            veVaCapNhatOthello();
+            
+            // AI moves after delay
+            setTimeout(() => {
+                if (othelloGameActive && othelloTurn === WHITE_OTHELLO) {
+                    aiNuocDiOthello();
+                }
+            }, 600);
         }
 
-        function diChuyenXuong() {
-            let oldBoard = JSON.stringify(board2048);
-            for (let c = 0; c < 4; c++) {
-                let col = [board2048[0][c], board2048[1][c], board2048[2][c], board2048[3][c]].reverse();
-                col = gopHang(col).reverse();
-                for (let r = 0; r < 4; r++) { board2048[r][c] = col[r]; }
+        function aiNuocDiOthello() {
+            if (!othelloGameActive) return;
+            if (othelloTurn !== WHITE_OTHELLO) return;
+
+            let validMoves = getValidMovesOthello(WHITE_OTHELLO, othelloBoard);
+            if (validMoves.length === 0) {
+                // No moves for AI, switch to player
+                othelloTurn = BLACK_OTHELLO;
+                veVaCapNhatOthello();
+                return;
             }
-            return oldBoard !== JSON.stringify(board2048);
+
+            // Simple AI: pick move with most flips
+            let bestMove = validMoves[0];
+            let maxFlips = -1;
+            validMoves.forEach(m => {
+                let fCount = getFlipsOthello(m.r, m.c, WHITE_OTHELLO, othelloBoard).length;
+                if (fCount > maxFlips) {
+                    maxFlips = fCount;
+                    bestMove = m;
+                }
+            });
+
+            // Execute AI move
+            let flips = getFlipsOthello(bestMove.r, bestMove.c, WHITE_OTHELLO, othelloBoard);
+            if (flips.length > 0) {
+                if (window.isSfxEnabledOthello) playSfxClick();
+                othelloBoard[bestMove.r][bestMove.c] = WHITE_OTHELLO;
+                flips.forEach(f => {
+                    othelloBoard[f.r][f.c] = WHITE_OTHELLO;
+                });
+            }
+
+            // Switch to player
+            othelloTurn = BLACK_OTHELLO;
+            veVaCapNhatOthello();
         }
     </script>
 </body>
