@@ -9,6 +9,7 @@
       "desc": "Thẻ: Tác phẩm gốc, nam x nam, cổ đại, H cao, chính kịch, cung đình, cường công cường thụ\n\n\nThể loại: Niên thượng, côn trùng, HE, gương vỡ lại lành, sinh con, thế thân\n\n\nGiới thiệu:\n[Trung cồn phụ tử], [Công là phụ, thụ là tử], [Từ cưỡng ép rồi happy ending]\n\n\nThái tử Yến triều cam chịu nằm dưới một nam nhân, mà nam nhân này lại là phụ hoàng của chính y. Cả ngày lẫn đêm, phụ hoàng của y đều cắm long căn của mình vào trong cái lỗ của thái tử, bắn cho tinh dịch đầy bụng con trai. Trên triều, không ai biết rằng người kế vị tương lai từng phút từng giây đều đang chứa đầy tinh dịch của hoàng đế trong người.\nNhưng dù vậy, mỗi lần hoàng đế Yến triều bắn tinh, cái tên mà hắn luôn gọi đều là tên kẻ khác.\n\n\nCảnh báo tránh lôi: Thế thân, sinh con, sinh sữa, cưỡng ép yêu, cưỡng ép rồi HE, truy thê có như không",
       "summary": "<b><font color=\"#ff69b4\">Thẻ:</font></b> Tác phẩm gốc, nam x nam, cổ đại, H cao, chính kịch, cung đình, cường công cường thụ\n<b><font color=\"#ff69b4\"><br></font></b><div><b><font color=\"#ff69b4\">Thể loại:</font></b> Niên thượng, côn trùng, HE, gương vỡ lại lành, sinh con, thế thân\n<b><font color=\"#ff69b4\"><br></font></b></div><div><b><font color=\"#ff69b4\">Giới thiệu:</font></b>\n[Trung cồn phụ tử], [Công là phụ, thụ là tử], [Từ cưỡng ép rồi happy ending]\n<br></div><div>Thái tử Yến triều cam chịu nằm dưới một nam nhân, mà nam nhân này lại là phụ hoàng của chính y. Cả ngày lẫn đêm, phụ hoàng của y đều cắm long căn của mình vào trong cái lỗ của thái tử, bắn cho tinh dịch đầy bụng con trai. Trên triều, không ai biết rằng người kế vị tương lai từng phút từng giây đều đang chứa đầy tinh dịch của hoàng đế trong người.\nNhưng dù vậy, mỗi lần hoàng đế Yến triều bắn tinh, cái tên mà hắn luôn gọi đều là tên kẻ khác.\n<font color=\"#e74c3c\"><b><br></b></font></div><div><font color=\"#e74c3c\"><b>Cảnh báo tránh lôi:</b></font> Thế thân, sinh con, sinh sữa, cưỡng ép yêu, cưỡng ép rồi HE, truy thê có như không</div>",
       "tags": [
+        "Cổ đại",
         "Ngược",
         "Thế thân",
         "Sinh con",
@@ -49,7 +50,8 @@
         }
       ],
       "author": "Bất Khai car Hành Bất Hành",
-      "defaultLayout": "list"
+      "defaultLayout": "list",
+      "totalMode": "fixed"
     }
   },
   "thongbao_data": [
@@ -84,7 +86,5 @@
       "content": "Web đã hoạt động trở lại bình thường và lưu trữ ổn định trên GitHub! ✨",
       "isPinned": false
     }
-  ],
-  "homechat_data": [],
-  "forum_data": []
+  ]
 }
