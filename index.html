@@ -7,7 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
+        /* ============================================================
+           ROOT THEME VARIABLES (GIỮ NGUYÊN THEME GỐC MẶC ĐỊNH)
+           ============================================================ */
         :root {
+            /* THEME GỐC: HỒNG PHẤN (mặc định) */
             --bg-color: #f7f8fa;
             --container-bg: #ffffff;
             --box-bg: #fffaf0;
@@ -19,8 +23,21 @@
             --badge-completed: #7c4dff;
             --badge-updating: #ff4081;
             --badge-hidden: #7f8c8d;
+            --new-badge-bg: #ff4081;
+            --card-shadow: 0 6px 15px rgba(255, 182, 193, 0.15);
+            
+            /* Biến cho các thành phần game & khác */
+            --game-bg: #1a1625;
+            --game-cell-bg: #2d263f;
+            --game-border: #3d3450;
+            --game-primary: #ff69b4;
+            --game-text: #e2d9f3;
+            --game-cell-filled-bg: #2d263f;
         }
 
+        /* ============================================================
+           DARK MODE GỐC (ÁP DỤNG CHO THEME GỐC)
+           ============================================================ */
         body.dark-mode {
             --bg-color: #1a1625;
             --container-bg: #262035;
@@ -30,8 +47,154 @@
             --header-bg: #3b2d4a;
             --text-color: #e2d9f3;
             --subtext-color: #a295be;
+            --new-badge-bg: #ff4081;
+            --card-shadow: 0 6px 15px rgba(255, 105, 180, 0.12);
+            --game-bg: #0f0c1a;
+            --game-cell-bg: #1e1830;
+            --game-border: #2d2640;
+            --game-primary: #ff85c0;
+            --game-text: #e2d9f3;
+            --game-cell-filled-bg: #2d263f;
         }
 
+        /* ============================================================
+           THEME: XANH LÁ (MATCHA PASTEL) - LIGHT
+           ============================================================ */
+        body.theme-xanhla {
+            --bg-color: #f2f8f0;
+            --container-bg: #ffffff;
+            --box-bg: #ebf5e8;
+            --border-color: #c8dec0;
+            --primary-color: #6d9e76;
+            --header-bg: #9dbf95;
+            --text-color: #2d3e2a;
+            --subtext-color: #5a7a55;
+            --badge-completed: #5a8a5e;
+            --badge-updating: #6d9e76;
+            --badge-hidden: #8fa58d;
+            --new-badge-bg: #6d9e76;
+            --card-shadow: 0 6px 15px rgba(109, 158, 118, 0.15);
+            --game-bg: #e4efe2;
+            --game-cell-bg: #d4e8d0;
+            --game-border: #b8d0b0;
+            --game-primary: #6d9e76;
+            --game-text: #2d3e2a;
+            --game-cell-filled-bg: #c8dec0;
+        }
+
+        /* THEME: XANH LÁ - DARK (MATCHA ĐẬM + SAGE TỐI) */
+        body.theme-xanhla.dark-mode {
+            --bg-color: #1a2618;
+            --container-bg: #253220;
+            --box-bg: #2d3d28;
+            --border-color: #3d5538;
+            --primary-color: #8fc996;
+            --header-bg: #3d5538;
+            --text-color: #d8ecd4;
+            --subtext-color: #aac9a5;
+            --new-badge-bg: #8fc996;
+            --card-shadow: 0 6px 15px rgba(143, 201, 150, 0.12);
+            --game-bg: #1a2618;
+            --game-cell-bg: #253220;
+            --game-border: #3d5538;
+            --game-primary: #8fc996;
+            --game-text: #d8ecd4;
+            --game-cell-filled-bg: #2d3d28;
+        }
+
+        /* ============================================================
+           THEME: XANH DƯƠNG (BLUEBERRY PASTEL) - LIGHT
+           ============================================================ */
+        body.theme-xanhduong {
+            --bg-color: #f0f5fb;
+            --container-bg: #ffffff;
+            --box-bg: #e8eef7;
+            --border-color: #c5d5e8;
+            --primary-color: #5a7fb8;
+            --header-bg: #8aacd0;
+            --text-color: #1f314a;
+            --subtext-color: #4a6b8a;
+            --badge-completed: #4a7ab5;
+            --badge-updating: #5a7fb8;
+            --badge-hidden: #8a9fb5;
+            --new-badge-bg: #5a7fb8;
+            --card-shadow: 0 6px 15px rgba(90, 127, 184, 0.15);
+            --game-bg: #e8eef5;
+            --game-cell-bg: #d8e4f0;
+            --game-border: #bccce0;
+            --game-primary: #5a7fb8;
+            --game-text: #1f314a;
+            --game-cell-filled-bg: #c8d8ec;
+        }
+
+        /* THEME: XANH DƯƠNG - DARK (BLUEBERRY ĐẬM + NAVY DỊU) */
+        body.theme-xanhduong.dark-mode {
+            --bg-color: #141e2e;
+            --container-bg: #1e2a3d;
+            --box-bg: #26354a;
+            --border-color: #3a4f6a;
+            --primary-color: #8aafe0;
+            --header-bg: #2a3f5a;
+            --text-color: #d4e2f5;
+            --subtext-color: #9ab0d0;
+            --new-badge-bg: #8aafe0;
+            --card-shadow: 0 6px 15px rgba(138, 175, 224, 0.12);
+            --game-bg: #141e2e;
+            --game-cell-bg: #1e2a3d;
+            --game-border: #3a4f6a;
+            --game-primary: #8aafe0;
+            --game-text: #d4e2f5;
+            --game-cell-filled-bg: #26354a;
+        }
+
+        /* ============================================================
+           THEME: TÍM (LAVENDER PASTEL) - LIGHT
+           ============================================================ */
+        body.theme-tim {
+            --bg-color: #f6f2fc;
+            --container-bg: #ffffff;
+            --box-bg: #f0eafa;
+            --border-color: #ddd0f0;
+            --primary-color: #8a6fc4;
+            --header-bg: #b8a8d8;
+            --text-color: #342a4a;
+            --subtext-color: #6a5a8a;
+            --badge-completed: #7a5ab5;
+            --badge-updating: #8a6fc4;
+            --badge-hidden: #9a8ab0;
+            --new-badge-bg: #8a6fc4;
+            --card-shadow: 0 6px 15px rgba(138, 111, 196, 0.15);
+            --game-bg: #ede8f5;
+            --game-cell-bg: #e0d8f0;
+            --game-border: #ccc0e0;
+            --game-primary: #8a6fc4;
+            --game-text: #342a4a;
+            --game-cell-filled-bg: #d8cce8;
+        }
+
+        /* THEME: TÍM - DARK (LAVENDER ĐẬM + PLUM DỊU) */
+        body.theme-tim.dark-mode {
+            --bg-color: #1a142a;
+            --container-bg: #2a1e3d;
+            --box-bg: #342a4a;
+            --border-color: #4a3a6a;
+            --primary-color: #b098e0;
+            --header-bg: #3a2a5a;
+            --text-color: #e4daf5;
+            --subtext-color: #a090c0;
+            --new-badge-bg: #b098e0;
+            --card-shadow: 0 6px 15px rgba(176, 152, 224, 0.12);
+            --game-bg: #1a142a;
+            --game-cell-bg: #2a1e3d;
+            --game-border: #4a3a6a;
+            --game-primary: #b098e0;
+            --game-text: #e4daf5;
+            --game-cell-filled-bg: #342a4a;
+        }
+
+        /* ============================================================
+           GLOBAL BODY STYLES (GIỮ NGUYÊN)
+           ============================================================ */
         body {
             font-family: 'Comfortaa', cursive, sans-serif;
             background-color: var(--bg-color);
@@ -41,6 +204,80 @@
             min-height: 100vh; transition: all 0.3s ease;
         }
 
+        /* Nút toggle theme mới ⚙️ */
+        .theme-toggle-btn {
+            background: var(--container-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 38px;
+        }
+        .theme-toggle-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Panel chọn Theme */
+        .theme-panel {
+            position: absolute;
+            top: 48px;
+            right: 0;
+            background: var(--container-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            padding: 12px 16px;
+            z-index: 100;
+            min-width: 180px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .theme-panel.hidden {
+            display: none;
+        }
+        .theme-option {
+            background: var(--box-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 8px 14px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .theme-option:hover {
+            border-color: var(--primary-color);
+            background: var(--border-color);
+        }
+        .theme-option.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .theme-option .check-mark {
+            display: none;
+        }
+        .theme-option.active .check-mark {
+            display: inline;
+        }
+
+        /* Các thành phần khác giữ nguyên */
         .sfx-toggle-btn {
             background: var(--box-bg); border: 2px solid var(--primary-color);
             color: var(--primary-color); padding: 5px 14px; border-radius: 18px;
@@ -51,6 +288,7 @@
         .header-top-controls {
             position: absolute; top: 15px; right: 15px;
             display: flex; gap: 8px; z-index: 10;
+            align-items: center;
         }
 
         .theme-toggle, .menu-style-toggle {
@@ -67,9 +305,11 @@
             user-select: none;
             transition: opacity 0.2s ease;
         }
-
         .brand-title:hover { opacity: 0.8; }
 
+        /* ============================================================
+           TẤT CẢ PHẦN CÒN LẠI GIỮ NGUYÊN (không thay đổi)
+           ============================================================ */
         #pass-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--bg-color);
@@ -163,19 +403,20 @@
         }
 
         .hot-slider-container {
-            position: relative; width: 100%; height: 340px; background: transparent;
+            position: relative; width: 100%; background: transparent;
             border-radius: 0; overflow: hidden; border: none;
             margin-bottom: 25px; box-shadow: none;
+            padding: 0;
         }
         .hot-slide-track {
-            display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out;
+            display: flex; width: 100%; transition: transform 0.5s ease-in-out;
         }
         .hot-slide-item {
-            min-width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
-            padding: 15px; box-sizing: border-box; cursor: pointer; position: relative;
+            min-width: 100%; display: flex; justify-content: center; align-items: center;
+            padding: 10px 0; box-sizing: border-box; cursor: pointer; position: relative;
         }
         .hot-slide-cover {
-            width: 210px; height: 300px; border-radius: 14px; overflow: hidden; flex-shrink: 0;
+            width: 240px; height: 340px; border-radius: 14px; overflow: hidden; flex-shrink: 0;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2); background: var(--border-color); border: 2px solid var(--border-color);
         }
         .hot-slide-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
@@ -213,6 +454,135 @@
             padding: 10px; border: 1.5px solid var(--border-color);
             border-radius: 12px; font-family: inherit; font-size: 14px; outline: none;
             background: var(--container-bg); color: var(--text-color);
+        }
+
+        .multi-tag-filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 12px;
+            background: var(--box-bg);
+            padding: 10px 14px;
+            border-radius: 16px;
+            border: 1.5px solid var(--border-color);
+            margin-bottom: 18px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .multi-tag-filter-container .filter-label {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--primary-color);
+            margin-right: 4px;
+        }
+        .tag-selector-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            flex: 1;
+        }
+        .tag-filter-btn {
+            background: var(--container-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .tag-filter-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--border-color);
+        }
+        .tag-filter-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.2);
+        }
+        .tag-filter-btn.active .tag-remove-icon {
+            display: inline-block;
+            margin-left: 4px;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+        .tag-remove-icon {
+            display: none;
+        }
+        .filter-clear-btn {
+            background: transparent;
+            border: 1.5px solid var(--border-color);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--subtext-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .filter-clear-btn:hover {
+            border-color: #ff4d4d;
+            color: #ff4d4d;
+            background: rgba(255, 77, 77, 0.05);
+        }
+        .active-tags-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+            align-items: center;
+            font-size: 12px;
+            color: var(--subtext-color);
+            margin-bottom: 12px;
+        }
+        .active-tags-display .active-tag-item {
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 12px;
+            padding: 2px 8px 2px 10px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .active-tags-display .active-tag-item .remove-tag-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            padding: 0 2px;
+            opacity: 0.7;
+        }
+        .active-tags-display .active-tag-item .remove-tag-btn:hover {
+            opacity: 1;
+        }
+        @media (max-width: 600px) {
+            .multi-tag-filter-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+            }
+            .tag-selector-group {
+                gap: 4px;
+            }
+            .tag-filter-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
+            .filter-clear-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+                align-self: flex-end;
+            }
         }
 
         .form-group { margin-bottom: 16px; }
@@ -305,41 +675,6 @@
         }
         .btn-delete:hover { background: #e03e3e; transform: scale(1.02); }
 
-        .forum-container { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
-        .forum-post-card {
-            background: var(--box-bg); border: 1px solid var(--border-color);
-            padding: 18px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            position: relative; transition: transform 0.2s ease;
-        }
-        .forum-post-card:hover { border-color: var(--primary-color); }
-        .forum-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .forum-author { font-weight: bold; color: var(--primary-color); font-size: 15px; display: flex; align-items: center; gap: 6px; }
-        .forum-badge-author { background: var(--primary-color); color: white; font-size: 10px; padding: 2px 6px; border-radius: 6px; }
-        .forum-time { font-size: 12px; color: var(--subtext-color); }
-        .forum-title { font-size: 16px; font-weight: bold; margin-bottom: 6px; color: var(--text-color); }
-        .forum-content { font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
-        .forum-footer-actions { display: flex; gap: 12px; align-items: center; font-size: 13px; border-top: 1px dashed var(--border-color); padding-top: 10px; }
-        .forum-action-btn { background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; font-family: inherit; padding: 0; display: flex; align-items: center; gap: 4px; }
-        .forum-action-btn:hover { text-decoration: underline; }
-
-        .reply-list { 
-            margin-top: 10px; display: flex; flex-direction: column; gap: 8px; 
-            padding-left: 15px; border-left: 2.5px solid var(--border-color);
-            max-height: 220px; overflow-y: auto; padding-right: 6px; 
-        }
-        .reply-item { background: var(--container-bg); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 13px; }
-        .reply-author { font-weight: bold; color: var(--primary-color); margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
-
-        .latest-list { display: flex; flex-direction: column; gap: 10px; }
-        .latest-item {
-            background: var(--box-bg); border: 1px solid var(--border-color);
-            padding: 14px 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
-        }
-        .latest-item:hover { border-color: var(--primary-color); transform: translateX(4px); }
-        .latest-title { font-weight: bold; font-size: 14px; color: var(--text-color); }
-        .latest-chapter { font-size: 13px; color: var(--primary-color); margin-top: 3px; }
-        .latest-time { font-size: 12px; color: var(--subtext-color); }
-
         .notice-board-container { display: flex; flex-direction: column; gap: 14px; margin-top: 15px; }
         .notice-card {
             border: 1px solid rgba(0,0,0,0.06);
@@ -426,7 +761,12 @@
         .ranking-item:nth-child(2) .ranking-number { background: #c0c0c0; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
         .ranking-item:nth-child(3) .ranking-number { background: #cd7f32; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 
-        .story-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 15px; }
+        .story-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            gap: 20px; 
+            margin-top: 15px; 
+        }
         .story-card {
             background: var(--container-bg);
             border: 2px solid var(--border-color);
@@ -437,7 +777,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
-            box-shadow: 0 6px 15px rgba(255, 182, 193, 0.15);
+            box-shadow: var(--card-shadow);
             padding: 12px;
             box-sizing: border-box;
         }
@@ -449,7 +789,7 @@
         .story-card-cover-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 135%;
+            padding-top: 150%;
             background-color: var(--border-color);
             border-radius: 14px;
             overflow: hidden;
@@ -472,29 +812,69 @@
         
         .story-card-info { padding: 10px 4px 4px 4px; display: flex; flex-direction: column; flex-grow: 1; }
         .story-card-title {
-            font-size: 14px; font-weight: 700; color: var(--text-color);
-            margin-bottom: 5px; line-height: 1.4;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 2px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
-        .story-card-desc {
-            font-size: 12px; color: var(--subtext-color); margin-bottom: 8px;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        .story-card-author {
+            font-size: 12px;
+            color: var(--subtext-color);
+            margin-bottom: 4px;
         }
-        .story-card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; margin-bottom: 8px; }
+        .story-card-chapter {
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .story-card-tags { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 5px; 
+            margin-top: auto; 
+            margin-bottom: 8px; 
+        }
         .mini-tag {
-            background-color: var(--box-bg); color: var(--primary-color);
-            border: 1px solid var(--border-color); padding: 3px 10px; border-radius: 15px;
-            font-size: 11px; font-weight: bold;
+            background-color: var(--box-bg); 
+            color: var(--primary-color);
+            border: 1px solid var(--border-color); 
+            padding: 2px 10px; 
+            border-radius: 15px;
+            font-size: 10px; 
+            font-weight: bold;
             cursor: pointer;
+            white-space: nowrap;
         }
         .mini-tag:hover { opacity: 0.8; background-color: var(--primary-color); color: white; }
 
         .read-story-link {
             font-size: 12px; font-weight: bold; color: var(--primary-color);
-            display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;
+            display: inline-flex; align-items: center; gap: 4px; margin-top: 2px;
             transition: opacity 0.2s;
         }
         .read-story-link:hover { opacity: 0.8; text-decoration: underline; }
+
+        .story-new-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff4081, #ff80ab);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: auto;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(255, 64, 129, 0.3);
+        }
 
         .about-author { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; max-width: 600px; margin: 0 auto; }
         .avatar { width: 100px; height: 100px; border-radius: 50%; background-color: var(--border-color); border: 3px solid var(--header-bg); display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 12px; overflow: hidden; }
@@ -524,8 +904,8 @@
         }
 
         .story-decor-cover {
-            width: 200px;
-            height: 280px;
+            width: 240px;
+            height: 340px;
             background-color: var(--border-color);
             border-radius: 12px;
             display: flex;
@@ -610,7 +990,18 @@
         .offline-btn.saved, .fav-btn.saved { background-color: var(--primary-color); color: white; }
 
         .chapter-list-vertical { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-        .chapter-item-v { background-color: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: 12px; cursor: pointer; font-size: 14px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+        .chapter-item-v { 
+            background-color: var(--box-bg); 
+            border: 1px solid var(--border-color); 
+            padding: 12px 16px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-size: 14px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            transition: all 0.2s; 
+        }
         .chapter-item-v:hover { background-color: var(--border-color); color: var(--primary-color); font-weight: bold; }
 
         .chapter-grid-view { 
@@ -732,53 +1123,32 @@
         .hidden { display: none !important; }
         footer { margin-top: auto; padding: 15px; color: var(--primary-color); font-size: 13px; text-align: center; font-weight: bold; }
 
-        @media (max-width: 768px) {
-            header h1 { font-size: 24px; }
-            .slogan { font-size: 12px; padding: 0 10px; }
-            header { padding: 20px 10px 15px 10px; }
-            
-            .nav-menu { gap: 6px; margin-top: 12px; padding: 0 5px; }
-            .nav-btn { padding: 7px 12px; font-size: 12px; }
-
-            .container { width: 98%; padding: 15px; margin: 10px 0 30px 0; border-radius: 14px; }
-
-            .search-box { padding: 10px; gap: 8px; }
-            .search-input, .filter-select { font-size: 13px; padding: 8px 12px; }
-
-            .story-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            
-            .story-decor-cover { width: 170px; height: 230px; }
-            .hot-slider-container { height: 280px; }
-            .hot-slide-cover { width: 160px; height: 230px; }
-
-            .scroll-controls { bottom: 25px; right: 15px; }
-            .scroll-btn, .floating-menu-btn { width: 38px; height: 38px; font-size: 15px; }
-            .reading-box { font-size: 15px; padding: 16px; }
-        }
-
-        /* --- GAME CARD STYLES (Quầy thư giãn) --- */
         .game-card-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-top: 10px;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .game-card-item {
             background: var(--box-bg);
             border: 1.5px solid var(--border-color);
             border-radius: 14px;
-            padding: 14px 10px;
+            padding: 12px 8px;
             cursor: pointer;
             transition: all 0.25s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 110px;
+            min-height: 80px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             text-align: center;
             box-sizing: border-box;
+            position: relative;
         }
 
         .game-card-item:hover {
@@ -788,50 +1158,93 @@
         }
 
         .game-card-icon {
-            font-size: 34px;
+            font-size: 28px;
             line-height: 1.2;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .game-card-name {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-color);
             letter-spacing: 0.2px;
         }
 
+        .block-blast-preview-icon {
+            display: grid;
+            grid-template-columns: repeat(3, 12px);
+            grid-template-rows: repeat(3, 12px);
+            gap: 2px;
+            margin: 0 auto 4px auto;
+        }
+        .bb-preview-cell {
+            border-radius: 2px;
+            background: var(--border-color);
+        }
+        .bb-preview-cell.filled {
+            background: var(--primary-color);
+            opacity: 0.7;
+        }
+        body.dark-mode .bb-preview-cell.filled {
+            opacity: 0.9;
+        }
+        .bb-preview-cell.filled.c1 { background: #f43f5e; }
+        .bb-preview-cell.filled.c2 { background: #fb923c; }
+        .bb-preview-cell.filled.c3 { background: #fbbf24; }
+        .bb-preview-cell.filled.c4 { background: #34d399; }
+        .bb-preview-cell.filled.c5 { background: #38bdf8; }
+        .bb-preview-cell.filled.c6 { background: #818cf8; }
+        .bb-preview-cell.filled.c7 { background: #e879f9; }
+
         @media (max-width: 480px) {
             .game-card-item {
-                min-height: 90px;
-                padding: 10px 8px;
+                min-height: 70px;
+                padding: 10px 6px;
                 border-radius: 12px;
             }
             .game-card-icon {
-                font-size: 28px;
-                margin-bottom: 4px;
+                font-size: 24px;
+                margin-bottom: 3px;
             }
             .game-card-name {
-                font-size: 12px;
+                font-size: 11px;
             }
             .game-card-grid {
                 gap: 8px;
+                max-width: 280px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .game-card-item:nth-child(3) {
+                grid-column: span 2;
+                max-width: 50%;
+                margin: 0 auto;
+            }
+            .block-blast-preview-icon {
+                grid-template-columns: repeat(3, 10px);
+                grid-template-rows: repeat(3, 10px);
             }
         }
 
         @media (max-width: 380px) {
             .game-card-item {
-                min-height: 80px;
-                padding: 8px 6px;
+                min-height: 60px;
+                padding: 8px 4px;
             }
             .game-card-icon {
-                font-size: 24px;
+                font-size: 20px;
             }
             .game-card-name {
-                font-size: 11px;
+                font-size: 10px;
+            }
+            .game-card-grid {
+                max-width: 240px;
+            }
+            .block-blast-preview-icon {
+                grid-template-columns: repeat(3, 8px);
+                grid-template-rows: repeat(3, 8px);
             }
         }
 
-        /* --- OTHELLO & 2048 SIZE SELECTOR BUTTONS --- */
         .size-selector-group {
             display: flex;
             flex-wrap: wrap;
@@ -867,7 +1280,6 @@
             box-shadow: 0 2px 10px rgba(255, 105, 180, 0.25);
         }
 
-        /* --- OTHELLO BOARD --- */
         .othello-board-wrapper {
             display: flex;
             justify-content: center;
@@ -940,7 +1352,6 @@
             box-shadow: 0 2px 4px rgba(255, 105, 180, 0.2);
         }
 
-        /* Game container center alignment */
         .game-center-container {
             display: flex;
             flex-direction: column;
@@ -1052,7 +1463,6 @@
             color: var(--primary-color);
         }
 
-        /* 2048 board */
         #game-2048-board {
             display: grid;
             gap: 10px;
@@ -1084,53 +1494,457 @@
             min-height: 0;
         }
 
-        /* Responsive cho game */
+        /* BLOCK BLAST */
+        #quay-game-blockblast-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 0 8px;
+            box-sizing: border-box;
+        }
+        #quay-game-blockblast-view .back-btn {
+            align-self: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .blockblast-container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .blockblast-header-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 4px 0 6px 0;
+            flex-wrap: wrap;
+            gap: 6px;
+            position: relative;
+        }
+
+        .blockblast-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin: 0;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .blockblast-sfx-btn {
+            background: var(--box-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 18px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: inherit;
+            flex-shrink: 0;
+            position: absolute;
+            right: 0;
+            transition: all 0.2s ease;
+        }
+        .blockblast-sfx-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .blockblast-score-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+
+        .blockblast-score-box {
+            background: var(--box-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
+            padding: 4px 14px;
+            text-align: center;
+            min-width: 70px;
+        }
+        .blockblast-score-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--subtext-color);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .blockblast-score-num {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--primary-color);
+        }
+
+        .blockblast-board-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 4px 0;
+            width: 100%;
+        }
+
+        .blockblast-board {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            gap: 4px;
+            background: #1a1625;
+            padding: 10px;
+            border-radius: 16px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+            width: 100%;
+            max-width: 340px;
+            aspect-ratio: 1 / 1;
+            box-sizing: border-box;
+        }
+
+        .blockblast-cell {
+            background: #2d263f;
+            border-radius: 6px;
+            border: 1px solid #3d3450;
+            transition: all 0.15s ease;
+            aspect-ratio: 1 / 1;
+            min-width: 0;
+            min-height: 0;
+        }
+        .blockblast-cell.preview-valid {
+            background: var(--primary-color) !important;
+            transform: scale(0.92);
+            border-color: #ff85c0;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+        }
+        .blockblast-cell.filled {
+            border: none;
+            box-shadow: inset 0 -3px 0 rgba(0,0,0,0.2), 0 0 10px rgba(255,105,180,0.1);
+            animation: popInCell 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .blockblast-cell.clearing {
+            animation: clearFlash 0.35s ease-out;
+        }
+
+        @keyframes popInCell {
+            0% { transform: scale(0.4); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes clearFlash {
+            0% { background: #ffffff; transform: scale(1.15); filter: brightness(1.6); }
+            50% { background: var(--primary-color); transform: scale(0.85); box-shadow: 0 0 30px var(--primary-color); }
+            100% { background: #2d263f; transform: scale(1); }
+        }
+
+        .blockblast-dock {
+            background: #1a1625;
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            max-width: 340px;
+            min-height: 100px;
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.08);
+            box-sizing: border-box;
+            gap: 8px;
+        }
+
+        .blockblast-dock-slot {
+            flex: 1;
+            min-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #262035;
+            border-radius: 12px;
+            border: 1.5px dashed #3d3450;
+            padding: 4px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .blockblast-dock-block {
+            display: grid;
+            gap: 2px;
+            cursor: grab;
+            filter: drop-shadow(0 4px 12px rgba(255, 105, 180, 0.2));
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .blockblast-dock-block:active { cursor: grabbing; }
+
+        .blockblast-mini-cell {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15);
+            pointer-events: none;
+        }
+        .blockblast-mini-cell.empty {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .blockblast-control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 4px 0 8px 0;
+        }
+
+        .blockblast-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            min-width: 100px;
+            text-align: center;
+        }
+        .blockblast-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .blockblast-gameover-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(26, 22, 37, 0.92);
+            backdrop-filter: blur(6px);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            border-radius: 16px;
+            animation: fadeInModal 0.25s ease-out;
+        }
+        .blockblast-gameover-box {
+            background: #2d263f;
+            border: 2px solid var(--primary-color);
+            padding: 24px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.15);
+            width: 85%;
+            max-width: 280px;
+        }
+        .blockblast-gameover-box h2 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 4px;
+            font-weight: 900;
+        }
+        .blockblast-gameover-box p {
+            color: #a295be;
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+        .blockblast-gameover-score {
+            font-size: 20px;
+            font-weight: 900;
+            color: #ff85c0;
+            margin: 4px 0 16px 0;
+        }
+
+        #blockblast-drag-ghost {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+            will-change: transform;
+            filter: drop-shadow(0 12px 25px rgba(255, 105, 180, 0.4));
+        }
+
         @media (max-width: 480px) {
-            .othello-board {
-                width: 280px;
-                height: 280px;
+            .blockblast-board {
+                max-width: 280px;
                 padding: 6px;
-                gap: 2px;
+                gap: 3px;
             }
-            #game-2048-board {
-                gap: 6px;
-                padding: 8px;
-                max-width: 320px;
+            .blockblast-dock {
+                max-width: 280px;
+                min-height: 80px;
+                padding: 6px 8px;
             }
-            .game-title-center {
+            .blockblast-dock-slot {
+                min-height: 65px;
+            }
+            .blockblast-mini-cell {
+                width: 16px;
+                height: 16px;
+            }
+            .blockblast-title {
                 font-size: 18px;
             }
-            .game-btn {
-                padding: 6px 14px;
-                font-size: 12px;
-                min-width: 80px;
-            }
-            .size-btn {
-                padding: 4px 12px;
-                font-size: 12px;
-                min-width: 44px;
-            }
-            .game-sfx-btn {
-                font-size: 13px;
-                padding: 3px 10px;
+            .blockblast-score-num {
+                font-size: 15px;
             }
         }
 
         @media (max-width: 380px) {
-            .othello-board {
-                width: 240px;
-                height: 240px;
+            .blockblast-board {
+                max-width: 240px;
                 padding: 4px;
                 gap: 2px;
             }
-            #game-2048-board {
-                gap: 4px;
-                padding: 6px;
-                max-width: 260px;
+            .blockblast-dock {
+                max-width: 240px;
+                min-height: 70px;
+                padding: 4px 6px;
             }
-            .game-title-center {
-                font-size: 16px;
+            .blockblast-dock-slot {
+                min-height: 55px;
             }
+            .blockblast-mini-cell {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        .total-views-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background: var(--box-bg);
+            padding: 12px 20px;
+            border-radius: 14px;
+            border: 1.5px solid var(--border-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .total-views-display span {
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .admin-chapter-views-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 10px;
+            padding-left: 10px;
+            border-left: 3px solid var(--border-color);
+        }
+        .admin-chapter-view-item {
+            font-size: 13px;
+            color: var(--text-color);
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        .admin-chapter-view-item .chap-name {
+            font-weight: 600;
+        }
+        .admin-chapter-view-item .chap-views {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .expandable-stats-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .expandable-stats-header:hover {
+            color: var(--primary-color);
+        }
+        .expand-icon {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .expand-icon.open {
+            transform: rotate(90deg);
+        }
+
+        .latest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .latest-item {
+            background: var(--box-bg);
+            border: 1px solid var(--border-color);
+            padding: 14px 18px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .latest-item:hover {
+            border-color: var(--primary-color);
+            transform: translateX(4px);
+        }
+        .latest-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        .latest-chapter {
+            font-size: 13px;
+            color: var(--primary-color);
+            margin-top: 3px;
+        }
+        .latest-time {
+            font-size: 12px;
+            color: var(--subtext-color);
+        }
+        .latest-new-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff4081, #ff80ab);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 6px;
+            vertical-align: middle;
+            box-shadow: 0 2px 6px rgba(255, 64, 129, 0.3);
+        }
+
+        /* Ẩn ô nhập số chương khi chọn "Đang cập nhật" */
+        .total-chapters-input-group {
+            transition: all 0.2s ease;
+        }
+        .total-chapters-input-group.hidden {
+            display: none !important;
         }
     </style>
 </head>
@@ -1188,6 +2002,27 @@
     <header>
         <div class="header-top-controls">
             <button class="menu-style-toggle" onclick="doiKieuMenu()" title="Đổi kiểu menu hiển thị">☰</button>
+            <!-- Nút Theme mới ⚙️ -->
+            <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleThemePanel()" title="Chọn Theme">⚙️</button>
+            <!-- Panel chọn Theme -->
+            <div id="theme-panel" class="theme-panel hidden">
+                <div class="theme-option active" data-theme="hongphan" onclick="chonTheme('hongphan')">
+                    <span>Hồng phấn</span>
+                    <span class="check-mark">✓</span>
+                </div>
+                <div class="theme-option" data-theme="xanhla" onclick="chonTheme('xanhla')">
+                    <span>Xanh lá</span>
+                    <span class="check-mark">✓</span>
+                </div>
+                <div class="theme-option" data-theme="xanhduong" onclick="chonTheme('xanhduong')">
+                    <span>Xanh dương</span>
+                    <span class="check-mark">✓</span>
+                </div>
+                <div class="theme-option" data-theme="tim" onclick="chonTheme('tim')">
+                    <span>Tím</span>
+                    <span class="check-mark">✓</span>
+                </div>
+            </div>
             <button class="theme-toggle" onclick="doiCheDoSangToi()">🌙 Tối</button>
         </div>
         <h1 class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</h1>
@@ -1205,7 +2040,6 @@
             🔔 Bảng Thông Báo 
             <span id="unread-badge" class="notification-badge hidden">0</span>
         </button>
-        <button class="nav-btn" id="btn-tab-dien-dan" onclick="chuyenTab('dien-dan', true)">💬 Diễn đàn</button>
         <button class="nav-btn" id="btn-tab-tu-sach-offline" onclick="chuyenTab('tu-sach-offline', true)">🧳 Tủ Sách</button>
         <button class="nav-btn" id="btn-tab-quay-thu-gian" onclick="chuyenTab('quay-thu-gian', true)">🍵 Quầy Thư Giãn</button>
         <button class="nav-btn" id="btn-tab-quan-li" onclick="yeuCauMoTabQuanLi()" style="background: var(--header-bg); color: white; border-color: var(--primary-color);">🔐 Quản Lý</button>
@@ -1221,7 +2055,6 @@
             <button class="nav-btn" onclick="chuyenTab('tat-ca-truyen', true); toggleHamburgerDropdown();">📚 Tất cả truyện</button>
             <button class="nav-btn" onclick="chuyenTab('xep-hang', true); toggleHamburgerDropdown();">🏆 Xếp Hạng</button>
             <button class="nav-btn" onclick="chuyenTab('bang-thong-bao', true); toggleHamburgerDropdown();">🔔 Bảng Thông Báo</button>
-            <button class="nav-btn" onclick="chuyenTab('dien-dan', true); toggleHamburgerDropdown();">💬 Diễn đàn</button>
             <button class="nav-btn" onclick="chuyenTab('tu-sach-offline', true); toggleHamburgerDropdown();">🧳 Tủ Sách</button>
             <button class="nav-btn" onclick="chuyenTab('quay-thu-gian', true); toggleHamburgerDropdown();">🍵 Quầy Thư Giãn</button>
             <button class="nav-btn" onclick="yeuCauMoTabQuanLi(); toggleHamburgerDropdown();" style="background: var(--header-bg); color: white; border-color: var(--primary-color);">🔐 Quản Lý</button>
@@ -1249,9 +2082,6 @@
 
             <div class="search-box">
                 <input type="text" id="search-home-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện..." oninput="locTruyen()">
-                <select id="search-home-tag" class="filter-select" onchange="locTruyen()">
-                    <option value="tat-ca">Tất cả Tag</option>
-                </select>
                 <select id="search-home-status" class="filter-select" onchange="locTruyen()">
                     <option value="tat-ca">Tất cả trạng thái</option>
                     <option value="Đang cập nhật">Đang cập nhật</option>
@@ -1264,6 +2094,13 @@
                     <option value="az">🔤 Tên từ A-Z</option>
                 </select>
             </div>
+
+            <div class="multi-tag-filter-container" id="multi-tag-filter-home">
+                <span class="filter-label">🏷️ Tag:</span>
+                <div class="tag-selector-group" id="tag-selector-home"></div>
+                <button class="filter-clear-btn" onclick="xoaBoLocTag('home')">✕ Xóa bộ lọc</button>
+            </div>
+            <div class="active-tags-display" id="active-tags-display-home"></div>
 
             <div class="section-title">⚡ Mới Cập Nhật</div>
             <div class="latest-list" id="home-latest-list"></div>
@@ -1293,9 +2130,6 @@
             
             <div class="search-box">
                 <input type="text" id="search-all-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện..." oninput="locTruyen()">
-                <select id="search-all-tag" class="filter-select" onchange="locTruyen()">
-                    <option value="tat-ca">Tất cả Tag</option>
-                </select>
                 <select id="search-all-status" class="filter-select" onchange="locTruyen()">
                     <option value="tat-ca">Tất cả trạng thái</option>
                     <option value="Đang cập nhật">Đang cập nhật</option>
@@ -1308,6 +2142,13 @@
                     <option value="az">🔤 Tên từ A-Z</option>
                 </select>
             </div>
+
+            <div class="multi-tag-filter-container" id="multi-tag-filter-all">
+                <span class="filter-label">🏷️ Tag:</span>
+                <div class="tag-selector-group" id="tag-selector-all"></div>
+                <button class="filter-clear-btn" onclick="xoaBoLocTag('all')">✕ Xóa bộ lọc</button>
+            </div>
+            <div class="active-tags-display" id="active-tags-display-all"></div>
             
             <div class="story-grid" id="danh-sach-truyen"></div>
         </div>
@@ -1340,37 +2181,6 @@
             <div class="notice-board-container" id="notice-board-list"></div>
         </div>
 
-        <div id="tab-dien-dan" class="hidden">
-            <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">💬 Diễn Đàn Trò Chuyện & Góp Ý</h3>
-            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 20px;">Nơi bàn luận gu truyện, đề cử tác phẩm hoặc gửi lời nhắn nhủ tới tác giả! ✨</p>
-
-            <div style="background: var(--box-bg); padding: 18px; border-radius: 16px; border: 1.5px solid var(--border-color); margin-bottom: 25px;">
-                <h4 style="color: var(--primary-color); margin-top: 0; margin-bottom: 12px; font-size: 16px;">✍️ Tạo chủ đề thảo luận mới</h4>
-                <div class="form-group" style="margin-bottom: 10px;">
-                    <label>Tên của bạn:</label>
-                    <input type="text" id="forum-author-input" class="form-control" placeholder="Nhập tên hoặc chọn nhanh danh hiệu bên dưới...">
-                    <select id="select-picker-forum" class="nickname-select" onchange="chonNicknameTuSelect('select-picker-forum', 'forum-author-input')"></select>
-                </div>
-                <div class="form-group" style="margin-bottom: 10px;">
-                    <label style="font-size: 13px; margin-bottom: 4px;">Chọn chủ đề hoặc tự nhập tiêu đề:</label>
-                    <select id="forum-title-select" class="form-control" onchange="kiemTraDoiTieuDeForum()" style="margin-bottom: 8px;">
-                        <option value="💬 Thảo luận chung về truyện">💬 Thảo luận chung về truyện</option>
-                        <option value="📚 Đề cử / Gợi ý truyện mới">📚 Đề cử / Gợi ý truyện mới</option>
-                        <option value="💌 Nhắn gửi / Góp ý tới tác giả">💌 Nhắn gửi / Góp ý tới tác giả</option>
-                        <option value="🎨 Góc khoe fanart / Sáng tạo">🎨 Góc khoe fanart / Sáng tạo</option>
-                        <option value="custom">✍️ Tự nhập tiêu đề khác...</option>
-                    </select>
-                    <input type="text" id="forum-title-input" class="form-control hidden" placeholder="Nhập tiêu đề thảo luận tùy chỉnh...">
-                </div>
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <textarea id="forum-content-input" class="form-control" placeholder="Nội dung bạn muốn chia sẻ..." style="height: 90px;"></textarea>
-                </div>
-                <button type="button" class="btn-submit" onclick="dangBaiVietForum()">Đăng bài thảo luận 🌸</button>
-            </div>
-
-            <div class="forum-container" id="forum-post-list"></div>
-        </div>
-
         <div id="tab-tu-sach-offline" class="hidden">
             <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🧳 Tủ Sách & Yêu Thích Của Bạn</h3>
             <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 20px;">Quản lý những bộ truyện yêu thích và các bộ đã lưu đọc ngoại tuyến.</p>
@@ -1390,25 +2200,35 @@
 
         <div id="tab-quay-thu-gian" class="hidden">
             <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🍵 Quầy Thư Giãn</h3>
-            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 25px;">Góc nhỏ giải trí, xả stress giữa những trang truyện ~ </p>
+            <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 25px;">Góc nhỏ giải trí giữa những trang truyện ~ </p>
             
             <div id="quay-game-list-view">
                 <div class="game-card-grid">
-                    <!-- Game 2048 Card -->
                     <div class="game-card-item" onclick="moGiaoDienGame('2048')">
                         <div class="game-card-icon">🎮</div>
                         <div class="game-card-name">2048</div>
                     </div>
-
-                    <!-- Game Othello Card -->
                     <div class="game-card-item" onclick="moGiaoDienGame('othello')">
                         <div class="game-card-icon">⚪⚫</div>
-                        <div class="game-card-name">Othello (Cờ Lật)</div>
+                        <div class="game-card-name">Othello</div>
+                    </div>
+                    <div class="game-card-item" onclick="moGiaoDienGame('blockblast')">
+                        <div class="block-blast-preview-icon">
+                            <div class="bb-preview-cell filled c1"></div>
+                            <div class="bb-preview-cell filled c2"></div>
+                            <div class="bb-preview-cell"></div>
+                            <div class="bb-preview-cell filled c3"></div>
+                            <div class="bb-preview-cell filled c4"></div>
+                            <div class="bb-preview-cell filled c5"></div>
+                            <div class="bb-preview-cell"></div>
+                            <div class="bb-preview-cell filled c6"></div>
+                            <div class="bb-preview-cell filled c7"></div>
+                        </div>
+                        <div class="game-card-name">Block Blast</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Giao diện Game 2048 -->
             <div id="quay-game-2048-view" class="hidden">
                 <button class="back-btn" onclick="quayLaiQuayThuGian()">‹ Quay lại Quầy thư giãn</button>
                 
@@ -1418,7 +2238,6 @@
                         <button class="game-sfx-btn" id="sfx-btn-2048" onclick="toggleSfx('2048')">🔊</button>
                     </div>
 
-                    <!-- Size selector cho 2048 -->
                     <div class="size-selector-group" id="size-selector-2048">
                         <button class="size-btn active" data-size="4" onclick="chonKichThuoc2048(4)">4×4</button>
                         <button class="size-btn" data-size="5" onclick="chonKichThuoc2048(5)">5×5</button>
@@ -1440,7 +2259,6 @@
                 </div>
             </div>
 
-            <!-- Giao diện Game Othello -->
             <div id="quay-game-othello-view" class="hidden">
                 <button class="back-btn" onclick="quayLaiQuayThuGian()">‹ Quay lại Quầy thư giãn</button>
                 
@@ -1450,7 +2268,6 @@
                         <button class="game-sfx-btn" id="sfx-btn-othello" onclick="toggleSfx('othello')">🔊</button>
                     </div>
 
-                    <!-- Size selector cho Othello -->
                     <div class="size-selector-group" id="size-selector-othello">
                         <button class="size-btn active" data-size="8" onclick="chonKichThuocOthello(8)">8×8</button>
                         <button class="size-btn" data-size="10" onclick="chonKichThuocOthello(10)">10×10</button>
@@ -1479,6 +2296,65 @@
                     </div>
                 </div>
             </div>
+
+            <!-- BLOCK BLAST VIEW -->
+            <div id="quay-game-blockblast-view" class="hidden">
+                <button class="back-btn" onclick="quayLaiQuayThuGian()">‹ Quay lại Quầy thư giãn</button>
+
+                <div class="blockblast-container" id="blockblast-root">
+                    <!-- Header -->
+                    <div class="blockblast-header-row">
+                        <h3 class="blockblast-title">Block Blast</h3>
+                        <button class="blockblast-sfx-btn" id="blockblast-sfx-btn" onclick="toggleBlockBlastAudio()">🔊</button>
+                    </div>
+
+                    <!-- Score row -->
+                    <div class="blockblast-score-row">
+                        <div class="blockblast-score-box">
+                            <div class="blockblast-score-label">Điểm</div>
+                            <div class="blockblast-score-num" id="blockblast-score">0</div>
+                        </div>
+                        <div class="blockblast-score-box">
+                            <div class="blockblast-score-label">Cao nhất</div>
+                            <div class="blockblast-score-num" id="blockblast-best">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Board -->
+                    <div class="blockblast-board-wrapper" style="position:relative; width:100%; max-width:340px; margin:0 auto;">
+                        <div class="blockblast-board" id="blockblast-board"></div>
+                        <!-- Game Over overlay -->
+                        <div class="blockblast-gameover-overlay" id="blockblast-gameover">
+                            <div class="blockblast-gameover-box">
+                                <h2>💔 HẾT NƯỚC ĐI!</h2>
+                                <p>Điểm số bạn đạt được</p>
+                                <div class="blockblast-gameover-score" id="blockblast-final-score">0</div>
+                                <button class="blockblast-btn" onclick="resetBlockBlast()">🌸 Thử Lại Ngay 🌸</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dock -->
+                    <div class="blockblast-dock" id="blockblast-dock"></div>
+
+                    <!-- Control row -->
+                    <div class="blockblast-control-row">
+                        <button class="blockblast-btn" onclick="resetBlockBlast()">🌸 Chơi Lại 🌸</button>
+                    </div>
+
+                    <!-- Ghost element for drag -->
+                    <div id="blockblast-drag-ghost"></div>
+
+                    <!-- Instructions -->
+                    <div style="background: var(--box-bg); border: 1.5px solid var(--border-color); padding: 12px 16px; border-radius: 14px; margin-top: 10px; text-align: left; font-size: 12px; color: var(--subtext-color); line-height: 1.6; width:100%; max-width:340px; box-sizing:border-box;">
+                        <strong style="color: var(--primary-color); display: block; margin-bottom: 4px;">💡 Hướng dẫn cách chơi:</strong>
+                        • 🖱️ <strong>Kéo thả:</strong> Click và kéo các khối màu từ thanh bên dưới lên bàn cờ 8×8.<br>
+                        • 🎯 Xếp các khối sao cho lấp đầy hàng ngang hoặc cột dọc để xóa và ghi điểm!<br>
+                        • 🚫 Nếu không thể đặt khối nào, game kết thúc. Hãy sắp xếp thông minh nhé!
+                    </div>
+                </div>
+            </div>
+            <!-- END BLOCK BLAST VIEW -->
         </div>
 
         <div id="tab-quan-li" class="hidden">
@@ -1486,11 +2362,11 @@
             <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 20px;">Bảng điều khiển toàn diện hệ thống dành riêng cho chủ web.</p>
 
             <div class="admin-sub-tabs">
-                <button class="admin-sub-btn active" id="btn-admin-tab-dangtruyen" onclick="doiAdminSubTab('dangtruyen')">✨ Đăng & Sửa Nội Dung</button>
+                <button class="admin-sub-btn active" id="btn-admin-tab-dangtruyen" onclick="doiAdminSubTab('dangtruyen')">➕ Đăng truyện</button>
                 <button class="admin-sub-btn" id="btn-admin-tab-tongquan" onclick="doiAdminSubTab('tongquan')">📊 Thống kê</button>
                 <button class="admin-sub-btn" id="btn-admin-tab-truyen" onclick="doiAdminSubTab('truyen')">📚 Truyện & Chương</button>
                 <button class="admin-sub-btn" id="btn-admin-tab-view" onclick="doiAdminSubTab('view')">👁️ Lượt view</button>
-                <button class="admin-sub-btn" id="btn-admin-tab-tuongtac" onclick="doiAdminSubTab('tuongtac')">💬 Tương tác & Lấy JSON Comment</button>
+                <button class="admin-sub-btn" id="btn-admin-tab-tuongtac" onclick="doiAdminSubTab('tuongtac')">💬 Tương tác</button>
                 <button class="admin-sub-btn" id="btn-admin-tab-hethong" onclick="doiAdminSubTab('hethong')">⚙️ Lịch trình</button>
             </div>
 
@@ -1535,7 +2411,13 @@
                     </div>
                     <div class="form-group">
                         <label>✨ Tổng số chương của truyện (*)</label>
-                        <input type="number" id="new-total-chapters" class="form-control" value="42" min="1" placeholder="42">
+                        <select id="new-total-mode" class="form-control" onchange="toggleTotalModeInput('new')">
+                            <option value="fixed">Cố định</option>
+                            <option value="updating">Đang cập nhật</option>
+                        </select>
+                        <div id="new-total-chapters-group" class="total-chapters-input-group">
+                            <input type="number" id="new-total-chapters" class="form-control" value="42" min="1" placeholder="42">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Thẻ Tag (Cách nhau bằng dấu phẩy)</label>
@@ -1625,7 +2507,13 @@
                     </div>
                     <div class="form-group">
                         <label>✨ Tổng số chương của truyện</label>
-                        <input type="number" id="edit-total-chapters" class="form-control" min="1" placeholder="42">
+                        <select id="edit-total-mode" class="form-control" onchange="toggleTotalModeInput('edit')">
+                            <option value="fixed">Cố định</option>
+                            <option value="updating">Đang cập nhật</option>
+                        </select>
+                        <div id="edit-total-chapters-group" class="total-chapters-input-group">
+                            <input type="number" id="edit-total-chapters" class="form-control" min="1" placeholder="42">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Sửa Thẻ Tag (Cách nhau bằng dấu phẩy)</label>
@@ -1824,9 +2712,6 @@
                     <label>Mã JSON kết quả (Copy toàn bộ đoạn dưới đây dán vào comment.json):</label>
                     <textarea id="output-json-comment-box" class="form-control" style="height: 200px; font-family: monospace; font-size: 12px; background: var(--container-bg);" readonly placeholder="Bấm nút tổng hợp ở trên để hiển thị mã..."></textarea>
                 </div>
-
-                <div class="section-title" style="margin-top: 30px;">📝 Chủ Đề Diễn Đàn Gần Đây</div>
-                <div id="admin-forum-summary-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
             </div>
 
             <div id="admin-subcontent-hethong" class="hidden">
@@ -1917,6 +2802,10 @@
                 </div>
                 
                 <div id="detail-chapters-container"></div>
+                
+                <div class="total-views-display">
+                    👁️ Tổng lượt xem: <span id="detail-total-views">0</span>
+                </div>
             </div>
 
             <div class="comment-section">
@@ -1985,6 +2874,70 @@
     <footer class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</footer>
 
     <script>
+        /* ============================================================
+           HỆ THỐNG THEME (MỚI) - ĐỘC LẬP VỚI LIGHT/DARK
+           ============================================================ */
+        // Các theme có sẵn (class CSS tương ứng)
+        const THEME_LIST = ['hongphan', 'xanhla', 'xanhduong', 'tim'];
+        const THEME_DISPLAY = {
+            hongphan: 'Hồng phấn',
+            xanhla: 'Xanh lá',
+            xanhduong: 'Xanh dương',
+            tim: 'Tím'
+        };
+
+        // Lấy theme đã lưu từ localStorage, mặc định 'hongphan' (theme gốc)
+        let currentTheme = localStorage.getItem('giadinhcauvong_theme') || 'hongphan';
+
+        // Áp dụng theme khi trang load
+        function applyTheme(theme) {
+            // Xóa tất cả class theme cũ
+            document.body.classList.remove('theme-xanhla', 'theme-xanhduong', 'theme-camdao', 'theme-tim');
+            // Nếu không phải theme gốc (hongphan) thì thêm class tương ứng
+            if (theme !== 'hongphan') {
+                document.body.classList.add('theme-' + theme);
+            }
+            // Cập nhật trạng thái active trong panel
+            document.querySelectorAll('.theme-option').forEach(el => {
+                el.classList.toggle('active', el.dataset.theme === theme);
+            });
+            // Lưu vào localStorage
+            localStorage.setItem('giadinhcauvong_theme', theme);
+            currentTheme = theme;
+        }
+
+        // Gọi khi chọn theme từ panel
+        function chonTheme(theme) {
+            if (!THEME_LIST.includes(theme)) return;
+            applyTheme(theme);
+            // Đóng panel sau khi chọn
+            document.getElementById('theme-panel').classList.add('hidden');
+        }
+
+        // Toggle hiển thị panel
+        function toggleThemePanel() {
+            const panel = document.getElementById('theme-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        // Đóng panel khi click ra ngoài
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('theme-panel');
+            const btn = document.getElementById('theme-toggle-btn');
+            if (panel && !panel.classList.contains('hidden')) {
+                if (!panel.contains(e.target) && !btn.contains(e.target)) {
+                    panel.classList.add('hidden');
+                }
+            }
+        });
+
+        // Áp dụng theme khi trang load
+        applyTheme(currentTheme);
+
+        // ============================================================
+        // PHẦN CÒN LẠI GIỮ NGUYÊN (KHÔNG THAY ĐỔI)
+        // ============================================================
+
         const MAT_KHAU_DUNG = "2026";
         const GITHUB_JSON_URL = "https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/data.json";
         const GITHUB_COMMENT_JSON_URL = "https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/comment.json";
@@ -1995,7 +2948,10 @@
         let currentNoticeSubTab = 'tat-ca';
         let currentChapterLayout = 'grid';
 
-        // --- HỆ THỐNG ÂM THANH (SFX) CHỈ KHI THAO TÁC TRONG GAME ---
+        // --- MULTI-TAG FILTER STATE ---
+        window.selectedTagsHome = new Set();
+        window.selectedTagsAll = new Set();
+
         window.isSfxEnabled2048 = true;
         window.isSfxEnabledOthello = true;
         let audioCtx = null;
@@ -2056,7 +3012,6 @@
                 document.getElementById('sfx-btn-othello').innerHTML = window.isSfxEnabledOthello ? "🔊" : "🔇";
             }
         }
-        // -------------------------------------------------------------
 
         const danhSachNicknames = [
             "🍡 Mochi Trà Xanh",
@@ -2142,20 +3097,6 @@
             }
         ];
 
-        let defaultForumPosts = [
-            {
-                id: 1,
-                author: "[Tác Giả] Cầu Vồng",
-                isAuthor: true,
-                title: "Góc đề cử truyện chữa rách tâm hồn đã lành 💕",
-                date: "08/08/2026",
-                content: "Mọi người đang thích đọc thể loại ngược như thế nào nè? Cứ thảo luận thoải mái dưới bài viết này để mình lấy ý tưởng edit truyện tiếp theo nhé!",
-                replies: [
-                    { author: "Mèo Lười", isAuthor: false, text: "Thảo luận gì chấn động vậy." }
-                ]
-            }
-        ];
-
         let defaultHomeChats = [
             { id: 1, name: "Mèo Lười 🐱", text: "Chủ nhà ơi hóng chương mới quá đi mất thôi! Chúc web ngày càng đông khách nha ❤️" },
             { id: 2, name: "🕵️‍♂️ Người qua đường bí ẩn", text: "Giao diện mới decor tông xẹt tông xinh xỉu dọc xỉu ngang luôn á >.<" }
@@ -2164,7 +3105,6 @@
         window.dữLiệuTruyện = {};
         window.danhSachThongBao = defaultNotices;
         window.danhSachHenGio = [];
-        window.danhSachDienDan = defaultForumPosts;
         window.danhSachYeuThich = [];
         window.danhSachLoiNhanTrangChu = defaultHomeChats;
         window.danhSachBinhLuanTruyen = {}; 
@@ -2175,6 +3115,64 @@
         
         if (localFavRaw) window.danhSachYeuThich = JSON.parse(localFavRaw);
         if (localScheduleRaw) window.danhSachHenGio = JSON.parse(localScheduleRaw);
+
+        const BADGE_DEPLOYMENT_KEY = 'giadinhcauvong_badge_deployment';
+        const CHAPTER_TIMESTAMPS_KEY = 'giadinhcauvong_chapter_timestamps';
+        const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+
+        function getDeploymentTimestamp() {
+            let ts = localStorage.getItem(BADGE_DEPLOYMENT_KEY);
+            if (!ts) {
+                ts = Date.now().toString();
+                localStorage.setItem(BADGE_DEPLOYMENT_KEY, ts);
+            }
+            return parseInt(ts);
+        }
+
+        function getChapterTimestamp(storyKey, chapterIndex) {
+            const all = JSON.parse(localStorage.getItem(CHAPTER_TIMESTAMPS_KEY) || '{}');
+            const key = storyKey + '_' + chapterIndex;
+            return all[key] || null;
+        }
+
+        function setChapterTimestamp(storyKey, chapterIndex) {
+            const all = JSON.parse(localStorage.getItem(CHAPTER_TIMESTAMPS_KEY) || '{}');
+            const key = storyKey + '_' + chapterIndex;
+            if (!all[key]) {
+                all[key] = Date.now().toString();
+                localStorage.setItem(CHAPTER_TIMESTAMPS_KEY, JSON.stringify(all));
+            }
+        }
+
+        function isChapterNew(storyKey, chapterIndex) {
+            const deployTs = getDeploymentTimestamp();
+            const now = Date.now();
+            
+            const storedTs = getChapterTimestamp(storyKey, chapterIndex);
+            if (storedTs) {
+                return (now - storedTs) < TWO_DAYS_MS;
+            } else {
+                return false;
+            }
+        }
+
+        function storyHasNewChapter(storyKey, truyen) {
+            if (!truyen.chapters || truyen.chapters.length === 0) return false;
+            const lastIdx = truyen.chapters.length - 1;
+            const deployTs = getDeploymentTimestamp();
+            const now = Date.now();
+            
+            const storedTs = getChapterTimestamp(storyKey, lastIdx);
+            if (storedTs) {
+                return (now - storedTs) < TWO_DAYS_MS;
+            } else {
+                if (now - deployTs < TWO_DAYS_MS) {
+                    setChapterTimestamp(storyKey, lastIdx);
+                    return true;
+                }
+                return false;
+            }
+        }
 
         async function loadDataFromGitHub() {
             try {
@@ -2189,21 +3187,21 @@
                 if (commentRes.ok) {
                     let cData = await commentRes.json();
                     if (cData.homechat_data && cData.homechat_data.length > 0) window.danhSachLoiNhanTrangChu = cData.homechat_data;
-                    if (cData.forum_data && cData.forum_data.length > 0) window.danhSachDienDan = cData.forum_data;
                     if (cData.stories_comments) window.danhSachBinhLuanTruyen = cData.stories_comments;
                 }
                 
                 capNhatDropdownTag();
+                buildTagSelectors();
                 locTruyen();
                 khoiTaoSliderHot();
                 hienThiBangThongBao();
                 hienThiXepHang();
-                hienThiDienDan();
                 hienThiLoiNhanTrangChu();
                 capNhatBadgeThongBao();
             } catch (error) {
                 console.log("Khởi tạo dữ liệu từ bộ nhớ cục bộ:", error);
                 capNhatDropdownTag();
+                buildTagSelectors();
                 khoiTaoSliderHot();
                 hienThiLoiNhanTrangChu();
             }
@@ -2211,6 +3209,103 @@
 
         loadDataFromGitHub();
         setInterval(kiemTraLichHenGio, 30000);
+
+        function buildTagSelectors() {
+            const tagsSet = new Set();
+            for (let key in window.dữLiệuTruyện) {
+                const tr = window.dữLiệuTruyện[key];
+                if (tr.tags && Array.isArray(tr.tags)) {
+                    tr.tags.forEach(t => { if(t.trim()) tagsSet.add(t.trim()); });
+                }
+            }
+            const sortedTags = Array.from(tagsSet).sort();
+
+            const homeContainer = document.getElementById('tag-selector-home');
+            if (homeContainer) {
+                homeContainer.innerHTML = '';
+                sortedTags.forEach(tag => {
+                    const btn = document.createElement('button');
+                    btn.className = 'tag-filter-btn';
+                    btn.dataset.tag = tag;
+                    btn.dataset.target = 'home';
+                    btn.innerHTML = `${tag} <span class="tag-remove-icon">×</span>`;
+                    if (window.selectedTagsHome.has(tag)) btn.classList.add('active');
+                    btn.onclick = () => toggleTagFilter('home', tag);
+                    homeContainer.appendChild(btn);
+                });
+            }
+
+            const allContainer = document.getElementById('tag-selector-all');
+            if (allContainer) {
+                allContainer.innerHTML = '';
+                sortedTags.forEach(tag => {
+                    const btn = document.createElement('button');
+                    btn.className = 'tag-filter-btn';
+                    btn.dataset.tag = tag;
+                    btn.dataset.target = 'all';
+                    btn.innerHTML = `${tag} <span class="tag-remove-icon">×</span>`;
+                    if (window.selectedTagsAll.has(tag)) btn.classList.add('active');
+                    btn.onclick = () => toggleTagFilter('all', tag);
+                    allContainer.appendChild(btn);
+                });
+            }
+
+            updateActiveTagsDisplay('home');
+            updateActiveTagsDisplay('all');
+        }
+
+        function toggleTagFilter(target, tag) {
+            const set = target === 'home' ? window.selectedTagsHome : window.selectedTagsAll;
+            if (set.has(tag)) {
+                set.delete(tag);
+            } else {
+                set.add(tag);
+            }
+            const container = target === 'home' ? document.getElementById('tag-selector-home') : document.getElementById('tag-selector-all');
+            if (container) {
+                container.querySelectorAll('.tag-filter-btn').forEach(btn => {
+                    if (btn.dataset.tag === tag) {
+                        btn.classList.toggle('active');
+                    }
+                });
+            }
+            updateActiveTagsDisplay(target);
+            locTruyen();
+        }
+
+        function updateActiveTagsDisplay(target) {
+            const set = target === 'home' ? window.selectedTagsHome : window.selectedTagsAll;
+            const displayEl = document.getElementById(`active-tags-display-${target}`);
+            if (!displayEl) return;
+            if (set.size === 0) {
+                displayEl.innerHTML = '';
+                return;
+            }
+            let html = '<span style="font-weight:600;color:var(--primary-color);margin-right:6px;">🔍 Đang lọc:</span>';
+            set.forEach(tag => {
+                html += `<span class="active-tag-item">${tag} <button class="remove-tag-btn" data-target="${target}" data-tag="${tag}">×</button></span>`;
+            });
+            displayEl.innerHTML = html;
+            displayEl.querySelectorAll('.remove-tag-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const t = btn.dataset.target;
+                    const tag = btn.dataset.tag;
+                    toggleTagFilter(t, tag);
+                };
+            });
+        }
+
+        function xoaBoLocTag(target) {
+            const set = target === 'home' ? window.selectedTagsHome : window.selectedTagsAll;
+            set.clear();
+            const container = target === 'home' ? document.getElementById('tag-selector-home') : document.getElementById('tag-selector-all');
+            if (container) {
+                container.querySelectorAll('.tag-filter-btn').forEach(btn => btn.classList.remove('active'));
+            }
+            updateActiveTagsDisplay(target);
+            locTruyen();
+        }
 
         function khoiTaoSliderHot() {
             const track = document.getElementById('hot-slide-track');
@@ -2302,13 +3397,18 @@
                     daDang = true;
                     if (item.type === 'story') {
                         window.dữLiệuTruyện[item.key] = item.storyData;
+                        if (item.storyData.chapters && item.storyData.chapters.length > 0) {
+                            setChapterTimestamp(item.key, 0);
+                        }
                         if (item.storyData.status !== 'Tạm ẩn') {
                             taoThongBaoTuDong(`✨ Truyện mới: "${item.storyData.title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${item.storyData.title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, item.key, false);
                         }
                     } else if (item.type === 'chapter') {
                         if (window.dữLiệuTruyện[item.storyKey]) {
-                            window.dữLiệuTruyện[item.storyKey].chapters.push(item.chapterData);
                             const truyen = window.dữLiệuTruyện[item.storyKey];
+                            const newIdx = truyen.chapters.length;
+                            truyen.chapters.push(item.chapterData);
+                            setChapterTimestamp(item.storyKey, newIdx);
                             if (truyen.status !== 'Tạm ẩn') {
                                 taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${item.chapterData.title}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${item.chapterData.title}". Đọc ngay thôi nào! ✨`, item.storyKey, false);
                             }
@@ -2327,6 +3427,7 @@
                 khoiTaoSliderHot();
                 hienThiXepHang();
                 hienThiBangThongBao();
+                buildTagSelectors();
             }
         }
 
@@ -2338,52 +3439,33 @@
         }
 
         function capNhatDropdownTag() {
-            let tagsSet = new Set();
-            for (let key in window.dữLiệuTruyện) {
-                const tr = window.dữLiệuTruyện[key];
-                if (tr.tags && Array.isArray(tr.tags)) {
-                    tr.tags.forEach(t => { if(t.trim()) tagsSet.add(t.trim()); });
-                }
-            }
-
-            const homeTagSelect = document.getElementById('search-home-tag');
-            const allTagSelect = document.getElementById('search-all-tag');
-            if(!homeTagSelect || !allTagSelect) return;
-
-            const currentHomeVal = homeTagSelect.value;
-            const currentAllVal = allTagSelect.value;
-
-            let optionsHTML = `<option value="tat-ca">Tất cả Tag</option>`;
-            Array.from(tagsSet).sort().forEach(tag => {
-                optionsHTML += `<option value="${tag}">${tag}</option>`;
-            });
-
-            homeTagSelect.innerHTML = optionsHTML;
-            allTagSelect.innerHTML = optionsHTML;
-
-            if(homeTagSelect.querySelector(`option[value="${currentHomeVal}"]`)) homeTagSelect.value = currentHomeVal;
-            if(allTagSelect.querySelector(`option[value="${currentAllVal}"]`)) allTagSelect.value = currentAllVal;
+            buildTagSelectors();
         }
 
         window.timTheoTag = function(tagName) {
             chuyenTab('tat-ca-truyen', true);
-            const allTagSelect = document.getElementById('search-all-tag');
-            if (allTagSelect) {
-                allTagSelect.value = tagName;
-                locTruyen();
+            const allContainer = document.getElementById('tag-selector-all');
+            if (allContainer) {
+                const btn = allContainer.querySelector(`.tag-filter-btn[data-tag="${tagName}"]`);
+                if (btn) {
+                    if (!btn.classList.contains('active')) {
+                        toggleTagFilter('all', tagName);
+                    }
+                } else {
+                    window.selectedTagsAll.add(tagName);
+                    buildTagSelectors();
+                    locTruyen();
+                }
             }
         };
 
         function luuVaoLocalStorage() {
             capNhatDropdownTag();
+            buildTagSelectors();
             xuatFileDuLieuJSON();
         }
 
         function luuThongBaoVaoLocalStorage() {
-            xuatFileDuLieuJSON();
-        }
-
-        function luuDienDanVaoLocalStorage() {
             xuatFileDuLieuJSON();
         }
 
@@ -2403,7 +3485,6 @@
         window.taoMaJsonCommentDeCopy = function() {
             const commentMaster = {
                 homechat_data: window.danhSachLoiNhanTrangChu,
-                forum_data: window.danhSachDienDan,
                 stories_comments: window.danhSachBinhLuanTruyen
             };
             const jsonString = JSON.stringify(commentMaster, null, 2);
@@ -2643,129 +3724,6 @@
             });
         }
 
-        function kiemTraDoiTieuDeForum() {
-            const select = document.getElementById('forum-title-select');
-            const input = document.getElementById('forum-title-input');
-            if (select.value === 'custom') {
-                input.classList.remove('hidden');
-                input.focus();
-            } else {
-                input.classList.add('hidden');
-            }
-        }
-
-        window.dangBaiVietForum = function() {
-            const author = document.getElementById('forum-author-input').value.trim() || "Ẩn danh";
-            const selectVal = document.getElementById('forum-title-select').value;
-            let title = selectVal;
-            if (selectVal === 'custom') {
-                title = document.getElementById('forum-title-input').value.trim();
-            }
-            const content = document.getElementById('forum-content-input').value.trim();
-
-            if (!title || !content) { alert("Vui lòng điền đầy đủ tiêu đề và nội dung thảo luận!"); return; }
-
-            const now = new Date();
-            const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
-                            String(now.getMonth() + 1).padStart(2, '0') + '/' + 
-                            now.getFullYear();
-
-            const isAuthor = author.toLowerCase().includes('tác giả') || author.toLowerCase().includes('cầu vồng');
-
-            window.danhSachDienDan.unshift({
-                id: Date.now(),
-                author: author,
-                isAuthor: isAuthor,
-                title: title,
-                date: dateStr,
-                content: content,
-                replies: []
-            });
-
-            hienThiDienDan();
-
-            document.getElementById('forum-title-select').selectedIndex = 0;
-            document.getElementById('forum-title-input').value = '';
-            document.getElementById('forum-title-input').classList.add('hidden');
-            document.getElementById('forum-content-input').value = '';
-            alert("🌸 Đã đăng bài viết lên diễn đàn thành công! Đừng quên vào Quản lý để lấy JSON cập nhật vào comment.json nhé.");
-        };
-
-        window.guiPhanHoiForum = function(postId) {
-            const authorInput = prompt("Nhập tên của bạn (hoặc ghi [Tác Giả] Cầu Vồng):", "Độc giả");
-            if (authorInput === null) return;
-            const author = authorInput.trim() || "Ẩn danh";
-
-            const replyText = prompt("Nhập nội dung phản hồi của bạn:");
-            if (!replyText || !replyText.trim()) return;
-
-            const isAuthor = author.toLowerCase().includes('tác giả') || author.toLowerCase().includes('cầu vồng');
-
-            const post = window.danhSachDienDan.find(p => p.id === postId);
-            if (post) {
-                if (!post.replies) post.replies = [];
-                post.replies.push({
-                    author: author,
-                    isAuthor: isAuthor,
-                    text: replyText.trim()
-                });
-                hienThiDienDan();
-                alert("🌸 Đã gửi phản hồi thành công! Hãy vào Quản lý để lấy JSON cập nhật vào comment.json nhé.");
-            }
-        };
-
-        window.xoaBaiVietForum = function(postId) {
-            if (confirm("Cậu có muốn xóa bài thảo luận này không?")) {
-                window.danhSachDienDan = window.danhSachDienDan.filter(p => p.id !== postId);
-                hienThiDienDan();
-            }
-        };
-
-        function hienThiDienDan() {
-            const container = document.getElementById('forum-post-list');
-            if (!container) return;
-            container.innerHTML = '';
-
-            if (!window.danhSachDienDan || window.danhSachDienDan.length === 0) {
-                container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Diễn đàn hiện chưa có bài thảo luận nào. Hãy là người đầu tiên tạo chủ đề nhé! 💬</p>`;
-                return;
-            }
-
-            window.danhSachDienDan.forEach(post => {
-                let repliesHTML = '';
-                if (post.replies && post.replies.length > 0) {
-                    post.replies.forEach(r => {
-                        const replyBadge = r.isAuthor ? `<span class="forum-badge-author">Tác Giả</span>` : '';
-                        repliesHTML += `
-                            <div class="reply-item">
-                                <div class="reply-author">${r.author} ${replyBadge}</div>
-                                <div>${r.text}</div>
-                            </div>
-                        `;
-                    });
-                }
-
-                const postBadge = post.isAuthor ? `<span class="forum-badge-author">Tác Giả</span>` : '';
-                container.innerHTML += `
-                    <div class="forum-post-card">
-                        <button class="pass-btn" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:16px; cursor:pointer; font-weight:bold; opacity:0.6;" onclick="xoaBaiVietForum(${post.id})" title="Xóa bài viết">×</button>
-                        <div class="forum-header">
-                            <div class="forum-author">👤 ${post.author} ${postBadge}</div>
-                            <div class="forum-time">📅 ${post.date}</div>
-                        </div>
-                        <div class="forum-title">${post.title}</div>
-                        <div class="forum-content">${post.content.replace(/\n/g, '<br>')}</div>
-                        
-                        <div class="forum-footer-actions">
-                            <button class="forum-action-btn" onclick="guiPhanHoiForum(${post.id})">💬 Phản hồi thảo luận</button>
-                        </div>
-
-                        ${repliesHTML ? `<div class="reply-list">${repliesHTML}</div>` : ''}
-                    </div>
-                `;
-            });
-        }
-
         function taoThongBaoTuDong(tieuDeThongBao, noiDungChiTiet, storyKey = null, isPinned = false) {
             const now = new Date();
             const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
@@ -2961,6 +3919,8 @@
         let choVaoIndexTam = 0;
 
         window.onload = function() {
+            getDeploymentTimestamp();
+
             const savedAvatar = localStorage.getItem('author_avatar');
             if (savedAvatar) { document.getElementById('author-avatar-box').innerHTML = `<img src="${savedAvatar}">`; }
             const savedName = localStorage.getItem('author_name');
@@ -2984,11 +3944,11 @@
 
             kiemTraHienThiLichSu();
             capNhatDropdownTag();
+            buildTagSelectors();
             locTruyen();
             khoiTaoSliderHot();
             hienThiBangThongBao();
             hienThiXepHang();
-            hienThiDienDan();
             hienThiLoiNhanTrangChu();
             capNhatBadgeThongBao();
             setupWattpadProgressBar();
@@ -2996,9 +3956,11 @@
             hienThiTrungTamQuanLy();
             capNhatSelectSuaThongBao();
 
-            // --- Khởi tạo game ---
             batDauGame2048();
             khoiTaoGameOthello();
+            
+            // Initialize Block Blast
+            initBlockBlast();
             
             window.addEventListener('popstate', function(event) {
                 if (event.state) {
@@ -3454,12 +4416,6 @@
             }
 
             if (window.danhSachLoiNhanTrangChu) totalComments += window.danhSachLoiNhanTrangChu.length;
-            if (window.danhSachDienDan) {
-                window.danhSachDienDan.forEach(p => {
-                    totalComments++;
-                    if (p.replies) totalComments += p.replies.length;
-                });
-            }
             if (window.danhSachBinhLuanTruyen) {
                 for (let sKey in window.danhSachBinhLuanTruyen) {
                     const scObj = window.danhSachBinhLuanTruyen[sKey];
@@ -3490,7 +4446,7 @@
                         <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
                             <div>
                                 <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${tr.title}</div>
-                                <div style="font-size: 13px; color: var(--subtext-color); margin-top: 3px;">Tác giả: ${tr.author || 'Đang cập nhật'} | Trạng thái: <strong>${tr.status}</strong> | Số chương: ${chapCount} | 👁️ ${v.toLocaleString()} views</div>
+                                <div style="font-size: 13px; color: var(--subtext-color); margin-top: 3px;">Tác giả: ${tr.author || 'Đang cập nhật'} | Trạng thái: <strong>${tr.status}</strong> | Số chương: ${tr.totalMode === 'updating' ? 'Đang cập nhật' : (tr.totalChaptersInput || chapCount)} | 👁️ ${v.toLocaleString()} views</div>
                             </div>
                             <button type="button" class="pass-btn" style="padding: 6px 14px; font-size: 12px; background: var(--header-bg);" onclick="xemTruyen('${key}', false)">📖 Xem truyện</button>
                         </div>
@@ -3503,37 +4459,47 @@
                 storyViewsContainer.innerHTML = '';
                 let dsView = [];
                 for (let key in window.dữLiệuTruyện) {
-                    dsView.push({ key: key, title: window.dữLiệuTruyện[key].title, views: tinhTongViewTruyen(window.dữLiệuTruyện[key]) });
+                    const tr = window.dữLiệuTruyện[key];
+                    dsView.push({ 
+                        key: key, 
+                        title: tr.title, 
+                        views: tinhTongViewTruyen(tr),
+                        chapters: tr.chapters ? tr.chapters.map((ch, idx) => ({ index: idx, title: ch.title, views: ch.views || 0 })) : []
+                    });
                 }
                 dsView.sort((a, b) => b.views - a.views);
 
                 dsView.forEach((item, index) => {
+                    let chaptersHTML = '';
+                    if (item.chapters && item.chapters.length > 0) {
+                        chaptersHTML = `<div class="admin-chapter-views-list">`;
+                        item.chapters.forEach(ch => {
+                            chaptersHTML += `
+                                <div class="admin-chapter-view-item">
+                                    <span class="chap-name">${ch.title}</span>
+                                    <span class="chap-views">${ch.views.toLocaleString()} lượt</span>
+                                </div>
+                            `;
+                        });
+                        chaptersHTML += `</div>`;
+                    }
+
                     storyViewsContainer.innerHTML += `
-                        <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <div style="font-weight: 900; color: var(--primary-color);">#${index + 1}</div>
-                                <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${item.title}</div>
+                        <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color);">
+                            <div class="expandable-stats-header" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.expand-icon').classList.toggle('open')">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="font-weight: 900; color: var(--primary-color);">#${index + 1}</div>
+                                    <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${item.title}</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="font-size: 13px; font-weight: bold; color: var(--primary-color);">👁️ ${item.views.toLocaleString()} lượt</span>
+                                    <span class="expand-icon">▶</span>
+                                </div>
                             </div>
-                            <div style="font-size: 13px; font-weight: bold; color: var(--primary-color);">👁️ ${item.views.toLocaleString()} lượt xem</div>
+                            ${chaptersHTML ? `<div class="hidden">${chaptersHTML}</div>` : ''}
                         </div>
                     `;
                 });
-            }
-
-            const forumSummaryContainer = document.getElementById('admin-forum-summary-list');
-            if (forumSummaryContainer) {
-                forumSummaryContainer.innerHTML = '';
-                if (window.danhSachDienDan.length === 0) {
-                    forumSummaryContainer.innerHTML = `<p style="font-size: 13px; color: var(--subtext-color);">Chưa có bài thảo luận diễn đàn nào.</p>`;
-                } else {
-                    window.danhSachDienDan.slice(0, 5).forEach(p => {
-                        forumSummaryContainer.innerHTML += `
-                            <div style="background: var(--box-bg); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 13px;">
-                                <strong style="color: var(--primary-color);">${p.author}:</strong> ${p.title} (${p.date})
-                            </div>
-                        `;
-                    });
-                }
             }
 
             const scheduleContainer = document.getElementById('admin-schedule-list');
@@ -3629,9 +4595,21 @@
                 document.getElementById('edit-cover-url').value = truyen.cover || '';
                 document.getElementById('edit-default-layout').value = truyen.defaultLayout || 'grid';
                 document.getElementById('edit-status').value = truyen.status || 'Đang cập nhật';
+                document.getElementById('edit-total-mode').value = truyen.totalMode || 'fixed';
                 document.getElementById('edit-total-chapters').value = truyen.totalChaptersInput || truyen.chapters.length || 42;
                 document.getElementById('edit-tags').value = truyen.tags ? truyen.tags.join(', ') : '';
                 document.getElementById('edit-summary').innerHTML = truyen.summary || truyen.desc || '';
+                toggleTotalModeInput('edit');
+            }
+        }
+
+        function toggleTotalModeInput(type) {
+            const mode = document.getElementById(type + '-total-mode').value;
+            const group = document.getElementById(type + '-total-chapters-group');
+            if (mode === 'updating') {
+                group.classList.add('hidden');
+            } else {
+                group.classList.remove('hidden');
             }
         }
 
@@ -3648,6 +4626,7 @@
                 alert(`🗑️ Đã xóa truyện thành công!`);
                 locTruyen();
                 khoiTaoSliderHot();
+                buildTagSelectors();
                 chuyenTab('trang-chu', true);
             }
         };
@@ -3753,10 +4732,22 @@
             return "dang-cap-nhat";
         }
 
+        const originalPush = Array.prototype.push;
+        Array.prototype.push = function(...items) {
+            const result = originalPush.apply(this, items);
+            if (this._lastUpdated === undefined) {
+                this._lastUpdated = Date.now();
+            } else {
+                this._lastUpdated = Date.now();
+            }
+            return result;
+        };
+
         window.xuLyLuuTruyenMoi = function() {
             const title = document.getElementById('new-title').value.trim();
             const author = document.getElementById('new-author').value.trim();
             const status = document.getElementById('new-status').value;
+            const totalMode = document.getElementById('new-total-mode').value;
             const totalChaptersInput = parseInt(document.getElementById('new-total-chapters').value) || 42;
             const tagsRaw = document.getElementById('new-tags').value;
             const summaryHTML = document.getElementById('new-summary').innerHTML.trim();
@@ -3783,7 +4774,8 @@
                 statusClass: getStatusClass(status),
                 cover: coverUrl || "",
                 defaultLayout: defaultLayout,
-                totalChaptersInput: totalChaptersInput,
+                totalMode: totalMode,
+                totalChaptersInput: (totalMode === 'fixed') ? totalChaptersInput : null,
                 desc: document.getElementById('new-summary').innerText,
                 summary: summaryHTML,
                 tags: tags,
@@ -3794,6 +4786,8 @@
                     views: Math.floor(Math.random() * 500) + 100
                 }]
             };
+            storyObj.chapters._lastUpdated = Date.now();
+            setChapterTimestamp(newKey, 0);
 
             if (isScheduled && scheduleTimeStr) {
                 const targetTime = new Date(scheduleTimeStr).getTime();
@@ -3832,6 +4826,7 @@
 
                 locTruyen();
                 khoiTaoSliderHot();
+                buildTagSelectors();
                 hienThiXepHang();
                 chuyenTab('trang-chu', true);
             }
@@ -3844,6 +4839,7 @@
             const title = document.getElementById('edit-title').value.trim();
             const author = document.getElementById('edit-author').value.trim();
             const status = document.getElementById('edit-status').value;
+            const totalMode = document.getElementById('edit-total-mode').value;
             const totalChaptersInput = parseInt(document.getElementById('edit-total-chapters').value) || 42;
             const tags = document.getElementById('edit-tags').value ? document.getElementById('edit-tags').value.split(',').map(t => t.trim()) : [];
             const summaryHTML = document.getElementById('edit-summary').innerHTML.trim();
@@ -3856,7 +4852,8 @@
             currentTruyen.status = status;
             currentTruyen.statusClass = getStatusClass(status);
             currentTruyen.defaultLayout = defaultLayout;
-            currentTruyen.totalChaptersInput = totalChaptersInput;
+            currentTruyen.totalMode = totalMode;
+            currentTruyen.totalChaptersInput = (totalMode === 'fixed') ? totalChaptersInput : null;
             if (coverUrl) currentTruyen.cover = coverUrl;
             currentTruyen.tags = tags;
             currentTruyen.summary = summaryHTML;
@@ -3866,6 +4863,7 @@
             alert("✏️ Đã lưu thay đổi thông tin truyện!");
             locTruyen();
             khoiTaoSliderHot();
+            buildTagSelectors();
             hienThiXepHang();
             chuyenTab('trang-chu', true);
         };
@@ -3906,7 +4904,10 @@
                 alert("⏰ Đã lên lịch hẹn giờ đăng chương tự động thành công!");
             } else {
                 const truyen = window.dữLiệuTruyện[selectedKey];
+                const newIdx = truyen.chapters.length;
                 truyen.chapters.push(chapterObj);
+                truyen.chapters._lastUpdated = Date.now();
+                setChapterTimestamp(selectedKey, newIdx);
                 
                 luuVaoLocalStorage();
                 
@@ -3954,6 +4955,17 @@
             }
             const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh Bìa ]`;
 
+            let chapterDisplay = '';
+            let newBadgeHTML = '';
+            if (truyen.chapters && truyen.chapters.length > 0) {
+                const lastIdx = truyen.chapters.length - 1;
+                const isNew = isChapterNew(key, lastIdx);
+                chapterDisplay = `Chương ${truyen.chapters.length}`;
+                if (isNew) {
+                    newBadgeHTML = `<span class="story-new-badge">✦ Mới</span>`;
+                }
+            }
+
             return `
                 <div class="story-card" onclick="handleStoryCardClick('${key}')">
                     <div class="story-card-cover-wrapper">
@@ -3962,7 +4974,11 @@
                     </div>
                     <div class="story-card-info">
                         <div class="story-card-title">${truyen.title}</div>
-                        <div class="story-card-desc">${truyen.desc || ''}</div>
+                        <div class="story-card-author">${truyen.author || 'Tác giả'}</div>
+                        <div class="story-card-chapter">
+                            <span>${chapterDisplay}</span>
+                            ${newBadgeHTML}
+                        </div>
                         <div class="story-card-tags">${tagsHTML}</div>
                         <div class="read-story-link">Đọc truyện →</div>
                     </div>
@@ -3977,11 +4993,13 @@
             if(!homeGrid || !allGrid || !latestList) return;
 
             const isHome = !document.getElementById('tab-trang-chu').classList.contains('hidden');
+            
             const kw = (isHome ? document.getElementById('search-home-input').value : document.getElementById('search-all-input').value).toLowerCase();
-            const selectedTag = isHome ? document.getElementById('search-home-tag').value : document.getElementById('search-all-tag').value;
             const st = isHome ? document.getElementById('search-home-status').value : document.getElementById('search-all-status').value;
             const sortType = isHome ? document.getElementById('search-home-sort').value : document.getElementById('search-all-sort').value;
             
+            const selectedTags = isHome ? window.selectedTagsHome : window.selectedTagsAll;
+
             homeGrid.innerHTML = ''; allGrid.innerHTML = ''; latestList.innerHTML = '';
 
             let dsTruyenThm = [];
@@ -3992,8 +5010,14 @@
                 const matchKw = truyen.title.toLowerCase().includes(kw) || (truyen.desc && truyen.desc.toLowerCase().includes(kw)) || (truyen.author && truyen.author.toLowerCase().includes(kw));
                 
                 let matchTag = true;
-                if (selectedTag && selectedTag !== 'tat-ca') {
-                    matchTag = truyen.tags && truyen.tags.map(t => t.trim()).includes(selectedTag);
+                if (selectedTags.size > 0) {
+                    const storyTags = (truyen.tags || []).map(t => t.trim());
+                    for (let tag of selectedTags) {
+                        if (!storyTags.includes(tag)) {
+                            matchTag = false;
+                            break;
+                        }
+                    }
                 }
 
                 const matchSt = (st === 'tat-ca') || (truyen.status === st);
@@ -4019,8 +5043,9 @@
             }
 
             if (dsTruyenThm.length === 0) {
-                homeGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có truyện nào trên hệ thống. Hãy đăng truyện mới nhé! 🌸</p>`;
-                allGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có truyện nào trên hệ thống.</p>`;
+                const emptyMsg = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Không tìm thấy truyện nào phù hợp với bộ lọc.</p>`;
+                homeGrid.innerHTML = emptyMsg;
+                allGrid.innerHTML = emptyMsg;
                 latestList.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có cập nhật mới.</p>`;
                 return;
             }
@@ -4031,11 +5056,22 @@
                 allGrid.innerHTML += html;
 
                 const lastChapter = item.truyen.chapters && item.truyen.chapters.length > 0 ? item.truyen.chapters[item.truyen.chapters.length - 1] : null;
+                
+                let newBadgeHTML = '';
+                if (item.truyen.chapters && item.truyen.chapters.length > 0) {
+                    const lastIdx = item.truyen.chapters.length - 1;
+                    if (isChapterNew(item.key, lastIdx)) {
+                        newBadgeHTML = `<span class="latest-new-badge">✦ Mới</span>`;
+                    }
+                }
+
+                const chapterDisplay = lastChapter ? lastChapter.title : 'Mới cập nhật';
+                
                 latestList.innerHTML += `
                     <div class="latest-item" onclick="handleStoryCardClick('${item.key}')">
                         <div>
                             <div class="latest-title">${item.truyen.title}</div>
-                            <div class="latest-chapter">${lastChapter ? lastChapter.title : 'Mới cập nhật'} — 👁️ ${item.views.toLocaleString()} views</div>
+                            <div class="latest-chapter">${chapterDisplay} ${newBadgeHTML}</div>
                         </div>
                         <div class="latest-time">Mới đăng</div>
                     </div>
@@ -4044,14 +5080,14 @@
         };
 
         window.chuyenTab = function(tabName, pushHistory = true) {
-            if (['trang-chu', 'tat-ca-truyen', 'xep-hang', 'bang-thong-bao', 'dien-dan', 'tu-sach-offline', 'gioi-thieu', 'quan-li', 'quay-thu-gian'].includes(tabName)) { tabTruocDo = tabName; }
+            if (['trang-chu', 'tat-ca-truyen', 'xep-hang', 'bang-thong-bao', 'tu-sach-offline', 'gioi-thieu', 'quan-li', 'quay-thu-gian'].includes(tabName)) { tabTruocDo = tabName; }
 
-            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
 
-            ['btn-tab-trang-chu', 'btn-tab-tat-ca-truyen', 'btn-tab-xep-hang', 'btn-tab-bang-thong-bao', 'btn-tab-dien-dan', 'btn-tab-tu-sach-offline', 'btn-tab-gioi-thieu', 'btn-tab-quan-li', 'btn-tab-quay-thu-gian'].forEach(id => {
+            ['btn-tab-trang-chu', 'btn-tab-tat-ca-truyen', 'btn-tab-xep-hang', 'btn-tab-bang-thong-bao', 'btn-tab-tu-sach-offline', 'btn-tab-gioi-thieu', 'btn-tab-quan-li', 'btn-tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.remove('active');
             });
@@ -4074,10 +5110,6 @@
                 document.getElementById('btn-tab-bang-thong-bao').classList.add('active');
                 hienThiBangThongBao();
                 danhDauDaDocThongBao();
-            } else if (tabName === 'dien-dan') {
-                document.getElementById('tab-dien-dan').classList.remove('hidden');
-                document.getElementById('btn-tab-dien-dan').classList.add('active');
-                hienThiDienDan();
             } else if (tabName === 'tu-sach-offline') {
                 document.getElementById('tab-tu-sach-offline').classList.remove('hidden');
                 document.getElementById('btn-tab-tu-sach-offline').classList.add('active');
@@ -4085,10 +5117,10 @@
             } else if (tabName === 'quay-thu-gian') {
                 document.getElementById('tab-quay-thu-gian').classList.remove('hidden');
                 document.getElementById('btn-tab-quay-thu-gian').classList.add('active');
-                // Reset game views
                 document.getElementById('quay-game-list-view').classList.remove('hidden');
                 document.getElementById('quay-game-2048-view').classList.add('hidden');
                 document.getElementById('quay-game-othello-view').classList.add('hidden');
+                document.getElementById('quay-game-blockblast-view').classList.add('hidden');
             } else if (tabName === 'gioi-thieu') {
                 document.getElementById('tab-gioi-thieu').classList.remove('hidden');
                 document.getElementById('btn-tab-gioi-thieu').classList.add('active');
@@ -4111,13 +5143,20 @@
 
             container.innerHTML = '';
 
+            const totalViews = tinhTongViewTruyen(truyen);
+            document.getElementById('detail-total-views').innerText = totalViews.toLocaleString();
+
             if (currentChapterLayout === 'grid') {
                 let gridDiv = document.createElement('div');
                 gridDiv.className = 'chapter-grid-view';
                 truyen.chapters.forEach((ch, index) => {
                     let item = document.createElement('div');
                     item.className = 'chapter-grid-item';
-                    item.innerHTML = (index + 1) + (ch.is18 ? ' 🔥' : '');
+                    let badgeHtml = '';
+                    if (isChapterNew(truyenHienTaiKey, index)) {
+                        badgeHtml = `<span class="story-new-badge" style="margin-left: 4px; font-size: 8px; padding: 1px 6px;">✦ Mới</span>`;
+                    }
+                    item.innerHTML = (index + 1) + (ch.is18 ? ' 🔥' : '') + badgeHtml;
                     item.title = ch.title;
                     item.onclick = () => kiemtraTruocKhiDoc(index, false);
                     gridDiv.appendChild(item);
@@ -4130,7 +5169,11 @@
                     let li = document.createElement('li');
                     li.className = 'chapter-item-v';
                     const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold; margin-right:5px;">[18+]</span>` : '';
-                    li.innerHTML = `<span>${badge18}${ch.title}</span> <span style="font-size:12px; color:var(--subtext-color);">👁️ ${ch.views || 0}</span>`;
+                    let badgeHtml = '';
+                    if (isChapterNew(truyenHienTaiKey, index)) {
+                        badgeHtml = `<span class="story-new-badge" style="margin-left: auto; font-size: 10px;">✦ Mới</span>`;
+                    }
+                    li.innerHTML = `<span>${badge18}${ch.title}</span> ${badgeHtml}`;
                     li.onclick = () => kiemtraTruocKhiDoc(index, false);
                     listUl.appendChild(li);
                 });
@@ -4154,7 +5197,8 @@
             if (!cleanTitleForInfo) cleanTitleForInfo = truyen.title;
 
             const soChuongDaHoanThanh = truyen.chapters ? truyen.chapters.length : 0;
-            const tongSoChuong = truyen.totalChaptersInput || 42;
+            const tongSoChuong = truyen.totalMode === 'updating' ? null : (truyen.totalChaptersInput || 42);
+            const isUpdating = truyen.totalMode === 'updating';
 
             let tagsHTML = truyen.tags ? truyen.tags.map(t => `<span class="tag" onclick="timTheoTag('${t}')">${t}</span>`).join('') : '<span class="tag">Đam Mỹ</span>';
             
@@ -4162,20 +5206,26 @@
                 <div><strong style="color: var(--primary-color);">Tên truyện:</strong> ${cleanTitleForInfo}</div>
                 <div><strong style="color: var(--primary-color);">Tác giả:</strong> ${truyen.author || 'Đang cập nhật'}</div>
                 <div><strong style="color: var(--primary-color);">Tình trạng:</strong> ${truyen.status || 'Đang cập nhật'}</div>
-                <div><strong style="color: var(--primary-color);">Số chương:</strong> ${tongSoChuong} chương</div>
+                <div><strong style="color: var(--primary-color);">Số chương:</strong> ${isUpdating ? 'Đang cập nhật' : (tongSoChuong + ' chương')}</div>
                 <div><strong style="color: var(--primary-color);">Thể loại / Thẻ:</strong> ${tagsHTML}</div>
             `;
 
             document.getElementById('detail-summary').innerHTML = truyen.summary || truyen.desc || 'Đang cập nhật...';
             document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh bìa ]`;
 
-            let percent = Math.round((soChuongDaHoanThanh / tongSoChuong) * 100);
-            if (percent > 100) percent = 100;
-
-            document.getElementById('story-progress-bar-fill').style.width = percent + '%';
-            document.getElementById('story-progress-percent-text').innerText = percent + '%';
-            document.getElementById('story-progress-chapters-text').innerText = `Đã hoàn thành: ${soChuongDaHoanThanh} / ${tongSoChuong} chương`;
-            document.getElementById('story-progress-status-text').innerText = (percent >= 100 || truyen.status === 'Hoàn thành') ? '🎉 Hoàn thành' : '🚀 Đang tiến hành';
+            if (isUpdating) {
+                document.getElementById('story-progress-bar-fill').style.width = '0%';
+                document.getElementById('story-progress-percent-text').innerText = '--';
+                document.getElementById('story-progress-chapters-text').innerText = `Đã edit ${soChuongDaHoanThanh} chương`;
+                document.getElementById('story-progress-status-text').innerText = '📝 Đang cập nhật';
+            } else {
+                let percent = Math.round((soChuongDaHoanThanh / tongSoChuong) * 100);
+                if (percent > 100) percent = 100;
+                document.getElementById('story-progress-bar-fill').style.width = percent + '%';
+                document.getElementById('story-progress-percent-text').innerText = percent + '%';
+                document.getElementById('story-progress-chapters-text').innerText = `Đã hoàn thành: ${soChuongDaHoanThanh} / ${tongSoChuong} chương`;
+                document.getElementById('story-progress-status-text').innerText = (percent >= 100 || truyen.status === 'Hoàn thành') ? '🎉 Hoàn thành' : '🚀 Đang tiến hành';
+            }
 
             const isFav = window.danhSachYeuThich.includes(key);
             capNhatNutYeuThich(isFav);
@@ -4185,7 +5235,7 @@
             renderDanhSachChươngTrangChiTiet();
             hienThiBinhLuanTruyen();
 
-            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
@@ -4240,7 +5290,7 @@
             document.getElementById('btn-floating-menu').classList.remove('hidden');
             document.getElementById('wattpad-progress-bar-fixed').classList.remove('hidden');
 
-            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-dien-dan', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-quay-thu-gian'].forEach(id => {
+            ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
@@ -4337,9 +5387,14 @@
             truyen.chapters.forEach((ch, index) => {
                 const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold; margin-right:5px;">[18+]</span>` : '';
                 const isActive = (index === chuongHienTaiIndex) ? 'active' : '';
+                let badgeHtml = '';
+                if (isChapterNew(truyenHienTaiKey, index)) {
+                    badgeHtml = `<span class="story-new-badge" style="margin-left: auto; font-size: 10px;">✦ Mới</span>`;
+                }
                 box.innerHTML += `
                     <div class="chapter-modal-item ${isActive}" onclick="chonChuongTuModal(${index})">
                         <span>${badge18}${ch.title}</span>
+                        ${badgeHtml}
                         ${index === chuongHienTaiIndex ? '<span>✨</span>' : ''}
                     </div>
                 `;
@@ -4382,17 +5437,21 @@
             } else if (tenGame === 'othello') {
                 document.getElementById('quay-game-othello-view').classList.remove('hidden');
                 resetGameOthello();
+            } else if (tenGame === 'blockblast') {
+                document.getElementById('quay-game-blockblast-view').classList.remove('hidden');
+                resetBlockBlast();
             }
         }
 
         function quayLaiQuayThuGian() {
             document.getElementById('quay-game-2048-view').classList.add('hidden');
             document.getElementById('quay-game-othello-view').classList.add('hidden');
+            document.getElementById('quay-game-blockblast-view').classList.add('hidden');
             document.getElementById('quay-game-list-view').classList.remove('hidden');
         }
 
         // ============================================================
-        // 2048 GAME - Full logic with size support
+        // 2048 GAME
         // ============================================================
         let board2048 = [];
         let score2048 = 0;
@@ -4545,7 +5604,6 @@
             return oldBoard !== JSON.stringify(board2048);
         }
 
-        // Keyboard controls for 2048
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('tab-quay-thu-gian').classList.contains('hidden') || 
                 document.getElementById('quay-game-2048-view').classList.contains('hidden')) return;
@@ -4564,7 +5622,6 @@
             }
         });
 
-        // Touch controls for 2048
         let touchStartX2048 = 0;
         let touchStartY2048 = 0;
 
@@ -4615,10 +5672,10 @@
         }
 
         // ============================================================
-        // OTHELLO GAME - Full logic with size support, Start/Reset, random turn
+        // OTHELLO GAME
         // ============================================================
         let othelloBoard = [];
-        let othelloTurn = 1; // 1 = player (Black), 2 = AI (White)
+        let othelloTurn = 1;
         let othelloSize = 8;
         let othelloGameActive = false;
         let othelloFirstMoveRandom = true;
@@ -4649,7 +5706,6 @@
             initOthelloBoard(othelloBoard);
             othelloTurn = BLACK_OTHELLO;
             veVaCapNhatOthello();
-            // Enable click but no moves until start
         }
 
         function createEmptyBoard(size) {
@@ -4667,9 +5723,7 @@
 
         function batDauGameOthello() {
             if (othelloGameActive) {
-                // If already active, just reset
                 resetGameOthello();
-                // Then start fresh
                 setTimeout(() => {
                     batDauGameOthello();
                 }, 50);
@@ -4683,17 +5737,14 @@
                 startBtn.disabled = true;
             }
 
-            // Reset board
             othelloBoard = createEmptyBoard(othelloSize);
             initOthelloBoard(othelloBoard);
             
-            // Random first turn
             othelloTurn = Math.random() < 0.5 ? BLACK_OTHELLO : WHITE_OTHELLO;
             othelloFirstMoveRandom = true;
             
             veVaCapNhatOthello();
             
-            // If AI goes first
             if (othelloTurn === WHITE_OTHELLO) {
                 setTimeout(() => {
                     if (othelloGameActive) {
@@ -4775,7 +5826,6 @@
                                 }
                             };
                         } else if (othelloGameActive && othelloTurn === BLACK_OTHELLO && val === 0) {
-                            // Still make it clickable to show feedback
                             cell.classList.add('clickable');
                             cell.onclick = () => {
                                 if (othelloGameActive && othelloTurn === BLACK_OTHELLO) {
@@ -4801,7 +5851,6 @@
             let blackMoves = getValidMovesOthello(BLACK_OTHELLO, othelloBoard);
             let whiteMoves = getValidMovesOthello(WHITE_OTHELLO, othelloBoard);
 
-            // Check game over
             if (blackMoves.length === 0 && whiteMoves.length === 0) {
                 if (window.isSfxEnabledOthello) playSfxWin();
                 if (blackCount > whiteCount) turnText.innerText = "🎉 Bạn thắng rồi! 💕";
@@ -4816,9 +5865,7 @@
                 return;
             }
 
-            // Check if current player has moves
             if (othelloTurn === BLACK_OTHELLO && blackMoves.length === 0) {
-                // No moves for player, switch to AI
                 othelloTurn = WHITE_OTHELLO;
                 veVaCapNhatOthello();
                 setTimeout(() => {
@@ -4828,7 +5875,6 @@
                 }, 500);
                 return;
             } else if (othelloTurn === WHITE_OTHELLO && whiteMoves.length === 0) {
-                // No moves for AI, switch to player
                 othelloTurn = BLACK_OTHELLO;
                 veVaCapNhatOthello();
                 return;
@@ -4855,11 +5901,9 @@
                 othelloBoard[f.r][f.c] = othelloTurn;
             });
 
-            // Switch to AI
             othelloTurn = WHITE_OTHELLO;
             veVaCapNhatOthello();
             
-            // AI moves after delay
             setTimeout(() => {
                 if (othelloGameActive && othelloTurn === WHITE_OTHELLO) {
                     aiNuocDiOthello();
@@ -4873,13 +5917,11 @@
 
             let validMoves = getValidMovesOthello(WHITE_OTHELLO, othelloBoard);
             if (validMoves.length === 0) {
-                // No moves for AI, switch to player
                 othelloTurn = BLACK_OTHELLO;
                 veVaCapNhatOthello();
                 return;
             }
 
-            // Simple AI: pick move with most flips
             let bestMove = validMoves[0];
             let maxFlips = -1;
             validMoves.forEach(m => {
@@ -4890,7 +5932,6 @@
                 }
             });
 
-            // Execute AI move
             let flips = getFlipsOthello(bestMove.r, bestMove.c, WHITE_OTHELLO, othelloBoard);
             if (flips.length > 0) {
                 if (window.isSfxEnabledOthello) playSfxClick();
@@ -4900,10 +5941,454 @@
                 });
             }
 
-            // Switch to player
             othelloTurn = BLACK_OTHELLO;
             veVaCapNhatOthello();
         }
+
+        // ============================================================
+        // BLOCK BLAST GAME
+        // ============================================================
+        let blockBlastBoard = [];
+        let blockBlastScore = 0;
+        let blockBlastBestScore = 0;
+        let blockBlastDock = [];
+        let blockBlastActive = false;
+        let blockBlastAudioEnabled = true;
+
+        const BLOCK_BLAST_COLORS = [
+            '#f43f5e', '#fb923c', '#fbbf24', '#34d399', '#38bdf8', '#818cf8', '#e879f9'
+        ];
+
+        const BLOCK_BLAST_SHAPES = [
+            [[1]],
+            [[1, 1]],
+            [[1], [1]],
+            [[1, 1, 1]],
+            [[1], [1], [1]],
+            [[1, 1], [1, 0]],
+            [[1, 1], [0, 1]],
+            [[1, 0], [1, 1]],
+            [[0, 1], [1, 1]],
+            [[1, 1], [1, 1]],
+            [[1, 1, 1, 1]],
+            [[1], [1], [1], [1]],
+            [[1, 0], [1, 0], [1, 1]],
+            [[0, 1], [0, 1], [1, 1]],
+            [[1, 1, 1], [1, 0, 0]],
+            [[1, 1, 1], [0, 0, 1]],
+            [[1, 1, 0], [0, 1, 1]],
+            [[0, 1, 1], [1, 1, 0]],
+            [[0, 1, 0], [1, 1, 1], [0, 1, 0]],
+            [[1, 1, 1], [1, 0, 0], [1, 0, 0]],
+            [[1, 1, 1], [0, 0, 1], [0, 0, 1]],
+            [[1, 1, 1, 1, 1]]
+        ];
+
+        function initBlockBlast() {
+            const saved = localStorage.getItem('blockblast_best_score');
+            if (saved) blockBlastBestScore = parseInt(saved) || 0;
+            document.getElementById('blockblast-best').innerText = blockBlastBestScore;
+            
+            const boardEl = document.getElementById('blockblast-board');
+            boardEl.innerHTML = '';
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'blockblast-cell';
+                    cell.dataset.row = r;
+                    cell.dataset.col = c;
+                    boardEl.appendChild(cell);
+                }
+            }
+            
+            document.getElementById('blockblast-gameover').style.display = 'none';
+            resetBlockBlast();
+        }
+
+        function resetBlockBlast() {
+            blockBlastBoard = Array(8).fill(0).map(() => Array(8).fill(null));
+            blockBlastScore = 0;
+            blockBlastDock = [null, null, null];
+            
+            for (let i = 0; i < 3; i++) {
+                blockBlastDock[i] = getRandomBlockBlastPiece();
+            }
+            
+            updateBlockBlastDisplay();
+            renderBlockBlastDock();
+            document.getElementById('blockblast-gameover').style.display = 'none';
+            document.getElementById('blockblast-score').innerText = '0';
+            
+            document.getElementById('blockblast-drag-ghost').style.display = 'none';
+            
+            if (blockBlastScore > blockBlastBestScore) {
+                blockBlastBestScore = blockBlastScore;
+                localStorage.setItem('blockblast_best_score', blockBlastBestScore);
+                document.getElementById('blockblast-best').innerText = blockBlastBestScore;
+            }
+        }
+
+        function getRandomBlockBlastPiece() {
+            const shape = BLOCK_BLAST_SHAPES[Math.floor(Math.random() * BLOCK_BLAST_SHAPES.length)];
+            const color = BLOCK_BLAST_COLORS[Math.floor(Math.random() * BLOCK_BLAST_COLORS.length)];
+            return { shape, color };
+        }
+
+        function renderBlockBlastDock() {
+            const dockEl = document.getElementById('blockblast-dock');
+            dockEl.innerHTML = '';
+            
+            blockBlastDock.forEach((piece, idx) => {
+                const slot = document.createElement('div');
+                slot.className = 'blockblast-dock-slot';
+                slot.dataset.dockIndex = idx;
+                
+                if (piece) {
+                    const block = document.createElement('div');
+                    block.className = 'blockblast-dock-block';
+                    block.dataset.dockIndex = idx;
+                    
+                    const rows = piece.shape.length;
+                    const cols = piece.shape[0].length;
+                    block.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
+                    block.style.gridTemplateRows = `repeat(${rows}, 20px)`;
+                    
+                    for (let r = 0; r < rows; r++) {
+                        for (let c = 0; c < cols; c++) {
+                            const cell = document.createElement('div');
+                            cell.className = 'blockblast-mini-cell';
+                            if (piece.shape[r][c] === 1) {
+                                cell.style.backgroundColor = piece.color;
+                            } else {
+                                cell.classList.add('empty');
+                            }
+                            block.appendChild(cell);
+                        }
+                    }
+                    
+                    block.addEventListener('pointerdown', (e) => startBlockBlastDrag(e, idx, block));
+                    slot.appendChild(block);
+                }
+                dockEl.appendChild(slot);
+            });
+        }
+
+        function updateBlockBlastDisplay() {
+            const cells = document.querySelectorAll('#blockblast-board .blockblast-cell');
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    const idx = r * 8 + c;
+                    const cell = cells[idx];
+                    const val = blockBlastBoard[r][c];
+                    if (val) {
+                        cell.style.backgroundColor = val;
+                        cell.classList.add('filled');
+                    } else {
+                        cell.style.backgroundColor = '#2d263f';
+                        cell.classList.remove('filled');
+                    }
+                    cell.classList.remove('preview-valid', 'clearing');
+                }
+            }
+            document.getElementById('blockblast-score').innerText = blockBlastScore;
+            
+            if (blockBlastScore > blockBlastBestScore) {
+                blockBlastBestScore = blockBlastScore;
+                localStorage.setItem('blockblast_best_score', blockBlastBestScore);
+                document.getElementById('blockblast-best').innerText = blockBlastBestScore;
+            }
+        }
+
+        let blockBlastDrag = null;
+        let blockBlastPointerX = 0;
+        let blockBlastPointerY = 0;
+        const BLOCK_BLAST_LIFT_OFFSET = 60;
+
+        function startBlockBlastDrag(e, dockIndex, element) {
+            if (!blockBlastDock[dockIndex]) return;
+            e.preventDefault();
+            
+            if (blockBlastAudioEnabled) playSfxClick();
+            
+            const piece = blockBlastDock[dockIndex];
+            const rect = element.getBoundingClientRect();
+            
+            blockBlastDrag = {
+                piece: piece,
+                dockIndex: dockIndex,
+                element: element,
+                grabX: e.clientX - rect.left,
+                grabY: e.clientY - rect.top
+            };
+            
+            blockBlastPointerX = e.clientX;
+            blockBlastPointerY = e.clientY;
+            
+            element.style.opacity = '0.2';
+            
+            const ghost = document.getElementById('blockblast-drag-ghost');
+            ghost.innerHTML = '';
+            const clone = element.cloneNode(true);
+            clone.style.opacity = '1';
+            clone.style.pointerEvents = 'none';
+            ghost.appendChild(clone);
+            ghost.style.display = 'block';
+            
+            updateBlockBlastGhost(blockBlastPointerX, blockBlastPointerY);
+            
+            if (e.target.setPointerCapture) {
+                try { e.target.setPointerCapture(e.pointerId); } catch(err) {}
+            }
+            
+            window.addEventListener('pointermove', onBlockBlastPointerMove, { passive: true });
+            window.addEventListener('pointerup', onBlockBlastPointerUp);
+            window.addEventListener('pointercancel', onBlockBlastPointerUp);
+        }
+
+        function onBlockBlastPointerMove(e) {
+            if (!blockBlastDrag) return;
+            blockBlastPointerX = e.clientX;
+            blockBlastPointerY = e.clientY;
+            updateBlockBlastGhost(blockBlastPointerX, blockBlastPointerY);
+        }
+
+        function updateBlockBlastGhost(x, y) {
+            const ghost = document.getElementById('blockblast-drag-ghost');
+            const ghostX = x - blockBlastDrag.grabX;
+            const ghostY = y - blockBlastDrag.grabY - BLOCK_BLAST_LIFT_OFFSET;
+            ghost.style.transform = `translate3d(${ghostX}px, ${ghostY}px, 0)`;
+            updateBlockBlastPreview(x, y);
+        }
+
+        function getBlockBlastPlacement(px, py) {
+            const boardEl = document.getElementById('blockblast-board');
+            const firstCell = boardEl.querySelector('.blockblast-cell[data-row="0"][data-col="0"]');
+            if (!firstCell) return null;
+            
+            const boardRect = boardEl.getBoundingClientRect();
+            const cellRect = firstCell.getBoundingClientRect();
+            
+            const style = getComputedStyle(boardEl);
+            const gap = parseFloat(style.gap) || 4;
+            const padLeft = parseFloat(style.paddingLeft) || 10;
+            const padTop = parseFloat(style.paddingTop) || 10;
+            
+            const cellSize = cellRect.width + gap;
+            
+            const ghostX = px - blockBlastDrag.grabX;
+            const ghostY = py - blockBlastDrag.grabY - BLOCK_BLAST_LIFT_OFFSET;
+            
+            const relX = ghostX - boardRect.left - padLeft;
+            const relY = ghostY - boardRect.top - padTop;
+            
+            const c = Math.round(relX / cellSize);
+            const r = Math.round(relY / cellSize);
+            
+            return { r, c };
+        }
+
+        function clearBlockBlastPreview() {
+            document.querySelectorAll('#blockblast-board .blockblast-cell.preview-valid').forEach(el => {
+                el.classList.remove('preview-valid');
+            });
+        }
+
+        function updateBlockBlastPreview(px, py) {
+            clearBlockBlastPreview();
+            if (!blockBlastDrag) return;
+            
+            const pos = getBlockBlastPlacement(px, py);
+            if (!pos) return;
+            
+            const { r, c } = pos;
+            const shape = blockBlastDrag.piece.shape;
+            
+            if (canPlaceBlockBlast(shape, r, c)) {
+                const cells = document.querySelectorAll('#blockblast-board .blockblast-cell');
+                for (let row = 0; row < shape.length; row++) {
+                    for (let col = 0; col < shape[0].length; col++) {
+                        if (shape[row][col] === 1) {
+                            const br = r + row;
+                            const bc = c + col;
+                            if (br >= 0 && br < 8 && bc >= 0 && bc < 8) {
+                                const idx = br * 8 + bc;
+                                cells[idx].classList.add('preview-valid');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function canPlaceBlockBlast(shape, startR, startC) {
+            const rows = shape.length;
+            const cols = shape[0].length;
+            
+            if (startR < 0 || startC < 0 || startR + rows > 8 || startC + cols > 8) return false;
+            
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (shape[r][c] === 1 && blockBlastBoard[startR + r][startC + c] !== null) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function onBlockBlastPointerUp(e) {
+            if (!blockBlastDrag) return;
+            
+            window.removeEventListener('pointermove', onBlockBlastPointerMove);
+            window.removeEventListener('pointerup', onBlockBlastPointerUp);
+            window.removeEventListener('pointercancel', onBlockBlastPointerUp);
+            
+            const ghost = document.getElementById('blockblast-drag-ghost');
+            ghost.style.display = 'none';
+            clearBlockBlastPreview();
+            
+            const pos = getBlockBlastPlacement(blockBlastPointerX, blockBlastPointerY);
+            let placed = false;
+            
+            if (pos) {
+                const { r, c } = pos;
+                if (canPlaceBlockBlast(blockBlastDrag.piece.shape, r, c)) {
+                    placeBlockBlastPiece(blockBlastDrag.piece, r, c);
+                    blockBlastDock[blockBlastDrag.dockIndex] = null;
+                    if (blockBlastAudioEnabled) playSfxClick();
+                    placed = true;
+                }
+            }
+            
+            if (!placed) {
+                blockBlastDrag.element.style.opacity = '1';
+            }
+            
+            blockBlastDrag = null;
+            updateBlockBlastDisplay();
+            renderBlockBlastDock();
+            refillBlockBlastDock();
+            checkBlockBlastGameOver();
+        }
+
+        function placeBlockBlastPiece(piece, startR, startC) {
+            const shape = piece.shape;
+            let count = 0;
+            for (let r = 0; r < shape.length; r++) {
+                for (let c = 0; c < shape[0].length; c++) {
+                    if (shape[r][c] === 1) {
+                        blockBlastBoard[startR + r][startC + c] = piece.color;
+                        count++;
+                    }
+                }
+            }
+            blockBlastScore += count * 10;
+            processBlockBlastLines();
+        }
+
+        function processBlockBlastLines() {
+            let rowsToClear = [];
+            let colsToClear = [];
+            
+            for (let r = 0; r < 8; r++) {
+                if (blockBlastBoard[r].every(cell => cell !== null)) {
+                    rowsToClear.push(r);
+                }
+            }
+            
+            for (let c = 0; c < 8; c++) {
+                let full = true;
+                for (let r = 0; r < 8; r++) {
+                    if (blockBlastBoard[r][c] === null) { full = false; break; }
+                }
+                if (full) colsToClear.push(c);
+            }
+            
+            const total = rowsToClear.length + colsToClear.length;
+            if (total > 0) {
+                if (blockBlastAudioEnabled) playSfxWin();
+                blockBlastScore += total * 100 + (total > 1 ? (total - 1) * 50 : 0);
+                
+                const cells = document.querySelectorAll('#blockblast-board .blockblast-cell');
+                rowsToClear.forEach(r => {
+                    for (let c = 0; c < 8; c++) {
+                        blockBlastBoard[r][c] = null;
+                        cells[r * 8 + c].classList.add('clearing');
+                    }
+                });
+                colsToClear.forEach(c => {
+                    for (let r = 0; r < 8; r++) {
+                        blockBlastBoard[r][c] = null;
+                        cells[r * 8 + c].classList.add('clearing');
+                    }
+                });
+                
+                setTimeout(() => {
+                    updateBlockBlastDisplay();
+                }, 350);
+            }
+        }
+
+        function refillBlockBlastDock() {
+            if (blockBlastDock.every(p => p === null)) {
+                for (let i = 0; i < 3; i++) {
+                    blockBlastDock[i] = getRandomBlockBlastPiece();
+                }
+                renderBlockBlastDock();
+            }
+        }
+
+        function checkBlockBlastGameOver() {
+            const active = blockBlastDock.filter(p => p !== null);
+            if (active.length === 0) return;
+            
+            let hasMove = false;
+            for (let i = 0; i < 3; i++) {
+                const piece = blockBlastDock[i];
+                if (!piece) continue;
+                for (let r = 0; r < 8; r++) {
+                    for (let c = 0; c < 8; c++) {
+                        if (canPlaceBlockBlast(piece.shape, r, c)) {
+                            hasMove = true;
+                            break;
+                        }
+                    }
+                    if (hasMove) break;
+                }
+                if (hasMove) break;
+            }
+            
+            if (!hasMove) {
+                if (blockBlastAudioEnabled) {
+                    try {
+                        const ctx = getAudioContext();
+                        [300, 240, 180, 120].forEach((f, i) => {
+                            const osc = ctx.createOscillator();
+                            const gain = ctx.createGain();
+                            osc.type = 'sawtooth';
+                            osc.frequency.setValueAtTime(f, ctx.currentTime + i * 0.1);
+                            gain.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.1);
+                            gain.gain.linearRampToValueAtTime(0.001, ctx.currentTime + i * 0.1 + 0.15);
+                            osc.connect(gain);
+                            gain.connect(ctx.destination);
+                            osc.start(ctx.currentTime + i * 0.1);
+                            osc.stop(ctx.currentTime + i * 0.1 + 0.15);
+                        });
+                    } catch(e) {}
+                }
+                document.getElementById('blockblast-final-score').innerText = blockBlastScore;
+                document.getElementById('blockblast-gameover').style.display = 'flex';
+            }
+        }
+
+        function toggleBlockBlastAudio() {
+            blockBlastAudioEnabled = !blockBlastAudioEnabled;
+            document.getElementById('blockblast-sfx-btn').innerHTML = blockBlastAudioEnabled ? '🔊' : '🔇';
+        }
+
+        window.resetBlockBlast = resetBlockBlast;
+        window.toggleBlockBlastAudio = toggleBlockBlastAudio;
+
     </script>
 </body>
 </html>
