@@ -468,12 +468,14 @@
             margin-bottom: 18px;
             width: 100%;
             box-sizing: border-box;
+            position: relative;
         }
         .multi-tag-filter-container .filter-label {
             font-weight: 700;
             font-size: 13px;
             color: var(--primary-color);
             margin-right: 4px;
+            flex-shrink: 0;
         }
         .tag-selector-group {
             display: flex;
@@ -481,6 +483,12 @@
             gap: 6px;
             align-items: center;
             flex: 1;
+            max-height: 60px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .tag-selector-group.expanded {
+            max-height: 500px;
         }
         .tag-filter-btn {
             background: var(--container-bg);
@@ -527,11 +535,31 @@
             cursor: pointer;
             transition: all 0.2s ease;
             white-space: nowrap;
+            flex-shrink: 0;
         }
         .filter-clear-btn:hover {
             border-color: #ff4d4d;
             color: #ff4d4d;
             background: rgba(255, 77, 77, 0.05);
+        }
+        .tag-expand-btn {
+            background: var(--primary-color);
+            border: 1.5px solid var(--primary-color);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .tag-expand-btn:hover {
+            opacity: 0.85;
+            transform: scale(1.02);
         }
         .active-tags-display {
             display: flex;
@@ -573,6 +601,10 @@
             }
             .tag-selector-group {
                 gap: 4px;
+                max-height: 50px;
+            }
+            .tag-selector-group.expanded {
+                max-height: 400px;
             }
             .tag-filter-btn {
                 font-size: 11px;
@@ -582,6 +614,10 @@
                 font-size: 11px;
                 padding: 3px 10px;
                 align-self: flex-end;
+            }
+            .tag-expand-btn {
+                font-size: 11px;
+                padding: 3px 10px;
             }
         }
 
@@ -2453,6 +2489,10 @@
                             <label>Nội Dung Chương Đầu Tiên (*)</label>
                             <textarea id="new-chapter-content" class="form-control" placeholder="Dán nội dung chương truyện ở đây..."></textarea>
                         </div>
+                        <div class="form-group">
+                            <label>Đánh dấu thời gian</label>
+                            <input type="datetime-local" id="new-chapter-timestamp" class="form-control">
+                        </div>
                     </div>
 
                     <div class="form-group" style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px;">
@@ -2534,6 +2574,11 @@
                         <div id="edit-summary" class="rich-textarea-box" contenteditable="true"></div>
                     </div>
 
+                    <div class="form-group">
+                        <label>Đánh dấu thời gian</label>
+                        <input type="datetime-local" id="edit-story-timestamp" class="form-control">
+                    </div>
+
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
                         <button type="button" class="btn-delete" onclick="xoaTruyenDangChon()">🗑️ Xóa Vĩnh Viễn</button>
                         <button type="button" class="btn-submit" onclick="xuLyLuuSuaTruyen()">💾 Lưu Thay Đổi</button>
@@ -2558,6 +2603,11 @@
                     <div class="form-group">
                         <label>Nội Dung Chương Mới (*)</label>
                         <textarea id="append-chapter-content" class="form-control" placeholder="Dán nội dung chương tiếp theo ở đây..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Đánh dấu thời gian</label>
+                        <input type="datetime-local" id="append-chapter-timestamp" class="form-control">
                     </div>
 
                     <div class="form-group" style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px;">
@@ -2599,6 +2649,12 @@
                         <label>Sửa Nội Dung Chương</label>
                         <textarea id="edit-chap-content-input" class="form-control"></textarea>
                     </div>
+                    
+                    <div class="form-group">
+                        <label>Đánh dấu thời gian</label>
+                        <input type="datetime-local" id="edit-chap-timestamp-input" class="form-control">
+                    </div>
+
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
                         <button type="button" class="btn-delete" onclick="xoaChuongDangChon()">🗑️ Xóa Chương Này</button>
                         <button type="button" class="btn-submit" onclick="xuLyLuuSuaChuong()">💾 Lưu Sửa Chương</button>
@@ -3135,13 +3191,11 @@
             return all[key] || null;
         }
 
-        function setChapterTimestamp(storyKey, chapterIndex) {
+        function setChapterTimestamp(storyKey, chapterIndex, timestamp) {
             const all = JSON.parse(localStorage.getItem(CHAPTER_TIMESTAMPS_KEY) || '{}');
             const key = storyKey + '_' + chapterIndex;
-            if (!all[key]) {
-                all[key] = Date.now().toString();
-                localStorage.setItem(CHAPTER_TIMESTAMPS_KEY, JSON.stringify(all));
-            }
+            all[key] = timestamp;
+            localStorage.setItem(CHAPTER_TIMESTAMPS_KEY, JSON.stringify(all));
         }
 
         function isChapterNew(storyKey, chapterIndex) {
@@ -3167,7 +3221,7 @@
                 return (now - storedTs) < TWO_DAYS_MS;
             } else {
                 if (now - deployTs < TWO_DAYS_MS) {
-                    setChapterTimestamp(storyKey, lastIdx);
+                    setChapterTimestamp(storyKey, lastIdx, Date.now().toString());
                     return true;
                 }
                 return false;
@@ -3210,6 +3264,9 @@
         loadDataFromGitHub();
         setInterval(kiemTraLichHenGio, 30000);
 
+        // ============================================================
+        // TAG - GIỚI HẠN 2 HÀNG + NÚT "+ THÊM"
+        // ============================================================
         function buildTagSelectors() {
             const tagsSet = new Set();
             for (let key in window.dữLiệuTruyện) {
@@ -3220,10 +3277,19 @@
             }
             const sortedTags = Array.from(tagsSet).sort();
 
+            // Xử lý cho home
             const homeContainer = document.getElementById('tag-selector-home');
             if (homeContainer) {
                 homeContainer.innerHTML = '';
-                sortedTags.forEach(tag => {
+                // Tính số tag tối đa cho 2 hàng (~14 tag)
+                const maxTagsPerRow = 7;
+                const maxVisible = maxTagsPerRow * 2;
+                const hasMore = sortedTags.length > maxVisible;
+                
+                const visibleTags = sortedTags.slice(0, maxVisible);
+                const hiddenTags = sortedTags.slice(maxVisible);
+
+                visibleTags.forEach(tag => {
                     const btn = document.createElement('button');
                     btn.className = 'tag-filter-btn';
                     btn.dataset.tag = tag;
@@ -3233,12 +3299,42 @@
                     btn.onclick = () => toggleTagFilter('home', tag);
                     homeContainer.appendChild(btn);
                 });
+
+                // Nút + thêm
+                let expandBtn = homeContainer.parentElement.querySelector('.tag-expand-btn');
+                if (hasMore) {
+                    if (!expandBtn) {
+                        expandBtn = document.createElement('button');
+                        expandBtn.className = 'tag-expand-btn';
+                        expandBtn.dataset.target = 'home';
+                        expandBtn.textContent = '+ thêm';
+                        expandBtn.onclick = function(e) {
+                            e.stopPropagation();
+                            toggleTagExpand('home');
+                        };
+                        homeContainer.parentElement.appendChild(expandBtn);
+                    }
+                    // Lưu hidden tags để dùng khi mở rộng
+                    homeContainer.dataset.hiddenTags = JSON.stringify(hiddenTags);
+                    homeContainer.classList.remove('expanded');
+                } else {
+                    if (expandBtn) expandBtn.remove();
+                    homeContainer.classList.add('expanded');
+                }
             }
 
+            // Xử lý cho all
             const allContainer = document.getElementById('tag-selector-all');
             if (allContainer) {
                 allContainer.innerHTML = '';
-                sortedTags.forEach(tag => {
+                const maxTagsPerRow = 7;
+                const maxVisible = maxTagsPerRow * 2;
+                const hasMore = sortedTags.length > maxVisible;
+                
+                const visibleTags = sortedTags.slice(0, maxVisible);
+                const hiddenTags = sortedTags.slice(maxVisible);
+
+                visibleTags.forEach(tag => {
                     const btn = document.createElement('button');
                     btn.className = 'tag-filter-btn';
                     btn.dataset.tag = tag;
@@ -3248,10 +3344,70 @@
                     btn.onclick = () => toggleTagFilter('all', tag);
                     allContainer.appendChild(btn);
                 });
+
+                let expandBtn = allContainer.parentElement.querySelector('.tag-expand-btn');
+                if (hasMore) {
+                    if (!expandBtn) {
+                        expandBtn = document.createElement('button');
+                        expandBtn.className = 'tag-expand-btn';
+                        expandBtn.dataset.target = 'all';
+                        expandBtn.textContent = '+ thêm';
+                        expandBtn.onclick = function(e) {
+                            e.stopPropagation();
+                            toggleTagExpand('all');
+                        };
+                        allContainer.parentElement.appendChild(expandBtn);
+                    }
+                    allContainer.dataset.hiddenTags = JSON.stringify(hiddenTags);
+                    allContainer.classList.remove('expanded');
+                } else {
+                    if (expandBtn) expandBtn.remove();
+                    allContainer.classList.add('expanded');
+                }
             }
 
             updateActiveTagsDisplay('home');
             updateActiveTagsDisplay('all');
+        }
+
+        function toggleTagExpand(target) {
+            const container = target === 'home' ? document.getElementById('tag-selector-home') : document.getElementById('tag-selector-all');
+            if (!container) return;
+            
+            const isExpanded = container.classList.contains('expanded');
+            const expandBtn = container.parentElement.querySelector('.tag-expand-btn');
+            
+            if (isExpanded) {
+                // Thu gọn
+                container.classList.remove('expanded');
+                if (expandBtn) expandBtn.textContent = '+ thêm';
+                
+                // Xóa các tag ẩn
+                const hiddenTags = JSON.parse(container.dataset.hiddenTags || '[]');
+                const allBtns = container.querySelectorAll('.tag-filter-btn');
+                const visibleCount = allBtns.length - hiddenTags.length;
+                const btnsToRemove = Array.from(allBtns).slice(visibleCount);
+                btnsToRemove.forEach(btn => btn.remove());
+                
+            } else {
+                // Mở rộng
+                container.classList.add('expanded');
+                if (expandBtn) expandBtn.textContent = '− thu gọn';
+                
+                // Thêm các tag ẩn
+                const hiddenTags = JSON.parse(container.dataset.hiddenTags || '[]');
+                hiddenTags.forEach(tag => {
+                    const btn = document.createElement('button');
+                    btn.className = 'tag-filter-btn';
+                    btn.dataset.tag = tag;
+                    btn.dataset.target = target;
+                    btn.innerHTML = `${tag} <span class="tag-remove-icon">×</span>`;
+                    const isActive = target === 'home' ? window.selectedTagsHome.has(tag) : window.selectedTagsAll.has(tag);
+                    if (isActive) btn.classList.add('active');
+                    btn.onclick = () => toggleTagFilter(target, tag);
+                    container.appendChild(btn);
+                });
+            }
         }
 
         function toggleTagFilter(target, tag) {
@@ -3398,7 +3554,8 @@
                     if (item.type === 'story') {
                         window.dữLiệuTruyện[item.key] = item.storyData;
                         if (item.storyData.chapters && item.storyData.chapters.length > 0) {
-                            setChapterTimestamp(item.key, 0);
+                            const timestamp = Date.now().toString();
+                            setChapterTimestamp(item.key, 0, timestamp);
                         }
                         if (item.storyData.status !== 'Tạm ẩn') {
                             taoThongBaoTuDong(`✨ Truyện mới: "${item.storyData.title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${item.storyData.title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, item.key, false);
@@ -3408,7 +3565,8 @@
                             const truyen = window.dữLiệuTruyện[item.storyKey];
                             const newIdx = truyen.chapters.length;
                             truyen.chapters.push(item.chapterData);
-                            setChapterTimestamp(item.storyKey, newIdx);
+                            const timestamp = Date.now().toString();
+                            setChapterTimestamp(item.storyKey, newIdx, timestamp);
                             if (truyen.status !== 'Tạm ẩn') {
                                 taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${item.chapterData.title}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${item.chapterData.title}". Đọc ngay thôi nào! ✨`, item.storyKey, false);
                             }
@@ -4683,6 +4841,14 @@
                 document.getElementById('edit-chap-title-input').value = chap.title || '';
                 document.getElementById('edit-chap-18-input').checked = !!chap.is18;
                 document.getElementById('edit-chap-content-input').value = chap.content ? chap.content.replace(/<\/?p>/g, '\n').trim() : '';
+                const timestamp = getChapterTimestamp(storyKey, parseInt(chapIndex));
+                if (timestamp) {
+                    const dateObj = new Date(parseInt(timestamp));
+                    const dateStr = dateObj.toISOString().slice(0, 16);
+                    document.getElementById('edit-chap-timestamp-input').value = dateStr;
+                } else {
+                    document.getElementById('edit-chap-timestamp-input').value = '';
+                }
             }
         }
 
@@ -4692,6 +4858,7 @@
             const newTitle = document.getElementById('edit-chap-title-input').value.trim();
             const is18 = document.getElementById('edit-chap-18-input').checked;
             let rawContent = document.getElementById('edit-chap-content-input').value.trim();
+            const timestampInput = document.getElementById('edit-chap-timestamp-input').value;
 
             if (!storyKey || chapIndex === "" || !newTitle || !rawContent) { alert("Vui lòng điền đủ thông tin!"); return; }
 
@@ -4701,6 +4868,13 @@
             truyen.chapters[chapIndex].title = newTitle;
             truyen.chapters[chapIndex].is18 = is18;
             truyen.chapters[chapIndex].content = `<p>${rawContent.replace(/\n/g, '</p><p>')}</p>`;
+
+            if (timestampInput) {
+                const ts = new Date(timestampInput).getTime();
+                if (!isNaN(ts)) {
+                    setChapterTimestamp(storyKey, parseInt(chapIndex), ts.toString());
+                }
+            }
 
             luuVaoLocalStorage();
             alert("💾 Đã lưu thay đổi chương thành công!");
@@ -4756,6 +4930,7 @@
             const chapTitle = document.getElementById('new-chapter-title').value.trim();
             let chapContent = document.getElementById('new-chapter-content').value.trim();
             const is18 = document.getElementById('new-chapter-18').checked;
+            const chapterTimestampInput = document.getElementById('new-chapter-timestamp').value;
 
             const isScheduled = document.getElementById('enable-schedule-story').checked;
             const scheduleTimeStr = document.getElementById('new-story-schedule-time').value;
@@ -4787,7 +4962,14 @@
                 }]
             };
             storyObj.chapters._lastUpdated = Date.now();
-            setChapterTimestamp(newKey, 0);
+            let chapterTimestamp = Date.now().toString();
+            if (chapterTimestampInput) {
+                const ts = new Date(chapterTimestampInput).getTime();
+                if (!isNaN(ts)) {
+                    chapterTimestamp = ts.toString();
+                }
+            }
+            setChapterTimestamp(newKey, 0, chapterTimestamp);
 
             if (isScheduled && scheduleTimeStr) {
                 const targetTime = new Date(scheduleTimeStr).getTime();
@@ -4821,6 +5003,7 @@
                 document.getElementById('new-chapter-title').value = '';
                 document.getElementById('new-chapter-content').value = '';
                 document.getElementById('new-chapter-18').checked = false;
+                document.getElementById('new-chapter-timestamp').value = '';
                 document.getElementById('enable-schedule-story').checked = false;
                 document.getElementById('schedule-box-story').classList.add('hidden');
 
@@ -4873,6 +5056,7 @@
             const chapTitle = document.getElementById('append-chapter-title').value.trim();
             let chapContent = document.getElementById('append-chapter-content').value.trim();
             const is18 = document.getElementById('append-chapter-18').checked;
+            const chapterTimestampInput = document.getElementById('append-chapter-timestamp').value;
 
             const isScheduled = document.getElementById('enable-schedule-chapter').checked;
             const scheduleTimeStr = document.getElementById('append-chapter-schedule-time').value;
@@ -4907,7 +5091,14 @@
                 const newIdx = truyen.chapters.length;
                 truyen.chapters.push(chapterObj);
                 truyen.chapters._lastUpdated = Date.now();
-                setChapterTimestamp(selectedKey, newIdx);
+                let chapterTimestamp = Date.now().toString();
+                if (chapterTimestampInput) {
+                    const ts = new Date(chapterTimestampInput).getTime();
+                    if (!isNaN(ts)) {
+                        chapterTimestamp = ts.toString();
+                    }
+                }
+                setChapterTimestamp(selectedKey, newIdx, chapterTimestamp);
                 
                 luuVaoLocalStorage();
                 
@@ -4920,6 +5111,7 @@
                 document.getElementById('append-chapter-title').value = '';
                 document.getElementById('append-chapter-content').value = '';
                 document.getElementById('append-chapter-18').checked = false;
+                document.getElementById('append-chapter-timestamp').value = '';
                 document.getElementById('enable-schedule-chapter').checked = false;
                 document.getElementById('schedule-box-chapter').classList.add('hidden');
 
@@ -4986,6 +5178,9 @@
             `;
         }
 
+        // ============================================================
+        // LỌC TRUYỆN + "⚡ Mới Cập Nhật" - Sắp xếp theo thời gian cập nhật
+        // ============================================================
         window.locTruyen = function() {
             const homeGrid = document.getElementById('home-story-grid');
             const allGrid = document.getElementById('danh-sach-truyen');
@@ -5050,32 +5245,61 @@
                 return;
             }
 
+            // ============================================================
+            // "⚡ Mới Cập Nhật" - Chỉ lấy 4 chương cập nhật gần nhất
+            // ============================================================
+            let allChapters = [];
+            for (let key in window.dữLiệuTruyện) {
+                const truyen = window.dữLiệuTruyện[key];
+                if (truyen.status === 'Tạm ẩn') continue;
+                if (truyen.chapters && truyen.chapters.length > 0) {
+                    truyen.chapters.forEach((ch, idx) => {
+                        const timestamp = getChapterTimestamp(key, idx);
+                        if (timestamp) {
+                            allChapters.push({
+                                storyKey: key,
+                                storyTitle: truyen.title,
+                                chapterIndex: idx,
+                                chapterTitle: ch.title,
+                                timestamp: parseInt(timestamp),
+                                isNew: isChapterNew(key, idx)
+                            });
+                        }
+                    });
+                }
+            }
+
+            // Sắp xếp theo timestamp giảm dần (mới nhất lên đầu)
+            allChapters.sort((a, b) => b.timestamp - a.timestamp);
+
+            // Chỉ lấy 4 chương mới nhất
+            const latestChapters = allChapters.slice(0, 4);
+
+            if (latestChapters.length === 0) {
+                latestList.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có chương mới nào.</p>`;
+            } else {
+                latestChapters.forEach(item => {
+                    let newBadgeHTML = '';
+                    if (item.isNew) {
+                        newBadgeHTML = `<span class="latest-new-badge">✦ Mới</span>`;
+                    }
+                    latestList.innerHTML += `
+                        <div class="latest-item" onclick="handleStoryCardClick('${item.storyKey}')">
+                            <div>
+                                <div class="latest-title">${item.storyTitle}</div>
+                                <div class="latest-chapter">${item.chapterTitle} ${newBadgeHTML}</div>
+                            </div>
+                            <div class="latest-time">Mới đăng</div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Hiển thị danh sách truyện
             dsTruyenThm.forEach(item => {
                 const html = taoCardHTML(item.key, item.truyen);
                 homeGrid.innerHTML += html;
                 allGrid.innerHTML += html;
-
-                const lastChapter = item.truyen.chapters && item.truyen.chapters.length > 0 ? item.truyen.chapters[item.truyen.chapters.length - 1] : null;
-                
-                let newBadgeHTML = '';
-                if (item.truyen.chapters && item.truyen.chapters.length > 0) {
-                    const lastIdx = item.truyen.chapters.length - 1;
-                    if (isChapterNew(item.key, lastIdx)) {
-                        newBadgeHTML = `<span class="latest-new-badge">✦ Mới</span>`;
-                    }
-                }
-
-                const chapterDisplay = lastChapter ? lastChapter.title : 'Mới cập nhật';
-                
-                latestList.innerHTML += `
-                    <div class="latest-item" onclick="handleStoryCardClick('${item.key}')">
-                        <div>
-                            <div class="latest-title">${item.truyen.title}</div>
-                            <div class="latest-chapter">${chapterDisplay} ${newBadgeHTML}</div>
-                        </div>
-                        <div class="latest-time">Mới đăng</div>
-                    </div>
-                `;
             });
         };
 
