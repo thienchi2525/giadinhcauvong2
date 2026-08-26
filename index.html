@@ -3558,7 +3558,8 @@
                             setChapterTimestamp(item.key, 0, timestamp);
                         }
                         if (item.storyData.status !== 'Tạm ẩn') {
-                            taoThongBaoTuDong(`✨ Truyện mới: "${item.storyData.title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${item.storyData.title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, item.key, false);
+                            // Thông báo truyện mới: xếp vào CHƯƠNG MỚI
+                            taoThongBaoTuDong(`📖 Chương mới: "${item.storyData.title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${item.storyData.title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, item.key, false);
                         }
                     } else if (item.type === 'chapter') {
                         if (window.dữLiệuTruyện[item.storyKey]) {
@@ -4510,7 +4511,7 @@
             let filteredList = window.danhSachThongBao.filter(n => {
                 const matchKw = n.title.toLowerCase().includes(searchKw) || n.content.toLowerCase().includes(searchKw);
                 
-                const isChuongMoi = n.title.includes('Chương mới');
+                const isChuongMoi = n.title.includes('Chương mới:');
                 const isHeThong = n.title.includes('Hệ thống') || n.title.includes('Chào mừng');
                 const isTamSuLich = n.title.includes('Lịch ra chương') || n.title.includes('lịch nghỉ') || n.title.includes('sự kiện') || n.title.includes('tâm sự') || n.title.includes('Truyện mới');
 
@@ -4537,11 +4538,13 @@
                 const pinnedClass = n.isPinned ? 'pinned' : '';
                 const pinnedBadgeHTML = n.isPinned ? `<div class="pinned-badge">📌 THÔNG BÁO QUAN TRỌNG</div>` : '';
 
-                let typeTagHTML = `<div class="notice-type-tag">🌸 TÂM SỰ</div>`;
-                if (n.title.includes('Chương mới')) {
+                let typeTagHTML = '';
+                if (n.title.includes('Chương mới:')) {
                     typeTagHTML = `<div class="notice-type-tag" style="background: #ff4081;">📖 CHƯƠNG MỚI</div>`;
                 } else if (n.title.includes('Hệ thống') || n.title.includes('Chào mừng')) {
                     typeTagHTML = `<div class="notice-type-tag" style="background: #7c4dff;">⚙️ HỆ THỐNG</div>`;
+                } else {
+                    typeTagHTML = `<div class="notice-type-tag">🌸 TÂM SỰ</div>`;
                 }
 
                 container.innerHTML += `
@@ -4989,7 +4992,8 @@
                 window.dữLiệuTruyện[newKey] = storyObj;
                 luuVaoLocalStorage();
                 if (status !== 'Tạm ẩn') {
-                    taoThongBaoTuDong(`✨ Truyện mới: "${title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, newKey, false);
+                    // Thông báo truyện mới: xếp vào CHƯƠNG MỚI
+                    taoThongBaoTuDong(`📖 Chương mới: "${title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, newKey, false);
                 }
 
                 alert("✨ Đăng truyện mới thành công!");
@@ -5284,7 +5288,7 @@
                         newBadgeHTML = `<span class="latest-new-badge">✦ Mới</span>`;
                     }
                     latestList.innerHTML += `
-                        <div class="latest-item" onclick="handleStoryCardClick('${item.storyKey}')">
+                        <div class="latest-item" onclick="moTrucTiepChuong('${item.storyKey}', ${item.chapterIndex})">
                             <div>
                                 <div class="latest-title">${item.storyTitle}</div>
                                 <div class="latest-chapter">${item.chapterTitle} ${newBadgeHTML}</div>
@@ -5302,6 +5306,17 @@
                 allGrid.innerHTML += html;
             });
         };
+
+        // Hàm mở trực tiếp chương từ "Mới Cập Nhật"
+        function moTrucTiepChuong(storyKey, chapterIndex) {
+            if (window.dữLiệuTruyện[storyKey]) {
+                truyenHienTaiKey = storyKey;
+                // Chuyển sang tab chi tiết trước
+                xemTruyen(storyKey, false);
+                // Sau đó mở chương
+                kiemtraTruocKhiDoc(chapterIndex, false, true);
+            }
+        }
 
         window.chuyenTab = function(tabName, pushHistory = true) {
             if (['trang-chu', 'tat-ca-truyen', 'xep-hang', 'bang-thong-bao', 'tu-sach-offline', 'gioi-thieu', 'quan-li', 'quay-thu-gian'].includes(tabName)) { tabTruocDo = tabName; }
@@ -5437,18 +5452,32 @@
             document.getElementById('detail-summary').innerHTML = truyen.summary || truyen.desc || 'Đang cập nhật...';
             document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh bìa ]`;
 
+            // ---- XỬ LÝ THANH TIẾN ĐỘ EDIT ----
+            const progressFill = document.getElementById('story-progress-bar-fill');
+            const progressPercentText = document.getElementById('story-progress-percent-text');
+            const progressChaptersText = document.getElementById('story-progress-chapters-text');
+            const progressStatusText = document.getElementById('story-progress-status-text');
+
             if (isUpdating) {
-                document.getElementById('story-progress-bar-fill').style.width = '0%';
-                document.getElementById('story-progress-percent-text').innerText = '--';
-                document.getElementById('story-progress-chapters-text').innerText = `Đã edit ${soChuongDaHoanThanh} chương`;
-                document.getElementById('story-progress-status-text').innerText = '📝 Đang cập nhật';
+                // Trường hợp KHÔNG có tổng chương cố định
+                // Thanh tăng dần theo số chương đã edit, không có điểm đích 100%
+                // Dùng width = số chương đã edit * 2 (tối đa 80% để còn chỗ cho tương lai)
+                // Nhưng nếu số chương > 40 thì thanh sẽ tiến đến 80% và dừng lại
+                let widthPercent = Math.min(soChuongDaHoanThanh * 2, 80);
+                progressFill.style.width = widthPercent + '%';
+                progressFill.classList.remove('indeterminate'); // Đảm bảo không có animation lặp
+                progressPercentText.innerText = 'Đang cập nhật';
+                progressChaptersText.innerText = `📝 Đã edit ${soChuongDaHoanThanh} chương`;
+                progressStatusText.innerText = '📝 Đang cập nhật';
             } else {
+                // Trường hợp CÓ tổng chương cố định: GIỮ NGUYÊN LOGIC CŨ
+                progressFill.classList.remove('indeterminate');
                 let percent = Math.round((soChuongDaHoanThanh / tongSoChuong) * 100);
                 if (percent > 100) percent = 100;
-                document.getElementById('story-progress-bar-fill').style.width = percent + '%';
-                document.getElementById('story-progress-percent-text').innerText = percent + '%';
-                document.getElementById('story-progress-chapters-text').innerText = `Đã hoàn thành: ${soChuongDaHoanThanh} / ${tongSoChuong} chương`;
-                document.getElementById('story-progress-status-text').innerText = (percent >= 100 || truyen.status === 'Hoàn thành') ? '🎉 Hoàn thành' : '🚀 Đang tiến hành';
+                progressFill.style.width = percent + '%';
+                progressPercentText.innerText = percent + '%';
+                progressChaptersText.innerText = `Đã hoàn thành: ${soChuongDaHoanThanh} / ${tongSoChuong} chương`;
+                progressStatusText.innerText = (percent >= 100 || truyen.status === 'Hoàn thành') ? '🎉 Hoàn thành' : '🚀 Đang tiến hành';
             }
 
             const isFav = window.danhSachYeuThich.includes(key);
