@@ -802,6 +802,27 @@
             white-space: pre-wrap; word-break: break-word;
         }
 
+        /* ===== FIX ĐỒNG BỘ FONT CHỮ CHO PHẦN TÓM TẮT ===== */
+        #new-summary, #edit-summary, #detail-summary,
+        #new-summary *, #edit-summary *, #detail-summary * {
+            font-family: 'Comfortaa', cursive, sans-serif !important;
+            font-size: 14px !important;
+            line-height: 1.8 !important;
+            color: var(--text-color) !important;
+            background-color: transparent !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+        #new-summary, #edit-summary, #detail-summary {
+            padding: 12px !important;
+        }
+        /* Đảm bảo các thẻ in đậm, nghiêng vẫn hoạt động */
+        #new-summary b, #edit-summary b, #detail-summary b { font-weight: 900 !important; }
+        #new-summary i, #edit-summary i, #detail-summary i { font-style: italic !important; }
+        #new-summary u, #edit-summary u, #detail-summary u { text-decoration: underline !important; }
+        /* ===== KẾT THÚC FIX ===== */
+
         .nickname-select {
             width: 100%; padding: 10px 12px; margin-top: 6px; margin-bottom: 4px;
             border: 1.5px solid var(--border-color); border-radius: 12px;
@@ -7378,10 +7399,12 @@
                 }
             }
 
+            // ===== FIX: CHỈ HIỂN THỊ NGOẠI TRUYỆN KHI CÓ DỮ LIỆU THỰC TẾ =====
             var extraText = '';
             if (truyen.hasExtraStories && truyen.extraStoryCount > 0) {
                 extraText = ' + ' + truyen.extraStoryCount + ' ngoại truyện';
             }
+            // ===== KẾT THÚC FIX =====
 
             // DÙNG HÀM TRẠNG THÁI DÙNG CHUNG
             const trangThaiHienThi = getTrangThaiHienThi(truyen);
