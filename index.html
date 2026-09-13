@@ -803,24 +803,30 @@
         }
 
         /* ===== FIX ĐỒNG BỘ FONT CHỮ CHO PHẦN TÓM TẮT ===== */
-        #new-summary, #edit-summary, #detail-summary,
-        #new-summary *, #edit-summary *, #detail-summary * {
+        #new-summary, #edit-summary, #detail-summary {
             font-family: 'Comfortaa', cursive, sans-serif !important;
             font-size: 14px !important;
             line-height: 1.8 !important;
-            color: var(--text-color) !important;
+            color: var(--text-color);
+            padding: 12px !important;
+        }
+        /* Đồng bộ font/cỡ chữ cho mọi thẻ con, KHÔNG ép màu/độ đậm để không phá format admin đã chọn */
+        #new-summary *, #edit-summary *, #detail-summary * {
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
             background-color: transparent !important;
             margin: 0 !important;
             padding: 0 !important;
             box-sizing: border-box !important;
         }
-        #new-summary, #edit-summary, #detail-summary {
-            padding: 12px !important;
-        }
-        /* Đảm bảo các thẻ in đậm, nghiêng vẫn hoạt động */
-        #new-summary b, #edit-summary b, #detail-summary b { font-weight: 900 !important; }
-        #new-summary i, #edit-summary i, #detail-summary i { font-style: italic !important; }
+        /* Đảm bảo các thẻ in đậm, nghiêng, gạch chân vẫn hoạt động */
+        #new-summary b, #edit-summary b, #detail-summary b,
+        #new-summary strong, #edit-summary strong, #detail-summary strong { font-weight: 900 !important; }
+        #new-summary i, #edit-summary i, #detail-summary i,
+        #new-summary em, #edit-summary em, #detail-summary em { font-style: italic !important; }
         #new-summary u, #edit-summary u, #detail-summary u { text-decoration: underline !important; }
+        /* Màu chữ do admin chọn (foreColor / span style="color:...") không bị ép lại nữa */
         /* ===== KẾT THÚC FIX ===== */
 
         .nickname-select {
@@ -1380,6 +1386,32 @@
             transform: scale(1.03);
             box-shadow: 0 6px 22px var(--glow-color);
         }
+
+        /* ===== FIX: ỔN ĐỊNH LAYOUT + KHOẢNG CÁCH RIÊNG CHO TRANG "BẢNG XẾP HẠNG" =====
+           (chỉ áp dụng trong #full-ranking-content, KHÔNG ảnh hưởng bảng xếp hạng mini ở trang chủ) */
+        #full-ranking-content {
+            padding-top: 30px; /* khoảng cách với thanh tab, không bị margin-collapse */
+        }
+        #full-ranking-content .ranking-top-three {
+            margin-top: 0; /* tránh cộng dồn khoảng cách gây lệch không kiểm soát được */
+        }
+        /* Giữ chiều cao tên truyện ổn định (dự trù đủ 2 dòng) dù tên dài/ngắn khác nhau,
+           để card không đổi kích thước/nhảy vị trí khi đổi tab hoặc re-render */
+        #full-ranking-content .ranking-card-title {
+            min-height: 2.6em;
+        }
+        /* Giữ tên tác giả luôn 1 dòng để không làm đổi chiều cao card */
+        #full-ranking-content .ranking-card-author {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        /* Bỏ transition cho transform (vị trí/layout), chỉ giữ hiệu ứng hover nhẹ cho shadow/viền */
+        #full-ranking-content .ranking-card {
+            transition: box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        /* ===== KẾT THÚC FIX ===== */
 
         /* ===== RESPONSIVE RANKING ===== */
         @media (max-width: 768px) {
@@ -4515,6 +4547,25 @@
             return maxTs;
         }
 
+        // ===== FIX: LẤY ĐÚNG CHAPTER MỚI NHẤT THEO THỜI GIAN ĐĂNG/CẬP NHẬT THỰC TẾ =====
+        // (dùng cho card truyện, KHÔNG liên quan đến tổng số chương/ngoại truyện dự kiến)
+        function getLatestChapterIndex(storyKey) {
+            const truyen = window.dữLiệuTruyện[storyKey];
+            if (!truyen || !truyen.chapters || truyen.chapters.length === 0) return -1;
+            let latestIdx = truyen.chapters.length - 1;
+            let maxTs = -1;
+            truyen.chapters.forEach((ch, idx) => {
+                const ts = getChapterTimestamp(storyKey, idx);
+                const tsNum = ts ? parseInt(ts) : 0;
+                if (tsNum > maxTs) {
+                    maxTs = tsNum;
+                    latestIdx = idx;
+                }
+            });
+            return latestIdx;
+        }
+        // ===== KẾT THÚC FIX =====
+
         function getRankingStatValue(storyKey, truyen, sortBy) {
             if (sortBy === 'favorites') {
                 return { label: '❤️', value: getVirtualFavCount(storyKey).toLocaleString() };
@@ -5422,6 +5473,58 @@
                 return false;
             }
         }
+
+        // ===== FIX: MÀU CHỮ TÓM TẮT TRUYỆN TỰ THEO THEME (LIGHT/DARK) =====
+        // Chỉ loại bỏ màu ĐEN/GẦN ĐEN dính từ việc copy nội dung ngoài (Word, v.v...)
+        // để chữ tự nhận màu mặc định của theme (var(--text-color)) và đổi ngay khi chuyển Light/Dark.
+        // KHÔNG đụng tới các màu do admin chủ động chọn bằng nút tô màu trong Quản lý truyện
+        // (hồng #ff69b4, đỏ #e74c3c, tím #7c4dff, hay bất kỳ màu nào không phải đen/gần đen).
+        function isMauDenTuWord(colorStr) {
+            if (!colorStr) return false;
+            const c = colorStr.trim().toLowerCase();
+            if (c === 'black' || c === 'windowtext' || c === '#000' || c === '#000000') return true;
+            let r, g, b;
+            const rgbMatch = c.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+            if (rgbMatch) {
+                r = parseInt(rgbMatch[1], 10); g = parseInt(rgbMatch[2], 10); b = parseInt(rgbMatch[3], 10);
+            } else {
+                const hexMatch = c.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/);
+                if (hexMatch) {
+                    let hex = hexMatch[1];
+                    if (hex.length === 3) hex = hex.split('').map(ch => ch + ch).join('');
+                    r = parseInt(hex.substr(0, 2), 16); g = parseInt(hex.substr(2, 2), 16); b = parseInt(hex.substr(4, 2), 16);
+                } else {
+                    return false;
+                }
+            }
+            // Ngưỡng "gần đen" điển hình của màu mặc định copy từ Word
+            return r <= 20 && g <= 20 && b <= 20;
+        }
+
+        function apDungMauChuTheoTheme(html) {
+            if (!html) return html;
+            try {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = html;
+
+                wrapper.querySelectorAll('[style]').forEach(el => {
+                    if (el.style.color && isMauDenTuWord(el.style.color)) {
+                        el.style.removeProperty('color');
+                        if (!el.getAttribute('style').trim()) el.removeAttribute('style');
+                    }
+                });
+                wrapper.querySelectorAll('font[color]').forEach(f => {
+                    if (isMauDenTuWord(f.getAttribute('color'))) {
+                        f.removeAttribute('color');
+                    }
+                });
+
+                return wrapper.innerHTML;
+            } catch (e) {
+                return html;
+            }
+        }
+        // ===== KẾT THÚC FIX =====
 
         async function loadDataFromGitHub() {
             try {
@@ -7390,19 +7493,17 @@
 
             let chapterDisplay = '';
             let newBadgeHTML = '';
+            // ===== FIX: CARD CHỈ HIỂN THỊ CHƯƠNG/NGOẠI TRUYỆN MỚI NHẤT THỰC TẾ ĐÃ ĐĂNG =====
+            // Lấy đúng chapter có thời gian đăng/cập nhật mới nhất, hiển thị ĐÚNG title của chapter đó.
+            // KHÔNG cộng dồn số ngoại truyện dự kiến vào dòng chương mới nhất.
             if (truyen.chapters && truyen.chapters.length > 0) {
-                const lastIdx = truyen.chapters.length - 1;
-                const isNew = isChapterNew(key, lastIdx);
-                chapterDisplay = `Chương ${truyen.chapters.length}`;
+                const latestIdx = getLatestChapterIndex(key);
+                const isNew = isChapterNew(key, latestIdx);
+                const latestChap = truyen.chapters[latestIdx];
+                chapterDisplay = (latestChap && latestChap.title) ? latestChap.title : `Chương ${truyen.chapters.length}`;
                 if (isNew) {
                     newBadgeHTML = `<span class="story-new-badge">✦ Mới</span>`;
                 }
-            }
-
-            // ===== FIX: CHỈ HIỂN THỊ NGOẠI TRUYỆN KHI CÓ DỮ LIỆU THỰC TẾ =====
-            var extraText = '';
-            if (truyen.hasExtraStories && truyen.extraStoryCount > 0) {
-                extraText = ' + ' + truyen.extraStoryCount + ' ngoại truyện';
             }
             // ===== KẾT THÚC FIX =====
 
@@ -7420,7 +7521,7 @@
                         <div class="story-card-title">${truyen.title}</div>
                         <div class="story-card-author">${truyen.author || 'Tác giả'}</div>
                         <div class="story-card-chapter">
-                            <span>${chapterDisplay}${extraText}</span>
+                            <span>${chapterDisplay}</span>
                             ${newBadgeHTML}
                         </div>
                         <div class="story-card-tags">${tagsHTML}</div>
@@ -7698,7 +7799,7 @@
                 <div><strong style="color: var(--primary-color);">Thể loại / Thẻ:</strong> ${tagsHTML}</div>
             `;
 
-            document.getElementById('detail-summary').innerHTML = truyen.summary || truyen.desc || 'Đang cập nhật...';
+            document.getElementById('detail-summary').innerHTML = truyen.summary ? apDungMauChuTheoTheme(truyen.summary) : (truyen.desc || 'Đang cập nhật...');
             document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh bìa ]`;
 
             const progressFill = document.getElementById('story-progress-bar-fill');
