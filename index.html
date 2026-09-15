@@ -11,7 +11,6 @@
            ROOT THEME VARIABLES
            ============================================================ */
         :root {
-            /* THEME HỒNG PHẤN (mặc định) */
             --bg-color: #f7f8fa;
             --container-bg: #ffffff;
             --box-bg: #fffaf0;
@@ -32,8 +31,6 @@
             --tag-bg: #fffaf0;
             --tag-border: #ffe4e1;
             --glow-color: rgba(255, 105, 180, 0.3);
-            
-            /* Biến cho các thành phần game & khác */
             --game-bg: #1a1625;
             --game-cell-bg: #2d263f;
             --game-border: #3d3450;
@@ -44,8 +41,6 @@
             --popup-bg: #ffffff;
             --popup-shadow: 0 10px 40px rgba(0,0,0,0.25);
             --pass-overlay-bg: #f7f8fa;
-            
-            /* BLOCK BLAST - MẶC ĐỊNH (HỒNG PHẤN) */
             --bb-board-bg: #1a1625;
             --bb-cell-bg: #2d263f;
             --bb-cell-border: #3d3450;
@@ -54,75 +49,43 @@
             --bb-dock-slot-border: #3d3450;
         }
 
-        /* ============================================================
-           THEME: NGỌT NGÀO (PASTEL GRADIENT - LIGHT) - KHÔI PHỤC TỪ BẢN CŨ
-           ============================================================ */
         body.theme-ngotngao {
-            /* MÀU NỀN - PASTEL GRADIENT (ĐẬM HƠN BẢN HIỆN TẠI) */
             --bg-color: transparent;
             --container-bg: rgba(255, 255, 255, 0.6);
             --box-bg: rgba(255, 255, 255, 0.45);
             --border-color: rgba(180, 160, 210, 0.4);
-            
-            /* MÀU CHÍNH - PASTEL LAVENDER + HỒNG PHẤN */
             --primary-color: #b088d0;
             --secondary-color: #d0b0e0;
-            
-            /* HEADER - PASTEL LAVENDER */
             --header-bg: rgba(200, 180, 230, 0.5);
-            
-            /* MÀU CHỮ - PASTEL DARK */
             --text-color: #3a2a4a;
             --subtext-color: #7a6a8a;
-            
-            /* BADGE - PASTEL TONES */
             --badge-completed: #b088c0;
             --badge-updating: #d4b0d0;
             --badge-hidden: #a090a8;
             --new-badge-bg: #d4b0d0;
-            
-            /* SHADOW - PASTEL GLOW */
             --card-shadow: 0 6px 20px rgba(150, 120, 180, 0.15);
-            
-            /* BUTTON GRADIENT - PASTEL PINK + BABY BLUE + LAVENDER */
             --button-gradient: linear-gradient(135deg, #b0d0e0, #d0b8e0, #e8b8d0);
             --button-hover-gradient: linear-gradient(135deg, #c0d8e8, #d8c8e8, #f0c8d8);
-            
-            /* BADGE NEW - PASTEL GRADIENT */
             --badge-new-gradient: linear-gradient(135deg, #b0d0e0, #d0b8e0, #e8b8d0);
-            
-            /* TAG - PASTEL */
             --tag-bg: rgba(255, 255, 255, 0.3);
             --tag-border: rgba(180, 160, 210, 0.3);
-            
-            /* GLOW - PASTEL */
             --glow-color: rgba(180, 160, 220, 0.25);
-            
-            /* GAME - PASTEL LIGHT */
             --game-bg: rgba(220, 210, 235, 0.3);
             --game-cell-bg: rgba(200, 190, 215, 0.35);
             --game-border: rgba(180, 160, 210, 0.3);
             --game-primary: #b088d0;
             --game-text: #3a2a4a;
             --game-cell-filled-bg: rgba(190, 170, 210, 0.4);
-            
-            /* POPUP - PASTEL LIGHT - OPAQUE */
             --popup-bg: rgba(255, 255, 255, 0.92);
             --popup-shadow: 0 10px 40px rgba(150, 120, 180, 0.3);
             --modal-overlay-bg: rgba(0,0,0,0.5);
-            
-            /* PASS SCREEN - OPAQUE PASTEL */
             --pass-overlay-bg: #f5edfa;
-            
-            /* BLOCK BLAST - PASTEL LIGHT (GIỮ NGUYÊN) */
             --bb-board-bg: rgba(220, 210, 235, 0.3);
             --bb-cell-bg: rgba(200, 190, 215, 0.35);
             --bb-cell-border: rgba(180, 160, 210, 0.3);
             --bb-dock-bg: rgba(220, 210, 235, 0.3);
             --bb-dock-slot-bg: rgba(200, 190, 215, 0.35);
             --bb-dock-slot-border: rgba(180, 160, 210, 0.3);
-            
-            /* BACKGROUND PASTEL GRADIENT - PINK + BABY BLUE + LAVENDER */
             background-image: 
                 radial-gradient(ellipse at 10% 20%, rgba(160, 210, 240, 0.7) 0%, transparent 55%),
                 radial-gradient(ellipse at 90% 10%, rgba(200, 180, 240, 0.6) 0%, transparent 50%),
@@ -135,9 +98,6 @@
             background-blend-mode: normal;
         }
 
-        /* ============================================================
-           DARK MODE CHO THEME NGỌT NGÀO (GIỮ NGUYÊN)
-           ============================================================ */
         body.theme-ngotngao.dark-mode {
             --bg-color: transparent;
             --container-bg: rgba(25, 20, 40, 0.7);
@@ -169,15 +129,12 @@
             --popup-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             --modal-overlay-bg: rgba(0,0,0,0.7);
             --pass-overlay-bg: #1a142a;
-            
-            /* BLOCK BLAST - GIỮ NGUYÊN DARK */
             --bb-board-bg: #1a1625;
             --bb-cell-bg: #2d263f;
             --bb-cell-border: #3d3450;
             --bb-dock-bg: #1a1625;
             --bb-dock-slot-bg: #2d263f;
             --bb-dock-slot-border: #3d3450;
-            
             background-image: 
                 radial-gradient(ellipse at 10% 20%, rgba(80, 60, 140, 0.5) 0%, transparent 55%),
                 radial-gradient(ellipse at 90% 10%, rgba(60, 80, 160, 0.4) 0%, transparent 50%),
@@ -191,9 +148,6 @@
             background-blend-mode: normal;
         }
 
-        /* ============================================================
-           DARK MODE (ÁP DỤNG CHO THEME HỒNG)
-           ============================================================ */
         body.dark-mode {
             --bg-color: #1a1625;
             --container-bg: #262035;
@@ -222,7 +176,6 @@
             --popup-shadow: 0 10px 40px rgba(0,0,0,0.4);
             --modal-overlay-bg: rgba(0,0,0,0.7);
             --pass-overlay-bg: #1a1625;
-            
             --bb-board-bg: #1a1625;
             --bb-cell-bg: #2d263f;
             --bb-cell-border: #3d3450;
@@ -231,9 +184,6 @@
             --bb-dock-slot-border: #3d3450;
         }
 
-        /* ============================================================
-           TRANSPARENT MODE - KHÔNG ẢNH HƯỞNG POPUP
-           ============================================================ */
         body.transparent-mode {
             --container-bg: transparent;
             --box-bg: transparent;
@@ -259,9 +209,6 @@
             --bb-dock-slot-border: rgba(70, 58, 90, 0.3);
         }
 
-        /* ============================================================
-           GLOBAL BODY STYLES
-           ============================================================ */
         body {
             font-family: 'Comfortaa', cursive, sans-serif;
             background-color: var(--bg-color);
@@ -277,21 +224,35 @@
             align-items: center;
         }
 
-        .theme-toggle, .menu-style-toggle, .settings-toggle {
+        .theme-toggle, .menu-style-toggle, .settings-toggle, .mobile-hamburger-btn {
             background: var(--container-bg); border: 2px solid var(--primary-color);
             color: var(--primary-color); padding: 6px 12px; border-radius: 20px;
             cursor: pointer; font-family: inherit; font-size: 14px; font-weight: bold;
             transition: all 0.2s ease;
         }
 
-        .theme-toggle:hover, .menu-style-toggle:hover, .settings-toggle:hover {
+        .theme-toggle:hover, .menu-style-toggle:hover, .settings-toggle:hover, .mobile-hamburger-btn:hover {
             background: var(--primary-color);
             color: #fff;
         }
 
-        /* ============================================================
-           SETTINGS PANEL
-           ============================================================ */
+        .theme-toggle {
+            width: 34px; height: 34px; padding: 0;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 17px; line-height: 1;
+            color: var(--primary-color);
+        }
+        .theme-toggle:hover { color: #fff; }
+
+        .mobile-hamburger-btn {
+            display: none;
+            width: 34px; height: 34px; padding: 0;
+            border-radius: 50%;
+            align-items: center; justify-content: center;
+            font-size: 16px; line-height: 1;
+        }
+
         .settings-panel {
             position: absolute;
             top: 48px;
@@ -347,9 +308,6 @@
         }
         .brand-title:hover { opacity: 0.8; }
 
-        /* ============================================================
-           PASS SCREEN - OPAQUE BACKGROUND
-           ============================================================ */
         #pass-screen {
             position: fixed;
             top: 0;
@@ -430,6 +388,7 @@
             transition: all 0.3s ease;
             position: relative;
             z-index: 100000;
+            white-space: nowrap;
         }
         .pass-btn:hover {
             background: var(--button-hover-gradient);
@@ -439,8 +398,37 @@
 
         .continue-reading-banner {
             background: var(--button-gradient);
-            color: white; padding: 16px 20px; border-radius: 15px; margin-bottom: 20px;
-            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px var(--glow-color);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px var(--glow-color);
+        }
+        .continue-reading-banner > div {
+            min-width: 0;
+            flex: 1;
+        }
+        .continue-reading-banner .banner-label {
+            font-size: 10px;
+            opacity: 0.9;
+            letter-spacing: 0.3px;
+        }
+        #continue-title {
+            font-weight: bold;
+            font-size: 13px;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .continue-reading-banner .pass-btn {
+            padding: 6px 12px;
+            font-size: 11px;
+            flex-shrink: 0;
         }
 
         header {
@@ -450,7 +438,6 @@
         }
 
         header h1 { margin: 0; color: #ffffff; font-size: 30px; }
-        .slogan { margin-top: 8px; color: #ffffff; font-size: 14px; line-height: 1.6; }
 
         .nav-menu { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; justify-content: center; transition: all 0.3s ease; }
         .nav-menu.collapsed { display: none; }
@@ -464,6 +451,7 @@
             cursor: pointer; font-weight: bold; font-family: inherit; font-size: 15px;
             display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
         .hamburger-btn:hover {
             background: var(--button-hover-gradient);
@@ -484,6 +472,7 @@
             border: 2px solid var(--primary-color); padding: 9px 18px; border-radius: 25px;
             cursor: pointer; font-weight: bold; font-family: inherit; transition: all 0.3s ease; font-size: 14px;
             position: relative;
+            white-space: nowrap;
         }
 
         .nav-btn:hover, .nav-btn.active {
@@ -560,6 +549,7 @@
             flex-grow: 1; padding: 10px 14px; border: 1.5px solid var(--border-color);
             border-radius: 12px; font-family: inherit; font-size: 14px; outline: none;
             background: var(--container-bg); color: var(--text-color);
+            min-width: 0;
         }
         .search-input:focus { border-color: var(--primary-color); }
         .filter-select {
@@ -600,11 +590,6 @@
             font-size: 18px;
             font-weight: 800;
             color: var(--primary-color);
-        }
-        @media (max-width: 600px) {
-            .story-stats-box { padding: 10px 3px; gap: 2px; }
-            .story-stats-label { font-size: 9.5px; }
-            .story-stats-number { font-size: 15px; }
         }
 
         .multi-tag-filter-container {
@@ -654,6 +639,13 @@
             transition: all 0.2s ease;
             white-space: nowrap;
             user-select: none;
+            line-height: 1.4;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            box-sizing: border-box;
+            height: auto;
+            min-height: 0;
         }
         .tag-filter-btn:hover {
             border-color: var(--primary-color);
@@ -667,9 +659,10 @@
         }
         .tag-filter-btn.active .tag-remove-icon {
             display: inline-block;
-            margin-left: 4px;
+            margin-left: 2px;
             font-size: 11px;
             opacity: 0.8;
+            line-height: 1;
         }
         .tag-remove-icon {
             display: none;
@@ -687,6 +680,8 @@
             transition: all 0.2s ease;
             white-space: nowrap;
             flex-shrink: 0;
+            line-height: 1.4;
+            box-sizing: border-box;
         }
         .filter-clear-btn:hover {
             border-color: var(--primary-color);
@@ -706,11 +701,16 @@
             flex-shrink: 0;
             transition: all 0.2s ease;
             user-select: none;
+            line-height: 1.4;
+            box-sizing: border-box;
         }
         .tag-expand-btn:hover {
             background: var(--button-hover-gradient);
             transform: scale(1.02);
             box-shadow: 0 4px 15px var(--glow-color);
+        }
+        .tag-mobile-toggle {
+            display: none;
         }
         .active-tags-display {
             display: flex;
@@ -744,32 +744,33 @@
         .active-tags-display .active-tag-item .remove-tag-btn:hover {
             opacity: 1;
         }
-        @media (max-width: 600px) {
-            .multi-tag-filter-container {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 6px;
-            }
-            .tag-selector-group {
-                gap: 4px;
-                max-height: 30px;
-            }
-            .tag-selector-group.expanded {
-                max-height: 400px;
-            }
-            .tag-filter-btn {
-                font-size: 11px;
-                padding: 3px 10px;
-            }
-            .filter-clear-btn {
-                font-size: 11px;
-                padding: 3px 10px;
-                align-self: flex-end;
-            }
-            .tag-expand-btn {
-                font-size: 11px;
-                padding: 3px 10px;
-            }
+
+        .loi-nhan-empty {
+            text-align: center;
+            color: var(--subtext-color);
+            font-size: 14px;
+        }
+        .loi-nhan-item {
+            background: var(--box-bg);
+            border: 1px solid var(--border-color);
+            padding: 14px 16px;
+            border-radius: 14px;
+            font-size: 14px;
+            line-height: 1.6;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            box-sizing: border-box;
+        }
+        .loi-nhan-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+        .loi-nhan-text {
+            font-size: 14px;
+            line-height: 1.6;
+            word-break: break-word;
         }
 
         .form-group { margin-bottom: 16px; }
@@ -802,7 +803,6 @@
             white-space: pre-wrap; word-break: break-word;
         }
 
-        /* ===== FIX ĐỒNG BỘ FONT CHỮ CHO PHẦN TÓM TẮT ===== */
         #new-summary, #edit-summary, #detail-summary {
             font-family: 'Comfortaa', cursive, sans-serif !important;
             font-size: 14px !important;
@@ -810,7 +810,6 @@
             color: var(--text-color);
             padding: 12px !important;
         }
-        /* Đồng bộ font/cỡ chữ cho mọi thẻ con, KHÔNG ép màu/độ đậm để không phá format admin đã chọn */
         #new-summary *, #edit-summary *, #detail-summary * {
             font-family: inherit !important;
             font-size: inherit !important;
@@ -820,14 +819,11 @@
             padding: 0 !important;
             box-sizing: border-box !important;
         }
-        /* Đảm bảo các thẻ in đậm, nghiêng, gạch chân vẫn hoạt động */
         #new-summary b, #edit-summary b, #detail-summary b,
         #new-summary strong, #edit-summary strong, #detail-summary strong { font-weight: 900 !important; }
         #new-summary i, #edit-summary i, #detail-summary i,
         #new-summary em, #edit-summary em, #detail-summary em { font-style: italic !important; }
         #new-summary u, #edit-summary u, #detail-summary u { text-decoration: underline !important; }
-        /* Màu chữ do admin chọn (foreColor / span style="color:...") không bị ép lại nữa */
-        /* ===== KẾT THÚC FIX ===== */
 
         .nickname-select {
             width: 100%; padding: 10px 12px; margin-top: 6px; margin-bottom: 4px;
@@ -844,6 +840,7 @@
             padding: 9px 16px; border-radius: 20px; cursor: pointer;
             font-family: inherit; font-size: 13px; font-weight: bold; color: var(--text-color);
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         .mode-btn.active {
             border-color: var(--primary-color); background: var(--button-gradient); color: white;
@@ -861,6 +858,7 @@
             padding: 9px 16px; border-radius: 20px; cursor: pointer;
             font-family: inherit; font-size: 13px; font-weight: bold; color: var(--text-color);
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         .admin-sub-btn.active {
             background: var(--button-gradient); color: white; border-color: var(--primary-color);
@@ -884,6 +882,7 @@
             background: var(--button-gradient); color: white; border: none; padding: 11px 24px;
             border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 14px;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
         .btn-submit:hover {
             background: var(--button-hover-gradient);
@@ -895,12 +894,10 @@
             background: #ff4d4d; color: white; border: none; padding: 11px 20px;
             border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 14px;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         .btn-delete:hover { background: #e03e3e; transform: scale(1.02); }
 
-        /* ============================================================
-           NOTICE BOARD - CLICKABLE CARDS
-           ============================================================ */
         .notice-board-container { display: flex; flex-direction: column; gap: 14px; margin-top: 15px; }
         .notice-card {
             border: 1px solid rgba(0,0,0,0.06);
@@ -1000,9 +997,6 @@
             font-size: 13px; color: var(--subtext-color); margin-top: 8px; font-weight: 600;
         }
 
-        /* ============================================================
-           RANKING COMPONENT (DÙNG CHUNG - PHIÊN BẢN MỚI)
-           ============================================================ */
         .ranking-section {
             margin-top: 35px;
             padding: 0 10px;
@@ -1027,19 +1021,18 @@
             letter-spacing: 0.5px;
         }
 
-        /* ===== THANH TAB RANKING - RỘNG HƠN ===== */
         .ranking-tabs {
             display: inline-flex;
             background: rgba(255, 228, 225, 0.5);
             border: 1.5px solid var(--primary-color);
             border-radius: 25px;
-            padding: 5px;
-            gap: 6px;
+            padding: 4px;
+            gap: 4px;
             flex-wrap: wrap;
             justify-content: center;
             margin: 0 auto;
             width: auto;
-            min-width: 280px;
+            min-width: 0;
             max-width: 100%;
             box-sizing: border-box;
             position: relative;
@@ -1052,11 +1045,11 @@
         .ranking-tab-btn {
             background: transparent;
             border: none;
-            padding: 9px 28px;
+            padding: 7px 18px;
             border-radius: 20px;
             cursor: pointer;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
             color: var(--primary-color);
             transition: all 0.25s ease;
@@ -1064,8 +1057,8 @@
             pointer-events: auto;
             position: relative;
             z-index: 11;
-            flex: 1;
-            text-align: center;
+            line-height: 1.3;
+            flex: 0 0 auto;
         }
         .ranking-tab-btn.active {
             background: var(--button-gradient);
@@ -1076,7 +1069,6 @@
             background: rgba(255, 105, 180, 0.15);
         }
 
-        /* ===== TOP 3 - BỐ CỤC MỚI: #1 CAO NHẤT, #2/#3 THẤP HƠN, KHÔNG ĐÈ ===== */
         .ranking-top-three {
             display: flex;
             justify-content: center;
@@ -1107,7 +1099,6 @@
             box-shadow: 0 10px 30px var(--glow-color);
         }
 
-        /* ===== TOP 1 - CAO NHẤT, LỚN NHẤT, Ở GIỮA ===== */
         .ranking-card-top.rank-1 {
             width: 200px;
             order: 2;
@@ -1148,7 +1139,6 @@
             padding: 7px 20px;
         }
 
-        /* ===== TOP 2 & 3 - THẤP HƠN, NHỎ HƠN, KHÔNG ĐÈ ===== */
         .ranking-card-top.rank-2 {
             width: 160px;
             order: 1;
@@ -1294,7 +1284,6 @@
             box-shadow: 0 4px 15px var(--glow-color);
         }
 
-        /* ===== #4 TRỞ ĐI - CARD NGANG ===== */
         .ranking-list-below {
             display: flex;
             flex-direction: column;
@@ -1380,6 +1369,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px var(--glow-color);
+            white-space: nowrap;
         }
         .ranking-view-more-btn:hover {
             background: var(--button-hover-gradient);
@@ -1387,260 +1377,23 @@
             box-shadow: 0 6px 22px var(--glow-color);
         }
 
-        /* ===== FIX: ỔN ĐỊNH LAYOUT + KHOẢNG CÁCH RIÊNG CHO TRANG "BẢNG XẾP HẠNG" =====
-           (chỉ áp dụng trong #full-ranking-content, KHÔNG ảnh hưởng bảng xếp hạng mini ở trang chủ) */
         #full-ranking-content {
-            padding-top: 30px; /* khoảng cách với thanh tab, không bị margin-collapse */
+            padding-top: 30px;
         }
         #full-ranking-content .ranking-top-three {
-            margin-top: 0; /* tránh cộng dồn khoảng cách gây lệch không kiểm soát được */
+            margin-top: 0;
         }
-        /* Giữ chiều cao tên truyện ổn định (dự trù đủ 2 dòng) dù tên dài/ngắn khác nhau,
-           để card không đổi kích thước/nhảy vị trí khi đổi tab hoặc re-render */
         #full-ranking-content .ranking-card-title {
             min-height: 2.6em;
         }
-        /* Giữ tên tác giả luôn 1 dòng để không làm đổi chiều cao card */
         #full-ranking-content .ranking-card-author {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 100%;
         }
-        /* Bỏ transition cho transform (vị trí/layout), chỉ giữ hiệu ứng hover nhẹ cho shadow/viền */
         #full-ranking-content .ranking-card {
             transition: box-shadow 0.25s ease, border-color 0.25s ease;
-        }
-        /* ===== KẾT THÚC FIX ===== */
-
-        /* ===== RESPONSIVE RANKING ===== */
-        @media (max-width: 768px) {
-            .ranking-top-three {
-                gap: 24px;
-                padding: 0 12px;
-            }
-            .ranking-card-top.rank-1 {
-                width: 160px;
-                padding: 16px 12px 12px 12px;
-            }
-            .ranking-card-top.rank-1 .ranking-card-cover {
-                width: 115px;
-                height: 155px;
-            }
-            .ranking-card-top.rank-1 .ranking-card-rank {
-                width: 34px;
-                height: 34px;
-                font-size: 14px;
-                top: -13px;
-            }
-            .ranking-card-top.rank-2,
-            .ranking-card-top.rank-3 {
-                width: 130px;
-                padding: 12px 10px 10px 10px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-cover,
-            .ranking-card-top.rank-3 .ranking-card-cover {
-                width: 85px;
-                height: 115px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-title,
-            .ranking-card-top.rank-3 .ranking-card-title {
-                font-size: 11px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-author,
-            .ranking-card-top.rank-3 .ranking-card-author {
-                font-size: 9px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-stats,
-            .ranking-card-top.rank-3 .ranking-card-stats {
-                font-size: 9.5px;
-            }
-            .ranking-card-row {
-                flex-wrap: wrap;
-                gap: 8px;
-                padding: 10px 12px;
-            }
-            .ranking-card-row .ranking-card-cover {
-                width: 70px;
-                height: 95px;
-            }
-            .ranking-card-row .ranking-card-title {
-                font-size: 12.5px;
-            }
-            .ranking-card-row .ranking-card-author {
-                font-size: 10.5px;
-            }
-            .ranking-card-row .ranking-card-stats {
-                font-size: 11px;
-            }
-            .ranking-card-row .ranking-card-rank {
-                width: 30px;
-                height: 30px;
-                font-size: 12px;
-            }
-            .ranking-tab-btn {
-                font-size: 12px;
-                padding: 7px 20px;
-            }
-            .ranking-tabs {
-                min-width: 240px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ranking-top-three {
-                gap: 14px;
-                padding: 0 12px;
-                flex-wrap: nowrap;
-                justify-content: center;
-            }
-            .ranking-card-top.rank-1 {
-                width: 135px;
-                padding: 14px 10px 10px 10px;
-                order: 1;
-                transform: translateY(0);
-                margin-bottom: 0;
-                flex-shrink: 1;
-                min-width: 0;
-            }
-            .ranking-card-top.rank-1 .ranking-card-cover {
-                width: 90px;
-                height: 120px;
-            }
-            .ranking-card-top.rank-1 .ranking-card-rank {
-                width: 28px;
-                height: 28px;
-                font-size: 11px;
-                top: -10px;
-            }
-            .ranking-card-top.rank-1 .ranking-card-title {
-                font-size: 11px;
-            }
-            .ranking-card-top.rank-2,
-            .ranking-card-top.rank-3 {
-                width: 110px;
-                padding: 10px 8px 8px 8px;
-                transform: translateY(6px);
-                flex-shrink: 1;
-                min-width: 0;
-            }
-            .ranking-card-top.rank-2 {
-                order: 2;
-            }
-            .ranking-card-top.rank-3 {
-                order: 3;
-            }
-            .ranking-card-top.rank-2 .ranking-card-cover,
-            .ranking-card-top.rank-3 .ranking-card-cover {
-                width: 68px;
-                height: 92px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-title,
-            .ranking-card-top.rank-3 .ranking-card-title {
-                font-size: 9px;
-                -webkit-line-clamp: 2;
-            }
-            .ranking-card-top.rank-2 .ranking-card-author,
-            .ranking-card-top.rank-3 .ranking-card-author {
-                font-size: 7.5px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-stats,
-            .ranking-card-top.rank-3 .ranking-card-stats {
-                font-size: 8px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-btn,
-            .ranking-card-top.rank-3 .ranking-card-btn {
-                font-size: 7px;
-                padding: 3px 8px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-rank,
-            .ranking-card-top.rank-3 .ranking-card-rank {
-                width: 24px;
-                height: 24px;
-                font-size: 10px;
-                top: -9px;
-            }
-            .ranking-tab-btn {
-                font-size: 11px;
-                padding: 6px 16px;
-            }
-            .ranking-tabs {
-                min-width: 200px;
-                padding: 4px;
-                gap: 4px;
-            }
-            .ranking-card-row {
-                padding: 8px 10px;
-                gap: 6px;
-            }
-            .ranking-card-row .ranking-card-cover {
-                width: 60px;
-                height: 82px;
-            }
-            .ranking-card-row .ranking-card-title {
-                font-size: 11px;
-            }
-            .ranking-card-row .ranking-card-author {
-                font-size: 9px;
-            }
-            .ranking-card-row .ranking-card-stats {
-                font-size: 9.5px;
-            }
-            .ranking-card-row .ranking-card-rank {
-                width: 26px;
-                height: 26px;
-                font-size: 10px;
-            }
-            .ranking-card-row .ranking-card-btn {
-                font-size: 9px;
-                padding: 4px 10px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .ranking-top-three {
-                gap: 10px;
-                padding: 0 8px;
-            }
-            .ranking-card-top.rank-1 {
-                width: 110px;
-                padding: 10px 6px 8px 6px;
-            }
-            .ranking-card-top.rank-1 .ranking-card-cover {
-                width: 75px;
-                height: 100px;
-            }
-            .ranking-card-top.rank-2,
-            .ranking-card-top.rank-3 {
-                width: 90px;
-                padding: 8px 5px 6px 5px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-cover,
-            .ranking-card-top.rank-3 .ranking-card-cover {
-                width: 55px;
-                height: 75px;
-            }
-            .ranking-card-top.rank-1 .ranking-card-title {
-                font-size: 9.5px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-title,
-            .ranking-card-top.rank-3 .ranking-card-title {
-                font-size: 8px;
-            }
-            .ranking-card-top.rank-1 .ranking-card-stats {
-                font-size: 9px;
-            }
-            .ranking-card-top.rank-2 .ranking-card-stats,
-            .ranking-card-top.rank-3 .ranking-card-stats {
-                font-size: 7px;
-            }
-            .ranking-tab-btn {
-                font-size: 10px;
-                padding: 5px 12px;
-            }
-            .ranking-tabs {
-                min-width: 170px;
-            }
         }
 
         .story-grid { 
@@ -1689,6 +1442,7 @@
             position: absolute; top: 8px; right: 8px; color: white; font-size: 10px;
             padding: 4px 10px; border-radius: 12px; font-weight: bold; z-index: 2;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            white-space: nowrap;
         }
         .badge.hoan-thanh { background-color: var(--badge-completed); }
         .badge.dang-cap-nhat { background-color: var(--badge-updating); }
@@ -1719,6 +1473,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 4px;
+        }
+        .story-card-chapter > span:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
+            flex: 1;
         }
         .story-card-tags { 
             display: flex; 
@@ -1760,9 +1522,9 @@
             font-weight: bold;
             padding: 2px 8px;
             border-radius: 12px;
-            margin-left: auto;
             flex-shrink: 0;
             box-shadow: 0 2px 6px var(--glow-color);
+            white-space: nowrap;
         }
 
         .about-author { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; max-width: 600px; margin: 0 auto; }
@@ -1876,6 +1638,7 @@
             background: var(--box-bg); color: var(--primary-color); border: 2px solid var(--primary-color);
             padding: 9px 18px; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 13px;
             display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s ease;
+            white-space: nowrap;
         }
         .offline-btn:hover, .fav-btn:hover { 
             background: var(--button-gradient); 
@@ -1908,7 +1671,22 @@
             align-items: center;
             gap: 6px;
             width: 100%;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            overflow: hidden;
+            min-width: 0;
+        }
+        .chapter-item-v .chapter-title-line .badge-18 {
+            color: #e74c3c;
+            font-weight: bold;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+        .chapter-item-v .chapter-title-line .chapter-name {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .chapter-item-v .chapter-date-line {
             display: none;
@@ -1930,12 +1708,13 @@
             font-size: 13px; color: var(--subtext-color); margin: 15px 0 8px 0; padding: 0 5px; font-weight: bold;
         }
 
-        .reading-nav { display: flex; justify-content: space-between; margin-top: 25px; }
+        .reading-nav { display: flex; justify-content: space-between; margin-top: 25px; gap: 8px; }
         .read-btn { 
             background: var(--button-gradient); 
             color: white; border: none; padding: 10px 18px; 
             border-radius: 14px; cursor: pointer; font-family: inherit; font-weight: bold; font-size: 14px;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
         .read-btn:hover {
             background: var(--button-hover-gradient);
@@ -1945,9 +1724,6 @@
 
         .comment-section { margin-top: 35px; border-top: 2px dashed var(--border-color); padding-top: 20px; }
 
-        /* ============================================================
-           WARNING MODAL - OPAQUE
-           ============================================================ */
         #warning-modal {
             position: fixed;
             top: 0;
@@ -1985,9 +1761,6 @@
             color: var(--text-color);
         }
 
-        /* ============================================================
-           ADMIN PASS MODAL - OPAQUE
-           ============================================================ */
         #admin-pass-modal {
             position: fixed;
             top: 0;
@@ -2007,9 +1780,6 @@
             display: none !important;
         }
 
-        /* ============================================================
-           CHAPTER MODAL OVERLAY - OPAQUE
-           ============================================================ */
         #chapter-modal-overlay {
             position: fixed;
             top: 0;
@@ -2053,18 +1823,21 @@
             padding-bottom: 10px;
             margin-bottom: 10px;
             flex-shrink: 0;
+            gap: 8px;
         }
 
         .chapter-modal-header h4 {
             color: var(--primary-color);
             margin: 0;
             font-size: 18px;
+            white-space: nowrap;
         }
 
         .chapter-modal-header .header-buttons {
             display: flex;
             gap: 8px;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .chapter-modal-list {
@@ -2088,6 +1861,7 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.2s;
+            gap: 6px;
         }
 
         .chapter-modal-item:hover,
@@ -2099,9 +1873,6 @@
             box-shadow: 0 4px 15px var(--glow-color);
         }
 
-        /* ============================================================
-           NOTICE POPUP - OPAQUE
-           ============================================================ */
         .notice-popup-overlay {
             position: fixed;
             top: 0;
@@ -2324,9 +2095,6 @@
         .hidden { display: none !important; }
         footer { margin-top: auto; padding: 15px; color: var(--primary-color); font-size: 13px; text-align: center; font-weight: bold; }
 
-        /* ============================================================
-           GAME CARDS
-           ============================================================ */
         .game-card-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -2400,55 +2168,6 @@
         .bb-preview-cell.filled.c6 { background: #818cf8; }
         .bb-preview-cell.filled.c7 { background: #e879f9; }
 
-        @media (max-width: 480px) {
-            .game-card-item {
-                min-height: 70px;
-                padding: 10px 6px;
-                border-radius: 12px;
-            }
-            .game-card-icon {
-                font-size: 24px;
-                margin-bottom: 3px;
-            }
-            .game-card-name {
-                font-size: 11px;
-            }
-            .game-card-grid {
-                gap: 8px;
-                max-width: 280px;
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .game-card-item:nth-child(3) {
-                grid-column: span 2;
-                max-width: 50%;
-                margin: 0 auto;
-            }
-            .block-blast-preview-icon {
-                grid-template-columns: repeat(3, 10px);
-                grid-template-rows: repeat(3, 10px);
-            }
-        }
-
-        @media (max-width: 380px) {
-            .game-card-item {
-                min-height: 60px;
-                padding: 8px 4px;
-            }
-            .game-card-icon {
-                font-size: 20px;
-            }
-            .game-card-name {
-                font-size: 10px;
-            }
-            .game-card-grid {
-                max-width: 240px;
-            }
-            .block-blast-preview-icon {
-                grid-template-columns: repeat(3, 8px);
-                grid-template-rows: repeat(3, 8px);
-            }
-        }
-
         .size-selector-group {
             display: flex;
             flex-wrap: wrap;
@@ -2470,6 +2189,7 @@
             transition: all 0.2s ease;
             min-width: 52px;
             text-align: center;
+            white-space: nowrap;
         }
 
         .size-btn:hover {
@@ -2484,9 +2204,6 @@
             box-shadow: 0 2px 10px var(--glow-color);
         }
 
-        /* ============================================================
-           OTHELLO
-           ============================================================ */
         .othello-board-wrapper {
             display: flex;
             justify-content: center;
@@ -2633,6 +2350,7 @@
             transition: all 0.3s ease;
             min-width: 100px;
             text-align: center;
+            white-space: nowrap;
         }
 
         .game-btn:hover {
@@ -2666,6 +2384,7 @@
             font-weight: bold;
             font-size: 14px;
             color: var(--text-color);
+            white-space: nowrap;
         }
 
         .game-score-display span {
@@ -2703,9 +2422,6 @@
             min-height: 0;
         }
 
-        /* ============================================================
-           BLOCK BLAST - SỬ DỤNG BIẾN THEME (GIỮ NGUYÊN)
-           ============================================================ */
         #quay-game-blockblast-view {
             display: flex;
             flex-direction: column;
@@ -2935,6 +2651,7 @@
             transition: all 0.3s ease;
             min-width: 100px;
             text-align: center;
+            white-space: nowrap;
         }
         .blockblast-btn:hover {
             background: var(--button-hover-gradient);
@@ -2994,124 +2711,6 @@
             filter: drop-shadow(0 12px 25px var(--glow-color));
         }
 
-        @media (max-width: 480px) {
-            .blockblast-board {
-                max-width: 280px;
-                padding: 6px;
-                gap: 3px;
-            }
-            .blockblast-dock {
-                max-width: 280px;
-                min-height: 80px;
-                padding: 6px 8px;
-            }
-            .blockblast-dock-slot {
-                min-height: 65px;
-            }
-            .blockblast-mini-cell {
-                width: 16px;
-                height: 16px;
-            }
-            .blockblast-title {
-                font-size: 18px;
-            }
-            .blockblast-score-num {
-                font-size: 15px;
-            }
-            .chapter-modal-box {
-                max-width: 95%;
-                padding: 16px;
-            }
-            .chapter-modal-header h4 {
-                font-size: 16px;
-            }
-            .chapter-modal-list {
-                max-height: 40vh;
-            }
-            .notice-popup-box {
-                padding: 16px 14px;
-                border-radius: 18px;
-            }
-            .notice-popup-title {
-                font-size: 15px;
-                margin-bottom: 14px;
-            }
-            .notice-popup-close {
-                top: 10px;
-                right: 12px;
-                font-size: 22px;
-                width: 30px;
-                height: 30px;
-            }
-            .notice-popup-story-section {
-                padding: 10px 12px;
-                border-radius: 12px;
-            }
-            .notice-popup-story-title {
-                font-size: 13px;
-            }
-            .notice-popup-chapter-item {
-                font-size: 12px;
-                padding: 6px 10px;
-                border-radius: 10px;
-            }
-            .notice-popup-chapter-item .chap-number {
-                width: 20px;
-                height: 20px;
-                font-size: 9px;
-            }
-            .batch-chapter-block {
-                padding: 10px 12px;
-            }
-            .batch-story-block {
-                padding: 12px 14px;
-            }
-            .batch-add-chapter-btn {
-                font-size: 12px;
-                padding: 8px;
-            }
-            .batch-add-story-btn {
-                font-size: 13px;
-                padding: 10px;
-            }
-            .pass-box {
-                padding: 16px;
-                max-width: 280px;
-            }
-            .pass-input {
-                font-size: 13px;
-                padding: 8px 12px;
-                width: 75%;
-            }
-            .pass-btn {
-                font-size: 13px;
-                padding: 8px 16px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .blockblast-board {
-                max-width: 240px;
-                padding: 4px;
-                gap: 2px;
-            }
-            .blockblast-dock {
-                max-width: 240px;
-                min-height: 70px;
-                padding: 4px 6px;
-            }
-            .blockblast-dock-slot {
-                min-height: 55px;
-            }
-            .blockblast-mini-cell {
-                width: 14px;
-                height: 14px;
-            }
-        }
-
-        /* ============================================================
-           BATCH CHAPTER STYLES
-           ============================================================ */
         .batch-chapter-block {
             background: var(--box-bg);
             border: 1.5px solid var(--border-color);
@@ -3339,6 +2938,7 @@
             align-items: center;
             cursor: pointer;
             transition: all 0.2s ease;
+            gap: 8px;
         }
         .latest-item:hover {
             border-color: var(--primary-color);
@@ -3357,6 +2957,8 @@
         .latest-time {
             font-size: 12px;
             color: var(--subtext-color);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         .latest-new-badge {
             display: inline-block;
@@ -3378,9 +2980,6 @@
             display: none !important;
         }
 
-        /* ============================================================
-           FIX: MENU DỌC - PASTEL LIGHT - OPAQUE BACKGROUND
-           ============================================================ */
         body.theme-ngotngao .hamburger-dropdown {
             background: #fdf6ff !important;
             border-color: #d4c8e0 !important;
@@ -3408,6 +3007,730 @@
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important;
             opacity: 1 !important;
+        }
+
+        /* ============================================================
+           RESPONSIVE: MOBILE - DESKTOP THU NHỎ
+           ============================================================ */
+
+        @media (max-width: 768px) {
+            header { padding: 16px 12px 12px 12px; }
+            header h1 { font-size: 22px; }
+            .container { padding: 16px; margin: 14px 0 28px 0; border-radius: 18px; }
+            .section-title { font-size: 17px; margin: 18px 0 12px 0; }
+            .ranking-section-header { margin-bottom: 36px; }
+            .story-decor-card { padding: 18px; margin-bottom: 18px; }
+            .reading-box { padding: 18px; font-size: 15px; }
+            .notice-popup-box { padding: 22px; border-radius: 20px; }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 12px 10px 10px 10px;
+            }
+            header h1 {
+                font-size: 17px;
+                text-align: left;
+                padding-left: 6px;
+                padding-right: 168px;
+                box-sizing: border-box;
+                line-height: 1.3;
+            }
+            .header-top-controls {
+                top: 8px; right: 8px; gap: 5px;
+            }
+            .menu-style-toggle, .settings-toggle {
+                padding: 3px 8px; font-size: 11px;
+            }
+            .theme-toggle {
+                width: 26px; height: 26px; font-size: 13px;
+            }
+            .mobile-hamburger-btn {
+                display: flex;
+                width: 26px; height: 26px; font-size: 13px;
+            }
+
+            /* Menu điều hướng chính: luôn dùng hamburger trên mobile, không cho chọn kiểu khác */
+            .nav-menu { display: none !important; }
+            .hamburger-menu-container.hidden { display: flex !important; }
+            .hamburger-menu-container {
+                margin-top: 0;
+                min-height: 0;
+            }
+            .hamburger-menu-container > .hamburger-btn {
+                display: none;
+            }
+            .hamburger-dropdown {
+                top: 10px;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: min(88vw, 280px);
+                max-width: 280px;
+            }
+
+            .container {
+                width: 96%;
+                padding: 12px;
+                margin: 10px 0 22px 0;
+                border-radius: 16px;
+            }
+
+            .hamburger-menu-container { margin-top: 10px; }
+            .hamburger-btn {
+                padding: 7px 16px;
+                font-size: 12px;
+                height: 34px;
+                border-radius: 18px;
+                font-weight: 600;
+            }
+
+            .nav-btn {
+                padding: 7px 13px;
+                font-size: 12px;
+            }
+
+            .continue-reading-banner {
+                padding: 10px 12px;
+                border-radius: 12px;
+                margin-bottom: 12px;
+                gap: 6px;
+            }
+            .continue-reading-banner .banner-label { font-size: 10px; }
+            #continue-title { font-size: 12px; }
+            .continue-reading-banner .pass-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+
+            .hot-slide-cover {
+                width: 160px;
+                height: 227px;
+            }
+            .slider-arrow {
+                width: 30px; height: 30px; font-size: 12px;
+            }
+            .slider-prev { left: 4px; }
+            .slider-next { right: 4px; }
+            .hot-slider-container { margin-bottom: 14px; }
+
+            .search-box {
+                padding: 10px;
+                gap: 6px;
+                border-radius: 12px;
+                margin-bottom: 10px;
+            }
+            .search-input {
+                padding: 8px 10px;
+                font-size: 12px;
+                border-radius: 10px;
+                height: 38px;
+                box-sizing: border-box;
+                flex: 1 1 100%;
+                min-width: 0;
+            }
+            .filter-select {
+                padding: 8px 10px;
+                font-size: 12px;
+                border-radius: 10px;
+                height: 38px;
+                box-sizing: border-box;
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+
+            .tag-mobile-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                width: auto;
+                background: var(--tag-bg);
+                border: 1.5px solid var(--tag-border);
+                border-radius: 20px;
+                padding: 4px 14px;
+                font-family: inherit;
+                font-size: 11px;
+                font-weight: 700;
+                color: var(--primary-color);
+                cursor: pointer;
+                margin-bottom: 8px;
+                white-space: nowrap;
+                transition: all 0.2s ease;
+                box-sizing: border-box;
+            }
+            .tag-mobile-toggle:hover {
+                border-color: var(--primary-color);
+                background: var(--border-color);
+            }
+            .tag-mobile-toggle.active {
+                background: var(--button-gradient);
+                border-color: var(--primary-color);
+                color: #fff;
+            }
+
+            .multi-tag-filter-container {
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 8px 10px;
+                border-radius: 12px;
+                margin-bottom: 10px;
+            }
+            .multi-tag-filter-container.tag-mobile-open {
+                display: flex;
+            }
+            .multi-tag-filter-container .filter-label {
+                font-size: 11px;
+                margin: 0 0 2px 0;
+            }
+            .tag-selector-group {
+                gap: 4px;
+                max-height: none;
+                flex-wrap: wrap;
+                overflow: visible;
+            }
+            .tag-expand-btn {
+                display: none;
+            }
+            .tag-filter-btn {
+                font-size: 10px;
+                padding: 3px 9px;
+            }
+            .filter-clear-btn {
+                font-size: 10px;
+                padding: 3px 9px;
+                align-self: flex-end;
+            }
+            .active-tags-display {
+                font-size: 10px;
+                margin-bottom: 8px;
+                gap: 3px 6px;
+            }
+            .active-tags-display .active-tag-item {
+                font-size: 10px;
+                padding: 1px 6px 1px 8px;
+            }
+            .active-tags-display .active-tag-item .remove-tag-btn {
+                font-size: 12px;
+            }
+
+            .section-title {
+                font-size: 15px;
+                margin: 14px 0 10px 0;
+                padding-bottom: 6px;
+            }
+
+            .loi-nhan-item {
+                padding: 11px 12px;
+                border-radius: 12px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+            .loi-nhan-name {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+            .loi-nhan-text {
+                font-size: 12.5px;
+                line-height: 1.6;
+            }
+            .loi-nhan-empty {
+                font-size: 12.5px;
+            }
+            #home-chat-list-box {
+                gap: 10px !important;
+            }
+
+            .story-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                margin-top: 8px;
+            }
+            .story-card {
+                padding: 7px;
+                border-radius: 12px;
+                border-width: 1.5px;
+            }
+            .story-card-cover-wrapper { border-radius: 8px; }
+            .story-card-info { padding: 6px 2px 2px 2px; }
+            .story-card-title { font-size: 11.5px; margin-bottom: 2px; }
+            .story-card-author { font-size: 9px; margin-bottom: 3px; }
+            .story-card-chapter { font-size: 9px; margin-bottom: 4px; gap: 3px; }
+            .mini-tag { font-size: 8px; padding: 1px 5px; }
+            .read-story-link { font-size: 10px; }
+            .story-new-badge { font-size: 8px; padding: 1px 5px; }
+            .badge { font-size: 8px; padding: 2px 6px; top: 4px; right: 4px; }
+
+            .latest-list { gap: 6px; margin-top: 6px; }
+            .latest-item { padding: 10px 12px; border-radius: 12px; gap: 6px; }
+            .latest-title { font-size: 12px; }
+            .latest-chapter { font-size: 11px; margin-top: 2px; }
+            .latest-time { font-size: 10px; }
+            .latest-new-badge { font-size: 9px; padding: 1px 6px; }
+
+            .ranking-tabs {
+                padding: 3px;
+                gap: 2px;
+                max-width: 100%;
+            }
+            .ranking-tab-btn {
+                font-size: 10.5px;
+                padding: 6px 9px;
+            }
+            .ranking-section { padding: 0 2px; margin-top: 22px; }
+            .ranking-section-header { margin-bottom: 28px; gap: 8px; }
+            .ranking-section-title { font-size: 16px; }
+
+            .ranking-top-three {
+                gap: 12px;
+                padding: 0 4px;
+                margin-top: 10px;
+                margin-bottom: 24px;
+                flex-wrap: nowrap;
+                align-items: flex-end;
+            }
+            .ranking-card-top.rank-1 {
+                width: 130px;
+                order: 2;
+                padding: 12px 10px 10px 10px;
+                transform: translateY(-6px);
+                border-width: 2px;
+                border-radius: 14px;
+            }
+            .ranking-card-top.rank-1 .ranking-card-cover {
+                width: 92px;
+                height: 122px;
+                border-width: 2px;
+            }
+            .ranking-card-top.rank-1 .ranking-card-rank {
+                width: 30px; height: 30px;
+                font-size: 13px;
+                top: -12px;
+                border-width: 1.5px;
+            }
+            .ranking-card-top.rank-1 .ranking-card-title { font-size: 11px; -webkit-line-clamp: 2; }
+            .ranking-card-top.rank-1 .ranking-card-author { font-size: 9px; }
+            .ranking-card-top.rank-1 .ranking-card-stats { font-size: 10px; }
+            .ranking-card-top.rank-1 .ranking-card-btn { font-size: 9px; padding: 4px 12px; }
+
+            .ranking-card-top.rank-2,
+            .ranking-card-top.rank-3 {
+                width: 105px;
+                padding: 10px 8px 8px 8px;
+                transform: translateY(4px);
+                border-width: 1.5px;
+                border-radius: 12px;
+            }
+            .ranking-card-top.rank-2 { order: 1; }
+            .ranking-card-top.rank-3 { order: 3; }
+            .ranking-card-top.rank-2 .ranking-card-cover,
+            .ranking-card-top.rank-3 .ranking-card-cover {
+                width: 74px; height: 100px;
+                border-width: 1.5px;
+            }
+            .ranking-card-top.rank-2 .ranking-card-rank,
+            .ranking-card-top.rank-3 .ranking-card-rank {
+                width: 26px; height: 26px;
+                font-size: 11px;
+                top: -10px;
+                border-width: 1.5px;
+            }
+            .ranking-card-top.rank-2 .ranking-card-title,
+            .ranking-card-top.rank-3 .ranking-card-title { font-size: 10px; -webkit-line-clamp: 2; }
+            .ranking-card-top.rank-2 .ranking-card-author,
+            .ranking-card-top.rank-3 .ranking-card-author { font-size: 8.5px; }
+            .ranking-card-top.rank-2 .ranking-card-stats,
+            .ranking-card-top.rank-3 .ranking-card-stats { font-size: 9px; }
+            .ranking-card-top.rank-2 .ranking-card-btn,
+            .ranking-card-top.rank-3 .ranking-card-btn { font-size: 8px; padding: 3px 10px; }
+
+            .ranking-list-below { gap: 8px; }
+            .ranking-card-row {
+                padding: 8px 10px; gap: 8px; border-radius: 12px;
+            }
+            .ranking-card-row .ranking-card-rank {
+                width: 30px; height: 30px; font-size: 12px; border-width: 1.5px;
+            }
+            .ranking-card-row .ranking-card-cover {
+                width: 60px; height: 82px; border-width: 1.5px;
+            }
+            .ranking-card-row .ranking-card-title { font-size: 11.5px; }
+            .ranking-card-row .ranking-card-author { font-size: 10px; }
+            .ranking-card-row .ranking-card-stats { font-size: 11px; }
+            .ranking-card-row .ranking-card-btn { font-size: 9px; padding: 4px 10px; }
+
+            .ranking-view-more { margin-top: 14px; }
+            .ranking-view-more-btn { font-size: 12px; padding: 8px 22px; }
+
+            .story-cover-title { font-size: 17px; margin-bottom: 10px; }
+            .story-decor-cover { width: 160px; height: 227px; }
+            .story-decor-card {
+                padding: 14px;
+                margin-bottom: 14px;
+                border-radius: 16px;
+            }
+            .decor-section-heading { margin: 16px 0 10px 0; gap: 8px; }
+            .decor-number-badge { font-size: 11px; padding: 3px 9px; }
+            .decor-title-text { font-size: 14px; }
+            .decor-box-content { padding: 12px; }
+
+            #detail-info-box,
+            #detail-summary {
+                font-size: 13px !important;
+                line-height: 1.7 !important;
+            }
+            #detail-info-box div {
+                font-size: 13px !important;
+                line-height: 1.8 !important;
+            }
+            #detail-info-box strong {
+                font-size: 13px !important;
+            }
+            #detail-summary,
+            #detail-summary * {
+                font-size: 13px !important;
+                line-height: 1.7 !important;
+            }
+            #detail-summary strong,
+            #detail-summary b {
+                font-size: 13px !important;
+                font-weight: 900 !important;
+            }
+
+            .story-stats-box {
+                padding: 10px 4px;
+                margin-bottom: 14px;
+                border-radius: 12px;
+            }
+            .story-stats-label { font-size: 9.5px; }
+            .story-stats-number { font-size: 15px; }
+
+            .story-progress-box {
+                padding: 12px 14px;
+                border-radius: 12px;
+                margin: 16px 0 0 0;
+            }
+            .story-progress-header { font-size: 12px; }
+            .story-progress-footer { font-size: 11px; }
+
+            .action-buttons-group { gap: 6px; margin-bottom: 14px; }
+            .offline-btn, .fav-btn {
+                padding: 7px 14px;
+                font-size: 11px;
+                border-width: 1.5px;
+            }
+
+            .chapter-list-vertical { gap: 6px; }
+            .chapter-item-v {
+                padding: 10px 12px;
+                font-size: 12px;
+                border-radius: 10px;
+                align-items: center;
+            }
+            .chapter-item-v .chapter-title-line {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                width: 100%;
+                flex-wrap: nowrap;
+                overflow: hidden;
+                min-width: 0;
+            }
+            .chapter-item-v .chapter-title-line .badge-18 {
+                flex-shrink: 0;
+                white-space: nowrap;
+                font-size: 12px;
+            }
+            .chapter-item-v .chapter-title-line .chapter-name {
+                flex: 1;
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 12px;
+            }
+            .chapter-item-v .chapter-title-line .story-new-badge {
+                flex-shrink: 0;
+                white-space: nowrap;
+                font-size: 9px;
+                padding: 1px 6px;
+            }
+
+            .chapter-stats-bar { font-size: 11px; margin: 10px 0 6px 0; }
+            .reading-box {
+                padding: 14px;
+                font-size: 14px;
+                border-radius: 12px;
+                line-height: 1.8;
+            }
+            .reading-box h3 { font-size: 17px !important; }
+            .reading-nav { margin-top: 18px; gap: 8px; }
+            .read-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+                border-radius: 12px;
+            }
+
+            .comment-section { margin-top: 22px; padding-top: 14px; }
+            .comment-section h4 { font-size: 15px !important; }
+
+            .notice-board-container { gap: 10px; margin-top: 10px; }
+            .notice-card { padding: 12px 14px; border-radius: 12px; }
+            .notice-title { font-size: 13px; }
+            .notice-date { font-size: 11px; }
+            .notice-content { font-size: 12px; }
+            .notice-type-tag { font-size: 10px; padding: 2px 7px; }
+            .pinned-badge { font-size: 10px; padding: 2px 7px; }
+
+            .form-group { margin-bottom: 12px; }
+            .form-group label { font-size: 12px; margin-bottom: 4px; }
+            .form-control {
+                padding: 10px;
+                font-size: 13px;
+                border-radius: 12px;
+            }
+            textarea.form-control { height: 120px; }
+            .rich-textarea-box {
+                min-height: 100px;
+                max-height: 200px;
+                padding: 10px;
+                font-size: 13px;
+            }
+            .toolbar-btn { padding: 5px 10px; font-size: 11px; border-radius: 6px; }
+            .btn-submit, .btn-delete {
+                padding: 9px 18px;
+                font-size: 12px;
+                border-radius: 16px;
+            }
+
+            .mode-selector { gap: 6px; margin-bottom: 14px; }
+            .mode-btn { padding: 7px 12px; font-size: 11px; border-width: 1.5px; }
+            .admin-sub-tabs {
+                padding: 6px; gap: 5px;
+                border-radius: 18px;
+                margin-bottom: 16px;
+            }
+            .admin-sub-btn { padding: 7px 12px; font-size: 11px; border-width: 1.5px; }
+
+            .stats-grid-dashboard {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                margin-bottom: 14px;
+            }
+            .stat-card-item { padding: 10px; border-radius: 12px; }
+            .stat-card-icon { font-size: 18px; margin-bottom: 4px; }
+            .stat-card-label { font-size: 10px; }
+            .stat-card-number { font-size: 17px; }
+
+            .pass-box {
+                padding: 20px 18px;
+                max-width: 300px;
+                border-radius: 16px;
+            }
+            .pass-box h3 { font-size: 16px !important; }
+            .pass-input {
+                font-size: 14px;
+                padding: 10px 12px;
+                width: 85%;
+                border-radius: 12px;
+            }
+            .pass-btn { font-size: 12px; padding: 8px 16px; border-radius: 16px; }
+
+            .chapter-modal-box { padding: 14px; max-width: 94%; border-radius: 16px; }
+            .chapter-modal-header h4 { font-size: 14px; }
+            .chapter-modal-list { max-height: 45vh; gap: 5px; }
+            .chapter-modal-item { padding: 9px 12px; font-size: 12px; border-radius: 8px; }
+            .notice-popup-box { padding: 18px 16px; border-radius: 18px; max-width: 94%; }
+            .notice-popup-title { font-size: 15px; margin-bottom: 14px; padding-bottom: 8px; }
+            .notice-popup-close { top: 8px; right: 10px; font-size: 20px; width: 28px; height: 28px; }
+            .notice-popup-story-section { padding: 10px 12px; border-radius: 12px; margin-bottom: 12px; }
+            .notice-popup-story-title { font-size: 12px; margin-bottom: 8px; padding-bottom: 6px; }
+            .notice-popup-chapter-item {
+                padding: 7px 10px; font-size: 12px;
+                border-radius: 10px; gap: 6px;
+            }
+            .notice-popup-chapter-item .chap-number { width: 22px; height: 22px; font-size: 9px; }
+
+            .game-card-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                max-width: 340px;
+            }
+            .game-card-item { min-height: 68px; padding: 10px 6px; border-radius: 12px; }
+            .game-card-icon { font-size: 22px; margin-bottom: 3px; }
+            .game-card-name { font-size: 11px; }
+            .block-blast-preview-icon {
+                grid-template-columns: repeat(3, 10px);
+                grid-template-rows: repeat(3, 10px);
+            }
+
+            .game-title-center { font-size: 17px; }
+            .game-header-row { margin: 4px 0 6px 0; }
+            .size-btn { padding: 5px 12px; font-size: 11px; min-width: 46px; }
+            .game-btn, .blockblast-btn {
+                padding: 7px 16px; font-size: 12px; min-width: 80px;
+            }
+            .game-score-display { padding: 5px 10px; font-size: 12px; }
+            .othello-board { width: 260px; height: 260px; padding: 6px; gap: 2px; }
+            .othello-piece { width: 70%; height: 70%; }
+            #game-2048-board { max-width: 320px; padding: 8px; gap: 6px; border-radius: 14px; }
+            .game-2048-cell { border-radius: 8px; font-size: 18px !important; }
+            .blockblast-board { max-width: 300px; padding: 6px; gap: 3px; }
+            .blockblast-dock { max-width: 300px; min-height: 84px; padding: 6px 8px; }
+            .blockblast-dock-slot { min-height: 68px; }
+            .blockblast-mini-cell { width: 16px; height: 16px; }
+            .blockblast-title { font-size: 17px; }
+            .blockblast-score-num { font-size: 15px; }
+
+            .batch-chapter-block { padding: 12px 14px; border-radius: 12px; }
+            .batch-chapter-block .chapter-number-label { font-size: 12px; margin-bottom: 8px; }
+            .batch-chapter-block .chapter-number-label .num-badge {
+                width: 22px; height: 22px; font-size: 10px;
+            }
+            .batch-story-block { padding: 12px 14px; border-radius: 14px; }
+            .batch-story-block .story-header { margin-bottom: 10px; padding-bottom: 8px; }
+            .batch-story-block .story-header .story-label { font-size: 13px; }
+            .batch-add-chapter-btn { padding: 8px; font-size: 12px; }
+            .batch-add-story-btn { padding: 10px; font-size: 12px; }
+
+            footer { padding: 10px; font-size: 11px; }
+            .scroll-controls { bottom: 14px; right: 12px; gap: 6px; }
+            .scroll-btn, .floating-menu-btn { width: 36px; height: 36px; font-size: 14px; }
+            .avatar { width: 80px; height: 80px; }
+            .author-bio { padding: 14px; font-size: 12px; }
+            #author-name-text { font-size: 17px !important; }
+        }
+
+        @media (max-width: 380px) {
+            header { padding: 10px 8px 8px 8px; }
+            header h1 { font-size: 14px; padding-right: 150px; padding-left: 4px; }
+            .header-top-controls { top: 6px; right: 6px; gap: 3px; }
+            .menu-style-toggle, .settings-toggle { padding: 3px 7px; font-size: 10px; }
+            .theme-toggle { width: 24px; height: 24px; font-size: 12px; }
+            .mobile-hamburger-btn { width: 24px; height: 24px; font-size: 12px; }
+
+            .container { padding: 10px; border-radius: 14px; }
+            .section-title { font-size: 13px; }
+            .hamburger-btn { padding: 6px 13px; font-size: 11px; height: 32px; border-radius: 17px; }
+            .nav-btn { padding: 6px 10px; font-size: 11px; }
+
+            .story-grid { gap: 6px; }
+            .story-card { padding: 5px; border-radius: 10px; }
+            .story-card-title { font-size: 10px; }
+            .story-card-author { font-size: 8.5px; }
+            .story-card-chapter { font-size: 8.5px; }
+            .mini-tag { font-size: 7.5px; padding: 1px 4px; }
+            .read-story-link { font-size: 9px; }
+            .badge { font-size: 7px; padding: 1px 5px; }
+
+            .hot-slide-cover { width: 140px; height: 198px; }
+            .story-decor-cover { width: 140px; height: 198px; }
+
+            .ranking-top-three { gap: 8px; padding: 0 2px; }
+            .ranking-card-top.rank-1 {
+                width: 112px;
+                padding: 10px 8px 8px 8px;
+            }
+            .ranking-card-top.rank-1 .ranking-card-cover { width: 78px; height: 105px; }
+            .ranking-card-top.rank-1 .ranking-card-rank { width: 26px; height: 26px; font-size: 11px; top: -10px; }
+            .ranking-card-top.rank-1 .ranking-card-title { font-size: 10px; }
+            .ranking-card-top.rank-1 .ranking-card-author { font-size: 8px; }
+            .ranking-card-top.rank-1 .ranking-card-stats { font-size: 9px; }
+            .ranking-card-top.rank-1 .ranking-card-btn { font-size: 8px; padding: 3px 10px; }
+
+            .ranking-card-top.rank-2,
+            .ranking-card-top.rank-3 { width: 92px; padding: 8px 6px 6px 6px; }
+            .ranking-card-top.rank-2 .ranking-card-cover,
+            .ranking-card-top.rank-3 .ranking-card-cover { width: 64px; height: 88px; }
+            .ranking-card-top.rank-2 .ranking-card-rank,
+            .ranking-card-top.rank-3 .ranking-card-rank {
+                width: 22px; height: 22px; font-size: 10px; top: -9px;
+            }
+            .ranking-card-top.rank-2 .ranking-card-title,
+            .ranking-card-top.rank-3 .ranking-card-title { font-size: 9px; }
+            .ranking-card-top.rank-2 .ranking-card-author,
+            .ranking-card-top.rank-3 .ranking-card-author { font-size: 7.5px; }
+            .ranking-card-top.rank-2 .ranking-card-stats,
+            .ranking-card-top.rank-3 .ranking-card-stats { font-size: 8px; }
+            .ranking-card-top.rank-2 .ranking-card-btn,
+            .ranking-card-top.rank-3 .ranking-card-btn { font-size: 7px; padding: 2px 8px; }
+
+            .ranking-tab-btn { font-size: 9.5px; padding: 5px 7px; }
+            .ranking-section-title { font-size: 14px; }
+            .ranking-card-row { padding: 6px 8px; gap: 6px; }
+            .ranking-card-row .ranking-card-cover { width: 52px; height: 72px; }
+            .ranking-card-row .ranking-card-title { font-size: 10.5px; }
+            .ranking-card-row .ranking-card-author { font-size: 9px; }
+            .ranking-card-row .ranking-card-stats { font-size: 10px; }
+            .ranking-card-row .ranking-card-rank { width: 26px; height: 26px; font-size: 10px; }
+
+            .game-card-grid { gap: 6px; max-width: 280px; }
+            .game-card-item { min-height: 60px; padding: 8px 4px; }
+            .game-card-icon { font-size: 18px; }
+            .game-card-name { font-size: 10px; }
+            .block-blast-preview-icon {
+                grid-template-columns: repeat(3, 8px);
+                grid-template-rows: repeat(3, 8px);
+            }
+            .othello-board { width: 230px; height: 230px; }
+            #game-2048-board { max-width: 280px; }
+            .blockblast-board { max-width: 260px; padding: 5px; gap: 2px; }
+            .blockblast-dock { max-width: 260px; min-height: 74px; padding: 5px 6px; }
+            .blockblast-dock-slot { min-height: 58px; }
+            .blockblast-mini-cell { width: 14px; height: 14px; }
+
+            .story-progress-header { font-size: 11px; }
+            .story-progress-footer { font-size: 10px; }
+            .chapter-item-v { font-size: 11px; padding: 8px 10px; }
+            .chapter-item-v .chapter-title-line .badge-18,
+            .chapter-item-v .chapter-title-line .chapter-name { font-size: 11px; }
+            .reading-box { padding: 12px; font-size: 13px; }
+            .read-btn { padding: 7px 12px; font-size: 11px; }
+        }
+
+        @media (max-width: 340px) {
+            header h1 { font-size: 13px; padding-right: 138px; }
+            .container { padding: 8px; }
+            .section-title { font-size: 12px; }
+
+            .story-grid { gap: 5px; }
+            .story-card { padding: 4px; }
+            .story-card-title { font-size: 9.5px; }
+            .story-card-author { font-size: 8px; }
+            .story-card-chapter { font-size: 8px; }
+            .mini-tag { font-size: 7px; padding: 1px 3px; }
+            .read-story-link { font-size: 8.5px; }
+
+            .ranking-top-three { gap: 5px; }
+            .ranking-card-top.rank-1 { width: 100px; padding: 8px 6px 6px 6px; }
+            .ranking-card-top.rank-1 .ranking-card-cover { width: 70px; height: 95px; }
+            .ranking-card-top.rank-1 .ranking-card-title { font-size: 9px; }
+            .ranking-card-top.rank-1 .ranking-card-author { font-size: 7.5px; }
+            .ranking-card-top.rank-1 .ranking-card-stats { font-size: 8px; }
+            .ranking-card-top.rank-1 .ranking-card-btn { font-size: 7px; padding: 2px 8px; }
+
+            .ranking-card-top.rank-2,
+            .ranking-card-top.rank-3 { width: 82px; padding: 6px 5px 5px 5px; }
+            .ranking-card-top.rank-2 .ranking-card-cover,
+            .ranking-card-top.rank-3 .ranking-card-cover { width: 56px; height: 78px; }
+            .ranking-card-top.rank-2 .ranking-card-title,
+            .ranking-card-top.rank-3 .ranking-card-title { font-size: 8px; }
+            .ranking-card-top.rank-2 .ranking-card-author,
+            .ranking-card-top.rank-3 .ranking-card-author { font-size: 7px; }
+            .ranking-card-top.rank-2 .ranking-card-stats,
+            .ranking-card-top.rank-3 .ranking-card-stats { font-size: 7px; }
+            .ranking-card-top.rank-2 .ranking-card-btn,
+            .ranking-card-top.rank-3 .ranking-card-btn { font-size: 6.5px; padding: 2px 6px; }
+
+            .ranking-tab-btn { font-size: 9px; padding: 4px 5px; letter-spacing: -0.2px; }
+            .story-decor-cover { width: 120px; height: 170px; }
+            .hot-slide-cover { width: 120px; height: 170px; }
+            .othello-board { width: 200px; height: 200px; }
+            #game-2048-board { max-width: 240px; padding: 6px; gap: 4px; }
+            .blockblast-board { max-width: 230px; }
+            .blockblast-dock { max-width: 230px; }
         }
     </style>
 </head>
@@ -3462,7 +3785,6 @@
         </div>
     </div>
 
-    <!-- ===== NOTICE POPUP ===== -->
     <div class="notice-popup-overlay" id="notice-popup">
         <div class="notice-popup-box">
             <button class="notice-popup-close" onclick="closeNoticePopup()" title="Đóng">×</button>
@@ -3470,14 +3792,12 @@
                 <span class="icon">✦</span> CẬP NHẬT MỚI <span class="icon">✦</span>
             </div>
             <div class="notice-popup-content" id="notice-popup-content">
-                <!-- Nội dung sẽ được JavaScript tạo động -->
             </div>
         </div>
     </div>
 
     <header>
         <div class="header-top-controls">
-            <button class="menu-style-toggle" onclick="doiKieuMenu()" title="Đổi kiểu menu hiển thị">☰</button>
             <button class="settings-toggle" id="settings-toggle-btn" onclick="toggleSettingsPanel()" title="Cài đặt theme">⚙️</button>
             <div id="settings-panel" class="settings-panel hidden">
                 <div class="settings-option active" data-theme="hongphan" onclick="chonTheme('hongphan')">
@@ -3489,13 +3809,10 @@
                     <span class="check-mark">✓</span>
                 </div>
             </div>
-            <button class="theme-toggle" onclick="doiCheDoSangToi()">🌙 Tối</button>
+            <button class="theme-toggle" onclick="doiCheDoSangToi()" title="Chuyển chế độ Sáng/Tối"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+            <button class="mobile-hamburger-btn" id="mobile-hamburger-btn" onclick="toggleHamburgerDropdown()" title="Menu">☰</button>
         </div>
         <h1 class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</h1>
-        <div class="slogan">
-            Chẳng sợ lãng phí năm tháng thanh xuân<br>
-            Chỉ muốn theo người đến chân trời góc bể
-        </div>
     </header>
 
     <div class="nav-menu" id="nav-menu-buttons">
@@ -3533,8 +3850,8 @@
         <div id="tab-trang-chu">
             <div id="continue-banner-box" class="hidden continue-reading-banner">
                 <div>
-                    <div style="font-size: 12px; opacity: 0.9;">📖 ĐỌC TIẾP CHƯƠNG GẦN NHẤT</div>
-                    <div id="continue-title" style="font-weight: bold; font-size: 15px; margin-top: 2px;">Tên truyện - Chương</div>
+                    <div class="banner-label">📖 ĐỌC TIẾP CHƯƠNG GẦN NHẤT</div>
+                    <div id="continue-title">Tên truyện - Chương</div>
                 </div>
                 <button class="pass-btn" style="background: white; color: var(--primary-color);" onclick="tiepTucDocNgay()">Đọc ngay ›</button>
             </div>
@@ -3547,20 +3864,17 @@
             </div>
 
             <div class="search-box">
-                <input type="text" id="search-home-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện..." oninput="locTruyen()">
+                <input type="text" id="search-home-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện, tác giả, thể loại..." oninput="locTruyen()">
                 <select id="search-home-status" class="filter-select" onchange="locTruyen()">
                     <option value="tat-ca">Tất cả trạng thái</option>
                     <option value="Đang cập nhật">Đang cập nhật</option>
                     <option value="Hoàn thành">Hoàn thành</option>
                 </select>
-                <select id="search-home-sort" class="filter-select" onchange="locTruyen()">
-                    <option value="moi-nhat">✨ Mới cập nhật</option>
-                    <option value="dai-nhat">📖 Truyện dài (>50c)</option>
-                    <option value="ngan-nhat">⚡ Truyện ngắn (<=50c)</option>
-                    <option value="az">🔤 Tên từ A-Z</option>
-                </select>
             </div>
 
+            <button type="button" class="tag-mobile-toggle" id="tag-mobile-toggle-home" onclick="toggleMobileTagPanel('home')">
+                <span>🏷️ Tag</span>
+            </button>
             <div class="multi-tag-filter-container" id="multi-tag-filter-home">
                 <span class="filter-label">🏷️ Tag:</span>
                 <div class="tag-selector-group" id="tag-selector-home"></div>
@@ -3573,7 +3887,6 @@
 
             <div class="section-title">💖 Kho Tàng Truyện</div>
             
-            <!-- THANH TAB KHO TÀNG - ĐÃ SỬA -->
             <div style="display: flex; justify-content: center; margin-bottom: 18px;">
                 <div class="ranking-tabs" id="kho-tang-tabs">
                     <button class="ranking-tab-btn active" data-khotang="views" onclick="doiKhoTangTab('views')">Lượt xem nhiều nhất</button>
@@ -3584,7 +3897,6 @@
             
             <div class="story-grid" id="home-story-grid"></div>
 
-            <!-- SECTION BẢNG XẾP HẠNG TRÊN TRANG CHỦ -->
             <div class="ranking-section" id="home-ranking-section">
                 <div class="ranking-section-header">
                     <h3 class="ranking-section-title">🏆 Bảng Xếp Hạng</h3>
@@ -3616,20 +3928,17 @@
             <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">📚 Danh Sách Tất Cả Truyện</h3>
             
             <div class="search-box">
-                <input type="text" id="search-all-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện..." oninput="locTruyen()">
+                <input type="text" id="search-all-input" class="search-input" placeholder="🔎 Tìm kiếm tên truyện, tác giả, thể loại..." oninput="locTruyen()">
                 <select id="search-all-status" class="filter-select" onchange="locTruyen()">
                     <option value="tat-ca">Tất cả trạng thái</option>
                     <option value="Đang cập nhật">Đang cập nhật</option>
                     <option value="Hoàn thành">Hoàn thành</option>
                 </select>
-                <select id="search-all-sort" class="filter-select" onchange="locTruyen()">
-                    <option value="moi-nhat">✨ Mới cập nhật</option>
-                    <option value="dai-nhat">📖 Truyện dài (>50c)</option>
-                    <option value="ngan-nhat">⚡ Truyện ngắn (<=50c)</option>
-                    <option value="az">🔤 Tên từ A-Z</option>
-                </select>
             </div>
 
+            <button type="button" class="tag-mobile-toggle" id="tag-mobile-toggle-all" onclick="toggleMobileTagPanel('all')">
+                <span>🏷️ Tag</span>
+            </button>
             <div class="multi-tag-filter-container" id="multi-tag-filter-all">
                 <span class="filter-label">🏷️ Tag:</span>
                 <div class="tag-selector-group" id="tag-selector-all"></div>
@@ -3644,7 +3953,6 @@
             <h3 style="text-align: center; color: var(--primary-color); margin-top: 0; font-size: 22px;">🏆 Tác Phẩm Được Yêu Thích Nhất</h3>
             <p style="text-align: center; font-size: 14px; color: var(--subtext-color); margin-bottom: 25px;">Những bộ truyện có tổng lượt đọc và yêu thích cao nhất.</p>
             
-            <!-- THANH TAB RANKING - ĐÃ SỬA -->
             <div style="display: flex; justify-content: center; margin-bottom: 28px;">
                 <div class="ranking-tabs" id="full-ranking-tabs">
                     <button class="ranking-tab-btn active" data-ranking-tab="views" onclick="doiRankingTab('full', 'views')">Lượt đọc</button>
@@ -3741,7 +4049,7 @@
                         <button class="size-btn" data-size="6" onclick="chonKichThuoc2048(6)">6×6</button>
                     </div>
 
-                    <div style="display: flex; justify-content: space-between; align-items: center; width:100%; max-width:400px; margin-bottom: 12px; font-weight: bold; font-size: 14px; padding: 0 4px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width:100%; max-width:400px; margin-bottom: 12px; font-weight: bold; font-size: 14px; padding: 0 4px; gap: 8px;">
                         <div class="game-score-display">Điểm: <span id="game-score">0</span></div>
                         <button class="game-btn" onclick="batDauGame2048()">Chơi Lại 🎮</button>
                     </div>
@@ -3794,7 +4102,6 @@
                 </div>
             </div>
 
-            <!-- BLOCK BLAST VIEW (GIỮ NGUYÊN) -->
             <div id="quay-game-blockblast-view" class="hidden">
                 <button class="back-btn" onclick="quayLaiQuayThuGian()">‹ Quay lại Quầy thư giãn</button>
 
@@ -3843,7 +4150,6 @@
                     </div>
                 </div>
             </div>
-            <!-- END BLOCK BLAST VIEW -->
         </div>
 
         <div id="tab-quan-li" class="hidden">
@@ -3868,7 +4174,6 @@
                     <button type="button" class="mode-btn" id="btn-mode-thongbao" onclick="doiCheDoDang('thongbao')">🔔 Đăng / Sửa thông báo</button>
                 </div>
 
-                <!-- Tạo truyện mới -->
                 <div id="group-truyen-moi">
                     <div class="form-group">
                         <label>Tên Truyện (*)</label>
@@ -3961,7 +4266,6 @@
                     </div>
                 </div>
 
-                <!-- Sửa truyện -->
                 <div id="group-sua-truyen" class="hidden">
                     <div class="form-group">
                         <label>Chọn Truyện Cần Sửa Hoặc Xóa (*)</label>
@@ -4032,7 +4336,6 @@
                     </div>
                 </div>
 
-                <!-- ===== ĐĂNG CHƯƠNG MỚI ===== -->
                 <div id="group-truyen-co-san" class="hidden">
                     <div class="mode-selector" style="margin-bottom: 18px; border-bottom: 2px dashed var(--border-color); padding-bottom: 12px;">
                         <button type="button" class="mode-btn active" id="btn-chapter-mode-single" onclick="doiChapterMode('single')">📝 Đăng chương mới</button>
@@ -4080,7 +4383,6 @@
                         </div>
                     </div>
 
-                    <!-- ===== ĐĂNG HÀNG LOẠT ===== -->
                     <div id="chapter-mode-batch" class="hidden">
                         <div class="mode-selector" style="margin-bottom: 16px;">
                             <button type="button" class="mode-btn active" id="btn-batch-mode-one" onclick="doiBatchMode('one')">📚 Một truyện</button>
@@ -4338,7 +4640,7 @@
                         <div class="story-progress-bar-fill" id="story-progress-bar-fill"></div>
                     </div>
                     <div class="story-progress-footer">
-                        <span id="story-progress-chapters-text">Đã hoàn thành: 0 / 0 chương</span>
+                        <span id="story-progress-chapters-text">0/0</span>
                         <span id="story-progress-status-text">Đang tiến hành</span>
                     </div>
                 </div>
@@ -4429,10 +4731,6 @@
     <footer class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</footer>
 
     <script>
-        /* ============================================================
-           PHẦN JAVASCRIPT - GIỮ NGUYÊN TOÀN BỘ CHỨC NĂNG
-           ============================================================ */
-
         const MAT_KHAU_DUNG = "2026";
         const GITHUB_JSON_URL = "https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/data.json";
         const GITHUB_COMMENT_JSON_URL = "https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/comment.json";
@@ -4449,12 +4747,10 @@
         window.isSfxEnabledOthello = true;
         let audioCtx = null;
 
-        // --- RANKING TAB STATE ---
         window.currentRankingTabHome = 'views';
         window.currentRankingTabFull = 'views';
         window.currentKhoTangTab = 'views';
 
-        // --- THEME MANAGEMENT ---
         function chonTheme(theme) {
             document.body.classList.remove('theme-ngotngao');
             if (theme === 'ngotngao') {
@@ -4480,23 +4776,15 @@
             }
         });
 
-        // --- BATCH CHAPTER VARIABLES ---
         var currentChapterMode = 'single';
         var currentBatchMode = 'one';
 
-        // ============================================================
-        // HÀM XÁC ĐỊNH TRẠNG THÁI TRUYỆN DÙNG CHUNG
-        // ============================================================
         function getTrangThaiHienThi(truyen) {
             if (!truyen) return 'Đang cập nhật';
-            // Nếu admin đã thủ công đánh dấu Hoàn thành -> giữ nguyên
             if (truyen.status === 'Hoàn thành') return 'Hoàn thành';
             if (truyen.status === 'Tạm ẩn') return 'Tạm ẩn';
-            
-            // Nếu không xác định được tổng số chương -> giữ Đang cập nhật
             var tongDuKien = truyen.totalChaptersInput || 0;
             if (!tongDuKien || tongDuKien <= 0) return 'Đang cập nhật';
-            
             var soChuongDaDang = truyen.chapters ? truyen.chapters.length : 0;
             if (soChuongDaDang >= tongDuKien) return 'Hoàn thành';
             return 'Đang cập nhật';
@@ -4508,9 +4796,6 @@
             return "dang-cap-nhat";
         }
 
-        // ============================================================
-        // RANKING SYSTEM - HÀM DÙNG CHUNG
-        // ============================================================
         function getRankedStories(sortBy) {
             let dsTruyen = [];
             for (let key in window.dữLiệuTruyện) {
@@ -4518,7 +4803,6 @@
                 if (truyen.status === 'Tạm ẩn') continue;
                 dsTruyen.push({ key: key, truyen: truyen });
             }
-
             if (sortBy === 'views') {
                 dsTruyen.sort((a, b) => tinhTongViewTruyen(b.truyen) - tinhTongViewTruyen(a.truyen));
             } else if (sortBy === 'favorites') {
@@ -4530,7 +4814,6 @@
                     return tsB - tsA;
                 });
             }
-
             return dsTruyen;
         }
 
@@ -4547,8 +4830,6 @@
             return maxTs;
         }
 
-        // ===== FIX: LẤY ĐÚNG CHAPTER MỚI NHẤT THEO THỜI GIAN ĐĂNG/CẬP NHẬT THỰC TẾ =====
-        // (dùng cho card truyện, KHÔNG liên quan đến tổng số chương/ngoại truyện dự kiến)
         function getLatestChapterIndex(storyKey) {
             const truyen = window.dữLiệuTruyện[storyKey];
             if (!truyen || !truyen.chapters || truyen.chapters.length === 0) return -1;
@@ -4564,7 +4845,6 @@
             });
             return latestIdx;
         }
-        // ===== KẾT THÚC FIX =====
 
         function getRankingStatValue(storyKey, truyen, sortBy) {
             if (sortBy === 'favorites') {
@@ -4578,7 +4858,6 @@
             const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Bìa ]`;
             const stat = getRankingStatValue(item.key, truyen, sortBy);
             const rankClass = index === 0 ? 'rank-1' : (index === 1 ? 'rank-2' : 'rank-3');
-            
             return `
                 <div class="ranking-card ranking-card-top ${rankClass}" onclick="xemTruyen('${item.key}', false)">
                     <div class="ranking-card-rank">#${index + 1}</div>
@@ -4598,7 +4877,6 @@
             const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Bìa ]`;
             const stat = getRankingStatValue(item.key, truyen, sortBy);
             const trangThai = getTrangThaiHienThi(truyen);
-            
             return `
                 <div class="ranking-card-row" onclick="xemTruyen('${item.key}', false)">
                     <div class="ranking-card-rank">#${index + 1}</div>
@@ -4616,20 +4894,15 @@
         function renderRankingSection(containerId, limit, sortBy) {
             const container = document.getElementById(containerId);
             if (!container) return;
-            
             const ds = getRankedStories(sortBy);
             const limited = limit ? ds.slice(0, limit) : ds;
-            
             if (limited.length === 0) {
                 container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có bộ truyện nào trên bảng xếp hạng! 🏆</p>`;
                 return;
             }
-
             let html = '';
-            
             const top3 = limited.slice(0, 3);
             const rest = limited.slice(3);
-            
             if (top3.length > 0) {
                 html += '<div class="ranking-top-three">';
                 if (top3[1]) html += renderRankingCardTop(top3[1], 1, sortBy);
@@ -4637,7 +4910,6 @@
                 if (top3[2]) html += renderRankingCardTop(top3[2], 2, sortBy);
                 html += '</div>';
             }
-            
             if (rest.length > 0) {
                 html += '<div class="ranking-list-below">';
                 rest.forEach((item, idx) => {
@@ -4645,7 +4917,6 @@
                 });
                 html += '</div>';
             }
-            
             container.innerHTML = html;
         }
 
@@ -4667,9 +4938,6 @@
             locTruyen();
         };
 
-        // ============================================================
-        // BATCH CHAPTER FUNCTIONS
-        // ============================================================
         function doiChapterMode(mode) {
             currentChapterMode = mode;
             document.getElementById('btn-chapter-mode-single').classList.toggle('active', mode === 'single');
@@ -4786,7 +5054,6 @@
             var block = document.createElement('div');
             block.className = 'batch-story-block';
             block.dataset.storyIndex = index;
-            
             var storySelectHTML = '<select class="form-control batch-story-select">';
             for (var key in window.dữLiệuTruyện) {
                 var truyen = window.dữLiệuTruyện[key];
@@ -4795,7 +5062,6 @@
                 }
             }
             storySelectHTML += '</select>';
-            
             block.innerHTML = 
                 '<div class="story-header">' +
                     '<span class="story-label">📖 TRUYỆN ' + storyNum + '</span>' +
@@ -4823,7 +5089,6 @@
                     '</div>' +
                 '</div>' +
                 '<button type="button" class="batch-add-chapter-btn" onclick="addBatchChapterMulti(this)">➕ Thêm chương cho truyện này</button>';
-            
             container.appendChild(block);
         }
 
@@ -4850,7 +5115,6 @@
             if (!container) return;
             var count = container.children.length;
             var num = count + 1;
-            
             var chapBlock = document.createElement('div');
             chapBlock.className = 'batch-chapter-block';
             chapBlock.dataset.index = count;
@@ -4893,39 +5157,30 @@
             });
         }
 
-        // ===== XỬ LÝ ĐĂNG BATCH =====
         window.xuLyDangBatchOne = function() {
             var storyKey = document.getElementById('batch-one-story-select').value;
             if (!storyKey) { alert("Vui lòng chọn truyện!"); return; }
-            
             var blocks = document.querySelectorAll('#batch-one-chapters-container .batch-chapter-block');
             if (blocks.length === 0) { alert("Chưa có chương nào để đăng!"); return; }
-            
             var chaptersToAdd = [];
             var hasError = false;
-            
             blocks.forEach(function(block) {
                 var title = block.querySelector('.batch-chap-title').value.trim();
                 var content = block.querySelector('.batch-chap-content').value.trim();
-                
                 if (!title || !content) {
                     hasError = true;
                     return;
                 }
-                
                 chaptersToAdd.push({
                     title: title,
                     content: content,
                     is18: false
                 });
             });
-            
             if (hasError) { alert("Vui lòng điền đầy đủ tiêu đề và nội dung cho tất cả các chương!"); return; }
-            
             var truyen = window.dữLiệuTruyện[storyKey];
             var addedChapters = [];
             var now = Date.now();
-            
             chaptersToAdd.forEach(function(ch, idx) {
                 var newChapter = {
                     title: ch.title,
@@ -4943,13 +5198,10 @@
                     title: ch.title
                 });
             });
-            
             window.luuVaoLocalStorage();
-            
             var nowDate = new Date();
             var dateStr = String(nowDate.getDate()).padStart(2, '0') + '/' + String(nowDate.getMonth() + 1).padStart(2, '0') + '/' + nowDate.getFullYear();
             var storyTitle = truyen.title;
-            
             if (addedChapters.length === 1) {
                 var singleChap = addedChapters[0];
                 window.danhSachThongBao.unshift({
@@ -4972,15 +5224,11 @@
                     chapters: addedChapters
                 });
             }
-            
             capNhatBadgeThongBao();
             window.luuVaoLocalStorage();
-            
             alert("📦 Đã đăng " + addedChapters.length + " chương thành công!");
             locTruyen();
             hienThiBangThongBao();
-            // KHÔNG CHUYỂN TAB, Ở LẠI TRANG ĐĂNG TRUYỆN
-            
             document.querySelectorAll('#batch-one-chapters-container .batch-chap-title').forEach(function(el) { el.value = ''; });
             document.querySelectorAll('#batch-one-chapters-container .batch-chap-content').forEach(function(el) { el.value = ''; });
         };
@@ -4988,30 +5236,24 @@
         window.xuLyDangBatchMulti = function() {
             var storyBlocks = document.querySelectorAll('#batch-multi-stories-container .batch-story-block');
             if (storyBlocks.length === 0) { alert("Chưa có truyện nào!"); return; }
-            
             var allAddedChapters = [];
             var hasError = false;
             var now = Date.now();
             var nowDate = new Date();
             var dateStr = String(nowDate.getDate()).padStart(2, '0') + '/' + String(nowDate.getMonth() + 1).padStart(2, '0') + '/' + nowDate.getFullYear();
-            
             storyBlocks.forEach(function(block, storyIdx) {
                 var storyKey = block.querySelector('.batch-story-select').value;
                 if (!storyKey) { hasError = true; return; }
-                
                 var chapBlocks = block.querySelectorAll('.batch-chapter-block');
                 var truyen = window.dữLiệuTruyện[storyKey];
                 var storyAddedChapters = [];
-                
                 chapBlocks.forEach(function(chapBlock, chapIdx) {
                     var title = chapBlock.querySelector('.batch-chap-title').value.trim();
                     var content = chapBlock.querySelector('.batch-chap-content').value.trim();
-                    
                     if (!title || !content) {
                         hasError = true;
                         return;
                     }
-                    
                     var newChapter = {
                         title: title,
                         content: '<p>' + content.replace(/\n/g, '</p><p>') + '</p>',
@@ -5028,29 +5270,23 @@
                         title: title
                     });
                 });
-                
                 if (storyAddedChapters.length > 0) {
                     allAddedChapters = allAddedChapters.concat(storyAddedChapters);
                 }
             });
-            
             if (hasError) { alert("Vui lòng điền đầy đủ thông tin cho tất cả các chương!"); return; }
             if (allAddedChapters.length === 0) { alert("Không có chương nào hợp lệ để đăng!"); return; }
-            
             window.luuVaoLocalStorage();
-            
             var grouped = {};
             allAddedChapters.forEach(function(ch) {
                 if (!grouped[ch.storyKey]) grouped[ch.storyKey] = [];
                 grouped[ch.storyKey].push(ch);
             });
-            
             for (var sk in grouped) {
                 var story = window.dữLiệuTruyện[sk];
                 if (!story) continue;
                 var chapters = grouped[sk];
                 var storyTitle = story.title;
-                
                 if (chapters.length === 1) {
                     var singleChap = chapters[0];
                     window.danhSachThongBao.unshift({
@@ -5074,33 +5310,24 @@
                     });
                 }
             }
-            
             capNhatBadgeThongBao();
             window.luuVaoLocalStorage();
-            
             alert("📦 Đã đăng " + allAddedChapters.length + " chương thành công!");
             locTruyen();
             hienThiBangThongBao();
-            // KHÔNG CHUYỂN TAB
-            
             document.querySelectorAll('#batch-multi-stories-container .batch-chap-title').forEach(function(el) { el.value = ''; });
             document.querySelectorAll('#batch-multi-stories-container .batch-chap-content').forEach(function(el) { el.value = ''; });
         };
 
-        // ============================================================
-        // NOTICE POPUP FUNCTIONS
-        // ============================================================
         function openNoticePopup(notice) {
             var popup = document.getElementById('notice-popup');
             var content = document.getElementById('notice-popup-content');
             content.innerHTML = '';
-            
             if (!notice.chapters || notice.chapters.length === 0) {
                 content.innerHTML = '<div class="notice-popup-empty">Không có chương nào trong thông báo này.</div>';
                 popup.classList.add('active');
                 return;
             }
-            
             var grouped = {};
             notice.chapters.forEach(function(ch) {
                 if (!grouped[ch.storyKey]) {
@@ -5108,23 +5335,18 @@
                 }
                 grouped[ch.storyKey].push(ch);
             });
-            
             for (var storyKey in grouped) {
                 var story = window.dữLiệuTruyện[storyKey];
                 var storyTitle = story ? story.title : 'Truyện';
                 var chapters = grouped[storyKey];
-                
                 var section = document.createElement('div');
                 section.className = 'notice-popup-story-section';
-                
                 var titleDiv = document.createElement('div');
                 titleDiv.className = 'notice-popup-story-title';
                 titleDiv.innerHTML = '<span class="story-icon">📖</span> ' + storyTitle;
                 section.appendChild(titleDiv);
-                
                 var listDiv = document.createElement('div');
                 listDiv.className = 'notice-popup-chapter-list';
-                
                 chapters.forEach(function(ch) {
                     var item = document.createElement('div');
                     item.className = 'notice-popup-chapter-item';
@@ -5140,11 +5362,9 @@
                     };
                     listDiv.appendChild(item);
                 });
-                
                 section.appendChild(listDiv);
                 content.appendChild(section);
             }
-            
             popup.classList.add('active');
         }
 
@@ -5164,28 +5384,21 @@
             }
         });
 
-        // ============================================================
-        // HANDLE NOTICE CLICK - TÍCH HỢP LOGIC TỪ FILE CŨ
-        // ============================================================
         window.handleNoticeClick = function(noticeId) {
             var notice = window.danhSachThongBao.find(function(n) { return n.id === noticeId; });
             if (!notice) return;
-            
             var lastReadId = parseInt(localStorage.getItem('giadinhcauvong_last_read_notice') || '0');
             if (notice.id > lastReadId) {
                 localStorage.setItem('giadinhcauvong_last_read_notice', notice.id);
                 capNhatBadgeThongBao();
             }
-            
             var isSystemNotice = notice.title.includes('Hệ thống') || notice.title.includes('Chào mừng');
             if (isSystemNotice) {
                 return;
             }
-            
             var isTruyenMoi = notice.title.includes('Truyện mới') || 
                               notice.title.includes('truyện mới') || 
                               (notice.content && notice.content.includes('truyện mới'));
-
             if (isTruyenMoi) {
                 if (notice.storyKey && window.dữLiệuTruyện[notice.storyKey]) {
                     xemTruyen(notice.storyKey, false);
@@ -5206,12 +5419,10 @@
                 }
                 return;
             }
-            
             if (notice.chapters && notice.chapters.length > 1) {
                 openNoticePopup(notice);
                 return;
             }
-            
             if (notice.chapters && notice.chapters.length === 1) {
                 var ch = notice.chapters[0];
                 if (window.dữLiệuTruyện[ch.storyKey] && window.dữLiệuTruyện[ch.storyKey].chapters[ch.chapterIndex]) {
@@ -5220,28 +5431,22 @@
                     return;
                 }
             }
-            
             var foundStoryKey = notice.storyKey;
-            
             if (!foundStoryKey || !window.dữLiệuTruyện[foundStoryKey]) {
                 var tieuDeThongBao = notice.title;
                 var matchName = tieuDeThongBao.match(/["“](.*?)["“]/);
                 var searchKeyword = matchName ? matchName[1].toLowerCase() : "";
-                
                 if (!searchKeyword && tieuDeThongBao.includes('—')) {
                     var parts = tieuDeThongBao.split('—');
                     searchKeyword = parts[0].replace('📖 Chương mới:', '').replace('📖 Truyện mới:', '').trim().toLowerCase();
                 }
-                
                 if (!searchKeyword) {
                     searchKeyword = tieuDeThongBao.toLowerCase();
                 }
-                
                 for (var key in window.dữLiệuTruyện) {
                     var truyen = window.dữLiệuTruyện[key];
                     var fullTitle = truyen.title.toLowerCase();
                     var cleanTitle = truyen.title.replace(/\[.*?\]/g, '').trim().toLowerCase();
-                    
                     if (searchKeyword.includes(fullTitle) || fullTitle.includes(searchKeyword) || 
                         (cleanTitle.length > 2 && searchKeyword.includes(cleanTitle))) {
                         foundStoryKey = key;
@@ -5249,17 +5454,13 @@
                     }
                 }
             }
-            
             if (!foundStoryKey || !window.dữLiệuTruyện[foundStoryKey]) {
                 return;
             }
-            
             var truyen = window.dữLiệuTruyện[foundStoryKey];
             var tieuDeThongBao = notice.title;
-            
             if (tieuDeThongBao.includes('Chương mới:') || tieuDeThongBao.includes('📖 Chương mới:')) {
                 var targetChapIndex = truyen.chapters.length - 1;
-                
                 for (var i = 0; i < truyen.chapters.length; i++) {
                     if (tieuDeThongBao.includes(truyen.chapters[i].title)) {
                         targetChapIndex = i;
@@ -5273,9 +5474,6 @@
             }
         };
 
-        // ============================================================
-        // CÁC HÀM CƠ BẢN KHÁC
-        // ============================================================
         function getAudioContext() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -5348,7 +5546,6 @@
             const btnContainer = document.getElementById('nav-menu-buttons');
             const hamburgerContainer = document.getElementById('hamburger-menu-container');
             const menuToggleBtn = document.querySelector('.menu-style-toggle');
-
             if (btnContainer.classList.contains('hidden')) {
                 btnContainer.classList.remove('hidden');
                 hamburgerContainer.classList.add('hidden');
@@ -5357,7 +5554,7 @@
             } else {
                 btnContainer.classList.add('hidden');
                 hamburgerContainer.classList.remove('hidden');
-                menuToggleBtn.innerText = '🔹';
+                menuToggleBtn.innerText = '◯';
                 localStorage.setItem('menu_style', 'hamburger');
             }
         }
@@ -5370,7 +5567,10 @@
         window.addEventListener('click', function(e) {
             const container = document.getElementById('hamburger-menu-container');
             const dropdown = document.getElementById('hamburger-dropdown');
-            if (container && !container.contains(e.target)) {
+            const mobileToggleBtn = document.getElementById('mobile-hamburger-btn');
+            const clickedInsideContainer = container && container.contains(e.target);
+            const clickedMobileBtn = mobileToggleBtn && mobileToggleBtn.contains(e.target);
+            if (!clickedInsideContainer && !clickedMobileBtn) {
                 if (dropdown) dropdown.classList.add('hidden');
             }
         });
@@ -5465,7 +5665,6 @@
         function isChapterNew(storyKey, chapterIndex) {
             const deployTs = getDeploymentTimestamp();
             const now = Date.now();
-            
             const storedTs = getChapterTimestamp(storyKey, chapterIndex);
             if (storedTs) {
                 return (now - storedTs) < TWO_DAYS_MS;
@@ -5474,11 +5673,6 @@
             }
         }
 
-        // ===== FIX: MÀU CHỮ TÓM TẮT TRUYỆN TỰ THEO THEME (LIGHT/DARK) =====
-        // Chỉ loại bỏ màu ĐEN/GẦN ĐEN dính từ việc copy nội dung ngoài (Word, v.v...)
-        // để chữ tự nhận màu mặc định của theme (var(--text-color)) và đổi ngay khi chuyển Light/Dark.
-        // KHÔNG đụng tới các màu do admin chủ động chọn bằng nút tô màu trong Quản lý truyện
-        // (hồng #ff69b4, đỏ #e74c3c, tím #7c4dff, hay bất kỳ màu nào không phải đen/gần đen).
         function isMauDenTuWord(colorStr) {
             if (!colorStr) return false;
             const c = colorStr.trim().toLowerCase();
@@ -5497,7 +5691,6 @@
                     return false;
                 }
             }
-            // Ngưỡng "gần đen" điển hình của màu mặc định copy từ Word
             return r <= 20 && g <= 20 && b <= 20;
         }
 
@@ -5506,7 +5699,6 @@
             try {
                 const wrapper = document.createElement('div');
                 wrapper.innerHTML = html;
-
                 wrapper.querySelectorAll('[style]').forEach(el => {
                     if (el.style.color && isMauDenTuWord(el.style.color)) {
                         el.style.removeProperty('color');
@@ -5518,13 +5710,11 @@
                         f.removeAttribute('color');
                     }
                 });
-
                 return wrapper.innerHTML;
             } catch (e) {
                 return html;
             }
         }
-        // ===== KẾT THÚC FIX =====
 
         async function loadDataFromGitHub() {
             try {
@@ -5534,14 +5724,12 @@
                     if (data.truyen_data) window.dữLiệuTruyện = data.truyen_data;
                     if (data.thongbao_data) window.danhSachThongBao = data.thongbao_data;
                 }
-
                 let commentRes = await fetch(GITHUB_COMMENT_JSON_URL + "?_t=" + new Date().getTime());
                 if (commentRes.ok) {
                     let cData = await commentRes.json();
                     if (cData.homechat_data && cData.homechat_data.length > 0) window.danhSachLoiNhanTrangChu = cData.homechat_data;
                     if (cData.stories_comments) window.danhSachBinhLuanTruyen = cData.stories_comments;
                 }
-                
                 capNhatDropdownTag();
                 buildTagSelectors();
                 locTruyen();
@@ -5565,9 +5753,6 @@
         loadDataFromGitHub();
         setInterval(kiemTraLichHenGio, 30000);
 
-        // ============================================================
-        // TAG - GIỚI HẠN 2 HÀNG + NÚT "+ THÊM"
-        // ============================================================
         function buildTagSelectors() {
             const tagsSet = new Set();
             for (let key in window.dữLiệuTruyện) {
@@ -5584,10 +5769,8 @@
                 const maxTagsPerRow = 5;
                 const maxVisible = maxTagsPerRow;
                 const hasMore = sortedTags.length > maxVisible;
-                
                 const visibleTags = sortedTags.slice(0, maxVisible);
                 const hiddenTags = sortedTags.slice(maxVisible);
-
                 visibleTags.forEach(tag => {
                     const btn = document.createElement('button');
                     btn.className = 'tag-filter-btn';
@@ -5598,7 +5781,6 @@
                     btn.onclick = () => toggleTagFilter('home', tag);
                     homeContainer.appendChild(btn);
                 });
-
                 let expandBtn = homeContainer.parentElement.querySelector('.tag-expand-btn');
                 if (hasMore) {
                     if (!expandBtn) {
@@ -5626,10 +5808,8 @@
                 const maxTagsPerRow = 5;
                 const maxVisible = maxTagsPerRow;
                 const hasMore = sortedTags.length > maxVisible;
-                
                 const visibleTags = sortedTags.slice(0, maxVisible);
                 const hiddenTags = sortedTags.slice(maxVisible);
-
                 visibleTags.forEach(tag => {
                     const btn = document.createElement('button');
                     btn.className = 'tag-filter-btn';
@@ -5640,7 +5820,6 @@
                     btn.onclick = () => toggleTagFilter('all', tag);
                     allContainer.appendChild(btn);
                 });
-
                 let expandBtn = allContainer.parentElement.querySelector('.tag-expand-btn');
                 if (hasMore) {
                     if (!expandBtn) {
@@ -5666,27 +5845,37 @@
             updateActiveTagsDisplay('all');
         }
 
+        window.toggleMobileTagPanel = function(target) {
+            const container = document.getElementById('multi-tag-filter-' + target);
+            const toggleBtn = document.getElementById('tag-mobile-toggle-' + target);
+            if (!container) return;
+            const isOpening = !container.classList.contains('tag-mobile-open');
+            container.classList.toggle('tag-mobile-open');
+            if (toggleBtn) toggleBtn.classList.toggle('active');
+            if (isOpening) {
+                const selectorGroup = document.getElementById('tag-selector-' + target);
+                if (selectorGroup && !selectorGroup.classList.contains('expanded') && selectorGroup.dataset.hiddenTags) {
+                    toggleTagExpand(target);
+                }
+            }
+        };
+
         function toggleTagExpand(target) {
             const container = target === 'home' ? document.getElementById('tag-selector-home') : document.getElementById('tag-selector-all');
             if (!container) return;
-            
             const isExpanded = container.classList.contains('expanded');
             const expandBtn = container.parentElement.querySelector('.tag-expand-btn');
-            
             if (isExpanded) {
                 container.classList.remove('expanded');
                 if (expandBtn) expandBtn.textContent = '+ thêm';
-                
                 const hiddenTags = JSON.parse(container.dataset.hiddenTags || '[]');
                 const allBtns = container.querySelectorAll('.tag-filter-btn');
                 const visibleCount = allBtns.length - hiddenTags.length;
                 const btnsToRemove = Array.from(allBtns).slice(visibleCount);
                 btnsToRemove.forEach(btn => btn.remove());
-                
             } else {
                 container.classList.add('expanded');
                 if (expandBtn) expandBtn.textContent = '− thu gọn';
-                
                 const hiddenTags = JSON.parse(container.dataset.hiddenTags || '[]');
                 hiddenTags.forEach(tag => {
                     const btn = document.createElement('button');
@@ -5759,10 +5948,8 @@
             const track = document.getElementById('hot-slide-track');
             const dotsContainer = document.getElementById('slider-dots');
             if (!track || !dotsContainer) return;
-
             track.innerHTML = '';
             dotsContainer.innerHTML = '';
-
             let hotList = [];
             for (let key in window.dữLiệuTruyện) {
                 const tr = window.dữLiệuTruyện[key];
@@ -5770,29 +5957,23 @@
                     hotList.push({ key: key, truyen: tr });
                 }
             }
-
             if (hotList.length === 0) {
                 document.getElementById('home-hot-slider').classList.add('hidden');
                 return;
             } else {
                 document.getElementById('home-hot-slider').classList.remove('hidden');
             }
-
             hotList = hotList.slice(0, 5);
-
             hotList.forEach((item, index) => {
                 const tr = item.truyen;
                 const coverHTML = tr.cover ? `<img src="${tr.cover}">` : `[ Bìa ]`;
-
                 track.innerHTML += `
                     <div class="hot-slide-item" onclick="xemTruyen('${item.key}', false)">
                         <div class="hot-slide-cover">${coverHTML}</div>
                     </div>
                 `;
-
                 dotsContainer.innerHTML += `<div class="slider-dot ${index === 0 ? 'active' : ''}" onclick="chuyenDenSlide(${index})"></div>`;
             });
-
             slideIndex = 0;
             batDauTuChuyenSlide();
         }
@@ -5801,11 +5982,9 @@
             const track = document.getElementById('hot-slide-track');
             const items = track.getElementsByClassName('hot-slide-item');
             if (items.length === 0) return;
-
             slideIndex += n;
             if (slideIndex >= items.length) slideIndex = 0;
             if (slideIndex < 0) slideIndex = items.length - 1;
-
             capNhatTrangThaiSlide();
         }
 
@@ -5819,9 +5998,7 @@
             const dots = document.getElementById('slider-dots').getElementsByClassName('slider-dot');
             const items = track.getElementsByClassName('hot-slide-item');
             if (items.length === 0) return;
-
             track.style.transform = `translateX(-${slideIndex * 100}%)`;
-
             for (let i = 0; i < dots.length; i++) {
                 dots[i].classList.toggle('active', i === slideIndex);
             }
@@ -5839,7 +6016,6 @@
             const now = new Date().getTime();
             let conLai = [];
             let daDang = false;
-
             window.danhSachHenGio.forEach(item => {
                 if (now >= item.targetTime) {
                     daDang = true;
@@ -5868,7 +6044,6 @@
                     conLai.push(item);
                 }
             });
-
             if (daDang) {
                 window.danhSachHenGio = conLai;
                 localStorage.setItem('giadinhcauvong_schedules', JSON.stringify(window.danhSachHenGio));
@@ -5982,7 +6157,6 @@
             document.getElementById('btn-admin-tab-view').classList.toggle('active', sub === 'view');
             document.getElementById('btn-admin-tab-tuongtac').classList.toggle('active', sub === 'tuongtac');
             document.getElementById('btn-admin-tab-hethong').classList.toggle('active', sub === 'hethong');
-
             document.getElementById('admin-subcontent-dangtruyen').classList.toggle('hidden', sub !== 'dangtruyen');
             document.getElementById('admin-subcontent-tongquan').classList.toggle('hidden', sub !== 'tongquan');
             document.getElementById('admin-subcontent-truyen').classList.toggle('hidden', sub !== 'truyen');
@@ -6025,10 +6199,8 @@
             const elViews = document.getElementById('stat-box-views');
             const elFav = document.getElementById('stat-box-fav');
             const elComments = document.getElementById('stat-box-comments');
-
             if (elViews) elViews.innerText = tinhTongViewTruyen(truyen).toLocaleString();
             if (elFav) elFav.innerText = getVirtualFavCount(key).toLocaleString();
-
             let totalComments = 0;
             if (window.danhSachBinhLuanTruyen && window.danhSachBinhLuanTruyen[key]) {
                 const cObj = window.danhSachBinhLuanTruyen[key];
@@ -6077,12 +6249,10 @@
             const grid = document.getElementById('fav-story-grid');
             if (!grid) return;
             grid.innerHTML = '';
-
             if (!window.danhSachYeuThich || window.danhSachYeuThich.length === 0) {
                 grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Danh sách yêu thích trống. Hãy bấm "Thêm vào yêu thích" ở trang truyện nhé! ❤️</p>`;
                 return;
             }
-
             window.danhSachYeuThich.forEach(key => {
                 const truyen = window.dữLiệuTruyện[key];
                 if (truyen) {
@@ -6096,7 +6266,6 @@
             const btnOff = document.getElementById('btn-subtab-offline');
             const contentFav = document.getElementById('subtab-fav-content');
             const contentOff = document.getElementById('subtab-offline-content');
-
             if (sub === 'fav') {
                 btnFav.classList.add('active');
                 btnOff.classList.remove('active');
@@ -6116,7 +6285,6 @@
             const name = document.getElementById('home-chat-name').value.trim();
             const text = document.getElementById('home-chat-text').value.trim();
             if (!name || !text) { alert("Vui lòng điền đầy đủ tên và lời nhắn!"); return; }
-
             window.danhSachLoiNhanTrangChu.unshift({ id: Date.now(), name: name, text: text });
             document.getElementById('home-chat-name').value = '';
             document.getElementById('home-chat-text').value = '';
@@ -6128,17 +6296,15 @@
             const box = document.getElementById('home-chat-list-box');
             if (!box) return;
             box.innerHTML = '';
-
             if (!window.danhSachLoiNhanTrangChu || window.danhSachLoiNhanTrangChu.length === 0) {
-                box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có lời nhắn nào. Hãy gửi lời nhắn đầu tiên cho nhà chung nhé! 💌</p>`;
+                box.innerHTML = `<p class="loi-nhan-empty">Chưa có lời nhắn nào. Hãy gửi lời nhắn đầu tiên cho nhà chung nhé! 💌</p>`;
                 return;
             }
-
             window.danhSachLoiNhanTrangChu.forEach(item => {
                 box.innerHTML += `
-                    <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 14px 16px; border-radius: 14px; font-size: 14px; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
-                        <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 4px; font-size: 13px;">👤 ${item.name}</div>
-                        <div>${item.text}</div>
+                    <div class="loi-nhan-item">
+                        <div class="loi-nhan-name">👤 ${item.name}</div>
+                        <div class="loi-nhan-text">${item.text}</div>
                     </div>
                 `;
             });
@@ -6148,14 +6314,12 @@
             const name = document.getElementById('story-comment-name').value.trim();
             const text = document.getElementById('story-comment-text').value.trim();
             if (!name || !text) { alert("Vui lòng điền đủ tên và nội dung bình luận!"); return; }
-
             if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey]) {
                 window.danhSachBinhLuanTruyen[truyenHienTaiKey] = { general: [], chapters: {} };
             }
             if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey].general) {
                 window.danhSachBinhLuanTruyen[truyenHienTaiKey].general = [];
             }
-
             window.danhSachBinhLuanTruyen[truyenHienTaiKey].general.unshift({ name: name, text: text, date: new Date().toLocaleDateString('vi-VN') });
             document.getElementById('story-comment-name').value = '';
             document.getElementById('story-comment-text').value = '';
@@ -6168,15 +6332,12 @@
             const box = document.getElementById('story-comments-list-box');
             if (!box || !truyenHienTaiKey) return;
             box.innerHTML = '';
-
             const storyCommObj = window.danhSachBinhLuanTruyen[truyenHienTaiKey];
             const list = (storyCommObj && storyCommObj.general) ? storyCommObj.general : [];
-
             if (list.length === 0) {
                 box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có bình luận nào cho bộ truyện này.</p>`;
                 return;
             }
-
             list.forEach(item => {
                 box.innerHTML += `
                     <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 14px; border-radius: 12px; font-size: 13px;">
@@ -6191,7 +6352,6 @@
             const name = document.getElementById('chapter-comment-name').value.trim();
             const text = document.getElementById('chapter-comment-text').value.trim();
             if (!name || !text) { alert("Vui lòng điền đủ tên và nội dung bình luận!"); return; }
-
             if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey]) {
                 window.danhSachBinhLuanTruyen[truyenHienTaiKey] = { general: [], chapters: {} };
             }
@@ -6201,7 +6361,6 @@
             if (!window.danhSachBinhLuanTruyen[truyenHienTaiKey].chapters[chuongHienTaiIndex]) {
                 window.danhSachBinhLuanTruyen[truyenHienTaiKey].chapters[chuongHienTaiIndex] = [];
             }
-
             window.danhSachBinhLuanTruyen[truyenHienTaiKey].chapters[chuongHienTaiIndex].unshift({ name: name, text: text, date: new Date().toLocaleDateString('vi-VN') });
             document.getElementById('chapter-comment-name').value = '';
             document.getElementById('chapter-comment-text').value = '';
@@ -6214,15 +6373,12 @@
             const box = document.getElementById('chapter-comments-list-box');
             if (!box || !truyenHienTaiKey) return;
             box.innerHTML = '';
-
             const storyCommObj = window.danhSachBinhLuanTruyen[truyenHienTaiKey];
             const list = (storyCommObj && storyCommObj.chapters && storyCommObj.chapters[chuongHienTaiIndex]) ? storyCommObj.chapters[chuongHienTaiIndex] : [];
-
             if (list.length === 0) {
                 box.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 13px;">Chưa có bình luận nào cho chương này.</p>`;
                 return;
             }
-
             list.forEach(item => {
                 box.innerHTML += `
                     <div style="background: var(--box-bg); border: 1px solid var(--border-color); padding: 12px 14px; border-radius: 12px; font-size: 13px;">
@@ -6238,7 +6394,6 @@
             const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
                             String(now.getMonth() + 1).padStart(2, '0') + '/' + 
                             now.getFullYear();
-
             const newNotice = {
                 id: Date.now(),
                 title: tieuDeThongBao,
@@ -6248,7 +6403,6 @@
                 isPinned: isPinned,
                 chapters: storyKey ? [{ storyKey: storyKey, chapterIndex: 0, title: 'Chương 1' }] : null
             };
-
             window.danhSachThongBao.unshift(newNotice);
             luuThongBaoVaoLocalStorage();
             capNhatBadgeThongBao();
@@ -6258,7 +6412,6 @@
             const lastReadId = parseInt(localStorage.getItem('giadinhcauvong_last_read_notice') || '0');
             const chuaDoc = window.danhSachThongBao.filter(n => n.id > lastReadId).length;
             const badge = document.getElementById('unread-badge');
-            
             if (chuaDoc > 0) {
                 badge.innerText = chuaDoc;
                 badge.classList.remove('hidden');
@@ -6367,11 +6520,9 @@
         function luuLichSuDoc(key, index) {
             const historyObj = { storyKey: key, chapterIndex: index };
             localStorage.setItem('giadinhcauvong_history', JSON.stringify(historyObj));
-            
             let storyHistoryMap = JSON.parse(localStorage.getItem('giadinhcauvong_story_history') || '{}');
             storyHistoryMap[key] = index;
             localStorage.setItem('giadinhcauvong_story_history', JSON.stringify(storyHistoryMap));
-
             kiemTraHienThiLichSu();
         }
 
@@ -6408,10 +6559,13 @@
             }
         }
 
+        const ICON_MOON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+        const ICON_SUN = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+
         function doiCheDoSangToi() {
             document.body.classList.toggle('dark-mode');
             const btn = document.querySelector('.theme-toggle');
-            btn.innerText = document.body.classList.contains('dark-mode') ? '☀️ Sáng' : '🌙 Tối';
+            btn.innerHTML = document.body.classList.contains('dark-mode') ? ICON_SUN : ICON_MOON;
             localStorage.setItem('dark_mode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
         }
 
@@ -6430,35 +6584,29 @@
 
         window.onload = function() {
             getDeploymentTimestamp();
-
             const savedTheme = localStorage.getItem('giadinhcauvong_theme');
             if (savedTheme) {
                 chonTheme(savedTheme);
             } else {
                 chonTheme('hongphan');
             }
-
             const savedAvatar = localStorage.getItem('author_avatar');
             if (savedAvatar) { document.getElementById('author-avatar-box').innerHTML = `<img src="${savedAvatar}">`; }
             const savedName = localStorage.getItem('author_name');
             if (savedName) { document.getElementById('author-name-text').innerHTML = savedName; }
             const savedBio = localStorage.getItem('author_bio');
             if (savedBio) { document.getElementById('author-bio-text').innerHTML = savedBio; }
-
             const savedMenuStyle = localStorage.getItem('menu_style');
             if (savedMenuStyle === 'hamburger') {
                 doiKieuMenu();
             }
-
             const savedDarkMode = localStorage.getItem('dark_mode');
             if (savedDarkMode === 'true') {
                 document.body.classList.add('dark-mode');
                 const btn = document.querySelector('.theme-toggle');
-                if (btn) btn.innerText = '☀️ Sáng';
+                if (btn) btn.innerHTML = ICON_SUN;
             }
-
             taoThanhChonNhanhNickname('select-picker-forum');
-
             kiemTraHienThiLichSu();
             capNhatDropdownTag();
             buildTagSelectors();
@@ -6471,19 +6619,14 @@
             lamMoiDongTruyenThongBao();
             hienThiTrungTamQuanLy();
             capNhatSelectSuaThongBao();
-
             batDauGame2048();
             khoiTaoGameOthello();
-            
             initBlockBlast();
-            
             capNhatSelectChuongBatch();
             khoiTaoBatchChapters();
             khoiTaoBatchStories();
-            
             renderRankingSection('home-ranking-content', 5, window.currentRankingTabHome);
             renderRankingSection('full-ranking-content', null, window.currentRankingTabFull);
-            
             window.addEventListener('popstate', function(event) {
                 if (event.state) {
                     if (event.state.page === 'doc-chuong') {
@@ -6520,13 +6663,11 @@
             document.getElementById('btn-mode-chuong').classList.toggle('active', mode === 'chuong');
             document.getElementById('btn-mode-sua-chuong').classList.toggle('active', mode === 'sua-chuong');
             document.getElementById('btn-mode-thongbao').classList.toggle('active', mode === 'thongbao');
-
             document.getElementById('group-truyen-moi').classList.toggle('hidden', mode !== 'truyen');
             document.getElementById('group-sua-truyen').classList.toggle('hidden', mode !== 'sua');
             document.getElementById('group-truyen-co-san').classList.toggle('hidden', mode !== 'chuong');
             document.getElementById('group-sua-chuong').classList.toggle('hidden', mode !== 'sua-chuong');
             document.getElementById('group-dang-thong-bao').classList.toggle('hidden', mode !== 'thongbao');
-
             if (mode === 'sua') {
                 capNhatDanhSachSelectSua();
                 setTimeout(function() {
@@ -6552,14 +6693,12 @@
             const input = document.getElementById('notice-title-input');
             const builderSection = document.getElementById('notice-builder-section');
             const builderLabel = document.getElementById('builder-section-label');
-            
             if (select.value === 'custom') {
                 input.classList.remove('hidden');
                 input.focus();
             } else {
                 input.classList.add('hidden');
             }
-
             if (select.value === '💌 Góc tâm sự cùng tác giả') {
                 builderSection.classList.add('hidden');
             } else {
@@ -6592,21 +6731,18 @@
             if (!datetimeVal) return "[Ngày/Tháng (Thứ) giờ]";
             let dateObj = new Date(datetimeVal);
             if (isNaN(dateObj.getTime())) return datetimeVal;
-
             let d = String(dateObj.getDate()).padStart(2, '0');
             let m = String(dateObj.getMonth() + 1).padStart(2, '0');
             const days = ["Chủ Nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
             let thuStr = days[dateObj.getDay()];
             let hours = String(dateObj.getHours()).padStart(2, '0');
             let minutes = String(dateObj.getMinutes()).padStart(2, '0');
-
             return `${d}/${m} (${thuStr}) ${hours}:${minutes}`;
         }
 
         function lamMoiDongTruyenThongBao() {
             const container = document.getElementById('notice-story-rows-container');
             if (!container) return;
-            
             container.innerHTML = `
                 <div class="notice-story-row" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--container-bg); padding: 10px; border-radius: 10px; border: 1.5px solid var(--border-color);">
                     <select class="form-control notice-story-select" style="flex: 2; margin: 0;">
@@ -6622,7 +6758,6 @@
         function themDongTruyenThongBao() {
             const container = document.getElementById('notice-story-rows-container');
             if (!container) return;
-
             const row = document.createElement('div');
             row.className = "notice-story-row";
             row.style.cssText = "display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--container-bg); padding: 10px; border-radius: 10px; border: 1.5px solid var(--border-color);";
@@ -6652,13 +6787,11 @@
             const rows = document.querySelectorAll('.notice-story-row');
             const contentTextarea = document.getElementById('notice-content-input');
             if (!contentTextarea) return;
-
             let detailsArr = [];
             rows.forEach(r => {
                 const storyTitle = r.querySelector('.notice-story-select').value || "[Tên Truyện]";
                 const rawTime = r.querySelector('.notice-time-input').value;
                 const timeText = formatNgayThangTuDong(rawTime);
-                
                 if (selectVal === '🌸 Thông báo lịch nghỉ / Tạm ngưng') {
                     detailsArr.push(`- Bộ truyện **${storyTitle}**: Sẽ tạm nghỉ ra chương từ ngày **${timeText}**. Mong các cậu thông cảm nhé! Chúng mình sẽ sớm quay lại 🌸`);
                 } else if (selectVal === '🎉 Thông báo sự kiện / Quà tặng') {
@@ -6671,7 +6804,6 @@
                     detailsArr.push(`- Truyện **${storyTitle}**: Sẽ có chương mới vào **${timeText}**! ✨`);
                 }
             });
-
             let templateStr = "";
             if (selectVal === '📅 Lịch ra chương tuần này') {
                 templateStr = `📅 Lịch ra chương các bộ truyện trong tuần này như sau:\n` + detailsArr.join('\n') + `\nMời các độc giả yêu quý đón đọc nhé! 💕`;
@@ -6684,7 +6816,6 @@
             } else if (selectVal === '📌 Thông báo chung') {
                 templateStr = `📌 Cập nhật thông tin quan trọng:\n` + detailsArr.join('\n') + `\nMọi người chú ý theo dõi để không bỏ lỡ thông tin nhé! 🌸`;
             }
-
             if (selectVal !== '💌 Góc tâm sự cùng tác giả') {
                 contentTextarea.value = templateStr;
             }
@@ -6706,7 +6837,6 @@
             const idVal = document.getElementById('select-edit-notice').value;
             const btnXoa = document.getElementById('btn-xoa-thong-bao-nhanh');
             const btnLuu = document.getElementById('btn-luu-thong-bao');
-
             if (!idVal) {
                 document.getElementById('notice-title-select').selectedIndex = 0;
                 document.getElementById('notice-title-input').value = '';
@@ -6718,7 +6848,6 @@
                 lamMoiDongTruyenThongBao();
                 return;
             }
-
             const id = parseInt(idVal);
             const notice = window.danhSachThongBao.find(n => n.id === id);
             if (notice) {
@@ -6738,10 +6867,8 @@
                 } else {
                     document.getElementById('notice-title-input').classList.add('hidden');
                 }
-
                 document.getElementById('notice-pin-checkbox').checked = !!notice.isPinned;
                 document.getElementById('notice-content-input').value = notice.content || '';
-                
                 btnXoa.style.display = 'inline-block';
                 btnLuu.innerText = '💾 Lưu Thay Đổi Thông Báo';
             }
@@ -6756,14 +6883,11 @@
             }
             const content = document.getElementById('notice-content-input').value.trim();
             const isPinned = document.getElementById('notice-pin-checkbox').checked;
-
             if (!title || !content) { alert("Vui lòng điền đầy đủ tiêu đề và nội dung thông báo!"); return; }
-
             const now = new Date();
             const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
                             String(now.getMonth() + 1).padStart(2, '0') + '/' + 
                             now.getFullYear();
-
             if (idVal) {
                 const id = parseInt(idVal);
                 const notice = window.danhSachThongBao.find(n => n.id === id);
@@ -6780,7 +6904,6 @@
                 capNhatBadgeThongBao();
                 alert("📢 Đã đăng thông báo thành công!");
             }
-
             document.getElementById('select-edit-notice').value = '';
             dienThongTinSuaThongBao();
             capNhatSelectSuaThongBao();
@@ -6792,7 +6915,6 @@
         window.xoaThongBaoDangChon = function() {
             const idVal = document.getElementById('select-edit-notice').value;
             if (!idVal) return;
-
             if (confirm("⚠️ Cậu có chăng muốn xóa thông báo này không?")) {
                 const id = parseInt(idVal);
                 window.danhSachThongBao = window.danhSachThongBao.filter(n => n.id !== id);
@@ -6819,47 +6941,38 @@
         function hienThiBangThongBao() {
             const container = document.getElementById('notice-board-list');
             const searchKw = (document.getElementById('search-notice-input')?.value || '').toLowerCase();
-            
             if (!container) return;
             container.innerHTML = '';
             if (!window.danhSachThongBao || window.danhSachThongBao.length === 0) {
                 container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Bảng thông báo hiện chưa có nội dung nào! 📌</p>`;
                 return;
             }
-
             let filteredList = window.danhSachThongBao.filter(n => {
                 const matchKw = n.title.toLowerCase().includes(searchKw) || n.content.toLowerCase().includes(searchKw);
-                
                 const isChuongMoi = n.title.includes('Chương mới:') || n.title.includes('cập nhật chương mới');
                 const isHeThong = n.title.includes('Hệ thống') || n.title.includes('Chào mừng');
                 const isTruyenMoi = n.title.includes('Truyện mới') || n.title.includes('truyện mới') || 
                                    (n.content && n.content.includes('truyện mới'));
                 const isTamSuLich = !isChuongMoi && !isTruyenMoi && !isHeThong;
-
                 let matchSubTab = true;
                 if (currentNoticeSubTab === 'hethong') matchSubTab = isHeThong;
                 if (currentNoticeSubTab === 'chuong') matchSubTab = isChuongMoi;
                 if (currentNoticeSubTab === 'truyenmoi') matchSubTab = isTruyenMoi;
                 if (currentNoticeSubTab === 'tamsulich') matchSubTab = isTamSuLich;
-
                 return matchKw && matchSubTab;
             });
-
             filteredList.sort((a, b) => {
                 if (a.isPinned && !b.isPinned) return -1;
                 if (!a.isPinned && b.isPinned) return 1;
                 return b.id - a.id;
             });
-
             if (filteredList.length === 0) {
                 container.innerHTML = `<p style="text-align: center; color: var(--subtext-color); font-size: 14px;">Không tìm thấy thông báo phù hợp! 🔍</p>`;
                 return;
             }
-
             filteredList.forEach(n => {
                 const pinnedClass = n.isPinned ? 'pinned' : '';
                 const pinnedBadgeHTML = n.isPinned ? `<div class="pinned-badge">📌 THÔNG BÁO QUAN TRỌNG</div>` : '';
-
                 let typeTagHTML = '';
                 var isSystemNotice = n.title.includes('Hệ thống') || n.title.includes('Chào mừng');
                 var isTruyenMoi = n.title.includes('Truyện mới') || (n.content && n.content.includes('truyện mới'));
@@ -6872,9 +6985,7 @@
                 } else {
                     typeTagHTML = `<div class="notice-type-tag">🌸 TÂM SỰ</div>`;
                 }
-
                 var systemClass = isSystemNotice ? 'notice-system' : '';
-
                 let contentHTML = '';
                 if (n.chapters && n.chapters.length === 1) {
                     const ch = n.chapters[0];
@@ -6901,7 +7012,6 @@
                 } else {
                     contentHTML = '<div class="notice-text">' + n.content.replace(/\n/g, '<br>') + '</div>';
                 }
-
                 container.innerHTML += `
                     <div class="notice-card ${pinnedClass} ${systemClass}" onclick="handleNoticeClick(${n.id})">
                         ${pinnedBadgeHTML}
@@ -6919,7 +7029,6 @@
             let totalChapters = 0;
             let totalViews = 0;
             let totalComments = 0;
-
             for (let key in window.dữLiệuTruyện) {
                 totalStories++;
                 const tr = window.dữLiệuTruyện[key];
@@ -6930,7 +7039,6 @@
                     });
                 }
             }
-
             if (window.danhSachLoiNhanTrangChu) totalComments += window.danhSachLoiNhanTrangChu.length;
             if (window.danhSachBinhLuanTruyen) {
                 for (let sKey in window.danhSachBinhLuanTruyen) {
@@ -6943,14 +7051,12 @@
                     }
                 }
             }
-
             document.getElementById('stat-dash-stories').innerText = totalStories;
             document.getElementById('stat-dash-chapters').innerText = totalChapters;
             document.getElementById('stat-dash-views').innerText = totalViews.toLocaleString();
             document.getElementById('stat-dash-comments').innerText = totalComments;
             document.getElementById('stat-dash-notices').innerText = window.danhSachThongBao.length;
             document.getElementById('stat-dash-schedules').innerText = window.danhSachHenGio.length;
-
             const storyStatusContainer = document.getElementById('admin-story-status-list');
             if (storyStatusContainer) {
                 storyStatusContainer.innerHTML = '';
@@ -6970,7 +7076,6 @@
                     `;
                 }
             }
-
             const storyViewsContainer = document.getElementById('admin-story-views-list');
             if (storyViewsContainer) {
                 storyViewsContainer.innerHTML = '';
@@ -6985,7 +7090,6 @@
                     });
                 }
                 dsView.sort((a, b) => b.views - a.views);
-
                 dsView.forEach((item, index) => {
                     let chaptersHTML = '';
                     if (item.chapters && item.chapters.length > 0) {
@@ -7000,7 +7104,6 @@
                         });
                         chaptersHTML += `</div>`;
                     }
-
                     storyViewsContainer.innerHTML += `
                         <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color);">
                             <div class="expandable-stats-header" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.expand-icon').classList.toggle('open')">
@@ -7018,7 +7121,6 @@
                     `;
                 });
             }
-
             const scheduleContainer = document.getElementById('admin-schedule-list');
             if (scheduleContainer) {
                 scheduleContainer.innerHTML = '';
@@ -7036,7 +7138,6 @@
                     });
                 }
             }
-
             const noticesContainer = document.getElementById('admin-notices-list');
             if (noticesContainer) {
                 noticesContainer.innerHTML = '';
@@ -7107,7 +7208,6 @@
         window.xoaTruyenDangChon = function() {
             const key = document.getElementById('select-edit-story').value;
             if (!key || !window.dữLiệuTruyện[key]) { alert("Chưa chọn truyện nào để xóa!"); return; }
-
             if (confirm(`⚠️ Cậu có CHẮC CẮN muốn xóa vĩnh viễn bộ truyện "${window.dữLiệuTruyện[key].title}" không?`)) {
                 delete window.dữLiệuTruyện[key];
                 luuVaoLocalStorage();
@@ -7154,7 +7254,6 @@
             const selectChap = document.getElementById('select-edit-chapter-item');
             if(!selectChap) return;
             selectChap.innerHTML = '';
-
             if (!storyKey || !window.dữLiệuTruyện[storyKey]) return;
             window.dữLiệuTruyện[storyKey].chapters.forEach((ch, index) => {
                 const opt = document.createElement('option');
@@ -7168,10 +7267,8 @@
         function dienThongTinChuongSua() {
             const storyKey = document.getElementById('select-edit-chapter-story').value;
             const chapIndex = document.getElementById('select-edit-chapter-item').value;
-
             if (!storyKey || chapIndex === "" || !window.dữLiệuTruyện[storyKey]) return;
             const chap = window.dữLiệuTruyện[storyKey].chapters[chapIndex];
-
             if (chap) {
                 document.getElementById('edit-chap-title-input').value = chap.title || '';
                 document.getElementById('edit-chap-18-input').checked = !!chap.is18;
@@ -7194,23 +7291,18 @@
             const is18 = document.getElementById('edit-chap-18-input').checked;
             let rawContent = document.getElementById('edit-chap-content-input').value.trim();
             const timestampInput = document.getElementById('edit-chap-timestamp-input').value;
-
             if (!storyKey || chapIndex === "" || !newTitle || !rawContent) { alert("Vui lòng điền đủ thông tin!"); return; }
-
             rawContent = rawContent.replace(/"/g, "'");
-
             const truyen = window.dữLiệuTruyện[storyKey];
             truyen.chapters[chapIndex].title = newTitle;
             truyen.chapters[chapIndex].is18 = is18;
             truyen.chapters[chapIndex].content = `<p>${rawContent.replace(/\n/g, '</p><p>')}</p>`;
-
             if (timestampInput) {
                 const ts = new Date(timestampInput).getTime();
                 if (!isNaN(ts)) {
                     setChapterTimestamp(storyKey, parseInt(chapIndex), ts.toString());
                 }
             }
-
             luuVaoLocalStorage();
             alert("💾 Đã lưu thay đổi chương thành công!");
             capNhatDanhSachChapterSua();
@@ -7220,12 +7312,9 @@
         window.xoaChuongDangChon = function() {
             const storyKey = document.getElementById('select-edit-chapter-story').value;
             const chapIndex = document.getElementById('select-edit-chapter-item').value;
-
             if (!storyKey || chapIndex === "" || !window.dữLiệuTruyện[storyKey]) { alert("Chưa chọn chương!"); return; }
-
             const truyen = window.dữLiệuTruyện[storyKey];
             if (truyen.chapters.length <= 1) { alert("⚠️ Truyện phải có ít nhất 1 chương!"); return; }
-
             if (confirm(`⚠️ Cậu có chăng muốn xóa chương này không?`)) {
                 truyen.chapters.splice(chapIndex, 1);
                 luuVaoLocalStorage();
@@ -7241,7 +7330,6 @@
             return "dang-cap-nhat";
         }
 
-        // ===== ĐĂNG TRUYỆN MỚI =====
         window.xuLyLuuTruyenMoi = function() {
             const title = document.getElementById('new-title').value.trim();
             const author = document.getElementById('new-author').value.trim();
@@ -7253,23 +7341,17 @@
             let chapContent = document.getElementById('new-chapter-content').value.trim();
             const is18 = document.getElementById('new-chapter-18').checked;
             const chapterTimestampInput = document.getElementById('new-chapter-timestamp').value;
-
             const isScheduled = document.getElementById('enable-schedule-story').checked;
             const scheduleTimeStr = document.getElementById('new-story-schedule-time').value;
-
             if (!title || !author || !summaryHTML || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin bắt buộc!"); return; }
-
             chapContent = chapContent.replace(/"/g, "'");
-
             const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()) : ["Đam Mỹ"];
             const newKey = "truyen-" + Date.now();
-
             const mainChaptersInput = document.getElementById('new-main-chapters').value;
             const mainChapters = mainChaptersInput ? parseInt(mainChaptersInput) : 0;
             const hasExtra = document.getElementById('new-has-extra').checked;
             const extraChapters = hasExtra ? parseInt(document.getElementById('new-extra-chapters').value) || 0 : 0;
             const totalChapters = mainChapters + (hasExtra ? extraChapters : 0);
-
             const storyObj = {
                 title: title,
                 author: author,
@@ -7300,7 +7382,6 @@
                 }
             }
             setChapterTimestamp(newKey, 0, chapterTimestamp);
-
             if (isScheduled && scheduleTimeStr) {
                 const targetTime = new Date(scheduleTimeStr).getTime();
                 if (targetTime <= new Date().getTime()) {
@@ -7321,9 +7402,7 @@
                 if (status !== 'Tạm ẩn') {
                     taoThongBaoTuDong(`📖 Truyện mới: "${title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, newKey, false);
                 }
-
                 alert("✨ Đăng truyện mới thành công!");
-
                 document.getElementById('new-title').value = '';
                 document.getElementById('new-author').value = '';
                 document.getElementById('new-main-chapters').value = '';
@@ -7340,21 +7419,17 @@
                 document.getElementById('new-chapter-timestamp').value = '';
                 document.getElementById('enable-schedule-story').checked = false;
                 document.getElementById('schedule-box-story').classList.add('hidden');
-
                 locTruyen();
                 khoiTaoSliderHot();
                 buildTagSelectors();
                 renderRankingSection('home-ranking-content', 5, window.currentRankingTabHome);
                 renderRankingSection('full-ranking-content', null, window.currentRankingTabFull);
-                // KHÔNG CHUYỂN TAB
             }
         };
 
-        // ===== SỬA TRUYỆN =====
         window.xuLyLuuSuaTruyen = function() {
             const selectedKey = document.getElementById('select-edit-story').value;
             if (!selectedKey) { alert("Chưa chọn truyện!"); return; }
-
             const title = document.getElementById('edit-title').value.trim();
             const author = document.getElementById('edit-author').value.trim();
             const status = document.getElementById('edit-status').value;
@@ -7362,13 +7437,11 @@
             const summaryHTML = document.getElementById('edit-summary').innerHTML.trim();
             const coverUrl = document.getElementById('edit-cover-url').value.trim();
             const currentTruyen = window.dữLiệuTruyện[selectedKey];
-
             const mainChaptersInput = document.getElementById('edit-main-chapters').value;
             const mainChapters = mainChaptersInput ? parseInt(mainChaptersInput) : 0;
             const hasExtra = document.getElementById('edit-has-extra').checked;
             const extraChapters = hasExtra ? parseInt(document.getElementById('edit-extra-chapters').value) || 0 : 0;
             const totalChapters = mainChapters + (hasExtra ? extraChapters : 0);
-
             currentTruyen.title = title;
             currentTruyen.author = author;
             currentTruyen.status = status;
@@ -7382,7 +7455,6 @@
             currentTruyen.tags = tags;
             currentTruyen.summary = summaryHTML;
             currentTruyen.desc = document.getElementById('edit-summary').innerText;
-
             luuVaoLocalStorage();
             alert("✏️ Đã lưu thay đổi thông tin truyện!");
             locTruyen();
@@ -7393,28 +7465,22 @@
             chuyenTab('trang-chu', true);
         };
 
-        // ===== THÊM CHƯƠNG (1 chương) =====
         window.xuLyLuuThemChuong = function() {
             const selectedKey = document.getElementById('select-existing-story').value;
             const chapTitle = document.getElementById('append-chapter-title').value.trim();
             let chapContent = document.getElementById('append-chapter-content').value.trim();
             const is18 = document.getElementById('append-chapter-18').checked;
             const chapterTimestampInput = document.getElementById('append-chapter-timestamp').value;
-
             const isScheduled = document.getElementById('enable-schedule-chapter').checked;
             const scheduleTimeStr = document.getElementById('append-chapter-schedule-time').value;
-
             if (!selectedKey || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin!"); return; }
-
             chapContent = chapContent.replace(/"/g, "'");
-
             const chapterObj = { 
                 title: chapTitle, 
                 content: `<p>${chapContent.replace(/\n/g, '</p><p>')}</p>`, 
                 is18: is18,
                 views: Math.floor(Math.random() * 300) + 50
             };
-
             if (isScheduled && scheduleTimeStr) {
                 const targetTime = new Date(scheduleTimeStr).getTime();
                 if (targetTime <= new Date().getTime()) {
@@ -7442,37 +7508,29 @@
                     }
                 }
                 setChapterTimestamp(selectedKey, newIdx, chapterTimestamp);
-                
                 luuVaoLocalStorage();
-                
                 if (truyen.status !== 'Tạm ẩn') {
                     taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${chapTitle}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${chapTitle}". Đọc ngay thôi nào! ✨`, selectedKey, false);
                 }
-
                 alert(`📖 Đã thêm chương mới thành công! 💕`);
-                
                 document.getElementById('append-chapter-title').value = '';
                 document.getElementById('append-chapter-content').value = '';
                 document.getElementById('append-chapter-18').checked = false;
                 document.getElementById('append-chapter-timestamp').value = '';
                 document.getElementById('enable-schedule-chapter').checked = false;
                 document.getElementById('schedule-box-chapter').classList.add('hidden');
-
                 locTruyen();
                 renderRankingSection('home-ranking-content', 5, window.currentRankingTabHome);
                 renderRankingSection('full-ranking-content', null, window.currentRankingTabFull);
-                // KHÔNG CHUYỂN TAB
             }
         };
 
         function handleStoryCardClick(key) {
             const currentTab = document.getElementById('tab-tu-sach-offline');
             const isInTuSach = currentTab && !currentTab.classList.contains('hidden');
-
             if (isInTuSach) {
                 let storyHistoryMap = JSON.parse(localStorage.getItem('giadinhcauvong_story_history') || '{}');
                 let lastChapIdx = storyHistoryMap[key];
-                
                 const truyen = window.dữLiệuTruyện[key];
                 if (truyen && truyen.chapters && lastChapIdx !== undefined && truyen.chapters[lastChapIdx]) {
                     xemTruyen(key, false); 
@@ -7490,12 +7548,8 @@
                 tagsHTML = limitedTags.map(t => `<span class="mini-tag" onclick="event.stopPropagation(); timTheoTag('${t}')">${t}</span>`).join('');
             }
             const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh Bìa ]`;
-
             let chapterDisplay = '';
             let newBadgeHTML = '';
-            // ===== FIX: CARD CHỈ HIỂN THỊ CHƯƠNG/NGOẠI TRUYỆN MỚI NHẤT THỰC TẾ ĐÃ ĐĂNG =====
-            // Lấy đúng chapter có thời gian đăng/cập nhật mới nhất, hiển thị ĐÚNG title của chapter đó.
-            // KHÔNG cộng dồn số ngoại truyện dự kiến vào dòng chương mới nhất.
             if (truyen.chapters && truyen.chapters.length > 0) {
                 const latestIdx = getLatestChapterIndex(key);
                 const isNew = isChapterNew(key, latestIdx);
@@ -7505,12 +7559,8 @@
                     newBadgeHTML = `<span class="story-new-badge">✦ Mới</span>`;
                 }
             }
-            // ===== KẾT THÚC FIX =====
-
-            // DÙNG HÀM TRẠNG THÁI DÙNG CHUNG
             const trangThaiHienThi = getTrangThaiHienThi(truyen);
             const statusClassHienThi = getStatusClassByStatus(trangThaiHienThi);
-
             return `
                 <div class="story-card" onclick="handleStoryCardClick('${key}')">
                     <div class="story-card-cover-wrapper">
@@ -7531,32 +7581,38 @@
             `;
         }
 
-        // ============================================================
-        // LỌC TRUYỆN + "⚡ Mới Cập Nhật"
-        // ============================================================
+        function boDauTiengViet(str) {
+            if (!str) return '';
+            return str.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
+        }
+
         window.locTruyen = function() {
             const homeGrid = document.getElementById('home-story-grid');
             const allGrid = document.getElementById('danh-sach-truyen');
             const latestList = document.getElementById('home-latest-list');
             if(!homeGrid || !allGrid || !latestList) return;
-
             const isHome = !document.getElementById('tab-trang-chu').classList.contains('hidden');
-            
             const kw = (isHome ? document.getElementById('search-home-input').value : document.getElementById('search-all-input').value).toLowerCase();
             const st = isHome ? document.getElementById('search-home-status').value : document.getElementById('search-all-status').value;
-            const sortType = isHome ? document.getElementById('search-home-sort').value : document.getElementById('search-all-sort').value;
-            
+            const sortType = 'moi-nhat';
             const selectedTags = isHome ? window.selectedTagsHome : window.selectedTagsAll;
-
             homeGrid.innerHTML = ''; allGrid.innerHTML = ''; latestList.innerHTML = '';
-
             let dsTruyenThm = [];
             for (let key in window.dữLiệuTruyện) {
                 const truyen = window.dữLiệuTruyện[key];
                 if (truyen.status === 'Tạm ẩn') continue;
-
-                const matchKw = truyen.title.toLowerCase().includes(kw) || (truyen.desc && truyen.desc.toLowerCase().includes(kw)) || (truyen.author && truyen.author.toLowerCase().includes(kw));
-                
+                const kwNoDau = boDauTiengViet(kw);
+                const storyTagsForSearch = (truyen.tags || []);
+                const matchKw = !kw ||
+                    truyen.title.toLowerCase().includes(kw) ||
+                    (truyen.desc && truyen.desc.toLowerCase().includes(kw)) ||
+                    (truyen.author && truyen.author.toLowerCase().includes(kw)) ||
+                    storyTagsForSearch.some(t => t.toLowerCase().includes(kw)) ||
+                    boDauTiengViet(truyen.title).includes(kwNoDau) ||
+                    (truyen.desc && boDauTiengViet(truyen.desc).includes(kwNoDau)) ||
+                    (truyen.author && boDauTiengViet(truyen.author).includes(kwNoDau)) ||
+                    storyTagsForSearch.some(t => boDauTiengViet(t).includes(kwNoDau));
                 let matchTag = true;
                 if (selectedTags.size > 0) {
                     const storyTags = (truyen.tags || []).map(t => t.trim());
@@ -7567,31 +7623,16 @@
                         }
                     }
                 }
-
-                // DÙNG TRẠNG THÁI DÙNG CHUNG ĐỂ FILTER
                 const trangThaiHienThi = getTrangThaiHienThi(truyen);
                 const matchSt = (st === 'tat-ca') || (trangThaiHienThi === st);
-
                 const totalChapCount = truyen.chapters ? truyen.chapters.length : 0;
                 let matchLength = true;
-                if (sortType === 'dai-nhat') {
-                    matchLength = totalChapCount > 50;
-                } else if (sortType === 'ngan-nhat') {
-                    matchLength = totalChapCount <= 50;
-                }
-
                 if (matchKw && matchTag && matchSt && matchLength) {
                     const totalViews = tinhTongViewTruyen(truyen);
                     dsTruyenThm.push({ key: key, truyen: truyen, views: totalViews, count: totalChapCount });
                 }
             }
-
-            if (sortType === 'az') {
-                dsTruyenThm.sort((a, b) => a.truyen.title.localeCompare(b.truyen.title));
-            } else {
-                dsTruyenThm.sort((a, b) => b.views - a.views);
-            }
-
+            dsTruyenThm.sort((a, b) => b.views - a.views);
             if (dsTruyenThm.length === 0) {
                 const emptyMsg = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Không tìm thấy truyện nào phù hợp với bộ lọc.</p>`;
                 homeGrid.innerHTML = emptyMsg;
@@ -7599,8 +7640,6 @@
                 latestList.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có cập nhật mới.</p>`;
                 return;
             }
-
-            // Sắp xếp theo tab Kho Tàng
             let displayedStories = dsTruyenThm;
             if (isHome) {
                 const ktTab = window.currentKhoTangTab || 'views';
@@ -7612,7 +7651,6 @@
                     displayedStories = dsTruyenThm.sort((a, b) => getLatestChapterTimestamp(b.key) - getLatestChapterTimestamp(a.key));
                 }
             }
-
             let allChapters = [];
             for (let key in window.dữLiệuTruyện) {
                 const truyen = window.dữLiệuTruyện[key];
@@ -7633,10 +7671,8 @@
                     });
                 }
             }
-
             allChapters.sort((a, b) => b.timestamp - a.timestamp);
             const latestChapters = allChapters.slice(0, 4);
-
             if (latestChapters.length === 0) {
                 latestList.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); font-size: 14px;">Chưa có chương mới nào.</p>`;
             } else {
@@ -7656,7 +7692,6 @@
                     `;
                 });
             }
-
             displayedStories.forEach(item => {
                 const html = taoCardHTML(item.key, item.truyen);
                 homeGrid.innerHTML += html;
@@ -7674,17 +7709,14 @@
 
         window.chuyenTab = function(tabName, pushHistory = true) {
             if (['trang-chu', 'tat-ca-truyen', 'xep-hang', 'bang-thong-bao', 'tu-sach-offline', 'gioi-thieu', 'quan-li', 'quay-thu-gian'].includes(tabName)) { tabTruocDo = tabName; }
-
             ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-tu-sach-offline', 'tab-gioi-thieu', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
-
             ['btn-tab-trang-chu', 'btn-tab-tat-ca-truyen', 'btn-tab-xep-hang', 'btn-tab-bang-thong-bao', 'btn-tab-tu-sach-offline', 'btn-tab-gioi-thieu', 'btn-tab-quan-li', 'btn-tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.remove('active');
             });
-
             if (tabName === 'trang-chu') {
                 document.getElementById('tab-trang-chu').classList.remove('hidden');
                 document.getElementById('btn-tab-trang-chu').classList.add('active');
@@ -7724,7 +7756,6 @@
                 hienThiTrungTamQuanLy();
             }
             window.locTruyen();
-
             if (pushHistory) {
                 history.pushState({ page: 'tab', tabName: tabName }, "", "#" + tabName);
             }
@@ -7734,25 +7765,26 @@
             const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
             const container = document.getElementById('detail-chapters-container');
             if (!container || !truyen || !truyen.chapters) return;
-
             container.innerHTML = '';
-
             const totalViews = tinhTongViewTruyen(truyen);
             const detailTotalViewsEl = document.getElementById('detail-total-views');
             if (detailTotalViewsEl) detailTotalViewsEl.innerText = totalViews.toLocaleString();
-
             let listUl = document.createElement('ul');
             listUl.className = 'chapter-list-vertical';
             truyen.chapters.forEach((ch, index) => {
                 let li = document.createElement('li');
                 li.className = 'chapter-item-v';
-                const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold;">[18+]</span>` : '';
+                const badge18 = ch.is18 ? `<span class="badge-18">[18+]</span>` : '';
                 let badgeHtml = '';
                 if (isChapterNew(truyenHienTaiKey, index)) {
-                    badgeHtml = `<span class="story-new-badge" style="margin-left: auto; font-size: 10px;">✦ Mới</span>`;
+                    badgeHtml = `<span class="story-new-badge">✦ Mới</span>`;
                 }
                 li.innerHTML = `
-                    <span class="chapter-title-line">${badge18}${ch.title}${badgeHtml}</span>
+                    <span class="chapter-title-line">
+                        ${badge18}
+                        <span class="chapter-name">${ch.title}</span>
+                        ${badgeHtml}
+                    </span>
                 `;
                 li.onclick = () => kiemtraTruocKhiDoc(index, false);
                 listUl.appendChild(li);
@@ -7763,21 +7795,14 @@
         window.xemTruyen = function(key, pushHistory = true) {
             truyenHienTaiKey = key;
             const truyen = window.dữLiệuTruyện[key];
-
             renderThongKeTruyen(key, truyen);
-
             document.getElementById('detail-top-title').innerText = truyen.title || 'Đang cập nhật';
-
             let cleanTitleForInfo = truyen.title ? truyen.title.replace(/\[.*?\]/g, '').trim() : 'Đang cập nhật';
             if (!cleanTitleForInfo) cleanTitleForInfo = truyen.title;
-
             const soChuongDaHoanThanh = truyen.chapters ? truyen.chapters.length : 0;
-            
             const tongSoChuong = truyen.totalChaptersInput || 0;
             const isUpdating = !truyen.totalChaptersInput || truyen.totalChaptersInput === 0;
-
             let tagsHTML = truyen.tags ? truyen.tags.map(t => `<span class="tag" onclick="timTheoTag('${t}')">${t}</span>`).join('') : '<span class="tag">Đam Mỹ</span>';
-            
             let chapterInfoText = '';
             if (isUpdating) {
                 chapterInfoText = 'Đang cập nhật';
@@ -7787,10 +7812,7 @@
                     chapterInfoText += ' + ' + truyen.extraStoryCount + ' ngoại truyện';
                 }
             }
-            
-            // DÙNG HÀM TRẠNG THÁI DÙNG CHUNG
             const displayStatus = getTrangThaiHienThi(truyen);
-            
             document.getElementById('detail-info-box').innerHTML = `
                 <div><strong style="color: var(--primary-color);">Tên truyện:</strong> ${cleanTitleForInfo}</div>
                 <div><strong style="color: var(--primary-color);">Tác giả:</strong> ${truyen.author || 'Đang cập nhật'}</div>
@@ -7798,15 +7820,12 @@
                 <div><strong style="color: var(--primary-color);">Số chương:</strong> ${chapterInfoText}</div>
                 <div><strong style="color: var(--primary-color);">Thể loại / Thẻ:</strong> ${tagsHTML}</div>
             `;
-
             document.getElementById('detail-summary').innerHTML = truyen.summary ? apDungMauChuTheoTheme(truyen.summary) : (truyen.desc || 'Đang cập nhật...');
             document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh bìa ]`;
-
             const progressFill = document.getElementById('story-progress-bar-fill');
             const progressPercentText = document.getElementById('story-progress-percent-text');
             const progressChaptersText = document.getElementById('story-progress-chapters-text');
             const progressStatusText = document.getElementById('story-progress-status-text');
-
             if (isUpdating || tongSoChuong === 0) {
                 let widthPercent = Math.min(soChuongDaHoanThanh * 2, 80);
                 progressFill.style.width = widthPercent + '%';
@@ -7820,25 +7839,20 @@
                 if (percent > 100) percent = 100;
                 progressFill.style.width = percent + '%';
                 progressPercentText.innerText = percent + '%';
-                progressChaptersText.innerText = `Đã hoàn thành: ${soChuongDaHoanThanh} / ${tongSoChuong} nội dung` + (truyen.hasExtraStories && truyen.extraStoryCount > 0 ? ` (gồm ${truyen.extraStoryCount} ngoại truyện)` : '');
+                progressChaptersText.innerText = `${soChuongDaHoanThanh}/${tongSoChuong}`;
                 progressStatusText.innerText = (percent >= 100 || displayStatus === 'Hoàn thành') ? '🎉 Hoàn thành' : '🚀 Đang tiến hành';
             }
-
             const isFav = window.danhSachYeuThich.includes(key);
             capNhatNutYeuThich(isFav);
-
             kiemTraTruyenDaLuuOffline(key, function(daLuu) { capNhatNutOffline(daLuu); });
-
             renderDanhSachChươngTrangChiTiet();
             hienThiBinhLuanTruyen();
-
             ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
             document.getElementById('tab-chi-tiet-truyen').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
             if (pushHistory) {
                 history.pushState({ page: 'chi-tiet', key: key }, "", "#truyen=" + key);
             }
@@ -7865,43 +7879,33 @@
             chuongHienTaiIndex = index;
             const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
             const chuong = truyen.chapters[index];
-
             luuLichSuDoc(truyenHienTaiKey, index);
-
             if (!chuong.views) chuong.views = 100;
             chuong.views += Math.floor(Math.random() * 3) + 1;
             luuVaoLocalStorage();
-
             document.getElementById('chapter-views').innerText = `👁️ Lượt xem: ${chuong.views}`;
             document.getElementById('reading-content').innerHTML = `
                 <h3 style="color: var(--primary-color); text-align: center; margin-top: 0; font-size: 22px;">${chuong.title}</h3>
                 <hr style="border: none; border-top: 1px dashed var(--header-bg); margin-bottom: 20px;">
                 ${chuong.content}
             `;
-
             hienThiBinhLuanChuong();
-
             document.getElementById('btn-prev').disabled = (index === 0);
             document.getElementById('btn-next').disabled = (index === truyen.chapters.length - 1);
-
             document.getElementById('btn-floating-menu').classList.remove('hidden');
             document.getElementById('wattpad-progress-bar-fixed').classList.remove('hidden');
-
             ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-chi-tiet-truyen', 'tab-quay-thu-gian'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.add('hidden');
             });
             document.getElementById('tab-doc-chuong').classList.remove('hidden');
-            
             const scrollKey = `scroll_${truyenHienTaiKey}_${chuongHienTaiIndex}`;
             const savedScrollPos = localStorage.getItem(scrollKey);
-
             if (restoreScroll && savedScrollPos) {
                 window.scrollTo({ top: parseInt(savedScrollPos), behavior: 'smooth' });
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-
             if (pushHistory) {
                 history.pushState({ page: 'doc-chuong', key: truyenHienTaiKey, chapIndex: index }, "", "#doc=" + truyenHienTaiKey + "-c" + index);
             }
@@ -7911,50 +7915,40 @@
             const container = document.getElementById('wattpad-progress-bar-fixed');
             const bar = document.getElementById('wattpad-progress-bar-fill');
             if(!container || !bar) return;
-
             let isDragging = false;
-
             function updateProgressByClientX(clientX) {
                 const rect = container.getBoundingClientRect();
                 let clickX = clientX - rect.left;
                 if (clickX < 0) clickX = 0;
                 if (clickX > rect.width) clickX = rect.width;
                 const percent = clickX / rect.width;
-
                 bar.style.width = (percent * 100) + '%';
-
                 const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 if (docHeight > 0) {
                     window.scrollTo({ top: docHeight * percent, behavior: 'auto' });
                 }
             }
-
             container.addEventListener('mousedown', (e) => {
                 isDragging = true;
                 updateProgressByClientX(e.clientX);
             });
-
             window.addEventListener('mousemove', (e) => {
                 if (isDragging) {
                     updateProgressByClientX(e.clientX);
                 }
             });
-
             window.addEventListener('mouseup', () => {
                 isDragging = false;
             });
-
             container.addEventListener('touchstart', (e) => {
                 isDragging = true;
                 if(e.touches.length > 0) updateProgressByClientX(e.touches[0].clientX);
             }, {passive: true});
-
             window.addEventListener('touchmove', (e) => {
                 if (isDragging && e.touches.length > 0) {
                     updateProgressByClientX(e.touches[0].clientX);
                 }
             }, {passive: true});
-
             window.addEventListener('touchend', () => {
                 isDragging = false;
             });
@@ -7964,7 +7958,6 @@
             if (!document.getElementById('tab-doc-chuong').classList.contains('hidden') && truyenHienTaiKey !== null) {
                 const scrollKey = `scroll_${truyenHienTaiKey}_${chuongHienTaiIndex}`;
                 localStorage.setItem(scrollKey, window.scrollY);
-
                 const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 if (docHeight > 0) {
                     const scrollPercent = (window.scrollY / docHeight) * 100;
@@ -7977,10 +7970,8 @@
         function moModalMucLuc() {
             const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
             if (!truyen || !truyen.chapters) return;
-
             const box = document.getElementById('modal-chapter-list-box');
             box.innerHTML = '';
-
             truyen.chapters.forEach((ch, index) => {
                 const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold;">[18+]</span>` : '';
                 const isActive = (index === chuongHienTaiIndex) ? 'active' : '';
@@ -7996,7 +7987,6 @@
                     </div>
                 `;
             });
-
             document.getElementById('chapter-modal-overlay').classList.remove('hidden');
         }
 
@@ -8047,9 +8037,6 @@
             document.getElementById('quay-game-list-view').classList.remove('hidden');
         }
 
-        // ============================================================
-        // 2048 GAME
-        // ============================================================
         let board2048 = [];
         let score2048 = 0;
         let currentSize2048 = 4;
@@ -8093,7 +8080,6 @@
             boardEl.style.gridTemplateRows = `repeat(${n}, 1fr)`;
             boardEl.innerHTML = '';
             document.getElementById('game-score').innerText = score2048;
-
             for (let r = 0; r < n; r++) {
                 for (let c = 0; c < n; c++) {
                     let val = board2048[r][c];
@@ -8204,13 +8190,11 @@
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('tab-quay-thu-gian').classList.contains('hidden') || 
                 document.getElementById('quay-game-2048-view').classList.contains('hidden')) return;
-
             let moved = false;
             if (e.key === 'ArrowLeft') { moved = diChuyenTrai2048(); }
             else if (e.key === 'ArrowRight') { moved = diChuyenPhai2048(); }
             else if (e.key === 'ArrowUp') { moved = diChuyenLen2048(); }
             else if (e.key === 'ArrowDown') { moved = diChuyenXuong2048(); }
-
             if (moved) {
                 if (window.isSfxEnabled2048) playSfxClick();
                 e.preventDefault();
@@ -8229,7 +8213,6 @@
                 touchStartY2048 = e.clientY;
                 e.preventDefault();
             });
-
             boardEl2048.addEventListener('pointerup', (e) => {
                 let touchEndX = e.clientX;
                 let touchEndY = e.clientY;
@@ -8242,7 +8225,6 @@
             let diffX = endX - startX;
             let diffY = endY - startY;
             let minDistance = 30;
-
             if (Math.abs(diffX) > Math.abs(diffY)) {
                 if (Math.abs(diffX) > minDistance) {
                     let moved = false;
@@ -8268,9 +8250,6 @@
             }
         }
 
-        // ============================================================
-        // OTHELLO GAME
-        // ============================================================
         let othelloBoard = [];
         let othelloTurn = 1;
         let othelloSize = 8;
@@ -8326,22 +8305,17 @@
                 }, 50);
                 return;
             }
-            
             othelloGameActive = true;
             const startBtn = document.getElementById('othello-start-btn');
             if (startBtn) {
                 startBtn.innerText = 'Bắt đầu';
                 startBtn.disabled = true;
             }
-
             othelloBoard = createEmptyBoard(othelloSize);
             initOthelloBoard(othelloBoard);
-            
             othelloTurn = Math.random() < 0.5 ? BLACK_OTHELLO : WHITE_OTHELLO;
             othelloFirstMoveRandom = true;
-            
             veVaCapNhatOthello();
-            
             if (othelloTurn === WHITE_OTHELLO) {
                 setTimeout(() => {
                     if (othelloGameActive) {
@@ -8356,7 +8330,6 @@
             let opponent = player === BLACK_OTHELLO ? WHITE_OTHELLO : BLACK_OTHELLO;
             let directions = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
             let totalFlips = [];
-
             for (let [dr, dc] of directions) {
                 let tempFlips = [];
                 let currR = r + dr;
@@ -8390,21 +8363,17 @@
         function veVaCapNhatOthello() {
             const boardEl = document.getElementById('othello-board');
             if (!boardEl) return;
-            
             const size = othelloBoard.length;
             boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
             boardEl.style.gridTemplateRows = `repeat(${size}, 1fr)`;
             boardEl.innerHTML = '';
-
             let blackCount = 0;
             let whiteCount = 0;
             let validMoves = othelloGameActive ? getValidMovesOthello(othelloTurn, othelloBoard) : [];
-
             for (let r = 0; r < size; r++) {
                 for (let c = 0; c < size; c++) {
                     let cell = document.createElement('div');
                     cell.className = 'othello-cell';
-                    
                     let val = othelloBoard[r][c];
                     if (val === BLACK_OTHELLO) {
                         blackCount++;
@@ -8434,20 +8403,15 @@
                     boardEl.appendChild(cell);
                 }
             }
-
             document.getElementById('othello-score-black').innerText = blackCount;
             document.getElementById('othello-score-white').innerText = whiteCount;
-
             const turnText = document.getElementById('othello-turn-text');
-            
             if (!othelloGameActive) {
                 turnText.innerText = "🔒 Nhấn 'Bắt đầu' để chơi!";
                 return;
             }
-
             let blackMoves = getValidMovesOthello(BLACK_OTHELLO, othelloBoard);
             let whiteMoves = getValidMovesOthello(WHITE_OTHELLO, othelloBoard);
-
             if (blackMoves.length === 0 && whiteMoves.length === 0) {
                 if (window.isSfxEnabledOthello) playSfxWin();
                 if (blackCount > whiteCount) turnText.innerText = "🎉 Bạn thắng rồi! 💕";
@@ -8461,7 +8425,6 @@
                 }
                 return;
             }
-
             if (othelloTurn === BLACK_OTHELLO && blackMoves.length === 0) {
                 othelloTurn = WHITE_OTHELLO;
                 veVaCapNhatOthello();
@@ -8476,7 +8439,6 @@
                 veVaCapNhatOthello();
                 return;
             }
-
             if (othelloTurn === BLACK_OTHELLO) {
                 turnText.innerText = "Lượt: Bạn (Đen)";
             } else {
@@ -8487,20 +8449,15 @@
         function thucHienNuocDiOthello(r, c) {
             if (!othelloGameActive) return;
             if (othelloTurn !== BLACK_OTHELLO) return;
-            
             if (window.isSfxEnabledOthello) playSfxClick();
-            
             let flips = getFlipsOthello(r, c, othelloTurn, othelloBoard);
             if (flips.length === 0) return;
-
             othelloBoard[r][c] = othelloTurn;
             flips.forEach(f => {
                 othelloBoard[f.r][f.c] = othelloTurn;
             });
-
             othelloTurn = WHITE_OTHELLO;
             veVaCapNhatOthello();
-            
             setTimeout(() => {
                 if (othelloGameActive && othelloTurn === WHITE_OTHELLO) {
                     aiNuocDiOthello();
@@ -8511,14 +8468,12 @@
         function aiNuocDiOthello() {
             if (!othelloGameActive) return;
             if (othelloTurn !== WHITE_OTHELLO) return;
-
             let validMoves = getValidMovesOthello(WHITE_OTHELLO, othelloBoard);
             if (validMoves.length === 0) {
                 othelloTurn = BLACK_OTHELLO;
                 veVaCapNhatOthello();
                 return;
             }
-
             let bestMove = validMoves[0];
             let maxFlips = -1;
             validMoves.forEach(m => {
@@ -8528,7 +8483,6 @@
                     bestMove = m;
                 }
             });
-
             let flips = getFlipsOthello(bestMove.r, bestMove.c, WHITE_OTHELLO, othelloBoard);
             if (flips.length > 0) {
                 if (window.isSfxEnabledOthello) playSfxClick();
@@ -8537,14 +8491,10 @@
                     othelloBoard[f.r][f.c] = WHITE_OTHELLO;
                 });
             }
-
             othelloTurn = BLACK_OTHELLO;
             veVaCapNhatOthello();
         }
 
-        // ============================================================
-        // BLOCK BLAST GAME - GIỮ NGUYÊN
-        // ============================================================
         let blockBlastBoard = [];
         let blockBlastScore = 0;
         let blockBlastBestScore = 0;
@@ -8585,7 +8535,6 @@
             const saved = localStorage.getItem('blockblast_best_score');
             if (saved) blockBlastBestScore = parseInt(saved) || 0;
             document.getElementById('blockblast-best').innerText = blockBlastBestScore;
-            
             const boardEl = document.getElementById('blockblast-board');
             boardEl.innerHTML = '';
             for (let r = 0; r < 8; r++) {
@@ -8597,7 +8546,6 @@
                     boardEl.appendChild(cell);
                 }
             }
-            
             document.getElementById('blockblast-gameover').style.display = 'none';
             resetBlockBlast();
         }
@@ -8606,18 +8554,14 @@
             blockBlastBoard = Array(8).fill(0).map(() => Array(8).fill(null));
             blockBlastScore = 0;
             blockBlastDock = [null, null, null];
-            
             for (let i = 0; i < 3; i++) {
                 blockBlastDock[i] = getRandomBlockBlastPiece();
             }
-            
             updateBlockBlastDisplay();
             renderBlockBlastDock();
             document.getElementById('blockblast-gameover').style.display = 'none';
             document.getElementById('blockblast-score').innerText = '0';
-            
             document.getElementById('blockblast-drag-ghost').style.display = 'none';
-            
             if (blockBlastScore > blockBlastBestScore) {
                 blockBlastBestScore = blockBlastScore;
                 localStorage.setItem('blockblast_best_score', blockBlastBestScore);
@@ -8634,22 +8578,18 @@
         function renderBlockBlastDock() {
             const dockEl = document.getElementById('blockblast-dock');
             dockEl.innerHTML = '';
-            
             blockBlastDock.forEach((piece, idx) => {
                 const slot = document.createElement('div');
                 slot.className = 'blockblast-dock-slot';
                 slot.dataset.dockIndex = idx;
-                
                 if (piece) {
                     const block = document.createElement('div');
                     block.className = 'blockblast-dock-block';
                     block.dataset.dockIndex = idx;
-                    
                     const rows = piece.shape.length;
                     const cols = piece.shape[0].length;
                     block.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
                     block.style.gridTemplateRows = `repeat(${rows}, 20px)`;
-                    
                     for (let r = 0; r < rows; r++) {
                         for (let c = 0; c < cols; c++) {
                             const cell = document.createElement('div');
@@ -8662,7 +8602,6 @@
                             block.appendChild(cell);
                         }
                     }
-                    
                     block.addEventListener('pointerdown', (e) => startBlockBlastDrag(e, idx, block));
                     slot.appendChild(block);
                 }
@@ -8688,7 +8627,6 @@
                 }
             }
             document.getElementById('blockblast-score').innerText = blockBlastScore;
-            
             if (blockBlastScore > blockBlastBestScore) {
                 blockBlastBestScore = blockBlastScore;
                 localStorage.setItem('blockblast_best_score', blockBlastBestScore);
@@ -8704,12 +8642,9 @@
         function startBlockBlastDrag(e, dockIndex, element) {
             if (!blockBlastDock[dockIndex]) return;
             e.preventDefault();
-            
             if (blockBlastAudioEnabled) playSfxClick();
-            
             const piece = blockBlastDock[dockIndex];
             const rect = element.getBoundingClientRect();
-            
             blockBlastDrag = {
                 piece: piece,
                 dockIndex: dockIndex,
@@ -8717,12 +8652,9 @@
                 grabX: e.clientX - rect.left,
                 grabY: e.clientY - rect.top
             };
-            
             blockBlastPointerX = e.clientX;
             blockBlastPointerY = e.clientY;
-            
             element.style.opacity = '0.2';
-            
             const ghost = document.getElementById('blockblast-drag-ghost');
             ghost.innerHTML = '';
             const clone = element.cloneNode(true);
@@ -8730,13 +8662,10 @@
             clone.style.pointerEvents = 'none';
             ghost.appendChild(clone);
             ghost.style.display = 'block';
-            
             updateBlockBlastGhost(blockBlastPointerX, blockBlastPointerY);
-            
             if (e.target.setPointerCapture) {
                 try { e.target.setPointerCapture(e.pointerId); } catch(err) {}
             }
-            
             window.addEventListener('pointermove', onBlockBlastPointerMove, { passive: true });
             window.addEventListener('pointerup', onBlockBlastPointerUp);
             window.addEventListener('pointercancel', onBlockBlastPointerUp);
@@ -8761,26 +8690,19 @@
             const boardEl = document.getElementById('blockblast-board');
             const firstCell = boardEl.querySelector('.blockblast-cell[data-row="0"][data-col="0"]');
             if (!firstCell) return null;
-            
             const boardRect = boardEl.getBoundingClientRect();
             const cellRect = firstCell.getBoundingClientRect();
-            
             const style = getComputedStyle(boardEl);
             const gap = parseFloat(style.gap) || 4;
             const padLeft = parseFloat(style.paddingLeft) || 10;
             const padTop = parseFloat(style.paddingTop) || 10;
-            
             const cellSize = cellRect.width + gap;
-            
             const ghostX = px - blockBlastDrag.grabX;
             const ghostY = py - blockBlastDrag.grabY - BLOCK_BLAST_LIFT_OFFSET;
-            
             const relX = ghostX - boardRect.left - padLeft;
             const relY = ghostY - boardRect.top - padTop;
-            
             const c = Math.round(relX / cellSize);
             const r = Math.round(relY / cellSize);
-            
             return { r, c };
         }
 
@@ -8793,13 +8715,10 @@
         function updateBlockBlastPreview(px, py) {
             clearBlockBlastPreview();
             if (!blockBlastDrag) return;
-            
             const pos = getBlockBlastPlacement(px, py);
             if (!pos) return;
-            
             const { r, c } = pos;
             const shape = blockBlastDrag.piece.shape;
-            
             if (canPlaceBlockBlast(shape, r, c)) {
                 const cells = document.querySelectorAll('#blockblast-board .blockblast-cell');
                 for (let row = 0; row < shape.length; row++) {
@@ -8820,9 +8739,7 @@
         function canPlaceBlockBlast(shape, startR, startC) {
             const rows = shape.length;
             const cols = shape[0].length;
-            
             if (startR < 0 || startC < 0 || startR + rows > 8 || startC + cols > 8) return false;
-            
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c < cols; c++) {
                     if (shape[r][c] === 1 && blockBlastBoard[startR + r][startC + c] !== null) {
@@ -8835,18 +8752,14 @@
 
         function onBlockBlastPointerUp(e) {
             if (!blockBlastDrag) return;
-            
             window.removeEventListener('pointermove', onBlockBlastPointerMove);
             window.removeEventListener('pointerup', onBlockBlastPointerUp);
             window.removeEventListener('pointercancel', onBlockBlastPointerUp);
-            
             const ghost = document.getElementById('blockblast-drag-ghost');
             ghost.style.display = 'none';
             clearBlockBlastPreview();
-            
             const pos = getBlockBlastPlacement(blockBlastPointerX, blockBlastPointerY);
             let placed = false;
-            
             if (pos) {
                 const { r, c } = pos;
                 if (canPlaceBlockBlast(blockBlastDrag.piece.shape, r, c)) {
@@ -8856,11 +8769,9 @@
                     placed = true;
                 }
             }
-            
             if (!placed) {
                 blockBlastDrag.element.style.opacity = '1';
             }
-            
             blockBlastDrag = null;
             updateBlockBlastDisplay();
             renderBlockBlastDock();
@@ -8886,13 +8797,11 @@
         function processBlockBlastLines() {
             let rowsToClear = [];
             let colsToClear = [];
-            
             for (let r = 0; r < 8; r++) {
                 if (blockBlastBoard[r].every(cell => cell !== null)) {
                     rowsToClear.push(r);
                 }
             }
-            
             for (let c = 0; c < 8; c++) {
                 let full = true;
                 for (let r = 0; r < 8; r++) {
@@ -8900,12 +8809,10 @@
                 }
                 if (full) colsToClear.push(c);
             }
-            
             const total = rowsToClear.length + colsToClear.length;
             if (total > 0) {
                 if (blockBlastAudioEnabled) playSfxWin();
                 blockBlastScore += total * 100 + (total > 1 ? (total - 1) * 50 : 0);
-                
                 const cells = document.querySelectorAll('#blockblast-board .blockblast-cell');
                 rowsToClear.forEach(r => {
                     for (let c = 0; c < 8; c++) {
@@ -8919,7 +8826,6 @@
                         cells[r * 8 + c].classList.add('clearing');
                     }
                 });
-                
                 setTimeout(() => {
                     updateBlockBlastDisplay();
                 }, 350);
@@ -8938,7 +8844,6 @@
         function checkBlockBlastGameOver() {
             const active = blockBlastDock.filter(p => p !== null);
             if (active.length === 0) return;
-            
             let hasMove = false;
             for (let i = 0; i < 3; i++) {
                 const piece = blockBlastDock[i];
@@ -8954,7 +8859,6 @@
                 }
                 if (hasMove) break;
             }
-            
             if (!hasMove) {
                 if (blockBlastAudioEnabled) {
                     try {
