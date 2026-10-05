@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gia đình cầu vồng</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <meta name="theme-color" content="#fdeff4">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -1452,6 +1456,31 @@
         .badge.hoan-thanh { background-color: var(--badge-completed); }
         .badge.dang-cap-nhat { background-color: var(--badge-updating); }
         .badge.tam-an { background-color: var(--badge-hidden); }
+
+        /* Icon lưu ngoại tuyến trên card (góc trên bên trái ảnh bìa) */
+        .card-offline-save {
+            position: absolute; top: 6px; left: 8px; z-index: 3;
+            width: 24px; height: 24px; padding: 0; margin: 0;
+            display: inline-flex; align-items: center; justify-content: center;
+            border-radius: 50%; border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(0,0,0,0.45); color: #fff; cursor: pointer;
+            -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card-offline-save:hover { transform: scale(1.1); background: rgba(0,0,0,0.6); }
+        .card-offline-save:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+        .card-offline-save .ic { width: 14px; height: 14px; vertical-align: 0; display: none; }
+        .card-offline-save[data-state="idle"] .oc-idle,
+        .card-offline-save[data-state="loading"] .oc-loading,
+        .card-offline-save[data-state="saved"] .oc-saved { display: block; }
+        .card-offline-save[data-state="loading"] { cursor: progress; }
+        .card-offline-save[data-state="loading"]:hover,
+        .card-offline-save[data-state="saved"]:hover { transform: none; }
+        .card-offline-save[data-state="saved"] { background: rgba(46,160,67,0.88); border-color: rgba(255,255,255,0.55); cursor: default; }
+        .card-offline-save .oc-loading { animation: ocSpin 0.8s linear infinite; }
+        @keyframes ocSpin { to { transform: rotate(360deg); } }
         
         .story-card-info { padding: 10px 4px 4px 4px; display: flex; flex-direction: column; flex-grow: 1; }
         .story-card-title {
@@ -3330,6 +3359,8 @@
             .read-story-link { font-size: 11px; }
             .story-new-badge { font-size: 9px; padding: 1px 5px; }
             .badge { font-size: 9px; padding: 2px 7px; top: 4px; right: 4px; }
+            .card-offline-save { width: 20px; height: 20px; top: 2px; left: 4px; }
+            .card-offline-save .ic { width: 12px; height: 12px; }
 
             .latest-list { gap: 6px; margin-top: 6px; }
             .latest-item { padding: 10px 12px; border-radius: 12px; gap: 6px; }
@@ -4692,7 +4723,6 @@
 
             <div class="action-buttons-group">
                 <button id="btn-toggle-fav" class="fav-btn" onclick="toggleYeuThichTruyen()"><svg class=ic aria-hidden=true><use href=#i-heart /></svg> Thêm vào yêu thích</button>
-                <button id="btn-toggle-offline" class="offline-btn hidden" onclick="toggleLuuTruyenOffline()"><svg class=ic aria-hidden=true><use href=#i-download /></svg> Lưu ngoại tuyến</button>
             </div>
 
             <div class="story-decor-card">
@@ -6282,8 +6312,6 @@
 
         function capNhatNutYeuThich(isFav) {
             const btn = document.getElementById('btn-toggle-fav');
-            const btnOffline = document.getElementById('btn-toggle-offline');
-            if (btnOffline) btnOffline.classList.toggle('hidden', !isFav);
             if (isFav) {
                 btn.innerHTML = "<svg class=ic aria-hidden=true><use href=#i-heart /></svg> Đã yêu thích (Bấm để gỡ)";
                 btn.classList.add('saved');
@@ -6307,6 +6335,8 @@
                     grid.innerHTML += taoCardHTML(key, truyen, 'fav');
                 }
             });
+            capNhatIconOfflineTrenCard();
+            dongBoIconOfflineTrenCard();
         }
 
         function doiSubTabTuSach(sub) {
@@ -6492,18 +6522,79 @@
             }
         };
 
-        function luuTruyenOffline(key, truyenObj) {
-            if (!db) return;
+        /* Trạng thái icon lưu ngoại tuyến trên card Tủ truyện */
+        window.offlineDaLuuKeys = new Set();
+        window.offlineDangLuuKeys = new Set();
+
+        function capNhatIconOfflineTrenCard() {
+            document.querySelectorAll('.card-offline-save').forEach(function(btn) {
+                const k = btn.dataset.key;
+                let state = 'idle', title = 'Lưu ngoại tuyến';
+                if (window.offlineDangLuuKeys.has(k)) { state = 'loading'; title = 'Đang lưu...'; }
+                else if (window.offlineDaLuuKeys.has(k)) { state = 'saved'; title = 'Đã lưu ngoại tuyến'; }
+                btn.dataset.state = state;
+                btn.title = title;
+                btn.setAttribute('aria-label', title);
+                btn.setAttribute('aria-busy', state === 'loading' ? 'true' : 'false');
+            });
+        }
+
+        /* Đồng bộ trạng thái từ IndexedDB (gọi sau mỗi lần render card trong Tủ truyện) */
+        function dongBoIconOfflineTrenCard(lanThu) {
+            lanThu = lanThu || 0;
+            if (!db) {
+                if (lanThu < 30) setTimeout(function() { dongBoIconOfflineTrenCard(lanThu + 1); }, 100);
+                return;
+            }
+            try {
+                const req = db.transaction(["offlineStories"], "readonly").objectStore("offlineStories").getAllKeys();
+                req.onsuccess = function(e) {
+                    window.offlineDaLuuKeys = new Set(e.target.result || []);
+                    capNhatIconOfflineTrenCard();
+                };
+                req.onerror = function() { capNhatIconOfflineTrenCard(); };
+            } catch (err) { capNhatIconOfflineTrenCard(); }
+        }
+
+        function luuTruyenOffline(key, truyenObj, callback) {
+            if (!db) { if (callback) callback(false); return; }
             const transaction = db.transaction(["offlineStories"], "readwrite");
             const store = transaction.objectStore("offlineStories");
             store.put({ key: key, data: truyenObj });
-            transaction.oncomplete = function() {
-                alert("Đã lưu truyện vào bộ nhớ ngoại tuyến thành công!");
-                capNhatNutOffline(true);
-            };
+            transaction.oncomplete = function() { if (callback) callback(true); };
+            transaction.onerror = function() { if (callback) callback(false); };
+            transaction.onabort = function() { if (callback) callback(false); };
         }
 
+        /* Bấm icon trên card: lưu ngoại tuyến ngay tại card, không mở trang truyện */
+        window.luuOfflineTuCard = function(event, key) {
+            if (event) { event.stopPropagation(); event.preventDefault(); }
+            if (window.offlineDangLuuKeys.has(key)) return;
+            if (window.offlineDaLuuKeys.has(key)) return; // đã lưu: không tải lại
+            const truyen = window.dữLiệuTruyện[key];
+            if (!truyen || !db) return;
+            kiemTraTruyenDaLuuOffline(key, function(daLuu) {
+                if (daLuu) { window.offlineDaLuuKeys.add(key); capNhatIconOfflineTrenCard(); return; } // đã có trong IndexedDB
+                window.offlineDangLuuKeys.add(key);
+                capNhatIconOfflineTrenCard();
+                const batDau = Date.now();
+                luuTruyenOffline(key, truyen, function(ok) {
+                    const conLai = Math.max(0, 500 - (Date.now() - batDau)); // giữ loading đủ lâu để nhìn thấy
+                    setTimeout(function() {
+                        window.offlineDangLuuKeys.delete(key);
+                        if (ok) window.offlineDaLuuKeys.add(key);
+                        capNhatIconOfflineTrenCard();
+                        setTimeout(function() {
+                            alert(ok ? "Đã lưu truyện vào bộ nhớ ngoại tuyến thành công!" : "Không thể lưu truyện ngoại tuyến. Vui lòng thử lại!");
+                        }, 30);
+                    }, conLai);
+                });
+            });
+        };
+
         function xoaDuLieuOfflineImLang(key, callback) {
+            window.offlineDaLuuKeys.delete(key);
+            capNhatIconOfflineTrenCard();
             if (!db) { if (callback) callback(); return; }
             const transaction = db.transaction(["offlineStories"], "readwrite");
             transaction.objectStore("offlineStories").delete(key);
@@ -6516,9 +6607,10 @@
             const transaction = db.transaction(["offlineStories"], "readwrite");
             const store = transaction.objectStore("offlineStories");
             store.delete(key);
+            window.offlineDaLuuKeys.delete(key);
             transaction.oncomplete = function() {
                 alert("Đã xóa truyện khỏi danh sách truyện ngoại tuyến!");
-                capNhatNutOffline(false);
+                capNhatIconOfflineTrenCard();
                 if (!document.getElementById('tab-tu-sach-offline').classList.contains('hidden')) {
                     hienThiTuSachOffline();
                 }
@@ -6532,20 +6624,6 @@
             const request = store.get(key);
             request.onsuccess = function(event) { callback(!!event.target.result); };
             request.onerror = function() { callback(false); };
-        }
-
-        function capNhatNutOffline(daLuu) {
-            /* Trang giới thiệu không hiển thị trạng thái "đã lưu": nút luôn là "Lưu ngoại tuyến". */
-            const btn = document.getElementById('btn-toggle-offline');
-            if (!btn) return;
-            btn.innerHTML = "<svg class=ic aria-hidden=true><use href=#i-download /></svg> Lưu ngoại tuyến";
-            btn.classList.remove('saved');
-        }
-
-        function toggleLuuTruyenOffline() {
-            if (!truyenHienTaiKey) return;
-            if (!window.danhSachYeuThich.includes(truyenHienTaiKey)) return; // chỉ truyện đã yêu thích mới được lưu ngoại tuyến
-            luuTruyenOffline(truyenHienTaiKey, window.dữLiệuTruyện[truyenHienTaiKey]);
         }
 
         window.boLuuNgoaiTuyenTuTuSach = function(key) {
@@ -6592,6 +6670,8 @@
                     if (!window.dữLiệuTruyện[item.key]) { window.dữLiệuTruyện[item.key] = item.data; }
                     grid.innerHTML += taoCardHTML(item.key, item.data, 'offline');
                 });
+                hienThi.forEach(function(item) { window.offlineDaLuuKeys.add(item.key); });
+                capNhatIconOfflineTrenCard();
             };
         }
 
@@ -7655,9 +7735,20 @@
                     : `<button type="button" class="story-card-action-btn" onclick="event.stopPropagation(); boLuuNgoaiTuyenTuTuSach('${key}')">Bỏ lưu</button>`;
                 bottomHTML = `<div class="story-card-actions"><button type="button" class="story-card-action-btn" onclick="event.stopPropagation(); docTuDauTuTuSach('${key}')">Đọc từ đầu</button>${nutPhu}</div>`;
             }
+            let offlineIconHTML = '';
+            if (mode === 'fav' || mode === 'offline') {
+                const trangThaiBanDau = (mode === 'offline' || window.offlineDaLuuKeys.has(key)) ? 'saved' : 'idle';
+                const tieuDe = trangThaiBanDau === 'saved' ? 'Đã lưu ngoại tuyến' : 'Lưu ngoại tuyến';
+                offlineIconHTML = `<button type="button" class="card-offline-save" data-key="${key}" data-state="${trangThaiBanDau}" title="${tieuDe}" aria-label="${tieuDe}" onclick="luuOfflineTuCard(event, '${key}')">`
+                    + `<svg class="ic oc-idle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>`
+                    + `<svg class="ic oc-loading" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.22-8.56"/></svg>`
+                    + `<svg class="ic oc-saved" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>`
+                    + `</button>`;
+            }
             return `
                 <div class="story-card" onclick="handleStoryCardClick('${key}')">
                     <div class="story-card-cover-wrapper">
+                        ${offlineIconHTML}
                         <span class="badge ${statusClassHienThi}">${trangThaiHienThi}</span>
                         <div class="story-card-cover">${coverHTML}</div>
                     </div>
@@ -7938,7 +8029,6 @@
             }
             const isFav = window.danhSachYeuThich.includes(key);
             capNhatNutYeuThich(isFav);
-            kiemTraTruyenDaLuuOffline(key, function(daLuu) { capNhatNutOffline(daLuu); });
             renderDanhSachChươngTrangChiTiet();
             hienThiBinhLuanTruyen();
             ['tab-trang-chu', 'tab-tat-ca-truyen', 'tab-xep-hang', 'tab-bang-thong-bao', 'tab-tu-sach-offline', 'tab-quan-li', 'tab-doc-chuong', 'tab-quay-thu-gian'].forEach(id => {
