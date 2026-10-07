@@ -1446,6 +1446,12 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         .story-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .story-card-cover-title {
+            display: block; max-width: 100%; box-sizing: border-box;
+            padding: 10px 12px; text-align: center; line-height: 1.4;
+            font-size: 14px; font-weight: 700;
+            overflow-wrap: anywhere; word-break: break-word;
+        }
         
         .badge {
             position: absolute; top: 8px; right: 8px; color: white; font-size: 10px;
@@ -3351,6 +3357,7 @@
                 border-width: 1.5px;
             }
             .story-card-cover-wrapper { border-radius: 8px; }
+            .story-card-cover-title { font-size: 11.5px; padding: 6px 8px; line-height: 1.35; }
             .story-card-info { padding: 6px 2px 2px 2px; }
             .story-card-title { font-size: 12.5px; margin-bottom: 2px; }
             .story-card-author { font-size: 10px; margin-bottom: 3px; }
@@ -3821,6 +3828,61 @@
             .blockblast-board { max-width: 230px; }
             .blockblast-dock { max-width: 230px; }
         }
+
+        /* ===== Xem trước ảnh (bìa truyện / avatar) ===== */
+        .img-url-wrap { width: 100%; }
+        .img-url-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+        .img-url-row .form-control { flex: 1 1 180px; min-width: 0; width: auto; }
+        .img-preview-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 16px; min-height: 42px; border: none; border-radius: 14px; background: var(--button-gradient); color: #fff; font-family: inherit; font-size: 13px; font-weight: bold; cursor: pointer; white-space: nowrap; transition: all 0.25s ease; }
+        .img-preview-btn:hover { background: var(--button-hover-gradient); box-shadow: 0 4px 14px var(--glow-color); }
+        .img-preview-btn .ic { width: 15px; height: 15px; }
+        .img-url-hint { margin-top: 6px; font-size: 12px; line-height: 1.5; color: var(--subtext-color); }
+        .img-url-hint:empty { display: none; }
+        .img-url-hint.is-ok { color: var(--primary-color); }
+        .img-url-hint.is-error, .img-preview-status.is-error { color: #d6336c; }
+        body.dark-mode .img-url-hint.is-error, body.dark-mode .img-preview-status.is-error { color: #ff9ec4; }
+        .img-preview-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100002; background: rgba(60, 20, 40, 0.55); display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; overflow-y: auto; }
+        .img-preview-box { position: relative; width: 100%; max-width: 560px; max-height: 100%; overflow-y: auto; background: #fffafc; color: var(--text-color); border: 2px solid var(--border-color); border-radius: 20px; padding: 22px 20px 18px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25); box-sizing: border-box; text-align: center; }
+        body.dark-mode .img-preview-box { background: #2d263f; }
+        .img-preview-close { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--border-color); background: transparent; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
+        .img-preview-close:hover { background: var(--border-color); }
+        .img-preview-heading { font-size: 17px; font-weight: bold; color: var(--primary-color); padding: 0 40px; }
+        .img-preview-sub { font-size: 12px; color: var(--subtext-color); margin: 6px 0 16px; line-height: 1.5; }
+        .img-preview-stage { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 20px; }
+        .img-preview-fig { margin: 0; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .img-preview-fig figcaption { font-size: 11.5px; color: var(--subtext-color); }
+        .img-preview-cover-frame { max-width: 100%; box-shadow: 0 6px 18px var(--glow-color); border-radius: 14px; }
+        .img-preview-error { width: 100%; max-width: 340px; box-sizing: border-box; padding: 18px 16px; border: 1.5px dashed #d6336c; border-radius: 14px; color: #d6336c; font-size: 13px; line-height: 1.6; background: rgba(255, 105, 180, 0.08); }
+        body.dark-mode .img-preview-error { color: #ff9ec4; border-color: #ff9ec4; }
+        .img-preview-status { margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--primary-color); }
+        .img-preview-note { margin-top: 4px; font-size: 12px; color: var(--subtext-color); line-height: 1.5; }
+        .img-preview-status:empty, .img-preview-note:empty { display: none; }
+        .img-preview-actions { margin-top: 16px; }
+
+        /* ===== Thanh thông báo quan trọng (trang chủ, nằm trong luồng nội dung) ===== */
+        .important-notice-bar { display: flex; align-items: stretch; margin-bottom: 16px; background: var(--box-bg); border: 1.5px solid var(--primary-color); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px var(--glow-color); position: relative; }
+        .important-notice-label { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: var(--button-gradient); color: #fff; font-size: 12px; font-weight: bold; letter-spacing: 0.6px; white-space: nowrap; }
+        .important-notice-label .ic { width: 14px; height: 14px; }
+        .important-notice-marquee { flex: 1 1 auto; min-width: 0; overflow: hidden; display: flex; align-items: center; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); }
+        .important-notice-track { display: inline-block; white-space: nowrap; padding-left: 100%; font-size: 13px; font-weight: 600; color: var(--text-color); animation: importantNoticeMarquee var(--imp-dur, 30s) linear infinite; will-change: transform; }
+        .important-notice-title { color: var(--primary-color); }
+        .important-notice-bar:hover .important-notice-track { animation-play-state: paused; }
+        @keyframes importantNoticeMarquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+        @media (prefers-reduced-motion: reduce) {
+            .important-notice-track { animation: none; padding-left: 0; white-space: normal; display: block; padding: 8px 12px; }
+        }
+        @media (max-width: 600px) {
+            .important-notice-bar { margin-bottom: 12px; border-radius: 10px; }
+            .important-notice-label { padding: 8px 10px; font-size: 10.5px; letter-spacing: 0.4px; }
+            .important-notice-track { font-size: 12.5px; }
+        }
+        .notice-important-box { background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px dashed var(--primary-color); margin-top: 15px; }
+        .notice-important-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0; color: var(--primary-color); font-weight: bold; }
+        .notice-important-toggle input { width: 18px; height: 18px; accent-color: var(--primary-color); flex: 0 0 auto; }
+        .notice-important-fields { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .notice-important-fields label { display: block; font-size: 12.5px; margin-bottom: 5px; }
+        .notice-important-help { grid-column: 1 / -1; font-size: 12px; color: var(--subtext-color); line-height: 1.5; }
+        @media (max-width: 560px) { .notice-important-fields { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body class="dark-mode">
@@ -3917,6 +3979,11 @@
     <div class="container">
         
         <div id="tab-trang-chu">
+            <div id="important-notice-bar" class="important-notice-bar hidden" role="status" aria-live="polite">
+                <div class="important-notice-label"><svg class=ic aria-hidden=true><use href=#i-megaphone /></svg><span>QUAN TRỌNG</span></div>
+                <div class="important-notice-marquee"><div class="important-notice-track" id="important-notice-track"></div></div>
+            </div>
+
             <div id="continue-banner-box" class="hidden continue-reading-banner">
                 <div>
                     <div class="banner-label"><svg class=ic aria-hidden=true><use href=#i-book-open /></svg> ĐỌC TIẾP CHƯƠNG GẦN NHẤT</div>
@@ -3934,7 +4001,7 @@
 
             <div class="search-box">
                 <div class="search-input-wrap">
-                    <input type="text" id="search-home-input" class="search-input" placeholder="Tìm kiếm tên truyện, tác giả, thể loại..." oninput="locTruyen()" onkeydown="if(event.key==='Enter'){locTruyen();}">
+                    <input type="text" id="search-home-input" class="search-input" placeholder="Tìm kiếm tên truyện, tác giả, thể loại..." oninput="locTruyen()" onkeydown="if(event.key==='Enter'&&!event.isComposing){locTruyen();}">
                     <button type="button" class="search-submit-btn" aria-label="Tìm kiếm" onclick="locTruyen()"><svg class=ic aria-hidden=true><use href=#i-search /></svg></button>
                 </div>
                 <select id="search-home-status" class="filter-select" onchange="locTruyen()">
@@ -4001,7 +4068,7 @@
             
             <div class="search-box">
                 <div class="search-input-wrap">
-                    <input type="text" id="search-all-input" class="search-input" placeholder="Tìm kiếm tên truyện, tác giả, thể loại..." oninput="locTruyen()" onkeydown="if(event.key==='Enter'){locTruyen();}">
+                    <input type="text" id="search-all-input" class="search-input" placeholder="Tìm kiếm tên truyện, tác giả, thể loại..." oninput="locTruyen()" onkeydown="if(event.key==='Enter'&&!event.isComposing){locTruyen();}">
                     <button type="button" class="search-submit-btn" aria-label="Tìm kiếm" onclick="locTruyen()"><svg class=ic aria-hidden=true><use href=#i-search /></svg></button>
                 </div>
                 <select id="search-all-status" class="filter-select" onchange="locTruyen()">
@@ -4260,7 +4327,13 @@
                     </div>
                     <div class="form-group">
                         <label><svg class=ic aria-hidden=true><use href=#i-link /></svg> Link Ảnh Bìa (Dán Direct Link từ ImgBB / Imgur):</label>
-                        <input type="text" id="new-cover-url" class="form-control" placeholder="https://i.ibb.co/xxxx/bia.jpg">
+                        <div class="img-url-wrap">
+                            <div class="img-url-row">
+                                <input type="text" id="new-cover-url" class="form-control" data-img-preview="cover" autocomplete="off" placeholder="https://i.ibb.co/xxxx/bia.jpg">
+                                <button type="button" class="img-preview-btn" onclick="moXemTruocAnh(this)"><svg class=ic aria-hidden=true><use href=#i-eye /></svg><span>Xem trước bìa</span></button>
+                            </div>
+                            <div class="img-url-hint" aria-live="polite"></div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -4356,7 +4429,13 @@
                     </div>
                     <div class="form-group">
                         <label><svg class=ic aria-hidden=true><use href=#i-link /></svg> Đổi Link Ảnh Bìa Mới:</label>
-                        <input type="text" id="edit-cover-url" class="form-control" placeholder="https://i.ibb.co/xxxx/bia.jpg">
+                        <div class="img-url-wrap">
+                            <div class="img-url-row">
+                                <input type="text" id="edit-cover-url" class="form-control" data-img-preview="cover" autocomplete="off" placeholder="https://i.ibb.co/xxxx/bia.jpg">
+                                <button type="button" class="img-preview-btn" onclick="moXemTruocAnh(this)"><svg class=ic aria-hidden=true><use href=#i-eye /></svg><span>Xem trước bìa</span></button>
+                            </div>
+                            <div class="img-url-hint" aria-live="polite"></div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -4529,13 +4608,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Chọn Loại Tiêu Đề Thông Báo Hoặc Tự Nhập (*)</label>
+                        <label>Chọn Loại Tiêu Đề Thông Báo</label>
                         <select id="notice-title-select" class="form-control" onchange="kiemTraDoiTieuDeThongBao()" style="margin-bottom: 8px;">
                             <option value="📅 Lịch ra chương tuần này">📅 Lịch ra chương tuần này</option>
                             <option value="✨ Truyện mới sắp ra mắt!">✨ Truyện mới sắp ra mắt!</option>
                             <option value="🌸 Thông báo lịch nghỉ / Tạm ngưng">🌸 Thông báo lịch nghỉ / Tạm ngưng</option>
                             <option value="🎉 Thông báo sự kiện / Quà tặng">🎉 Thông báo sự kiện / Quà tặng</option>
-                            <option value="📌 Thông báo chung">📌 Thông báo chung</option>
+                            <option value="📌 Cập nhật">📌 Cập nhật</option>
                             <option value="💌 Góc tâm sự cùng tác giả">💌 Góc tâm sự cùng tác giả</option>
                             <option value="custom">Tự nhập tiêu đề khác...</option>
                         </select>
@@ -4545,8 +4624,26 @@
                     <div class="form-group" style="background: var(--box-bg); padding: 14px; border-radius: 12px; border: 1.5px dashed var(--primary-color);">
                         <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0;">
                             <input type="checkbox" id="notice-pin-checkbox" style="width: 18px; height: 18px; accent-color: #ff1493;">
-                            <span style="color: #ff1493; font-weight: bold;"><svg class=ic aria-hidden=true><use href=#i-pin /></svg> Ghim thông báo này lên đầu bảng (Thông báo quan trọng)</span>
+                            <span style="color: #ff1493; font-weight: bold;"><svg class=ic aria-hidden=true><use href=#i-pin /></svg> Ghim thông báo này lên đầu bảng</span>
                         </label>
+                    </div>
+
+                    <div class="form-group notice-important-box" id="notice-important-box">
+                        <label class="notice-important-toggle">
+                            <input type="checkbox" id="notice-important-checkbox" onchange="toggleKhungThongBaoQuanTrong()">
+                            <span><svg class=ic aria-hidden=true><use href=#i-megaphone /></svg> Hiển thị thành thanh thông báo trên trang chủ</span>
+                        </label>
+                        <div id="notice-important-fields" class="notice-important-fields hidden">
+                            <div>
+                                <label for="notice-important-start">Thời gian bắt đầu</label>
+                                <input type="datetime-local" id="notice-important-start" class="form-control">
+                            </div>
+                            <div>
+                                <label for="notice-important-end">Thời gian kết thúc</label>
+                                <input type="datetime-local" id="notice-important-end" class="form-control">
+                            </div>
+                            <div class="notice-important-help">Thanh chạy ngang ở đầu trang chủ trong đúng khoảng thời gian trên và tự ẩn khi hết hạn. Chức năng này độc lập với "Ghim thông báo".</div>
+                        </div>
                     </div>
 
                     <div id="notice-builder-section" style="background: var(--box-bg); padding: 16px; border-radius: 14px; border: 1.5px solid var(--border-color); margin-bottom: 15px; margin-top: 15px;">
@@ -4645,11 +4742,13 @@
                 <span>[ Ảnh ]</span>
             </div>
             
-            <div style="margin-top: -5px;">
+            <div class="img-url-wrap" style="margin-top: -5px;">
                 <label style="font-size: 12px; color: var(--primary-color); cursor: pointer; text-decoration: underline;">
                     <svg class=ic aria-hidden=true><use href=#i-camera /></svg> Đổi ảnh đại diện (Dán link URL)
-                    <input type="text" id="author-avatar-url-input" class="form-control" placeholder="Dán link ảnh đại diện..." style="margin-top: 5px; font-size: 13px;" onchange="thayAnhTacGiaUrl(this.value)">
+                    <input type="text" id="author-avatar-url-input" data-img-preview="avatar" class="form-control" placeholder="Dán link ảnh đại diện..." style="margin-top: 5px; font-size: 13px;" onchange="thayAnhTacGiaUrl(this.value)">
                 </label>
+                <div style="margin-top: 8px;"><button type="button" class="img-preview-btn" style="min-height: 34px; font-size: 12px;" onclick="moXemTruocAnh(this)"><svg class=ic aria-hidden=true><use href=#i-eye /></svg><span>Xem trước ảnh</span></button></div>
+                <div class="img-url-hint" aria-live="polite"></div>
             </div>
 
             <h3 style="color: var(--primary-color); margin: 5px 0; font-size: 22px;" contenteditable="true" id="author-name-text" oninput="luuThongTinGioiThieu()">Xin chào, tôi là Cầu Vồng!</h3>
@@ -4800,6 +4899,18 @@
         <button class="floating-menu-btn hidden" id="btn-floating-menu" onclick="moModalMucLuc()" title="Mục lục chương"><svg class=ic aria-hidden=true><use href=#i-book-open /></svg></button>
         <button class="scroll-btn" onclick="keoLenDauTrang()" title="Kéo lên đầu trang"><svg class=ic aria-hidden=true><use href=#i-chevron-up /></svg></button>
         <button class="scroll-btn" onclick="docDenCuoiTrang()" title="Đọc đến cuối trang"><svg class=ic aria-hidden=true><use href=#i-chevron-down /></svg></button>
+    </div>
+
+    <div id="img-preview-modal" class="img-preview-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="img-preview-heading" onclick="if (event.target === this) dongXemTruocAnh()">
+        <div class="img-preview-box">
+            <button type="button" class="img-preview-close" onclick="dongXemTruocAnh()" aria-label="Đóng xem trước"><svg class=ic aria-hidden=true><use href=#i-x /></svg></button>
+            <div class="img-preview-heading" id="img-preview-heading">Xem trước bìa truyện</div>
+            <div class="img-preview-sub" id="img-preview-sub"></div>
+            <div class="img-preview-stage" id="img-preview-stage"></div>
+            <div class="img-preview-status" id="img-preview-status"></div>
+            <div class="img-preview-note" id="img-preview-note"></div>
+            <div class="img-preview-actions"><button type="button" class="img-preview-btn" onclick="dongXemTruocAnh()">Đóng</button></div>
+        </div>
     </div>
 
     <footer class="brand-title" onclick="troVeTrangChu()">Gia đình cầu vồng</footer>
@@ -5790,6 +5901,290 @@
             }
         }
 
+        // ===== XEM TRƯỚC ẢNH (bìa truyện / ảnh đại diện) =====
+        window._imgHintCache = {};
+        window._imgHintTimers = new WeakMap();
+        window._imgPreviewToken = 0;
+
+        function urlAnhHopLe(url) {
+            return /^https?:\/\/\S+$/i.test(url) || /^data:image\//i.test(url);
+        }
+
+        function kiemTraUrlAnh(url, cb) {
+            const cache = window._imgHintCache;
+            if (cache[url]) { cb(cache[url]); return; }
+            const probe = new Image();
+            probe.onload = function () { cache[url] = { ok: true, w: probe.naturalWidth, h: probe.naturalHeight }; cb(cache[url]); };
+            probe.onerror = function () { cb({ ok: false }); };
+            probe.src = url;
+        }
+
+        function moTaDoCatAnh(w, h, kind) {
+            if (!w || !h) return '';
+            const target = kind === 'avatar' ? 1 : 2 / 3;
+            const r = w / h;
+            if (Math.abs(r - target) / target < 0.02) return 'Tỉ lệ ảnh gần khớp với khung nên gần như không bị cắt.';
+            if (r > target) return 'Ảnh rộng hơn khung: hai bên trái và phải bị cắt khoảng ' + Math.round((1 - target / r) / 2 * 100) + '% mỗi bên.';
+            return 'Ảnh cao hơn khung: phần trên và phần dưới bị cắt khoảng ' + Math.round((1 - r / target) / 2 * 100) + '% mỗi bên.';
+        }
+
+        function capNhatGoiYUrlAnh(input) {
+            const wrap = input.closest('.img-url-wrap');
+            const hint = wrap && wrap.querySelector('.img-url-hint');
+            if (!hint) return;
+            const url = input.value.trim();
+            hint.className = 'img-url-hint';
+            if (!url) { hint.textContent = ''; return; }
+            if (!urlAnhHopLe(url)) { hint.classList.add('is-error'); hint.textContent = 'Link chưa hợp lệ: cần bắt đầu bằng http:// hoặc https://'; return; }
+            hint.textContent = 'Đang kiểm tra ảnh...';
+            kiemTraUrlAnh(url, function (kq) {
+                if (input.value.trim() !== url) return;
+                if (kq.ok) {
+                    hint.className = 'img-url-hint is-ok';
+                    hint.textContent = 'Tải ảnh được (' + kq.w + '×' + kq.h + ' px). Bấm nút xem trước để thấy vùng hiển thị thật.';
+                } else {
+                    hint.className = 'img-url-hint is-error';
+                    hint.textContent = 'Không tải được ảnh từ link này. Hãy kiểm tra lại link ảnh trực tiếp.';
+                }
+            });
+        }
+
+        window.capNhatGoiYAnhTheoId = function (id) {
+            const el = document.getElementById(id);
+            if (el) capNhatGoiYUrlAnh(el);
+        };
+
+        document.addEventListener('input', function (e) {
+            const el = e.target;
+            if (!el || !el.matches || !el.matches('input[data-img-preview]')) return;
+            clearTimeout(window._imgHintTimers.get(el));
+            window._imgHintTimers.set(el, setTimeout(function () { capNhatGoiYUrlAnh(el); }, 350));
+        });
+
+        window.moXemTruocAnh = function (btn) {
+            const wrap = btn.closest('.img-url-wrap');
+            const input = wrap && wrap.querySelector('input[data-img-preview]');
+            if (!input) return;
+            const kind = input.dataset.imgPreview === 'avatar' ? 'avatar' : 'cover';
+            const url = input.value.trim();
+            const modal = document.getElementById('img-preview-modal');
+            const stage = document.getElementById('img-preview-stage');
+            const status = document.getElementById('img-preview-status');
+            const note = document.getElementById('img-preview-note');
+            const token = ++window._imgPreviewToken;
+            document.getElementById('img-preview-heading').textContent = kind === 'avatar' ? 'Xem trước ảnh đại diện' : 'Xem trước bìa truyện';
+            document.getElementById('img-preview-sub').textContent = kind === 'avatar'
+                ? 'Ảnh đại diện hiển thị dạng tròn, căn giữa và phủ kín khung (object-fit: cover).'
+                : 'Mô phỏng đúng card truyện ngoài trang chủ: tỉ lệ 2:3, object-fit: cover, căn giữa.';
+            stage.textContent = '';
+            note.textContent = '';
+            status.className = 'img-preview-status';
+            modal.classList.remove('hidden');
+
+            function baoLoi(msg) {
+                stage.textContent = '';
+                const box = document.createElement('div');
+                box.className = 'img-preview-error';
+                box.textContent = msg;
+                stage.appendChild(box);
+                status.className = 'img-preview-status is-error';
+                status.textContent = 'Không thể hiển thị ảnh.';
+                note.textContent = '';
+            }
+            if (!url) { baoLoi('Chưa có link ảnh. Hãy dán link ảnh vào ô nhập rồi bấm xem trước.'); return; }
+            if (!urlAnhHopLe(url)) { baoLoi('Link ảnh chưa hợp lệ. Link cần bắt đầu bằng http:// hoặc https:// và trỏ trực tiếp tới file ảnh.'); return; }
+
+            status.textContent = 'Đang tải ảnh...';
+            const sizes = kind === 'avatar' ? [[160, 'Xem lớn'], [100, 'Cỡ thực tế']] : [[240, 'Xem lớn'], [150, 'Thu nhỏ như ngoài trang']];
+            sizes.forEach(function (sz, idx) {
+                const fig = document.createElement('figure');
+                fig.className = 'img-preview-fig';
+                const frame = document.createElement('div');
+                let holder;
+                if (kind === 'cover') {
+                    frame.className = 'img-preview-cover-frame';
+                    frame.style.width = sz[0] + 'px';
+                    frame.innerHTML = '<div class="story-card-cover-wrapper"><div class="story-card-cover"></div></div>';
+                    holder = frame.querySelector('.story-card-cover');
+                } else {
+                    frame.className = 'avatar';
+                    frame.style.width = sz[0] + 'px';
+                    frame.style.height = sz[0] + 'px';
+                    holder = frame;
+                }
+                const img = document.createElement('img');
+                if (idx === 0) {
+                    img.onload = function () {
+                        if (token !== window._imgPreviewToken) return;
+                        status.className = 'img-preview-status';
+                        status.textContent = 'Ảnh gốc ' + img.naturalWidth + '×' + img.naturalHeight + ' px';
+                        note.textContent = moTaDoCatAnh(img.naturalWidth, img.naturalHeight, kind);
+                    };
+                    img.onerror = function () {
+                        if (token !== window._imgPreviewToken) return;
+                        baoLoi('Không tải được ảnh từ link này. Hãy kiểm tra lại link (cần link ảnh trực tiếp như .jpg, .png, .webp) hoặc ảnh có thể đang bị chặn hiển thị. Giao diện trang không bị ảnh hưởng.');
+                    };
+                }
+                img.src = url;
+                holder.appendChild(img);
+                const cap = document.createElement('figcaption');
+                cap.textContent = sz[1];
+                fig.appendChild(frame);
+                fig.appendChild(cap);
+                stage.appendChild(fig);
+            });
+        };
+
+        window.dongXemTruocAnh = function () {
+            const modal = document.getElementById('img-preview-modal');
+            if (!modal) return;
+            window._imgPreviewToken++;
+            modal.classList.add('hidden');
+            document.getElementById('img-preview-stage').textContent = '';
+        };
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            const modal = document.getElementById('img-preview-modal');
+            if (modal && !modal.classList.contains('hidden')) dongXemTruocAnh();
+        });
+
+        // ===== THANH THÔNG BÁO QUAN TRỌNG (độc lập với chức năng ghim thông báo) =====
+        window.thongBaoQuanTrong = null;
+        window._impTimer = null;
+        window._impRenderKey = '';
+
+        function chuanHoaThongBaoQuanTrong(raw) {
+            if (!raw || typeof raw !== 'object') return null;
+            const startAt = typeof raw.startAt === 'string' ? raw.startAt : '';
+            const endAt = typeof raw.endAt === 'string' ? raw.endAt : '';
+            if (isNaN(new Date(startAt).getTime()) || isNaN(new Date(endAt).getTime())) return null;
+            return {
+                enabled: raw.enabled === true,
+                noticeId: raw.noticeId === undefined || raw.noticeId === null ? '' : String(raw.noticeId),
+                title: raw.title === undefined || raw.title === null ? '' : String(raw.title),
+                content: raw.content === undefined || raw.content === null ? '' : String(raw.content),
+                startAt: startAt,
+                endAt: endAt
+            };
+        }
+
+        function layTrangThaiThanhQuanTrong(cfg, nowMs) {
+            if (!cfg || cfg.enabled !== true) return 'off';
+            const s = new Date(cfg.startAt).getTime();
+            const e = new Date(cfg.endAt).getTime();
+            if (isNaN(s) || isNaN(e) || e <= s) return 'off';
+            if (!String(cfg.content || cfg.title || '').trim()) return 'off';
+            if (nowMs < s) return 'upcoming';
+            if (nowMs >= e) return 'expired';
+            return 'active';
+        }
+
+        function datLichThanhQuanTrong(state, cfg, nowMs) {
+            if (window._impTimer) { clearTimeout(window._impTimer); window._impTimer = null; }
+            let next = null;
+            if (state === 'upcoming') next = new Date(cfg.startAt).getTime();
+            else if (state === 'active') next = new Date(cfg.endAt).getTime();
+            if (next === null) return;
+            const wait = Math.min(Math.max(next - nowMs, 0) + 50, 2147000000);
+            window._impTimer = setTimeout(hienThiThanhThongBaoQuanTrong, wait);
+        }
+
+        function hienThiThanhThongBaoQuanTrong() {
+            const bar = document.getElementById('important-notice-bar');
+            const track = document.getElementById('important-notice-track');
+            if (!bar || !track) return;
+            const cfg = window.thongBaoQuanTrong;
+            const now = Date.now();
+            const state = layTrangThaiThanhQuanTrong(cfg, now);
+            if (state !== 'active') {
+                bar.classList.add('hidden');
+                track.textContent = '';
+                window._impRenderKey = '';
+            } else {
+                const key = [cfg.noticeId, cfg.title, cfg.content, cfg.startAt, cfg.endAt].join('|');
+                if (key !== window._impRenderKey) {
+                    const tieuDe = String(cfg.title || '').replace(/^[^\p{L}\p{N}]+/u, '').trim();
+                    const noiDung = String(cfg.content || '').replace(/\s*[\r\n]+\s*/g, '  •  ').trim();
+                    track.textContent = '';
+                    if (tieuDe) {
+                        const b = document.createElement('strong');
+                        b.className = 'important-notice-title';
+                        b.textContent = tieuDe;
+                        track.appendChild(b);
+                    }
+                    if (noiDung) track.appendChild(document.createTextNode((tieuDe ? '  —  ' : '') + noiDung));
+                    const soKyTu = tieuDe.length + noiDung.length;
+                    track.style.setProperty('--imp-dur', Math.max(18, Math.round((soKyTu * 8 + 700) / 55)) + 's');
+                    window._impRenderKey = key;
+                }
+                bar.classList.remove('hidden');
+            }
+            datLichThanhQuanTrong(state, cfg, now);
+        }
+
+        setInterval(hienThiThanhThongBaoQuanTrong, 15000);
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) hienThiThanhThongBaoQuanTrong();
+        });
+
+        function aTaoDatetimeLocal(iso) {
+            const d = new Date(iso);
+            if (isNaN(d.getTime())) return '';
+            const p = function (n) { return String(n).padStart(2, '0'); };
+            return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + 'T' + p(d.getHours()) + ':' + p(d.getMinutes());
+        }
+
+        function toggleKhungThongBaoQuanTrong() {
+            const cb = document.getElementById('notice-important-checkbox');
+            const box = document.getElementById('notice-important-fields');
+            if (cb && box) box.classList.toggle('hidden', !cb.checked);
+        }
+
+        function napFormThongBaoQuanTrong(noticeId) {
+            const cb = document.getElementById('notice-important-checkbox');
+            const s = document.getElementById('notice-important-start');
+            const e = document.getElementById('notice-important-end');
+            if (!cb || !s || !e) return;
+            const cfg = window.thongBaoQuanTrong;
+            const laHienTai = noticeId !== null && noticeId !== undefined && cfg && String(cfg.noticeId) === String(noticeId);
+            cb.checked = !!(laHienTai && cfg.enabled);
+            s.value = laHienTai ? aTaoDatetimeLocal(cfg.startAt) : '';
+            e.value = laHienTai ? aTaoDatetimeLocal(cfg.endAt) : '';
+            toggleKhungThongBaoQuanTrong();
+        }
+
+        function docFormThongBaoQuanTrong() {
+            const cb = document.getElementById('notice-important-checkbox');
+            if (!cb || !cb.checked) return { ok: true, enabled: false };
+            const s = document.getElementById('notice-important-start').value;
+            const e = document.getElementById('notice-important-end').value;
+            if (!s || !e) { alert("Bạn đã bật thanh thông báo quan trọng, vui lòng nhập đầy đủ thời gian bắt đầu và thời gian kết thúc!"); return { ok: false }; }
+            const sd = new Date(s);
+            const ed = new Date(e);
+            if (isNaN(sd.getTime()) || isNaN(ed.getTime())) { alert("Thời gian bắt đầu hoặc kết thúc không hợp lệ!"); return { ok: false }; }
+            if (ed.getTime() <= sd.getTime()) { alert("Thời gian kết thúc phải sau thời gian bắt đầu!"); return { ok: false }; }
+            return { ok: true, enabled: true, startAt: sd.toISOString(), endAt: ed.toISOString() };
+        }
+
+        function xacNhanThayThongBaoQuanTrong(noticeId) {
+            const cur = window.thongBaoQuanTrong;
+            if (!cur || cur.enabled !== true || String(cur.noticeId) === String(noticeId)) return true;
+            const st = layTrangThaiThanhQuanTrong(cur, Date.now());
+            if (st !== 'active' && st !== 'upcoming') return true;
+            return confirm('Hiện đã có một thông báo quan trọng khác ("' + cur.title + '"). Thanh trên trang chủ chỉ hiển thị một thông báo, cậu có muốn thay thế không?');
+        }
+
+        function apDungThongBaoQuanTrong(noticeId, title, content, cauHinh) {
+            const cur = window.thongBaoQuanTrong;
+            if (cauHinh.enabled) {
+                window.thongBaoQuanTrong = { enabled: true, noticeId: String(noticeId), title: title, content: content, startAt: cauHinh.startAt, endAt: cauHinh.endAt };
+            } else if (cur && String(cur.noticeId) === String(noticeId)) {
+                window.thongBaoQuanTrong = { enabled: false, noticeId: String(noticeId), title: title, content: content, startAt: cur.startAt, endAt: cur.endAt };
+            }
+            hienThiThanhThongBaoQuanTrong();
+        }
+
         async function loadDataFromGitHub() {
             try {
                 let response = await fetch(GITHUB_JSON_URL + "?_t=" + new Date().getTime());
@@ -5797,6 +6192,10 @@
                     let data = await response.json();
                     if (data.truyen_data) window.dữLiệuTruyện = data.truyen_data;
                     if (data.thongbao_data) window.danhSachThongBao = data.thongbao_data;
+                    if (data.thongbao_quantrong !== undefined) {
+                        window.thongBaoQuanTrong = chuanHoaThongBaoQuanTrong(data.thongbao_quantrong);
+                        hienThiThanhThongBaoQuanTrong();
+                    }
                 }
                 let commentRes = await fetch(GITHUB_COMMENT_JSON_URL + "?_t=" + new Date().getTime());
                 if (commentRes.ok) {
@@ -6177,7 +6576,8 @@
             dongBoTimestampVaoDuLieu();
             const masterData = {
                 truyen_data: window.dữLiệuTruyện,
-                thongbao_data: window.danhSachThongBao
+                thongbao_data: window.danhSachThongBao,
+                thongbao_quantrong: window.thongBaoQuanTrong || null
             };
             console.log("--- DỮ LIỆU TRUYỆN JSON ĐỂ DÁN VÀO data.json ---");
             console.log(JSON.stringify(masterData, null, 2));
@@ -7001,6 +7401,7 @@
                 document.getElementById('notice-title-input').value = '';
                 document.getElementById('notice-title-input').classList.add('hidden');
                 document.getElementById('notice-pin-checkbox').checked = false;
+                napFormThongBaoQuanTrong(null);
                 document.getElementById('notice-content-input').value = '';
                 btnXoa.style.display = 'none';
                 btnLuu.innerText = 'Dán Lên Bảng Thông Báo';
@@ -7027,6 +7428,7 @@
                     document.getElementById('notice-title-input').classList.add('hidden');
                 }
                 document.getElementById('notice-pin-checkbox').checked = !!notice.isPinned;
+                napFormThongBaoQuanTrong(notice.id);
                 document.getElementById('notice-content-input').value = notice.content || '';
                 btnXoa.style.display = 'inline-block';
                 btnLuu.innerText = 'Lưu Thay Đổi Thông Báo';
@@ -7043,6 +7445,10 @@
             const content = document.getElementById('notice-content-input').value.trim();
             const isPinned = document.getElementById('notice-pin-checkbox').checked;
             if (!title || !content) { alert("Vui lòng điền đầy đủ tiêu đề và nội dung thông báo!"); return; }
+            const cauHinhQuanTrong = docFormThongBaoQuanTrong();
+            if (!cauHinhQuanTrong.ok) return;
+            const idThongBaoMoi = Date.now();
+            if (cauHinhQuanTrong.enabled && !xacNhanThayThongBaoQuanTrong(idVal ? parseInt(idVal) : idThongBaoMoi)) return;
             const now = new Date();
             const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
                             String(now.getMonth() + 1).padStart(2, '0') + '/' + 
@@ -7054,11 +7460,13 @@
                     notice.title = title;
                     notice.isPinned = isPinned;
                     notice.content = content;
+                    apDungThongBaoQuanTrong(notice.id, title, content, cauHinhQuanTrong);
                     luuThongBaoVaoLocalStorage();
                     alert("Đã cập nhật và lưu thay đổi thông báo thành công!");
                 }
             } else {
-                window.danhSachThongBao.unshift({ id: Date.now(), title: title, date: dateStr, content: content, storyKey: null, isPinned: isPinned, chapters: null });
+                apDungThongBaoQuanTrong(idThongBaoMoi, title, content, cauHinhQuanTrong);
+                window.danhSachThongBao.unshift({ id: idThongBaoMoi, title: title, date: dateStr, content: content, storyKey: null, isPinned: isPinned, chapters: null });
                 luuThongBaoVaoLocalStorage();
                 capNhatBadgeThongBao();
                 alert("Đã đăng thông báo thành công!");
@@ -7077,6 +7485,10 @@
             if (confirm("Cậu có chăng muốn xóa thông báo này không?")) {
                 const id = parseInt(idVal);
                 window.danhSachThongBao = window.danhSachThongBao.filter(n => n.id !== id);
+                if (window.thongBaoQuanTrong && String(window.thongBaoQuanTrong.noticeId) === String(id)) {
+                    window.thongBaoQuanTrong = null;
+                    hienThiThanhThongBaoQuanTrong();
+                }
                 luuThongBaoVaoLocalStorage();
                 alert("Đã xóa thông báo!");
                 document.getElementById('select-edit-notice').value = '';
@@ -7335,6 +7747,7 @@
                 document.getElementById('edit-title').value = truyen.title || '';
                 document.getElementById('edit-author').value = truyen.author || '';
                 document.getElementById('edit-cover-url').value = truyen.cover || '';
+                capNhatGoiYAnhTheoId('edit-cover-url');
                 document.getElementById('edit-status').value = truyen.status || 'Đang cập nhật';
                 document.getElementById('edit-main-chapters').value = truyen.mainChapterCount || truyen.totalChaptersInput || truyen.chapters.length || 42;
                 var hasExtra = truyen.hasExtraStories || false;
@@ -7572,6 +7985,7 @@
                 document.getElementById('new-tags').value = '';
                 document.getElementById('new-summary').innerHTML = '';
                 document.getElementById('new-cover-url').value = '';
+                capNhatGoiYAnhTheoId('new-cover-url');
                 document.getElementById('new-chapter-title').value = '';
                 document.getElementById('new-chapter-content').value = '';
                 document.getElementById('new-chapter-18').checked = false;
@@ -7708,13 +8122,23 @@
             }
         };
 
+        // Bìa mặc định: bỏ tiền tố [...] đầu tiên ở ĐẦU tên (chỉ để hiển thị, không sửa dữ liệu gốc) và escape HTML
+        function taoTenBiaMacDinh(title) {
+            const goc = String(title == null ? '' : title);
+            let ten = goc.replace(/^\s*\[[^\]]*\]\s*/, '').trim();
+            if (!ten) ten = goc.trim();
+            if (!ten) ten = 'Ảnh bìa';
+            return ten.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
         function taoCardHTML(key, truyen, mode) {
             let tagsHTML = '';
             if (truyen.tags && Array.isArray(truyen.tags)) {
                 const limitedTags = truyen.tags.slice(0, 3);
                 tagsHTML = limitedTags.map(t => `<span class="mini-tag" onclick="event.stopPropagation(); timTheoTag('${t}')">${t}</span>`).join('');
             }
-            const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh Bìa ]`;
+            const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `<span class="story-card-cover-title">${taoTenBiaMacDinh(truyen.title)}</span>`;
             let chapterDisplay = '';
             let newBadgeHTML = '';
             if (truyen.chapters && truyen.chapters.length > 0) {
@@ -8373,6 +8797,10 @@
         }
 
         document.addEventListener('keydown', (e) => {
+            // Không xử lý phím khi đang gõ chữ (input/textarea/contenteditable) hoặc đang soạn IME (UniKey/Telex/VNI)
+            const t2048 = e.target;
+            if (e.isComposing || e.keyCode === 229 ||
+                (t2048 && (t2048 instanceof HTMLInputElement || t2048 instanceof HTMLTextAreaElement || t2048 instanceof HTMLSelectElement || t2048.isContentEditable))) return;
             if (document.getElementById('tab-quay-thu-gian').classList.contains('hidden') || 
                 document.getElementById('quay-game-2048-view').classList.contains('hidden')) return;
             let moved = false;
