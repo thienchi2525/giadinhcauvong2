@@ -5495,6 +5495,7 @@
                 var singleChap = addedChapters[0];
                 window.danhSachThongBao.unshift({
                     id: Date.now(),
+                    type: 'chuong-moi',
                     title: '📖 Chương mới: ' + storyTitle + ' — ' + singleChap.title,
                     date: dateStr,
                     content: '📖 ' + storyTitle + '\n\n' + singleChap.title + '\n\nvừa được cập nhật...',
@@ -5505,6 +5506,7 @@
             } else {
                 window.danhSachThongBao.unshift({
                     id: Date.now(),
+                    type: 'chuong-moi',
                     title: '📖 ' + storyTitle + ' — ' + addedChapters.length + ' chương mới',
                     date: dateStr,
                     content: '📖 ' + storyTitle + '\n\nvừa cập nhật ' + addedChapters.length + ' chương mới! Đọc ngay thôi nào! ✨',
@@ -5580,6 +5582,7 @@
                     var singleChap = chapters[0];
                     window.danhSachThongBao.unshift({
                         id: Date.now() + Math.random() * 1000,
+                        type: 'chuong-moi',
                         title: '📖 Chương mới: ' + storyTitle + ' — ' + singleChap.title,
                         date: dateStr,
                         content: '📖 ' + storyTitle + '\n\n' + singleChap.title + '\n\nvừa được cập nhật...',
@@ -5590,6 +5593,7 @@
                 } else {
                     window.danhSachThongBao.unshift({
                         id: Date.now() + Math.random() * 1000,
+                        type: 'chuong-moi',
                         title: '📖 ' + storyTitle + ' — ' + chapters.length + ' chương mới',
                         date: dateStr,
                         content: '📖 ' + storyTitle + '\n\nvừa cập nhật ' + chapters.length + ' chương mới! Đọc ngay thôi nào! ✨',
@@ -7173,7 +7177,7 @@
                             setChapterTimestamp(item.key, 0, timestamp);
                         }
                         if (item.storyData.status !== 'Tạm ẩn') {
-                            taoThongBaoTuDong(`📖 Truyện mới: "${item.storyData.title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${item.storyData.title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, item.key, false);
+                            taoThongBaoTuDong(`📖 Truyện mới: "${item.storyData.title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${item.storyData.title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, item.key, false, 'truyen-moi');
                         }
                     } else if (item.type === 'chapter') {
                         if (window.dữLiệuTruyện[item.storyKey]) {
@@ -7183,7 +7187,7 @@
                             const timestamp = Date.now().toString();
                             setChapterTimestamp(item.storyKey, newIdx, timestamp);
                             if (truyen.status !== 'Tạm ẩn') {
-                                taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${item.chapterData.title}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${item.chapterData.title}". Đọc ngay thôi nào! ✨`, item.storyKey, false);
+                                taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${item.chapterData.title}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${item.chapterData.title}". Đọc ngay thôi nào! ✨`, item.storyKey, false, 'chuong-moi');
                             }
                         }
                     }
@@ -7541,13 +7545,26 @@
             });
         }
 
-        function taoThongBaoTuDong(tieuDeThongBao, noiDungChiTiet, storyKey = null, isPinned = false) {
+        // Mã loại thông báo: 'hethong' | 'chuong-moi' | 'truyen-moi' | 'tamsu'
+        // Ưu tiên trường type đã lưu; thông báo cũ chưa có type thì suy luận từ tiêu đề (tương thích dữ liệu cũ).
+        function layLoaiThongBao(n) {
+            if (n && (n.type === 'hethong' || n.type === 'chuong-moi' || n.type === 'truyen-moi' || n.type === 'tamsu')) return n.type;
+            var title = (n && n.title) || '';
+            var content = (n && n.content) || '';
+            if (title.includes('Hệ thống') || title.includes('Chào mừng')) return 'hethong';
+            if (title.includes('Chương mới:') || title.includes('cập nhật chương mới') || /\d+\s*chương mới\s*$/.test(title)) return 'chuong-moi';
+            if (title.includes('Truyện mới') || title.includes('truyện mới') || content.includes('truyện mới')) return 'truyen-moi';
+            return 'tamsu';
+        }
+
+        function taoThongBaoTuDong(tieuDeThongBao, noiDungChiTiet, storyKey = null, isPinned = false, loai = null) {
             const now = new Date();
             const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
                             String(now.getMonth() + 1).padStart(2, '0') + '/' + 
                             now.getFullYear();
             const newNotice = {
                 id: Date.now(),
+                type: loai,
                 title: tieuDeThongBao,
                 date: dateStr,
                 content: noiDungChiTiet,
@@ -8194,11 +8211,11 @@
             }
             let filteredList = window.danhSachThongBao.filter(n => {
                 const matchKw = n.title.toLowerCase().includes(searchKw) || n.content.toLowerCase().includes(searchKw);
-                const isChuongMoi = n.title.includes('Chương mới:') || n.title.includes('cập nhật chương mới');
-                const isHeThong = n.title.includes('Hệ thống') || n.title.includes('Chào mừng');
-                const isTruyenMoi = n.title.includes('Truyện mới') || n.title.includes('truyện mới') || 
-                                   (n.content && n.content.includes('truyện mới'));
-                const isTamSuLich = !isChuongMoi && !isTruyenMoi && !isHeThong;
+                const loaiTB = layLoaiThongBao(n);
+                const isChuongMoi = loaiTB === 'chuong-moi';
+                const isHeThong = loaiTB === 'hethong';
+                const isTruyenMoi = loaiTB === 'truyen-moi';
+                const isTamSuLich = loaiTB === 'tamsu';
                 let matchSubTab = true;
                 if (currentNoticeSubTab === 'hethong') matchSubTab = isHeThong;
                 if (currentNoticeSubTab === 'chuong') matchSubTab = isChuongMoi;
@@ -8219,11 +8236,12 @@
                 const pinnedClass = n.isPinned ? 'pinned' : '';
                 const pinnedBadgeHTML = n.isPinned ? `<div class="pinned-badge"><svg class=ic aria-hidden=true><use href=#i-pin /></svg> THÔNG BÁO QUAN TRỌNG</div>` : '';
                 let typeTagHTML = '';
-                var isSystemNotice = n.title.includes('Hệ thống') || n.title.includes('Chào mừng');
-                var isTruyenMoi = n.title.includes('Truyện mới') || (n.content && n.content.includes('truyện mới'));
+                var loaiTB = layLoaiThongBao(n);
+                var isSystemNotice = loaiTB === 'hethong';
+                var isTruyenMoi = loaiTB === 'truyen-moi';
                 if (isSystemNotice) {
                     typeTagHTML = `<div class="notice-type-tag" style="background: #7c4dff;"><svg class=ic aria-hidden=true><use href=#i-sliders /></svg> HỆ THỐNG</div>`;
-                } else if (n.title.includes('Chương mới:') || n.title.includes('cập nhật chương mới')) {
+                } else if (loaiTB === 'chuong-moi') {
                     typeTagHTML = `<div class="notice-type-tag" style="background: #ff4081;"><svg class=ic aria-hidden=true><use href=#i-book-open /></svg> CHƯƠNG MỚI</div>`;
                 } else if (isTruyenMoi) {
                     typeTagHTML = `<div class="notice-type-tag" style="background: #ff6f61;"><svg class=ic aria-hidden=true><use href=#i-mail /></svg> TRUYỆN MỚI</div>`;
@@ -8650,7 +8668,7 @@
                 window.dữLiệuTruyện[newKey] = storyObj;
                 luuVaoLocalStorage();
                 if (status !== 'Tạm ẩn') {
-                    taoThongBaoTuDong(`📖 Truyện mới: "${title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, newKey, false);
+                    taoThongBaoTuDong(`📖 Truyện mới: "${title}" đã ra mắt!`, `Tác giả vừa đăng bộ truyện mới cứng mang tên "${title}". Mời các cậu ghé đọc chương đầu tiên ngay nhé! 💕`, newKey, false, 'truyen-moi');
                 }
                 alert("Đăng truyện mới thành công!");
                 document.getElementById('new-title').value = '';
@@ -8765,7 +8783,7 @@
                 setChapterTimestamp(selectedKey, newIdx, chapterTimestamp);
                 luuVaoLocalStorage();
                 if (truyen.status !== 'Tạm ẩn') {
-                    taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${chapTitle}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${chapTitle}". Đọc ngay thôi nào! ✨`, selectedKey, false);
+                    taoThongBaoTuDong(`📖 Chương mới: ${truyen.title} — ${chapTitle}`, `Bộ truyện "${truyen.title}" vừa được cập nhật chương mới: "${chapTitle}". Đọc ngay thôi nào! ✨`, selectedKey, false, 'chuong-moi');
                 }
                 alert(`Đã thêm chương mới thành công!`);
                 document.getElementById('append-chapter-title').value = '';
