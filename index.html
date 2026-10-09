@@ -3883,10 +3883,104 @@
         .notice-important-fields label { display: block; font-size: 12.5px; margin-bottom: 5px; }
         .notice-important-help { grid-column: 1 / -1; font-size: 12px; color: var(--subtext-color); line-height: 1.5; }
         @media (max-width: 560px) { .notice-important-fields { grid-template-columns: 1fr; } }
+
+        /* ===== Hình ảnh giới thiệu (tùy chọn theo từng truyện) ===== */
+        /* -- Khu quản lí -- */
+        .intro-gallery-help { font-size: 12px; line-height: 1.6; color: var(--subtext-color); margin-bottom: 10px; }
+        .intro-gallery-list { display: flex; flex-direction: column; gap: 10px; }
+        .intro-gallery-empty { font-size: 13px; color: var(--subtext-color); border: 1.5px dashed var(--border-color); border-radius: 14px; padding: 14px; text-align: center; background: var(--box-bg); }
+        .intro-gallery-list:not(:empty) + .intro-gallery-empty { display: none; }
+        .intro-add-btn { margin-top: 10px; }
+        .intro-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px; background: var(--box-bg); border: 1.5px solid var(--border-color); border-radius: 14px; position: relative; transition: border-color 0.2s ease, opacity 0.2s ease; }
+        .intro-row.is-dragging { opacity: 0.45; }
+        .intro-row.drop-before { box-shadow: 0 -3px 0 0 var(--primary-color); }
+        .intro-row.drop-after { box-shadow: 0 3px 0 0 var(--primary-color); }
+        .intro-grip { flex: 0 0 auto; align-self: center; width: 26px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: var(--subtext-color); cursor: grab; padding: 0; touch-action: none; }
+        .intro-grip:hover { color: var(--primary-color); }
+        .intro-grip:active { cursor: grabbing; }
+        .intro-grip .ic { width: 18px; height: 18px; fill: currentColor; stroke: none; }
+        .intro-thumb { flex: 0 0 auto; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: var(--container-bg); border: 1.5px solid var(--border-color); border-radius: 10px; overflow: hidden; font-size: 11px; color: var(--subtext-color); text-align: center; line-height: 1.3; box-sizing: border-box; }
+        .intro-thumb img { width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+        .intro-main { flex: 1 1 auto; min-width: 0; }
+        .intro-main .img-url-hint { margin-top: 6px; }
+        .intro-actions { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+        .intro-order { font-size: 12px; font-weight: bold; color: var(--primary-color); white-space: nowrap; }
+        .intro-btn-group { display: flex; gap: 6px; }
+        .intro-icon-btn { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; background: var(--container-bg); color: var(--primary-color); border: 1.5px solid var(--border-color); border-radius: 10px; cursor: pointer; padding: 0; transition: all 0.2s ease; font-family: inherit; }
+        .intro-icon-btn .ic { width: 16px; height: 16px; }
+        .intro-icon-btn:hover:not(:disabled) { background: var(--button-gradient); color: #fff; border-color: transparent; }
+        .intro-icon-btn:disabled { opacity: 0.35; cursor: default; }
+        .intro-icon-btn.is-danger:hover:not(:disabled) { background: #ff4d4d; }
+        .intro-form-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        @media (max-width: 600px) {
+            .intro-row { flex-wrap: wrap; }
+            .intro-main { flex: 1 1 calc(100% - 80px); }
+            .intro-actions { flex: 1 1 100%; flex-direction: row; justify-content: space-between; align-items: center; }
+            .intro-grip { display: none; }
+        }
+        @media (hover: none) and (pointer: coarse) { .intro-grip { display: none; } }
+
+        /* -- Gallery cho người đọc -- */
+        .intro-gal { width: 100%; }
+        .intro-gal-stage { position: relative; width: 100%; overflow: hidden; touch-action: pan-y; outline: none; user-select: none; -webkit-user-select: none; transition: height 0.25s ease; }
+        .intro-gal-stage:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 3px; border-radius: 6px; }
+        .intro-gal-track { display: flex; align-items: flex-start; width: 100%; transition: transform 0.3s ease; will-change: transform; }
+        .intro-gal-track.is-dragging { transition: none; }
+        .intro-gal-slide { flex: 0 0 100%; width: 100%; min-width: 0; display: flex; align-items: flex-start; justify-content: center; box-sizing: border-box; }
+        .intro-gal-img { display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: min(72vh, 640px); object-fit: contain; cursor: zoom-in; -webkit-user-drag: none; }
+        .intro-gal-img.is-tall { max-height: min(86vh, 820px); }
+        .intro-gal-slide:not(.has-media) { min-height: 120px; }
+        .intro-gal-fail { align-self: center; width: 100%; padding: 28px 12px; text-align: center; font-size: 13px; color: var(--subtext-color); }
+        .intro-gal-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 12px; }
+        .intro-gal-nav { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; background: var(--box-bg); color: var(--primary-color); border: 1.5px solid var(--border-color); border-radius: 50%; cursor: pointer; padding: 0; transition: all 0.2s ease; flex: 0 0 auto; }
+        .intro-gal-nav .ic { width: 18px; height: 18px; }
+        .intro-gal-nav:hover { background: var(--button-gradient); color: #fff; border-color: transparent; box-shadow: 0 4px 12px var(--glow-color); }
+        .intro-gal-indicator { display: flex; align-items: center; justify-content: center; gap: 7px; flex-wrap: wrap; min-width: 60px; }
+        .intro-gal-dot { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: none; background: var(--border-color); cursor: pointer; transition: all 0.2s ease; }
+        .intro-gal-dot.is-active { background: var(--primary-color); width: 20px; border-radius: 8px; }
+        /* Gallery nằm trực tiếp trên nền trang: không khung, không viền, không nền riêng, không đổ bóng */
+        .intro-gallery-free { margin: 0 0 25px 0; padding: 0; background: none; border: none; box-shadow: none; }
+        @media (max-width: 600px) {
+            .intro-gal-img { max-height: min(66vh, 520px); }
+            .intro-gal-img.is-tall { max-height: min(80vh, 680px); }
+            .intro-gal-nav { width: 34px; height: 34px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .intro-gal-stage, .intro-gal-track { transition: none; }
+        }
+
+        /* -- Xem ảnh ở kích thước lớn (bấm vào ảnh) -- */
+        .intro-lb { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100003; background: rgba(20, 8, 18, 0.88); display: flex; overflow: auto; padding: 16px; box-sizing: border-box; }
+        .intro-lb img { display: block; flex: 0 0 auto; margin: auto; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-out; }
+        .intro-lb img.is-tall { max-height: none; }
+        .intro-lb-close { position: fixed; top: 12px; right: 12px; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--container-bg); color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; z-index: 1; }
+        .intro-lb-close:hover { background: var(--border-color); }
+
+        /* -- Xem trước trang giới thiệu -- */
+        .ipp-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100002; background: rgba(60, 20, 40, 0.55); display: flex; justify-content: center; align-items: flex-start; padding: 0 16px 16px; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; }
+        .ipp-box { position: relative; margin-top: 16px; width: 100%; max-width: 960px; background: var(--container-bg); color: var(--text-color); border: 2px solid var(--border-color); border-radius: 20px; padding: 0 22px 22px; box-sizing: border-box; box-shadow: 0 12px 34px rgba(0,0,0,0.25); }
+        .ipp-bar { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0 10px; margin-bottom: 14px; background: var(--container-bg); border-bottom: 2px dashed var(--border-color); }
+        .ipp-bar-title { font-size: 17px; font-weight: bold; color: var(--primary-color); }
+        .ipp-bar-sub { font-size: 12px; color: var(--subtext-color); margin-top: 3px; line-height: 1.5; }
+        .ipp-close { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--border-color); background: transparent; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
+        .ipp-close:hover { background: var(--border-color); }
+        .ipp-readonly .tag, .ipp-readonly .chapter-item-v, .ipp-readonly .fav-btn { pointer-events: none; }
+        .ipp-footer { text-align: center; margin-top: 6px; }
+        #ipp-summary { font-family: 'Comfortaa', cursive, sans-serif !important; font-size: 14px !important; line-height: 1.8 !important; color: var(--text-color); padding: 12px !important; }
+        #ipp-summary * { font-family: inherit !important; font-size: inherit !important; line-height: inherit !important; background-color: transparent !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; }
+        #ipp-summary b, #ipp-summary strong { font-weight: 900 !important; }
+        #ipp-summary i, #ipp-summary em { font-style: italic !important; }
+        #ipp-summary u { text-decoration: underline !important; }
+        @media (max-width: 600px) {
+            .ipp-overlay { padding: 0 8px 8px; }
+            .ipp-box { margin-top: 8px; padding: 0 12px 14px; border-radius: 16px; }
+            #ipp-summary, #ipp-summary * { font-size: 13px !important; line-height: 1.7 !important; }
+            #ipp-info-box, #ipp-info-box div, #ipp-info-box strong { font-size: 13px !important; }
+        }
     </style>
 </head>
 <body class="dark-mode">
-<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol><symbol id="i-library" viewBox="0 0 24 24"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol><symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-bookmark" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></symbol><symbol id="i-coffee" viewBox="0 0 24 24"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol><symbol id="i-heart-crack" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="m12 13-1-1 2-2-3-3 2-2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><line x1="12" x2="12" y1="17" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol><symbol id="i-volume-x" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol><symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-gamepad" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></symbol><symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol><symbol id="i-circle-fill" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/></symbol><symbol id="i-pointer" viewBox="0 0 24 24"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></symbol><symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol><symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol><symbol id="i-library" viewBox="0 0 24 24"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol><symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-bookmark" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></symbol><symbol id="i-coffee" viewBox="0 0 24 24"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol><symbol id="i-heart-crack" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="m12 13-1-1 2-2-3-3 2-2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><line x1="12" x2="12" y1="17" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol><symbol id="i-volume-x" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol><symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-gamepad" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></symbol><symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol><symbol id="i-circle-fill" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/></symbol><symbol id="i-pointer" viewBox="0 0 24 24"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></symbol><symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol><symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol><symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></symbol></svg>
 
     <div id="pass-screen">
         <div class="pass-box">
@@ -4377,6 +4471,13 @@
                         <div id="new-summary" class="rich-textarea-box" contenteditable="true" placeholder="Viết vài dòng giới thiệu truyện..."></div>
                     </div>
 
+                    <div class="form-group intro-gallery-group">
+                        <label>Thêm hình ảnh giới thiệu</label>
+                        <div class="intro-gallery-list" id="new-intro-list"></div>
+                        <div class="intro-gallery-empty">Chưa có ảnh giới thiệu nào.</div>
+                        <button type="button" class="img-preview-btn intro-add-btn" onclick="themAnhGioiThieu('new')">+ Thêm ảnh</button>
+                    </div>
+
                     <div style="border-top: 1px dashed var(--border-color); padding-top: 15px; margin-top: 15px;">
                         <div class="form-group">
                             <label>Tên Chương Đầu Tiên (*)</label>
@@ -4409,7 +4510,8 @@
                         </div>
                     </div>
 
-                    <div style="text-align: center; margin-top: 20px;">
+                    <div class="intro-form-actions" style="justify-content: center; margin-top: 20px;">
+                        <button type="button" class="img-preview-btn" onclick="xemTruocTrangGioiThieu('new')"><svg class=ic aria-hidden=true><use href=#i-eye /></svg><span>Xem trước trang giới thiệu</span></button>
                         <button type="button" class="btn-submit" onclick="xuLyLuuTruyenMoi()"><svg class=ic aria-hidden=true><use href=#i-sparkles /></svg> Đăng Truyện Mới</button>
                     </div>
                 </div>
@@ -4479,14 +4581,25 @@
                         <div id="edit-summary" class="rich-textarea-box" contenteditable="true"></div>
                     </div>
 
+                    <div class="form-group intro-gallery-group">
+                        <label>Hình ảnh giới thiệu (tùy chọn)</label>
+                        <div class="intro-gallery-help">Dán link ảnh trực tiếp (ImgBB, Imgur...). Mỗi ảnh có thể có kích thước và tỉ lệ khác nhau, ảnh được giữ nguyên file gốc, không cắt, không nén, không đổi kích thước. Truyện không có ảnh thì khu vực này tự ẩn ở trang người đọc.</div>
+                        <div class="intro-gallery-list" id="edit-intro-list"></div>
+                        <div class="intro-gallery-empty">Chưa có ảnh giới thiệu nào.</div>
+                        <button type="button" class="img-preview-btn intro-add-btn" onclick="themAnhGioiThieu('edit')">+ Thêm ảnh</button>
+                    </div>
+
                     <div class="form-group">
                         <label>Đánh dấu thời gian</label>
                         <input type="datetime-local" id="edit-story-timestamp" class="form-control">
                     </div>
 
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px;">
                         <button type="button" class="btn-delete" onclick="xoaTruyenDangChon()"><svg class=ic aria-hidden=true><use href=#i-trash /></svg> Xóa Vĩnh Viễn</button>
+                        <div class="intro-form-actions">
+                        <button type="button" class="img-preview-btn" onclick="xemTruocTrangGioiThieu('edit')"><svg class=ic aria-hidden=true><use href=#i-eye /></svg><span>Xem trước trang giới thiệu</span></button>
                         <button type="button" class="btn-submit" onclick="xuLyLuuSuaTruyen()"><svg class=ic aria-hidden=true><use href=#i-save /></svg> Lưu Thay Đổi</button>
+                        </div>
                     </div>
                 </div>
 
@@ -4838,6 +4951,8 @@
                 </div>
             </div>
 
+            <div id="detail-intro-gallery" class="intro-gallery-free hidden"></div>
+
             <div class="comment-section">
                 <h4 style="color: var(--primary-color); margin-top: 0; margin-bottom: 15px; font-size: 18px;"><svg class=ic aria-hidden=true><use href=#i-message /></svg> Bình luận</h4>
                 
@@ -4910,6 +5025,20 @@
             <div class="img-preview-status" id="img-preview-status"></div>
             <div class="img-preview-note" id="img-preview-note"></div>
             <div class="img-preview-actions"><button type="button" class="img-preview-btn" onclick="dongXemTruocAnh()">Đóng</button></div>
+        </div>
+    </div>
+
+    <div id="intro-page-preview-modal" class="ipp-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="ipp-heading" onclick="if (event.target === this) dongXemTruocTrangGioiThieu()">
+        <div class="ipp-box">
+            <div class="ipp-bar">
+                <div>
+                    <div class="ipp-bar-title" id="ipp-heading">Xem trước trang giới thiệu</div>
+                    <div class="ipp-bar-sub">Hiển thị đúng như người đọc sẽ thấy (chưa lưu).</div>
+                </div>
+                <button type="button" class="ipp-close" onclick="dongXemTruocTrangGioiThieu()" aria-label="Đóng xem trước"><svg class=ic aria-hidden=true><use href=#i-x /></svg></button>
+            </div>
+            <div class="ipp-readonly" id="intro-page-preview-body"></div>
+            <div class="ipp-footer"><button type="button" class="img-preview-btn" onclick="dongXemTruocTrangGioiThieu()">Đóng</button></div>
         </div>
     </div>
 
@@ -6047,6 +6176,551 @@
             if (e.key !== 'Escape') return;
             const modal = document.getElementById('img-preview-modal');
             if (modal && !modal.classList.contains('hidden')) dongXemTruocAnh();
+        });
+
+
+        // ===== HÌNH ẢNH GIỚI THIỆU (tùy chọn theo từng truyện) =====
+        // Ảnh chỉ được lưu dưới dạng link tới file gốc (truyen.introImages = [url, ...]).
+        // Không tải lên lại, không resize, không tạo bản sao nhỏ: trình duyệt chỉ co ảnh bằng CSS khi hiển thị.
+        window._introImgs = window._introImgs || { new: [], edit: [] };
+        window._introUid = window._introUid || 0;
+
+        function thoatHTMLGT(str) {
+            return String(str == null ? '' : str).replace(/[&<>"']/g, function (c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        function chuanHoaDanhSachAnhGT(arr) {
+            if (!Array.isArray(arr)) return [];
+            return arr.map(function (it) { return typeof it === 'string' ? it : (it && it.url) || ''; })
+                .map(function (u) { return String(u).trim(); })
+                .filter(Boolean);
+        }
+
+        function taoPhanTuGT(tag, cls, text) {
+            const el = document.createElement(tag);
+            if (cls) el.className = cls;
+            if (text != null) el.textContent = text;
+            return el;
+        }
+
+        function taoIconGT(id) {
+            const svgNS = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(svgNS, 'svg');
+            svg.setAttribute('class', 'ic');
+            svg.setAttribute('aria-hidden', 'true');
+            const use = document.createElementNS(svgNS, 'use');
+            use.setAttribute('href', '#' + id);
+            svg.appendChild(use);
+            return svg;
+        }
+
+        // ---------- Gallery hiển thị cho người đọc ----------
+        function moAnhPhongToGT(url, isTall) {
+            const old = document.getElementById('intro-lightbox');
+            if (old) old.remove();
+            const box = taoPhanTuGT('div', 'intro-lb');
+            box.id = 'intro-lightbox';
+            box.setAttribute('role', 'dialog');
+            box.setAttribute('aria-modal', 'true');
+            box.setAttribute('aria-label', 'Xem ảnh lớn');
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = 'Hình ảnh giới thiệu';
+            if (isTall) img.classList.add('is-tall');
+            const close = taoPhanTuGT('button', 'intro-lb-close');
+            close.type = 'button';
+            close.setAttribute('aria-label', 'Đóng');
+            close.appendChild(taoIconGT('i-x'));
+            function dong() { box.remove(); document.removeEventListener('keydown', onKey, true); }
+            function onKey(e) { if (e.key === 'Escape') { e.stopPropagation(); dong(); } }
+            close.addEventListener('click', function (e) { e.stopPropagation(); dong(); });
+            box.addEventListener('click', dong);
+            document.addEventListener('keydown', onKey, true);
+            box.appendChild(img);
+            box.appendChild(close);
+            document.body.appendChild(box);
+        }
+
+        function taoGalleryGioiThieu(host, rawUrls) {
+            host.textContent = '';
+            const urls = chuanHoaDanhSachAnhGT(rawUrls);
+            const n = urls.length;
+            if (!n) return false;
+            const root = taoPhanTuGT('div', 'intro-gal');
+            const stage = taoPhanTuGT('div', 'intro-gal-stage');
+            const track = taoPhanTuGT('div', 'intro-gal-track');
+            stage.appendChild(track);
+            root.appendChild(stage);
+            let idx = 0;
+            const slides = [];
+            const tallFlags = [];
+
+            function fitHeight() {
+                const sl = slides[idx];
+                if (!sl) return;
+                const h = sl.offsetHeight;
+                stage.style.height = h > 0 ? h + 'px' : '';
+            }
+            function nap(i) {
+                const sl = slides[i];
+                if (!sl || sl.dataset.loaded) return;
+                sl.dataset.loaded = '1';
+                const img = document.createElement('img');
+                img.className = 'intro-gal-img';
+                img.alt = 'Hình ảnh giới thiệu ' + (i + 1) + (n > 1 ? ' trên ' + n : '');
+                img.draggable = false;
+                img.decoding = 'async';
+                img.addEventListener('load', function () {
+                    sl.classList.add('has-media');
+                    tallFlags[i] = img.naturalWidth > 0 && (img.naturalHeight / img.naturalWidth) > 2.2;
+                    img.classList.toggle('is-tall', tallFlags[i]);
+                    if (i === idx) fitHeight();
+                    else if (stage.style.height === '' ) fitHeight();
+                });
+                img.addEventListener('error', function () {
+                    sl.textContent = '';
+                    sl.classList.add('has-media');
+                    sl.appendChild(taoPhanTuGT('div', 'intro-gal-fail', 'Không tải được ảnh này.'));
+                    if (i === idx) fitHeight();
+                });
+                img.addEventListener('click', function () {
+                    if (stage._moved) { stage._moved = false; return; }
+                    moAnhPhongToGT(urls[i], !!tallFlags[i]);
+                });
+                img.src = urls[i];
+                sl.textContent = '';
+                sl.appendChild(img);
+            }
+            urls.forEach(function () {
+                const sl = taoPhanTuGT('div', 'intro-gal-slide');
+                slides.push(sl);
+                track.appendChild(sl);
+            });
+
+            let dots = [], prevBtn = null, nextBtn = null;
+            if (n > 1) {
+                stage.tabIndex = 0;
+                stage.setAttribute('role', 'group');
+                stage.setAttribute('aria-roledescription', 'gallery');
+                stage.setAttribute('aria-label', 'Hình ảnh giới thiệu');
+                const controls = taoPhanTuGT('div', 'intro-gal-controls');
+                prevBtn = taoPhanTuGT('button', 'intro-gal-nav');
+                prevBtn.type = 'button';
+                prevBtn.setAttribute('aria-label', 'Ảnh trước');
+                prevBtn.appendChild(taoIconGT('i-chevron-left'));
+                nextBtn = taoPhanTuGT('button', 'intro-gal-nav');
+                nextBtn.type = 'button';
+                nextBtn.setAttribute('aria-label', 'Ảnh sau');
+                nextBtn.appendChild(taoIconGT('i-chevron-right'));
+                const ind = taoPhanTuGT('div', 'intro-gal-indicator');
+                for (let i = 0; i < n; i++) {
+                    const d = taoPhanTuGT('button', 'intro-gal-dot');
+                    d.type = 'button';
+                    d.setAttribute('aria-label', 'Chuyển tới ảnh ' + (i + 1));
+                    d.addEventListener('click', (function (k) { return function () { go(k); }; })(i));
+                    dots.push(d);
+                    ind.appendChild(d);
+                }
+                controls.appendChild(prevBtn);
+                controls.appendChild(ind);
+                controls.appendChild(nextBtn);
+                root.appendChild(controls);
+                prevBtn.addEventListener('click', function () { go(idx - 1); });
+                nextBtn.addEventListener('click', function () { go(idx + 1); });
+                stage.addEventListener('keydown', function (e) {
+                    if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
+                    else if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
+                });
+            }
+
+            function go(i) {
+                idx = ((i % n) + n) % n;
+                track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+                nap(idx); nap((idx + 1) % n); nap((idx - 1 + n) % n);
+                dots.forEach(function (d, k) {
+                    d.classList.toggle('is-active', k === idx);
+                    if (k === idx) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+                });
+                slides.forEach(function (sl, k) { sl.setAttribute('aria-hidden', k === idx ? 'false' : 'true'); });
+                fitHeight();
+            }
+
+            // Vuốt trái/phải trên điện thoại (và kéo chuột)
+            if (n > 1) {
+                let startX = 0, startY = 0, dx = 0, drag = false, axis = null, w = 1, pid = null;
+                stage.addEventListener('pointerdown', function (e) {
+                    if (e.pointerType === 'mouse' && e.button !== 0) return;
+                    drag = true; axis = null; dx = 0; stage._moved = false;
+                    startX = e.clientX; startY = e.clientY; pid = e.pointerId;
+                    w = stage.clientWidth || 1;
+                });
+                stage.addEventListener('pointermove', function (e) {
+                    if (!drag || e.pointerId !== pid) return;
+                    const mx = e.clientX - startX, my = e.clientY - startY;
+                    if (axis === null && (Math.abs(mx) > 6 || Math.abs(my) > 6)) axis = Math.abs(mx) > Math.abs(my) ? 'x' : 'y';
+                    if (axis !== 'x') return;
+                    if (e.cancelable) e.preventDefault();
+                    if (!stage.hasPointerCapture || !stage.hasPointerCapture(pid)) { try { stage.setPointerCapture(pid); } catch (err) {} }
+                    track.classList.add('is-dragging');
+                    dx = mx;
+                    stage._moved = Math.abs(mx) > 6;
+                    track.style.transform = 'translateX(calc(' + (-idx * 100) + '% + ' + dx + 'px))';
+                });
+                function ketThuc(e) {
+                    if (!drag || (e && e.pointerId !== pid)) return;
+                    drag = false;
+                    track.classList.remove('is-dragging');
+                    if (axis === 'x' && Math.abs(dx) > Math.min(60, w * 0.15)) go(dx < 0 ? idx + 1 : idx - 1);
+                    else go(idx);
+                    try { stage.releasePointerCapture(pid); } catch (err) {}
+                    setTimeout(function () { stage._moved = false; }, 0);
+                }
+                stage.addEventListener('pointerup', ketThuc);
+                stage.addEventListener('pointercancel', ketThuc);
+            }
+
+            host.appendChild(root);
+            if (typeof ResizeObserver !== 'undefined') {
+                const ro = new ResizeObserver(function () {
+                    if (!stage.isConnected) { ro.disconnect(); return; }
+                    fitHeight();
+                });
+                ro.observe(stage);
+            }
+            go(0);
+            return true;
+        }
+
+        function hienThiGalleryGioiThieuChiTiet(truyen) {
+            const wrap = document.getElementById('detail-intro-gallery');
+            if (!wrap) return;
+            const urls = chuanHoaDanhSachAnhGT(truyen && truyen.introImages);
+            wrap.textContent = '';
+            if (!urls.length) { wrap.classList.add('hidden'); return; }
+            wrap.classList.remove('hidden');
+            taoGalleryGioiThieu(wrap, urls);
+        }
+
+        // ---------- Khu quản lí ảnh (Đăng truyện / Chỉnh sửa truyện) ----------
+        function napAnhGioiThieuVaoForm(mode, urls) {
+            window._introImgs[mode] = chuanHoaDanhSachAnhGT(urls).map(function (u) { return { id: ++window._introUid, url: u }; });
+            renderAnhGioiThieu(mode);
+        }
+
+        window.themAnhGioiThieu = function (mode) {
+            window._introImgs[mode].push({ id: ++window._introUid, url: '' });
+            renderAnhGioiThieu(mode);
+            const list = document.getElementById(mode + '-intro-list');
+            const inputs = list && list.querySelectorAll('input');
+            if (inputs && inputs.length) inputs[inputs.length - 1].focus();
+        };
+
+        window.xoaAnhGioiThieu = function (mode, id) {
+            window._introImgs[mode] = window._introImgs[mode].filter(function (it) { return it.id !== id; });
+            renderAnhGioiThieu(mode);
+        };
+
+        window.dichAnhGioiThieu = function (mode, id, delta) {
+            const arr = window._introImgs[mode];
+            const i = arr.findIndex(function (it) { return it.id === id; });
+            const j = i + delta;
+            if (i < 0 || j < 0 || j >= arr.length) return;
+            const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+            renderAnhGioiThieu(mode);
+        };
+
+        function capNhatDongAnhGT(item, row) {
+            const hint = row.querySelector('.img-url-hint');
+            const thumb = row.querySelector('.intro-thumb');
+            const url = item.url.trim();
+            hint.className = 'img-url-hint';
+            thumb.textContent = '';
+            if (!url) { hint.textContent = ''; thumb.textContent = 'Chưa có ảnh'; return; }
+            if (!urlAnhHopLe(url)) {
+                hint.classList.add('is-error');
+                hint.textContent = 'Link chưa hợp lệ: cần bắt đầu bằng http:// hoặc https://';
+                thumb.textContent = 'Lỗi link';
+                return;
+            }
+            hint.textContent = 'Đang kiểm tra ảnh...';
+            thumb.textContent = '...';
+            kiemTraUrlAnh(url, function (kq) {
+                if (item.url.trim() !== url) return;
+                thumb.textContent = '';
+                if (kq.ok) {
+                    hint.className = 'img-url-hint is-ok';
+                    hint.textContent = 'Ảnh gốc ' + kq.w + '×' + kq.h + ' px. Được giữ nguyên, không cắt, không đổi kích thước.';
+                    const im = document.createElement('img');
+                    im.alt = '';
+                    im.src = url;
+                    thumb.appendChild(im);
+                } else {
+                    hint.className = 'img-url-hint is-error';
+                    hint.textContent = 'Không tải được ảnh từ link này. Hãy kiểm tra lại link ảnh trực tiếp.';
+                    thumb.textContent = 'Lỗi ảnh';
+                }
+            });
+        }
+
+        function renderAnhGioiThieu(mode) {
+            const list = document.getElementById(mode + '-intro-list');
+            if (!list) return;
+            const arr = window._introImgs[mode];
+            list.textContent = '';
+            let dragId = null;
+            arr.forEach(function (item, i) {
+                const row = taoPhanTuGT('div', 'intro-row');
+                row.dataset.id = item.id;
+
+                const grip = taoPhanTuGT('span', 'intro-grip');
+                grip.title = 'Kéo để đổi thứ tự';
+                grip.appendChild(taoIconGT('i-grip'));
+                grip.addEventListener('mousedown', function () {
+                    row.draggable = true;
+                    document.addEventListener('mouseup', function () { if (dragId === null) row.draggable = false; }, { once: true });
+                });
+
+                const thumb = taoPhanTuGT('div', 'intro-thumb');
+                const main = taoPhanTuGT('div', 'intro-main');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'form-control';
+                input.autocomplete = 'off';
+                input.placeholder = 'https://i.ibb.co/xxxx/hinh-gioi-thieu.jpg';
+                input.setAttribute('aria-label', 'Link hình ảnh giới thiệu số ' + (i + 1));
+                input.value = item.url;
+                let timer = null;
+                input.addEventListener('input', function () {
+                    item.url = input.value;
+                    clearTimeout(timer);
+                    timer = setTimeout(function () { capNhatDongAnhGT(item, row); }, 350);
+                });
+                const hint = taoPhanTuGT('div', 'img-url-hint');
+                hint.setAttribute('aria-live', 'polite');
+                main.appendChild(input);
+                main.appendChild(hint);
+
+                const actions = taoPhanTuGT('div', 'intro-actions');
+                actions.appendChild(taoPhanTuGT('span', 'intro-order', 'Ảnh ' + (i + 1)));
+                const grp = taoPhanTuGT('div', 'intro-btn-group');
+                function nut(iconId, label, extra, onClick, disabled) {
+                    const b = taoPhanTuGT('button', 'intro-icon-btn' + (extra ? ' ' + extra : ''));
+                    b.type = 'button';
+                    b.title = label;
+                    b.setAttribute('aria-label', label);
+                    b.disabled = !!disabled;
+                    b.appendChild(taoIconGT(iconId));
+                    b.addEventListener('click', onClick);
+                    return b;
+                }
+                grp.appendChild(nut('i-chevron-up', 'Chuyển lên', '', function () { dichAnhGioiThieu(mode, item.id, -1); }, i === 0));
+                grp.appendChild(nut('i-chevron-down', 'Chuyển xuống', '', function () { dichAnhGioiThieu(mode, item.id, 1); }, i === arr.length - 1));
+                grp.appendChild(nut('i-trash', 'Xóa ảnh', 'is-danger', function () { xoaAnhGioiThieu(mode, item.id); }, false));
+                actions.appendChild(grp);
+
+                row.appendChild(grip);
+                row.appendChild(thumb);
+                row.appendChild(main);
+                row.appendChild(actions);
+
+                // Kéo thả đổi thứ tự (máy tính); điện thoại dùng nút lên/xuống
+                row.addEventListener('dragstart', function (e) {
+                    dragId = item.id;
+                    row.classList.add('is-dragging');
+                    if (e.dataTransfer) { e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', String(item.id)); } catch (err) {} }
+                });
+                row.addEventListener('dragend', function () {
+                    row.draggable = false;
+                    dragId = null;
+                    list.querySelectorAll('.intro-row').forEach(function (r) { r.classList.remove('is-dragging', 'drop-before', 'drop-after'); });
+                });
+                row.addEventListener('dragover', function (e) {
+                    if (dragId === null || dragId === item.id) return;
+                    e.preventDefault();
+                    const rect = row.getBoundingClientRect();
+                    const before = (e.clientY - rect.top) < rect.height / 2;
+                    row.classList.toggle('drop-before', before);
+                    row.classList.toggle('drop-after', !before);
+                });
+                row.addEventListener('dragleave', function () { row.classList.remove('drop-before', 'drop-after'); });
+                row.addEventListener('drop', function (e) {
+                    if (dragId === null || dragId === item.id) return;
+                    e.preventDefault();
+                    const rect = row.getBoundingClientRect();
+                    const before = (e.clientY - rect.top) < rect.height / 2;
+                    const a = window._introImgs[mode];
+                    const from = a.findIndex(function (it) { return it.id === dragId; });
+                    const moved = a.splice(from, 1)[0];
+                    let to = a.findIndex(function (it) { return it.id === item.id; });
+                    if (!before) to += 1;
+                    a.splice(to, 0, moved);
+                    renderAnhGioiThieu(mode);
+                });
+
+                list.appendChild(row);
+                capNhatDongAnhGT(item, row);
+            });
+        }
+
+        // Trả về mảng link hợp lệ (bỏ dòng trống). Trả về null nếu có link sai (đã báo lỗi).
+        function thuAnhGioiThieuDeLuu(mode) {
+            const out = [];
+            const arr = window._introImgs[mode] || [];
+            for (let i = 0; i < arr.length; i++) {
+                const u = (arr[i].url || '').trim();
+                if (!u) continue;
+                if (!urlAnhHopLe(u)) {
+                    alert('Link hình ảnh giới thiệu số ' + (i + 1) + ' chưa hợp lệ. Link cần bắt đầu bằng http:// hoặc https:// và trỏ trực tiếp tới file ảnh.');
+                    return null;
+                }
+                out.push(u);
+            }
+            return out;
+        }
+
+        // ---------- Xem trước toàn bộ trang giới thiệu ----------
+        function layDuLieuXemTruocGT(mode) {
+            const g = function (id) { return document.getElementById(id); };
+            let d;
+            if (mode === 'edit') {
+                const key = g('select-edit-story').value;
+                const goc = (key && window.dữLiệuTruyện[key]) || {};
+                const mainCh = g('edit-main-chapters').value ? parseInt(g('edit-main-chapters').value) : 0;
+                const hasExtra = g('edit-has-extra').checked;
+                const extra = hasExtra ? (parseInt(g('edit-extra-chapters').value) || 0) : 0;
+                const total = mainCh + (hasExtra ? extra : 0);
+                d = {
+                    title: g('edit-title').value.trim(),
+                    author: g('edit-author').value.trim(),
+                    status: g('edit-status').value,
+                    cover: g('edit-cover-url').value.trim() || goc.cover || '',
+                    tags: g('edit-tags').value ? g('edit-tags').value.split(',').map(function (t) { return t.trim(); }).filter(Boolean) : [],
+                    summary: g('edit-summary').innerHTML.trim(),
+                    hasExtraStories: hasExtra,
+                    extraStoryCount: extra,
+                    totalChaptersInput: total > 0 ? total : null,
+                    chapters: (goc.chapters || []).map(function (c) { return { title: c.title, is18: c.is18 }; })
+                };
+            } else {
+                const mainCh = g('new-main-chapters').value ? parseInt(g('new-main-chapters').value) : 0;
+                const hasExtra = g('new-has-extra').checked;
+                const extra = hasExtra ? (parseInt(g('new-extra-chapters').value) || 0) : 0;
+                const total = mainCh + (hasExtra ? extra : 0);
+                const tagsRaw = g('new-tags').value;
+                d = {
+                    title: g('new-title').value.trim(),
+                    author: g('new-author').value.trim(),
+                    status: g('new-status').value,
+                    cover: g('new-cover-url').value.trim(),
+                    tags: tagsRaw ? tagsRaw.split(',').map(function (t) { return t.trim(); }).filter(Boolean) : ['Đam Mỹ'],
+                    summary: g('new-summary').innerHTML.trim(),
+                    hasExtraStories: hasExtra,
+                    extraStoryCount: extra,
+                    totalChaptersInput: total > 0 ? total : null,
+                    chapters: [{ title: g('new-chapter-title').value.trim() || 'Chương đầu tiên', is18: g('new-chapter-18').checked }]
+                };
+            }
+            d.images = chuanHoaDanhSachAnhGT((window._introImgs[mode] || []).map(function (it) { return it.url; })).filter(urlAnhHopLe);
+            return d;
+        }
+
+        window.xemTruocTrangGioiThieu = function (mode) {
+            const d = layDuLieuXemTruocGT(mode);
+            const modal = document.getElementById('intro-page-preview-modal');
+            const body = document.getElementById('intro-page-preview-body');
+            const E = thoatHTMLGT;
+            const title = d.title || 'Đang cập nhật';
+            let cleanTitle = d.title ? d.title.replace(/\[.*?\]/g, '').trim() : 'Đang cập nhật';
+            if (!cleanTitle) cleanTitle = d.title || 'Đang cập nhật';
+            const done = d.chapters.length;
+            const total = d.totalChaptersInput || 0;
+            const isUpdating = !total;
+            const fake = { status: d.status, totalChaptersInput: d.totalChaptersInput, chapters: d.chapters };
+            const displayStatus = getTrangThaiHienThi(fake);
+            let chapterInfo;
+            if (isUpdating) chapterInfo = 'Đang cập nhật';
+            else {
+                chapterInfo = total + ' chương';
+                if (d.hasExtraStories && d.extraStoryCount > 0) chapterInfo += ' + ' + d.extraStoryCount + ' ngoại truyện';
+            }
+            const tagsHTML = d.tags.length ? d.tags.map(function (t) { return '<span class="tag">' + E(t) + '</span>'; }).join('') : '<span class="tag">Đam Mỹ</span>';
+            let pctText, fillW, chText, stText;
+            if (isUpdating) {
+                fillW = Math.min(done * 2, 80); pctText = 'Đang cập nhật'; chText = 'Đã edit ' + done + ' chương'; stText = 'Đang cập nhật';
+            } else {
+                let pc = Math.min(100, Math.round(done / total * 100));
+                fillW = pc; pctText = pc + '%'; chText = done + '/' + total;
+                stText = (pc >= 100 || displayStatus === 'Hoàn thành') ? 'Hoàn thành' : 'Đang tiến hành';
+            }
+            const summaryHTML = d.summary ? apDungMauChuTheoTheme(d.summary) : 'Đang cập nhật...';
+            const hasImgs = d.images.length > 0;
+            const chaptersHTML = d.chapters.map(function (ch) {
+                return '<li class="chapter-item-v"><span class="chapter-title-line">' + (ch.is18 ? '<span class="badge-18">[18+]</span>' : '') + '<span class="chapter-name">' + E(ch.title) + '</span></span></li>';
+            }).join('');
+            const coverHTML = d.cover && urlAnhHopLe(d.cover) ? '<img src="' + E(d.cover) + '" alt="">' : '[ Ảnh bìa ]';
+
+            body.innerHTML = `
+                <div class="story-decor-card">
+                    <div style="text-align: center;">
+                        <h2 class="story-cover-title">${E(title)}</h2>
+                        <div style="position: relative; display: inline-block; margin: 0 auto 20px auto;">
+                            <div class="story-decor-cover">${coverHTML}</div>
+                        </div>
+                    </div>
+                    <div class="story-stats-box">
+                        <div class="story-stats-item"><div class="story-stats-label"><svg class=ic aria-hidden=true><use href=#i-eye /></svg> LƯỢT ĐỌC</div><div class="story-stats-number">0</div></div>
+                        <div class="story-stats-item"><div class="story-stats-label"><svg class=ic aria-hidden=true><use href=#i-heart /></svg> YÊU THÍCH</div><div class="story-stats-number">0</div></div>
+                        <div class="story-stats-item"><div class="story-stats-label"><svg class=ic aria-hidden=true><use href=#i-message /></svg> BÌNH LUẬN</div><div class="story-stats-number">0</div></div>
+                    </div>
+                    <div class="decor-section-heading"><div class="decor-number-badge">01</div><div class="decor-title-text">Thông tin</div><div class="decor-line"></div></div>
+                    <div class="decor-box-content">
+                        <div id="ipp-info-box" style="font-size: 14px; line-height: 2.0; color: var(--text-color);">
+                            <div><strong style="color: var(--primary-color);">Tên truyện:</strong> ${E(cleanTitle)}</div>
+                            <div><strong style="color: var(--primary-color);">Tác giả:</strong> ${E(d.author || 'Đang cập nhật')}</div>
+                            <div><strong style="color: var(--primary-color);">Tình trạng:</strong> ${E(displayStatus)}</div>
+                            <div><strong style="color: var(--primary-color);">Số chương:</strong> ${E(chapterInfo)}</div>
+                            <div><strong style="color: var(--primary-color);">Thể loại / Thẻ:</strong> ${tagsHTML}</div>
+                        </div>
+                    </div>
+                    <div class="decor-section-heading"><div class="decor-number-badge">02</div><div class="decor-title-text">Giới thiệu</div><div class="decor-line"></div></div>
+                    <div class="decor-box-content">
+                        <div id="ipp-summary" style="font-size: 14px; line-height: 1.8; color: var(--text-color); white-space: pre-wrap; word-break: break-word;">${summaryHTML}</div>
+                    </div>
+                    <div class="story-progress-box" style="margin-top: 25px; margin-bottom: 0;">
+                        <div class="story-progress-header"><span><svg class=ic aria-hidden=true><use href=#i-file-text /></svg> Tiến độ edit</span><span>${E(pctText)}</span></div>
+                        <div class="story-progress-bar-bg"><div class="story-progress-bar-fill" style="width: ${fillW}%;"></div></div>
+                        <div class="story-progress-footer"><span>${E(chText)}</span><span>${E(stText)}</span></div>
+                    </div>
+                </div>
+                <div class="action-buttons-group">
+                    <button type="button" class="fav-btn"><svg class=ic aria-hidden=true><use href=#i-heart /></svg> Thêm vào yêu thích</button>
+                </div>
+                <div class="story-decor-card">
+                    <div class="decor-section-heading" style="margin-top: 0;"><div class="decor-number-badge">03</div><div class="decor-title-text">Mục lục</div><div class="decor-line"></div></div>
+                    <ul class="chapter-list-vertical">${chaptersHTML}</ul>
+                </div>
+                ${hasImgs ? '<div id="ipp-gallery-body" class="intro-gallery-free"></div>' : ''}`;
+            if (hasImgs) taoGalleryGioiThieu(document.getElementById('ipp-gallery-body'), d.images);
+            modal.classList.remove('hidden');
+            modal.scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.dongXemTruocTrangGioiThieu = function () {
+            const modal = document.getElementById('intro-page-preview-modal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            document.getElementById('intro-page-preview-body').textContent = '';
+            document.body.style.overflow = '';
+        };
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            if (document.getElementById('intro-lightbox')) return;
+            const modal = document.getElementById('intro-page-preview-modal');
+            if (modal && !modal.classList.contains('hidden')) dongXemTruocTrangGioiThieu();
         });
 
         // ===== THANH THÔNG BÁO QUAN TRỌNG (độc lập với chức năng ghim thông báo) =====
@@ -7762,6 +8436,7 @@
                 }
                 document.getElementById('edit-tags').value = truyen.tags ? truyen.tags.join(', ') : '';
                 document.getElementById('edit-summary').innerHTML = truyen.summary || truyen.desc || '';
+                napAnhGioiThieuVaoForm('edit', truyen.introImages);
             }
         }
 
@@ -7916,6 +8591,8 @@
             const isScheduled = document.getElementById('enable-schedule-story').checked;
             const scheduleTimeStr = document.getElementById('new-story-schedule-time').value;
             if (!title || !author || !summaryHTML || !chapTitle || !chapContent) { alert("Vui lòng điền đủ thông tin bắt buộc!"); return; }
+            const introImgs = thuAnhGioiThieuDeLuu('new');
+            if (introImgs === null) return;
             chapContent = chapContent.replace(/"/g, "'");
             const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()) : ["Đam Mỹ"];
             const newKey = "truyen-" + Date.now();
@@ -7946,6 +8623,7 @@
                 }]
             };
             storyObj.chapters._lastUpdated = Date.now();
+            if (introImgs.length) storyObj.introImages = introImgs;
             let chapterTimestamp = Date.now().toString();
             if (chapterTimestampInput) {
                 const ts = new Date(chapterTimestampInput).getTime();
@@ -7986,6 +8664,7 @@
                 document.getElementById('new-summary').innerHTML = '';
                 document.getElementById('new-cover-url').value = '';
                 capNhatGoiYAnhTheoId('new-cover-url');
+                napAnhGioiThieuVaoForm('new', []);
                 document.getElementById('new-chapter-title').value = '';
                 document.getElementById('new-chapter-content').value = '';
                 document.getElementById('new-chapter-18').checked = false;
@@ -8009,6 +8688,8 @@
             const tags = document.getElementById('edit-tags').value ? document.getElementById('edit-tags').value.split(',').map(t => t.trim()) : [];
             const summaryHTML = document.getElementById('edit-summary').innerHTML.trim();
             const coverUrl = document.getElementById('edit-cover-url').value.trim();
+            const introImgs = thuAnhGioiThieuDeLuu('edit');
+            if (introImgs === null) return;
             const currentTruyen = window.dữLiệuTruyện[selectedKey];
             const mainChaptersInput = document.getElementById('edit-main-chapters').value;
             const mainChapters = mainChaptersInput ? parseInt(mainChaptersInput) : 0;
@@ -8025,6 +8706,7 @@
             currentTruyen.hasExtraStories = hasExtra;
             currentTruyen.extraStoryCount = extraChapters;
             if (coverUrl) currentTruyen.cover = coverUrl;
+            if (introImgs.length) currentTruyen.introImages = introImgs; else delete currentTruyen.introImages;
             currentTruyen.tags = tags;
             currentTruyen.summary = summaryHTML;
             currentTruyen.desc = document.getElementById('edit-summary').innerText;
@@ -8431,6 +9113,7 @@
             `;
             document.getElementById('detail-summary').innerHTML = truyen.summary ? apDungMauChuTheoTheme(truyen.summary) : (truyen.desc || 'Đang cập nhật...');
             document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh bìa ]`;
+            hienThiGalleryGioiThieuChiTiet(truyen);
             const progressFill = document.getElementById('story-progress-bar-fill');
             const progressPercentText = document.getElementById('story-progress-percent-text');
             const progressChaptersText = document.getElementById('story-progress-chapters-text');
