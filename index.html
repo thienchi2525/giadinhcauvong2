@@ -7251,7 +7251,24 @@
             }
         }
 
-        loadDataFromGitHub();
+        // Mở đường dẫn trực tiếp (#truyen=... / #doc=...-cN), kể cả sau khi refresh: luôn đi qua bước xác nhận 18+.
+        function moTheoDuongDanBanDau() {
+            var h = location.hash || '';
+            var m;
+            if ((m = h.match(/^#doc=(.+)-c(\d+)$/))) {
+                var kc = decodeURIComponent(m[1]), ic = parseInt(m[2], 10);
+                var tc = window.dữLiệuTruyện[kc];
+                if (tc && tc.chapters && tc.chapters[ic]) {
+                    truyenHienTaiKey = kc;
+                    xemTruyen(kc, false);
+                    kiemtraTruocKhiDoc(ic, false, false);
+                }
+            } else if ((m = h.match(/^#truyen=(.+)$/))) {
+                var kt = decodeURIComponent(m[1]);
+                if (window.dữLiệuTruyện[kt]) xemTruyen(kt, false);
+            }
+        }
+        loadDataFromGitHub().then(moTheoDuongDanBanDau, moTheoDuongDanBanDau);
         setInterval(kiemTraLichHenGio, 30000);
 
         function buildTagSelectors() {
@@ -9593,23 +9610,20 @@
         function chuanHoaTatCaTrangThai18() {
             for (var k in window.dữLiệuTruyện) { chuanHoaTrangThai18(window.dữLiệuTruyện[k]); }
         }
-        // Ghi nhớ xác nhận chỉ trong phiên truy cập hiện tại, KHÔNG ghi vào dữ liệu truyện.
-        var xacNhan18BoNho = {};
+        // Xác nhận 18+ chỉ tồn tại trong bộ nhớ tạm của MỘT lượt mở truyện:
+        // không lưu vào localStorage/sessionStorage/cookie/dữ liệu truyện. Refresh trang là mất.
+        // Lượt mở kết thúc khi người đọc rời khỏi trang giới thiệu/trang đọc của truyện đó hoặc mở truyện khác.
+        var xacNhan18Key = null;   // truyện đã được xác nhận trong lượt mở hiện tại
+        var truyenDangMoKey = null; // truyện đang hiển thị ở trang giới thiệu / trang đọc
         function daXacNhan18(key) {
-            if (xacNhan18BoNho[key]) return true;
-            try {
-                var o = JSON.parse(sessionStorage.getItem('giadinhcauvong_18_ok') || '{}');
-                return !!o[key];
-            } catch (e) { return false; }
+            if (xacNhan18Key !== key || truyenDangMoKey !== key) return false;
+            var ct = document.getElementById('tab-chi-tiet-truyen');
+            var dc = document.getElementById('tab-doc-chuong');
+            var dangOTrongTruyen = (ct && !ct.classList.contains('hidden')) || (dc && !dc.classList.contains('hidden'));
+            if (!dangOTrongTruyen) { xacNhan18Key = null; return false; }
+            return true;
         }
-        function ghiNhanXacNhan18(key) {
-            xacNhan18BoNho[key] = true;
-            try {
-                var o = JSON.parse(sessionStorage.getItem('giadinhcauvong_18_ok') || '{}');
-                o[key] = 1;
-                sessionStorage.setItem('giadinhcauvong_18_ok', JSON.stringify(o));
-            } catch (e) {}
-        }
+        function ghiNhanXacNhan18(key) { xacNhan18Key = key; }
         var cho18 = { key: null, hanhDong: [] };
         // Trả về true nếu chạy ngay; false nếu phải chờ xác nhận bằng popup 18+ cũ.
         function canXacNhan18(key, hanhDong) {
@@ -9629,6 +9643,7 @@
 
         function xemTruyenThucSu(key, pushHistory) {
             truyenHienTaiKey = key;
+            truyenDangMoKey = key;
             const truyen = window.dữLiệuTruyện[key];
             chuanHoaTrangThai18(truyen);
             renderThongKeTruyen(key, truyen);
@@ -9728,6 +9743,7 @@
 
         function docChuong(index, restoreScroll = false, pushHistory = true, giuViTriDoc = false) {
             chuongHienTaiIndex = index;
+            truyenDangMoKey = truyenHienTaiKey;
             const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
             const chuong = truyen.chapters[index];
             if (!giuViTriDoc) luuLichSuDoc(truyenHienTaiKey, index);
