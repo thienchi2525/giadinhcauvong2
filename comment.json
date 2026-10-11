@@ -1,5 +1,26 @@
 {
-  "homechat_data": [],
-  "forum_data": [],
-  "stories_comments": {}
+  "homechat_data": [
+    {
+      "id": 1,
+      "name": "Mèo Lười",
+      "text": "Chủ nhà ơi hóng chương mới quá đi mất thôi! Chúc web ngày càng đông khách nha"
+    },
+    {
+      "id": 2,
+      "name": "Người qua đường bí ẩn",
+      "text": "Giao diện mới decor tông xẹt tông xinh xỉu luôn á >.<"
+    }
+  ],
+  "stories_comments": {
+    "truyen-1786807749047": {
+      "general": [
+        {
+          "name": "Sữa chua nha đam",
+          "text": "Hóng~",
+          "date": "11/10/2026"
+        }
+      ],
+      "chapters": {}
+    }
+  }
 }
