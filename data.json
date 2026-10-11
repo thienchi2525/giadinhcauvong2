@@ -212,7 +212,7 @@
       "author": "1912",
       "status": "Đang cập nhật",
       "statusClass": "dang-cap-nhat",
-      "cover": "",
+      "cover": "https://files.catbox.moe/woydkp.png",
       "totalMode": "fixed",
       "totalChaptersInput": 21,
       "mainChapterCount": 21,
@@ -235,7 +235,14 @@
           "views": 434,
           "updatedAt": 1791712687245
         }
-      ]
+      ],
+      "imgFit": {
+        "cover": {
+          "x": 50,
+          "y": 0,
+          "z": 1
+        }
+      }
     }
   },
   "thongbao_data": [
