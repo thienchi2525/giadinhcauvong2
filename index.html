@@ -5052,6 +5052,11 @@
         window.cheDoDang = 'truyen'; 
         let slideIndex = 0;
         let slideInterval = null;
+        // Cấu hình chọn truyện cho carousel bìa ở trang chủ:
+        //   che_do: 'hot' (theo tương tác thực tế) hoặc 'ngau-nhien' (mỗi lần tải lại trang một nhóm khác)
+        //   so_luong: số bìa hiển thị. Có thể thử nhanh bằng đường dẫn ?carousel=hot hoặc ?carousel=ngau-nhien
+        window.cauHinhCarousel = { che_do: 'hot', so_luong: 5 };
+        window.carouselNgauNhienDaChon = [];
         let currentNoticeSubTab = 'tat-ca';
 
         window.selectedTagsHome = new Set();
@@ -7095,26 +7100,93 @@
             locTruyen();
         }
 
+        function laTruyenHopLeChoCarousel(key) {
+            const tr = window.dữLiệuTruyện ? window.dữLiệuTruyện[key] : null;
+            return !!(tr && typeof tr === 'object' && tr.status !== 'Tạm ẩn' && typeof tr.title === 'string' && tr.title.trim() !== '');
+        }
+
+        function xaoTronMang(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+            }
+            return arr;
+        }
+
+        function demBinhLuanTruyenChoCarousel(key) {
+            let tong = 0;
+            const cObj = window.danhSachBinhLuanTruyen ? window.danhSachBinhLuanTruyen[key] : null;
+            if (cObj) {
+                if (cObj.general) tong += cObj.general.length;
+                if (cObj.chapters) {
+                    for (let cIdx in cObj.chapters) {
+                        if (cObj.chapters[cIdx]) tong += cObj.chapters[cIdx].length;
+                    }
+                }
+            }
+            return tong;
+        }
+
+        function chonTruyenChoCarousel() {
+            const cfg = window.cauHinhCarousel || {};
+            let cheDo = cfg.che_do === 'ngau-nhien' ? 'ngau-nhien' : 'hot';
+            try {
+                const q = new URLSearchParams(window.location.search).get('carousel');
+                if (q === 'hot' || q === 'ngau-nhien') cheDo = q;
+            } catch (e) {}
+            const soLuong = cfg.so_luong > 0 ? cfg.so_luong : 5;
+
+            const hopLe = [];
+            for (let key in window.dữLiệuTruyện) {
+                if (laTruyenHopLeChoCarousel(key)) hopLe.push(key);
+            }
+
+            let chon = [];
+            if (cheDo === 'ngau-nhien') {
+                // Giữ nhóm đã chọn trong cùng lượt tải trang (hàm này được gọi lại sau mỗi lần dữ liệu thay đổi),
+                // chỉ loại truyện không còn hợp lệ và bổ sung cho đủ số lượng. Tải lại trang sẽ chọn nhóm mới.
+                chon = (window.carouselNgauNhienDaChon || []).filter(k => hopLe.indexOf(k) !== -1);
+                if (chon.length < Math.min(soLuong, hopLe.length)) {
+                    const conLai = xaoTronMang(hopLe.filter(k => chon.indexOf(k) === -1));
+                    chon = chon.concat(conLai.slice(0, soLuong - chon.length));
+                }
+                chon = chon.slice(0, soLuong);
+                window.carouselNgauNhienDaChon = chon.slice();
+            } else {
+                // Truyện hot: chỉ dùng số liệu sẵn có — tổng lượt xem các chương, lượt yêu thích đang lưu và số bình luận.
+                // Đọc lượt yêu thích ở chế độ chỉ-đọc (không tạo/ghi thêm số liệu nào).
+                let favCounts = {};
+                try { favCounts = getVirtualFavCounts() || {}; } catch (e) {}
+                const ds = hopLe.map(k => ({
+                    key: k,
+                    views: tinhTongViewTruyen(window.dữLiệuTruyện[k]) || 0,
+                    fav: (typeof favCounts[k] === 'number' && favCounts[k] > 0) ? favCounts[k] : 0,
+                    cmt: demBinhLuanTruyenChoCarousel(k)
+                }));
+                const maxV = Math.max(1, ...ds.map(d => d.views));
+                const maxF = Math.max(1, ...ds.map(d => d.fav));
+                const maxC = Math.max(1, ...ds.map(d => d.cmt));
+                ds.forEach(d => { d.score = 0.5 * d.views / maxV + 0.3 * d.fav / maxF + 0.2 * d.cmt / maxC; });
+                xaoTronMang(ds); // truyện bằng điểm nhau sẽ được xếp ngẫu nhiên thay vì theo thứ tự đăng
+                ds.sort((a, b) => b.score - a.score);
+                chon = ds.slice(0, soLuong).map(d => d.key);
+            }
+            return chon.map(k => ({ key: k, truyen: window.dữLiệuTruyện[k] }));
+        }
+
         function khoiTaoSliderHot() {
             const track = document.getElementById('hot-slide-track');
             const dotsContainer = document.getElementById('slider-dots');
             if (!track || !dotsContainer) return;
             track.innerHTML = '';
             dotsContainer.innerHTML = '';
-            let hotList = [];
-            for (let key in window.dữLiệuTruyện) {
-                const tr = window.dữLiệuTruyện[key];
-                if (tr.status !== 'Tạm ẩn') {
-                    hotList.push({ key: key, truyen: tr });
-                }
-            }
+            let hotList = chonTruyenChoCarousel();
             if (hotList.length === 0) {
                 document.getElementById('home-hot-slider').classList.add('hidden');
                 return;
             } else {
                 document.getElementById('home-hot-slider').classList.remove('hidden');
             }
-            hotList = hotList.slice(0, 5);
             hotList.forEach((item, index) => {
                 const tr = item.truyen;
                 const coverHTML = tr.cover ? `<img src="${tr.cover}">` : `[ Bìa ]`;
