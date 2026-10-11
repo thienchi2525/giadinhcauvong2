@@ -4490,6 +4490,12 @@
                         <input type="text" id="new-author" class="form-control" placeholder="Ví dụ: Cầu Vồng">
                     </div>
                     <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <input type="checkbox" id="new-is18" style="width: 17px; height: 17px; accent-color: #e74c3c;"> 
+                            <span style="color: #e74c3c; font-weight: bold;"><svg class=ic aria-hidden=true><use href=#i-flame /></svg> Đánh dấu truyện 18+</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
                         <label><svg class=ic aria-hidden=true><use href=#i-link /></svg> Link Ảnh Bìa (Dán Direct Link từ ImgBB / Imgur):</label>
                         <div class="img-url-wrap">
                             <div class="img-url-row">
@@ -4554,12 +4560,6 @@
                             <input type="text" id="new-chapter-title" class="form-control" placeholder="Ví dụ: Chương 1: Khởi đầu mới">
                         </div>
                         <div class="form-group">
-                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <input type="checkbox" id="new-chapter-18" style="width: 17px; height: 17px; accent-color: #e74c3c;"> 
-                                <span style="color: #e74c3c; font-weight: bold;"><svg class=ic aria-hidden=true><use href=#i-flame /></svg> Đánh dấu chương này là 18+ / Bạo lực</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
                             <label>Nội Dung Chương Đầu Tiên (*)</label>
                             <textarea id="new-chapter-content" class="form-control" placeholder="Dán nội dung chương truyện ở đây..."></textarea>
                         </div>
@@ -4598,6 +4598,12 @@
                     <div class="form-group">
                         <label>Sửa Tác Giả</label>
                         <input type="text" id="edit-author" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <input type="checkbox" id="edit-is18" style="width: 17px; height: 17px; accent-color: #e74c3c;"> 
+                            <span style="color: #e74c3c; font-weight: bold;"><svg class=ic aria-hidden=true><use href=#i-flame /></svg> Đánh dấu truyện 18+</span>
+                        </label>
                     </div>
                     <div class="form-group">
                         <label><svg class=ic aria-hidden=true><use href=#i-link /></svg> Đổi Link Ảnh Bìa Mới:</label>
@@ -4689,12 +4695,6 @@
                             <input type="text" id="append-chapter-title" class="form-control" placeholder="Ví dụ: Chương 2: Diễn biến mới">
                         </div>
                         <div class="form-group">
-                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <input type="checkbox" id="append-chapter-18" style="width: 17px; height: 17px; accent-color: #e74c3c;"> 
-                                <span style="color: #e74c3c; font-weight: bold;"><svg class=ic aria-hidden=true><use href=#i-flame /></svg> Đánh dấu chương này là 18+ / Bạo lực</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
                             <label>Nội Dung Chương Mới (*)</label>
                             <textarea id="append-chapter-content" class="form-control" placeholder="Dán nội dung chương tiếp theo ở đây..."></textarea>
                         </div>
@@ -4761,12 +4761,6 @@
                     <div class="form-group">
                         <label>Sửa Tên Chương</label>
                         <input type="text" id="edit-chap-title-input" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                            <input type="checkbox" id="edit-chap-18-input" style="width: 17px; height: 17px; accent-color: #e74c3c;"> 
-                            <span style="color: #e74c3c; font-weight: bold;"><svg class=ic aria-hidden=true><use href=#i-flame /></svg> Đánh dấu chương này là 18+ / Bạo lực</span>
-                        </label>
                     </div>
                     <div class="form-group">
                         <label>Sửa Nội Dung Chương</label>
@@ -5539,8 +5533,7 @@
                 }
                 chaptersToAdd.push({
                     title: title,
-                    content: content,
-                    is18: false
+                    content: content
                 });
             });
             if (hasError) { alert("Vui lòng điền đầy đủ tiêu đề và nội dung cho tất cả các chương!"); return; }
@@ -5551,7 +5544,6 @@
                 var newChapter = {
                     title: ch.title,
                     content: '<p>' + ch.content.replace(/\n/g, '</p><p>') + '</p>',
-                    is18: ch.is18 || false,
                     views: Math.floor(Math.random() * 300) + 50
                 };
                 var newIdx = truyen.chapters.length;
@@ -5625,7 +5617,6 @@
                     var newChapter = {
                         title: title,
                         content: '<p>' + content.replace(/\n/g, '</p><p>') + '</p>',
-                        is18: false,
                         views: Math.floor(Math.random() * 300) + 50
                     };
                     var newIdx = truyen.chapters.length;
@@ -6954,7 +6945,8 @@
                     hasExtraStories: hasExtra,
                     extraStoryCount: extra,
                     totalChaptersInput: total > 0 ? total : null,
-                    chapters: (goc.chapters || []).map(function (c) { return { title: c.title, is18: c.is18 }; })
+                    is18: g('edit-is18').checked,
+                    chapters: (goc.chapters || []).map(function (c) { return { title: c.title }; })
                 };
             } else {
                 const mainCh = g('new-main-chapters').value ? parseInt(g('new-main-chapters').value) : 0;
@@ -6972,7 +6964,8 @@
                     hasExtraStories: hasExtra,
                     extraStoryCount: extra,
                     totalChaptersInput: total > 0 ? total : null,
-                    chapters: [{ title: g('new-chapter-title').value.trim() || 'Chương đầu tiên', is18: g('new-chapter-18').checked }]
+                    is18: g('new-is18').checked,
+                    chapters: [{ title: g('new-chapter-title').value.trim() || 'Chương đầu tiên' }]
                 };
             }
             d.images = chuanHoaDanhSachAnhGT((window._introImgs[mode] || []).map(function (it) { return it.url; })).filter(urlAnhHopLe);
@@ -7018,7 +7011,7 @@
             const summaryHTML = d.summary ? apDungMauChuTheoTheme(d.summary) : 'Đang cập nhật...';
             const hasImgs = d.images.length > 0;
             const chaptersHTML = d.chapters.map(function (ch) {
-                return '<li class="chapter-item-v"><span class="chapter-title-line">' + (ch.is18 ? '<span class="badge-18">[18+]</span>' : '') + '<span class="chapter-name">' + E(ch.title) + '</span></span></li>';
+                return '<li class="chapter-item-v"><span class="chapter-title-line"><span class="chapter-name">' + E(ch.title) + '</span></span></li>';
             }).join('');
             const coverHTML = d.cover && urlAnhHopLe(d.cover) ? '<img src="' + E(d.cover) + '" alt=""' + thuocTinhFitBia(d) + '>' : '[ Ảnh bìa ]';
 
@@ -7225,7 +7218,7 @@
                 let response = await fetch(GITHUB_JSON_URL + "?_t=" + new Date().getTime());
                 if (response.ok) {
                     let data = await response.json();
-                    if (data.truyen_data) window.dữLiệuTruyện = data.truyen_data;
+                    if (data.truyen_data) { window.dữLiệuTruyện = data.truyen_data; chuanHoaTatCaTrangThai18(); }
                     if (data.thongbao_data) window.danhSachThongBao = data.thongbao_data;
                     if (data.thongbao_quantrong !== undefined) {
                         window.thongBaoQuanTrong = chuanHoaThongBaoQuanTrong(data.thongbao_quantrong);
@@ -8305,7 +8298,7 @@
                 if (event.state) {
                     if (event.state.page === 'doc-chuong') {
                         truyenHienTaiKey = event.state.key;
-                        docChuong(event.state.chapIndex, true, true);
+                        kiemtraTruocKhiDoc(event.state.chapIndex, true, true);
                     } else if (event.state.page === 'chi-tiet') {
                         truyenHienTaiKey = event.state.key;
                         xemTruyen(truyenHienTaiKey, false, true);
@@ -8878,6 +8871,7 @@
                     document.getElementById('edit-extra-chapters-group').classList.add('hidden');
                 }
                 document.getElementById('edit-tags').value = truyen.tags ? truyen.tags.join(', ') : '';
+                document.getElementById('edit-is18').checked = chuanHoaTrangThai18(truyen);
                 document.getElementById('edit-summary').innerHTML = truyen.summary || truyen.desc || '';
                 napAnhGioiThieuVaoForm('edit', truyen.introImages);
             }
@@ -8948,7 +8942,7 @@
             window.dữLiệuTruyện[storyKey].chapters.forEach((ch, index) => {
                 const opt = document.createElement('option');
                 opt.value = index;
-                opt.innerText = ch.title + (ch.is18 ? " [18+]" : "");
+                opt.innerText = ch.title;
                 selectChap.appendChild(opt);
             });
             dienThongTinChuongSua();
@@ -8961,7 +8955,6 @@
             const chap = window.dữLiệuTruyện[storyKey].chapters[chapIndex];
             if (chap) {
                 document.getElementById('edit-chap-title-input').value = chap.title || '';
-                document.getElementById('edit-chap-18-input').checked = !!chap.is18;
                 document.getElementById('edit-chap-content-input').value = chap.content ? chap.content.replace(/<\/?p>/g, '\n').trim() : '';
                 const timestamp = getChapterTimestamp(storyKey, parseInt(chapIndex));
                 if (timestamp) {
@@ -8978,14 +8971,12 @@
             const storyKey = document.getElementById('select-edit-chapter-story').value;
             const chapIndex = document.getElementById('select-edit-chapter-item').value;
             const newTitle = document.getElementById('edit-chap-title-input').value.trim();
-            const is18 = document.getElementById('edit-chap-18-input').checked;
             let rawContent = document.getElementById('edit-chap-content-input').value.trim();
             const timestampInput = document.getElementById('edit-chap-timestamp-input').value;
             if (!storyKey || chapIndex === "" || !newTitle || !rawContent) { alert("Vui lòng điền đủ thông tin!"); return; }
             rawContent = rawContent.replace(/"/g, "'");
             const truyen = window.dữLiệuTruyện[storyKey];
             truyen.chapters[chapIndex].title = newTitle;
-            truyen.chapters[chapIndex].is18 = is18;
             truyen.chapters[chapIndex].content = `<p>${rawContent.replace(/\n/g, '</p><p>')}</p>`;
             if (timestampInput) {
                 const ts = new Date(timestampInput).getTime();
@@ -9029,7 +9020,7 @@
             const coverUrl = document.getElementById('new-cover-url').value.trim();
             const chapTitle = document.getElementById('new-chapter-title').value.trim();
             let chapContent = document.getElementById('new-chapter-content').value.trim();
-            const is18 = document.getElementById('new-chapter-18').checked;
+            const truyenLa18Moi = document.getElementById('new-is18').checked;
             const chapterTimestampInput = document.getElementById('new-chapter-timestamp').value;
             const isScheduled = document.getElementById('enable-schedule-story').checked;
             const scheduleTimeStr = document.getElementById('new-story-schedule-time').value;
@@ -9058,10 +9049,10 @@
                 desc: document.getElementById('new-summary').innerText,
                 summary: summaryHTML,
                 tags: tags,
+                is18: truyenLa18Moi,
                 chapters: [{ 
                     title: chapTitle, 
                     content: `<p>${chapContent.replace(/\n/g, '</p><p>')}</p>`, 
-                    is18: is18,
                     views: Math.floor(Math.random() * 500) + 100
                 }]
             };
@@ -9113,7 +9104,7 @@
                 napAnhGioiThieuVaoForm('new', []);
                 document.getElementById('new-chapter-title').value = '';
                 document.getElementById('new-chapter-content').value = '';
-                document.getElementById('new-chapter-18').checked = false;
+                document.getElementById('new-is18').checked = false;
                 document.getElementById('new-chapter-timestamp').value = '';
                 document.getElementById('enable-schedule-story').checked = false;
                 document.getElementById('schedule-box-story').classList.add('hidden');
@@ -9163,6 +9154,7 @@
                 }
             }
             if (introImgs.length) currentTruyen.introImages = introImgs; else delete currentTruyen.introImages;
+            currentTruyen.is18 = document.getElementById('edit-is18').checked;
             currentTruyen.tags = tags;
             currentTruyen.summary = summaryHTML;
             currentTruyen.desc = document.getElementById('edit-summary').innerText;
@@ -9180,7 +9172,6 @@
             const selectedKey = document.getElementById('select-existing-story').value;
             const chapTitle = document.getElementById('append-chapter-title').value.trim();
             let chapContent = document.getElementById('append-chapter-content').value.trim();
-            const is18 = document.getElementById('append-chapter-18').checked;
             const chapterTimestampInput = document.getElementById('append-chapter-timestamp').value;
             const isScheduled = document.getElementById('enable-schedule-chapter').checked;
             const scheduleTimeStr = document.getElementById('append-chapter-schedule-time').value;
@@ -9189,7 +9180,6 @@
             const chapterObj = { 
                 title: chapTitle, 
                 content: `<p>${chapContent.replace(/\n/g, '</p><p>')}</p>`, 
-                is18: is18,
                 views: Math.floor(Math.random() * 300) + 50
             };
             if (isScheduled && scheduleTimeStr) {
@@ -9226,7 +9216,6 @@
                 alert(`Đã thêm chương mới thành công!`);
                 document.getElementById('append-chapter-title').value = '';
                 document.getElementById('append-chapter-content').value = '';
-                document.getElementById('append-chapter-18').checked = false;
                 document.getElementById('append-chapter-timestamp').value = '';
                 document.getElementById('enable-schedule-chapter').checked = false;
                 document.getElementById('schedule-box-chapter').classList.add('hidden');
@@ -9576,14 +9565,12 @@
             truyen.chapters.forEach((ch, index) => {
                 let li = document.createElement('li');
                 li.className = 'chapter-item-v';
-                const badge18 = ch.is18 ? `<span class="badge-18">[18+]</span>` : '';
                 let badgeHtml = '';
                 if (isChapterNew(truyenHienTaiKey, index)) {
                     badgeHtml = `<span class="story-new-badge"><svg class=ic aria-hidden=true><use href=#i-sparkles /></svg> Mới</span>`;
                 }
                 li.innerHTML = `
                     <span class="chapter-title-line">
-                        ${badge18}
                         <span class="chapter-name">${ch.title}</span>
                         ${badgeHtml}
                     </span>
@@ -9594,9 +9581,56 @@
             container.appendChild(listUl);
         }
 
+        // ===== 18+ cấp độ truyện =====
+        // Chuẩn hoá: truyện chưa có cờ is18 thì nhận diện từ chương cũ có is18 (giữ nguyên dữ liệu chương).
+        function chuanHoaTrangThai18(truyen) {
+            if (!truyen) return false;
+            if (typeof truyen.is18 !== 'boolean') {
+                truyen.is18 = !!(truyen.chapters && truyen.chapters.some(function (c) { return c && c.is18 === true; }));
+            }
+            return truyen.is18;
+        }
+        function chuanHoaTatCaTrangThai18() {
+            for (var k in window.dữLiệuTruyện) { chuanHoaTrangThai18(window.dữLiệuTruyện[k]); }
+        }
+        // Ghi nhớ xác nhận chỉ trong phiên truy cập hiện tại, KHÔNG ghi vào dữ liệu truyện.
+        var xacNhan18BoNho = {};
+        function daXacNhan18(key) {
+            if (xacNhan18BoNho[key]) return true;
+            try {
+                var o = JSON.parse(sessionStorage.getItem('giadinhcauvong_18_ok') || '{}');
+                return !!o[key];
+            } catch (e) { return false; }
+        }
+        function ghiNhanXacNhan18(key) {
+            xacNhan18BoNho[key] = true;
+            try {
+                var o = JSON.parse(sessionStorage.getItem('giadinhcauvong_18_ok') || '{}');
+                o[key] = 1;
+                sessionStorage.setItem('giadinhcauvong_18_ok', JSON.stringify(o));
+            } catch (e) {}
+        }
+        var cho18 = { key: null, hanhDong: [] };
+        // Trả về true nếu chạy ngay; false nếu phải chờ xác nhận bằng popup 18+ cũ.
+        function canXacNhan18(key, hanhDong) {
+            var truyen = window.dữLiệuTruyện[key];
+            if (!truyen || !chuanHoaTrangThai18(truyen) || daXacNhan18(key)) { hanhDong(); return true; }
+            if (cho18.key !== key) { cho18.key = key; cho18.hanhDong = []; }
+            cho18.hanhDong.push(hanhDong);
+            document.getElementById('warning-modal').classList.remove('hidden');
+            return false;
+        }
+
         window.xemTruyen = function(key, pushHistory = true) {
             truyenHienTaiKey = key;
+            if (!window.dữLiệuTruyện[key]) return;
+            canXacNhan18(key, function () { xemTruyenThucSu(key, pushHistory); });
+        };
+
+        function xemTruyenThucSu(key, pushHistory) {
+            truyenHienTaiKey = key;
             const truyen = window.dữLiệuTruyện[key];
+            chuanHoaTrangThai18(truyen);
             renderThongKeTruyen(key, truyen);
             document.getElementById('detail-top-title').innerText = truyen.title || 'Đang cập nhật';
             let cleanTitleForInfo = truyen.title ? truyen.title.replace(/\[.*?\]/g, '').trim() : 'Đang cập nhật';
@@ -9658,24 +9692,38 @@
             if (pushHistory) {
                 history.pushState({ page: 'chi-tiet', key: key }, "", "#truyen=" + key);
             }
-        };
+        }
 
         function kiemtraTruocKhiDoc(index, restoreScroll = false, pushHistory = true, giuViTriDoc = false) {
             const truyen = window.dữLiệuTruyện[truyenHienTaiKey];
+            if (!truyen) return;
+            const key = truyenHienTaiKey;
             choVaoIndexTam = index;
             window.dangPhucHoiCuon = restoreScroll;
             window.tamPushHistory = pushHistory;
             window.tamGiuViTriDoc = giuViTriDoc;
-            if (truyen.chapters[index].is18) {
-                document.getElementById('warning-modal').classList.remove('hidden');
-            } else {
+            // Chỉ hỏi 18+ nếu truyện chưa được xác nhận; đã xác nhận thì mở chương bình thường.
+            canXacNhan18(key, function () {
+                truyenHienTaiKey = key;
                 docChuong(index, restoreScroll, pushHistory, giuViTriDoc);
-            }
+            });
         }
 
         window.xacNhanVaoDoc = function(dongY) {
             document.getElementById('warning-modal').classList.add('hidden');
-            if (dongY) { docChuong(choVaoIndexTam, window.dangPhucHoiCuon, window.tamPushHistory, window.tamGiuViTriDoc); }
+            const key = cho18.key;
+            const dsHanhDong = cho18.hanhDong;
+            cho18 = { key: null, hanhDong: [] };
+            if (dongY) {
+                if (key) ghiNhanXacNhan18(key);
+                dsHanhDong.forEach(function (fn) { fn(); });
+            } else if (key) {
+                // Quay lại: không mở truyện. Nếu URL đã trỏ vào truyện này (mở trực tiếp/nút Back) thì về trang chủ.
+                const h = location.hash || '';
+                if (h.indexOf('#truyen=' + key) === 0 || h.indexOf('#doc=' + key + '-c') === 0) {
+                    chuyenTab('trang-chu', true);
+                }
+            }
         };
 
         function docChuong(index, restoreScroll = false, pushHistory = true, giuViTriDoc = false) {
@@ -9776,7 +9824,6 @@
             const box = document.getElementById('modal-chapter-list-box');
             box.innerHTML = '';
             truyen.chapters.forEach((ch, index) => {
-                const badge18 = ch.is18 ? `<span style="color:#e74c3c; font-weight:bold;">[18+]</span>` : '';
                 const isActive = (index === chuongHienTaiIndex) ? 'active' : '';
                 let badgeHtml = '';
                 if (isChapterNew(truyenHienTaiKey, index)) {
@@ -9784,7 +9831,7 @@
                 }
                 box.innerHTML += `
                     <div class="chapter-modal-item ${isActive}" onclick="chonChuongTuModal(${index})">
-                        <span>${badge18}${ch.title}</span>
+                        <span>${ch.title}</span>
                         ${badgeHtml}
                         ${index === chuongHienTaiIndex ? '<span><svg class=ic aria-hidden=true><use href=#i-sparkles /></svg></span>' : ''}
                     </div>
