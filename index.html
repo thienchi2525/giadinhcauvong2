@@ -3829,6 +3829,41 @@
             .blockblast-dock { max-width: 230px; }
         }
 
+        /* ===== Căn chỉnh vị trí ảnh bìa (kéo / phóng to) + bìa mặc định trên carousel ===== */
+        .story-decor-cover, .hot-slide-cover { position: relative; }
+        .hot-slide-cover.is-default-cover {
+            background: linear-gradient(135deg, #ffe4e1, #ffb6c1);
+            color: var(--primary-color); font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .hot-slide-cover .story-card-cover-title { font-size: 18px; padding: 14px 16px; }
+        @media (max-width: 768px) { .hot-slide-cover .story-card-cover-title { font-size: 15px; padding: 10px 12px; } }
+        @media (max-width: 380px) { .hot-slide-cover .story-card-cover-title { font-size: 14px; padding: 8px 10px; } }
+        @media (max-width: 340px) { .hot-slide-cover .story-card-cover-title { font-size: 12px; padding: 6px 8px; } }
+        .fit-editor { margin-top: 12px; padding: 12px; border: 1.5px dashed var(--border-color); border-radius: 14px; background: var(--box-bg); box-sizing: border-box; }
+        .fit-editor[hidden] { display: none; }
+        .fit-editor-title { font-size: 13px; font-weight: bold; color: var(--primary-color); margin-bottom: 10px; }
+        .fit-editor-body { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+        .fit-frame-col { width: 200px; max-width: 100%; flex: 0 0 auto; }
+        .fit-frame-col .story-card-cover-wrapper { box-shadow: 0 6px 18px var(--glow-color); }
+        .fit-drag { cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; outline: none; }
+        .fit-drag.is-dragging { cursor: grabbing; }
+        .fit-drag:focus-visible { box-shadow: inset 0 0 0 3px var(--primary-color); }
+        .fit-drag img { pointer-events: none; -webkit-user-drag: none; user-select: none; }
+        .fit-controls { flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+        .fit-help { font-size: 12px; line-height: 1.5; color: var(--subtext-color); }
+        .fit-zoom-row { display: flex; align-items: center; gap: 8px; }
+        .fit-zoom-row input[type=range] { flex: 1 1 auto; min-width: 0; accent-color: var(--primary-color); }
+        .fit-step { width: 36px; height: 36px; flex: 0 0 auto; padding: 0; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--container-bg); color: var(--primary-color); font-size: 18px; font-weight: bold; line-height: 1; cursor: pointer; font-family: inherit; }
+        .fit-step:hover { background: var(--border-color); }
+        .fit-zoom-val { min-width: 44px; text-align: right; font-size: 12px; font-weight: bold; color: var(--primary-color); }
+        .fit-thumb-row { display: flex; align-items: flex-end; gap: 10px; font-size: 11px; color: var(--subtext-color); }
+        .fit-thumb { width: 80px; flex: 0 0 auto; }
+        .fit-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .fit-btn-secondary { display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; min-height: 42px; border: 1.5px solid var(--primary-color); border-radius: 14px; background: transparent; color: var(--primary-color); font-family: inherit; font-size: 13px; font-weight: bold; cursor: pointer; white-space: nowrap; }
+        .fit-btn-secondary:hover { background: var(--border-color); }
+        .fit-readout { font-size: 11.5px; color: var(--subtext-color); }
+
         /* ===== Xem trước ảnh (bìa truyện / avatar) ===== */
         .img-url-wrap { width: 100%; }
         .img-url-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
@@ -4583,7 +4618,7 @@
 
                     <div class="form-group intro-gallery-group">
                         <label>Hình ảnh giới thiệu (tùy chọn)</label>
-                        <div class="intro-gallery-help">Dán link ảnh trực tiếp (ImgBB, Imgur...). Mỗi ảnh có thể có kích thước và tỉ lệ khác nhau, ảnh được giữ nguyên file gốc, không cắt, không nén, không đổi kích thước. Truyện không có ảnh thì khu vực này tự ẩn ở trang người đọc.</div>
+                        <div class="intro-gallery-help">Truyện không có ảnh thì khu vực này tự ẩn ở trang người đọc.</div>
                         <div class="intro-gallery-list" id="edit-intro-list"></div>
                         <div class="intro-gallery-empty">Chưa có ảnh giới thiệu nào.</div>
                         <button type="button" class="img-preview-btn intro-add-btn" onclick="themAnhGioiThieu('edit')">+ Thêm ảnh</button>
@@ -4828,15 +4863,15 @@
             </div>
 
             <div id="admin-subcontent-tuongtac" class="hidden">
-                <div class="section-title"><svg class=ic aria-hidden=true><use href=#i-message /></svg>Tổng comment</div>
-                <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 15px;">Bấm nút bên dưới để hệ thống gom toàn bộ bình luận thành một đoạn mã JSON duy nhất</p>
+                <div class="section-title"><svg class=ic aria-hidden=true><use href=#i-message /></svg> Quản Lý & Tổng Hợp Mã JSON Comment</div>
+                <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 15px;">Bấm nút bên dưới để hệ thống gom toàn bộ bình luận thành một đoạn mã JSON duy nhất, sau đó copy dán đè thẳng vào file <code>comment.json</code> trên GitHub!</p>
                 
                 <div style="background: var(--box-bg); padding: 16px; border-radius: 14px; border: 1.5px solid var(--border-color); margin-bottom: 20px; text-align: center;">
                     <button type="button" class="btn-submit" onclick="taoMaJsonCommentDeCopy()" style="padding: 12px 28px; font-size: 15px;"><svg class=ic aria-hidden=true><use href=#i-package /></svg> Tổng hợp toàn bộ Comment thành mã JSON</button>
                 </div>
 
                 <div class="form-group">
-                    <label>Mã JSON kết quả (Copy toàn bộ đoạn dưới đây) :</label>
+                    <label>Mã JSON kết quả (Copy toàn bộ đoạn dưới đây dán vào comment.json):</label>
                     <textarea id="output-json-comment-box" class="form-control" style="height: 200px; font-family: monospace; font-size: 12px; background: var(--container-bg);" readonly placeholder="Bấm nút tổng hợp ở trên để hiển thị mã..."></textarea>
                 </div>
             </div>
@@ -5149,7 +5184,7 @@
 
         function renderRankingCardTop(item, index, sortBy) {
             const truyen = item.truyen;
-            const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Bìa ]`;
+            const coverHTML = truyen.cover ? `<img src="${truyen.cover}"${thuocTinhFitBia(truyen)}>` : `[ Bìa ]`;
             const stat = getRankingStatValue(item.key, truyen, sortBy);
             const rankClass = index === 0 ? 'rank-1' : (index === 1 ? 'rank-2' : 'rank-3');
             return `
@@ -5168,7 +5203,7 @@
 
         function renderRankingCardRow(item, index, sortBy) {
             const truyen = item.truyen;
-            const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Bìa ]`;
+            const coverHTML = truyen.cover ? `<img src="${truyen.cover}"${thuocTinhFitBia(truyen)}>` : `[ Bìa ]`;
             const stat = getRankingStatValue(item.key, truyen, sortBy);
             const trangThai = getTrangThaiHienThi(truyen);
             return `
@@ -6105,6 +6140,8 @@
             if (!input) return;
             const kind = input.dataset.imgPreview === 'avatar' ? 'avatar' : 'cover';
             const url = input.value.trim();
+            const fitMode = kind === 'cover' ? (input.id === 'edit-cover-url' ? 'edit' : (input.id === 'new-cover-url' ? 'new' : null)) : null;
+            const fitPv = fitMode ? (layFitXemTruoc(fitMode, url) || { x: 50, y: 50, z: 1 }) : null;
             const modal = document.getElementById('img-preview-modal');
             const stage = document.getElementById('img-preview-stage');
             const status = document.getElementById('img-preview-status');
@@ -6113,7 +6150,7 @@
             document.getElementById('img-preview-heading').textContent = kind === 'avatar' ? 'Xem trước ảnh đại diện' : 'Xem trước bìa truyện';
             document.getElementById('img-preview-sub').textContent = kind === 'avatar'
                 ? 'Ảnh đại diện hiển thị dạng tròn, căn giữa và phủ kín khung (object-fit: cover).'
-                : 'Mô phỏng đúng card truyện ngoài trang chủ: tỉ lệ 2:3, object-fit: cover, căn giữa.';
+                : (fitPv && !laFitMacDinh(fitPv) ? 'Mô phỏng đúng card truyện ngoài trang chủ: tỉ lệ 2:3, theo vị trí và mức phóng to bạn đã căn.' : 'Mô phỏng đúng card truyện ngoài trang chủ: tỉ lệ 2:3, object-fit: cover, căn giữa.');
             stage.textContent = '';
             note.textContent = '';
             status.className = 'img-preview-status';
@@ -6156,7 +6193,7 @@
                         if (token !== window._imgPreviewToken) return;
                         status.className = 'img-preview-status';
                         status.textContent = 'Ảnh gốc ' + img.naturalWidth + '×' + img.naturalHeight + ' px';
-                        note.textContent = moTaDoCatAnh(img.naturalWidth, img.naturalHeight, kind);
+                        note.textContent = (fitPv && !laFitMacDinh(fitPv)) ? ('Đang áp dụng căn chỉnh: ngang ' + Math.round(fitPv.x) + '%, dọc ' + Math.round(fitPv.y) + '%, phóng to ' + fitPv.z + '×.') : moTaDoCatAnh(img.naturalWidth, img.naturalHeight, kind);
                     };
                     img.onerror = function () {
                         if (token !== window._imgPreviewToken) return;
@@ -6164,6 +6201,7 @@
                     };
                 }
                 img.src = url;
+                if (fitPv) aDungFitLenImg(img, fitPv);
                 holder.appendChild(img);
                 const cap = document.createElement('figcaption');
                 cap.textContent = sz[1];
@@ -6187,6 +6225,275 @@
             if (modal && !modal.classList.contains('hidden')) dongXemTruocAnh();
         });
 
+
+
+        // ===== CĂN CHỈNH VỊ TRÍ ẢNH (metadata theo từng vị trí, không đổi file/URL ảnh) =====
+        // Lưu trong dữ liệu truyện: truyen.imgFit = { cover: { x, y, z } }
+        //   x, y: 0–100 (%), cùng ý nghĩa với object-position; z: mức phóng to 1–3.
+        // Mỗi vị trí ảnh có khóa riêng trong imgFit (hiện dùng khóa "cover"). Thiếu dữ liệu = hiển thị mặc định như cũ.
+        var FIT_ZOOM_MAX = 3;
+        window._fitBia = { 'new': { x: 50, y: 50, z: 1, url: '' }, edit: { x: 50, y: 50, z: 1, url: '' } };
+        window._fitEd = { 'new': null, edit: null };
+
+        function kepSoFit(v, min, max, macDinh) {
+            if (v === null || v === undefined || v === '' || typeof v === 'boolean') return macDinh;
+            v = Number(v);
+            if (!isFinite(v)) return macDinh;
+            return Math.min(max, Math.max(min, v));
+        }
+        function lamTron2Fit(v) { return Math.round(v * 100) / 100; }
+        function chuanHoaFitAnh(f) {
+            if (!f || typeof f !== 'object') return null;
+            return {
+                x: lamTron2Fit(kepSoFit(f.x, 0, 100, 50)),
+                y: lamTron2Fit(kepSoFit(f.y, 0, 100, 50)),
+                z: lamTron2Fit(kepSoFit(f.z, 1, FIT_ZOOM_MAX, 1))
+            };
+        }
+        function layFitAnh(truyen, slot) {
+            const m = truyen && truyen.imgFit;
+            if (!m || typeof m !== 'object') return null;
+            return chuanHoaFitAnh(m[slot || 'cover']);
+        }
+        function laFitMacDinh(f) { return !f || (f.x === 50 && f.y === 50 && f.z === 1); }
+        // Công thức duy nhất cho mọi nơi hiển thị: ảnh phóng z lần trong khung rồi căn theo x%, y% của phần dư.
+        function styleFitAnh(f) {
+            f = chuanHoaFitAnh(f);
+            if (laFitMacDinh(f)) return '';
+            const k = f.z - 1;
+            return 'position:absolute;max-width:none;width:' + lamTron2Fit(f.z * 100) + '%;height:' + lamTron2Fit(f.z * 100) + '%;left:' + lamTron2Fit(-k * f.x) + '%;top:' + lamTron2Fit(-k * f.y) + '%;object-position:' + f.x + '% ' + f.y + '%;';
+        }
+        function thuocTinhFitBia(truyen) {
+            const s = styleFitAnh(layFitAnh(truyen, 'cover'));
+            return s ? ' style="' + s + '"' : '';
+        }
+        function aDungFitLenImg(img, f) { img.style.cssText = styleFitAnh(f); }
+
+        // Một nguồn duy nhất cho bìa truyện (card, carousel...): ảnh thật + căn chỉnh, hoặc bìa mặc định theo tên truyện.
+        function coAnhBiaHopLe(truyen) {
+            return !!(truyen && typeof truyen.cover === 'string' && truyen.cover.trim());
+        }
+        function taoBiaTruyenHTML(truyen) {
+            const ten = taoTenBiaMacDinh(truyen && truyen.title);
+            if (coAnhBiaHopLe(truyen)) {
+                return `<img src="${truyen.cover}"${thuocTinhFitBia(truyen)} data-ten="${ten}" onerror="dungBiaMacDinhKhiLoiAnh(this)">`;
+            }
+            return `<span class="story-card-cover-title">${ten}</span>`;
+        }
+        window.dungBiaMacDinhKhiLoiAnh = function (img) {
+            const p = img && img.parentNode;
+            if (!p) return;
+            const span = document.createElement('span');
+            span.className = 'story-card-cover-title';
+            span.textContent = img.getAttribute('data-ten') || 'Ảnh bìa';
+            if (p.classList.contains('hot-slide-cover')) p.classList.add('is-default-cover');
+            p.textContent = '';
+            p.appendChild(span);
+        };
+
+        // ---------- Trạng thái căn chỉnh trong form ----------
+        function layFitDeLuu(mode, url) {
+            const s = window._fitBia && window._fitBia[mode];
+            if (!s || !url || s.url !== url) return null;
+            const f = chuanHoaFitAnh(s);
+            return laFitMacDinh(f) ? null : f;
+        }
+        function layFitXemTruoc(mode, url) { return layFitDeLuu(mode, url); }
+
+        function napFitBiaVaoForm(mode, truyen) {
+            if (!window._fitBia || !window._fitBia[mode]) return;
+            const st = window._fitBia[mode];
+            const f = layFitAnh(truyen, 'cover') || { x: 50, y: 50, z: 1 };
+            st.x = f.x; st.y = f.y; st.z = f.z;
+            st.url = String((truyen && truyen.cover) || '').trim();
+            capNhatEditorFitBia(mode);
+        }
+        function datLaiFitBia(mode) {
+            if (!window._fitBia || !window._fitBia[mode]) return;
+            const st = window._fitBia[mode];
+            st.x = 50; st.y = 50; st.z = 1; st.url = '';
+            capNhatEditorFitBia(mode);
+        }
+
+        function veLaiEditorFit(mode) {
+            const E = window._fitEd[mode];
+            if (!E || !E.imgMain) return;
+            const f = chuanHoaFitAnh(window._fitBia[mode]);
+            aDungFitLenImg(E.imgMain, f);
+            aDungFitLenImg(E.imgThumb, f);
+            const pct = Math.round(f.z * 100);
+            E.range.value = pct;
+            E.val.textContent = pct + '%';
+            E.readout.textContent = 'Ngang ' + Math.round(f.x) + '% · Dọc ' + Math.round(f.y) + '% · Phóng to ' + f.z.toFixed(2).replace(/\.?0+$/, '') + '×';
+        }
+
+        function capNhatEditorFitBia(mode) {
+            const E = window._fitEd[mode];
+            const st = window._fitBia[mode];
+            const input = document.getElementById(mode + '-cover-url');
+            if (!E || !input) return;
+            const url = input.value.trim();
+            if (!url) {
+                if (mode === 'new') { st.x = 50; st.y = 50; st.z = 1; st.url = ''; }
+                E.token++; E.root.hidden = true;
+                return;
+            }
+            if (url !== st.url) { st.x = 50; st.y = 50; st.z = 1; st.url = url; } // ảnh khác → vị trí cũ không còn đúng
+            if (!urlAnhHopLe(url)) { E.token++; E.root.hidden = true; return; }
+            if (E.loadedUrl === url && E.imgMain) { E.root.hidden = false; veLaiEditorFit(mode); return; }
+            const token = ++E.token;
+            const probe = new Image();
+            probe.onload = function () {
+                if (token !== E.token) return;
+                E.nw = probe.naturalWidth; E.nh = probe.naturalHeight; E.loadedUrl = url;
+                function mk() { const im = new Image(); im.src = url; im.alt = ''; im.draggable = false; return im; }
+                E.imgMain = mk(); E.imgThumb = mk();
+                E.drag.textContent = ''; E.drag.appendChild(E.imgMain);
+                E.thumb.textContent = ''; E.thumb.appendChild(E.imgThumb);
+                E.root.hidden = false;
+                veLaiEditorFit(mode);
+            };
+            probe.onerror = function () {
+                if (token !== E.token) return;
+                E.loadedUrl = ''; E.imgMain = null; E.root.hidden = true;
+            };
+            probe.src = url;
+        }
+
+        function datZoomFit(mode, z) {
+            const st = window._fitBia[mode];
+            st.z = lamTron2Fit(kepSoFit(z, 1, FIT_ZOOM_MAX, 1));
+            veLaiEditorFit(mode);
+        }
+
+        function taoEditorFitBia(mode) {
+            const input = document.getElementById(mode + '-cover-url');
+            const wrap = input && input.closest('.img-url-wrap');
+            if (!wrap || wrap.querySelector('.fit-editor')) return;
+            const root = document.createElement('div');
+            root.className = 'fit-editor';
+            root.hidden = true;
+            root.innerHTML =
+                '<div class="fit-editor-title">Căn chỉnh vị trí ảnh bìa</div>' +
+                '<div class="fit-editor-body">' +
+                  '<div class="fit-frame-col"><div class="story-card-cover-wrapper"><div class="story-card-cover fit-drag" tabindex="0" role="group" aria-label="Khung căn chỉnh ảnh bìa. Kéo để di chuyển, phím + và - để phóng to thu nhỏ"></div></div></div>' +
+                  '<div class="fit-controls">' +
+                    '<div class="fit-help">Kéo ảnh trong khung bằng chuột hoặc ngón tay để căn ngang / dọc. Khung đúng tỉ lệ 2:3 như bìa truyện ngoài trang.</div>' +
+                    '<div class="fit-zoom-row">' +
+                      '<button type="button" class="fit-step" data-fit="out" aria-label="Thu nhỏ">−</button>' +
+                      '<input type="range" class="fit-range" min="100" max="' + (FIT_ZOOM_MAX * 100) + '" step="5" value="100" aria-label="Mức phóng to">' +
+                      '<button type="button" class="fit-step" data-fit="in" aria-label="Phóng to">+</button>' +
+                      '<span class="fit-zoom-val">100%</span>' +
+                    '</div>' +
+                    '<div class="fit-thumb-row"><div class="fit-thumb"><div class="story-card-cover-wrapper"><div class="story-card-cover"></div></div></div><span>Thu nhỏ như ngoài trang</span></div>' +
+                    '<div class="fit-actions">' +
+                      '<button type="button" class="img-preview-btn" data-fit="preview"><svg class=ic aria-hidden=true><use href=#i-eye /></svg><span>Xem trước</span></button>' +
+                      '<button type="button" class="fit-btn-secondary" data-fit="reset">Đặt lại vị trí</button>' +
+                    '</div>' +
+                    '<div class="fit-readout" aria-live="polite"></div>' +
+                  '</div>' +
+                '</div>';
+            wrap.appendChild(root);
+            const E = {
+                root: root, drag: root.querySelector('.fit-drag'), thumb: root.querySelector('.fit-thumb .story-card-cover'),
+                range: root.querySelector('.fit-range'), val: root.querySelector('.fit-zoom-val'), readout: root.querySelector('.fit-readout'),
+                imgMain: null, imgThumb: null, nw: 0, nh: 0, loadedUrl: '', token: 0
+            };
+            window._fitEd[mode] = E;
+            const st = window._fitBia[mode];
+
+            root.querySelector('[data-fit="reset"]').addEventListener('click', function () { st.x = 50; st.y = 50; st.z = 1; veLaiEditorFit(mode); });
+            root.querySelector('[data-fit="in"]').addEventListener('click', function () { datZoomFit(mode, st.z + 0.1); });
+            root.querySelector('[data-fit="out"]').addEventListener('click', function () { datZoomFit(mode, st.z - 0.1); });
+            root.querySelector('[data-fit="preview"]').addEventListener('click', function (e) { moXemTruocAnh(e.currentTarget); });
+            E.range.addEventListener('input', function () { datZoomFit(mode, Number(E.range.value) / 100); });
+
+            // Kéo bằng chuột / chạm; hai ngón để pinch zoom. touch-action:none giữ cho trang không cuộn khi đang căn.
+            const drag = E.drag, ptrs = new Map();
+            let pan = null, pinch = null;
+            function kichThuoc() { const r = drag.getBoundingClientRect(); return { W: r.width, H: r.height }; }
+            function batDauPan() {
+                const first = Array.from(ptrs.values())[0];
+                if (!first) { pan = null; return; }
+                pan = { px: first.x, py: first.y, x: st.x, y: st.y };
+            }
+            drag.addEventListener('pointerdown', function (e) {
+                if (!E.imgMain) return;
+                if (e.pointerType === 'mouse' && e.button !== 0) return;
+                try { drag.setPointerCapture(e.pointerId); } catch (err) {}
+                ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                if (ptrs.size === 1) batDauPan();
+                else if (ptrs.size === 2) {
+                    const p = Array.from(ptrs.values());
+                    pinch = { d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1, z: st.z };
+                    pan = null;
+                }
+                drag.classList.add('is-dragging');
+                e.preventDefault();
+            });
+            drag.addEventListener('pointermove', function (e) {
+                if (!ptrs.has(e.pointerId)) return;
+                ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                if (ptrs.size >= 2 && pinch) {
+                    const p = Array.from(ptrs.values());
+                    const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1;
+                    datZoomFit(mode, pinch.z * d / pinch.d);
+                } else if (pan && E.nw && E.nh) {
+                    const k = kichThuoc();
+                    if (!k.W || !k.H) return;
+                    const s = Math.max(k.W / E.nw, k.H / E.nh) * st.z;
+                    const ox = E.nw * s - k.W, oy = E.nh * s - k.H; // phần ảnh thừa ra ngoài khung (px)
+                    if (ox > 0.5) st.x = lamTron2Fit(kepSoFit(pan.x - (e.clientX - pan.px) / ox * 100, 0, 100, 50));
+                    if (oy > 0.5) st.y = lamTron2Fit(kepSoFit(pan.y - (e.clientY - pan.py) / oy * 100, 0, 100, 50));
+                    veLaiEditorFit(mode);
+                }
+                e.preventDefault();
+            });
+            function ketThuc(e) {
+                if (!ptrs.has(e.pointerId)) return;
+                ptrs.delete(e.pointerId);
+                pinch = null;
+                if (ptrs.size === 1) batDauPan(); else pan = null;
+                if (!ptrs.size) drag.classList.remove('is-dragging');
+            }
+            drag.addEventListener('pointerup', ketThuc);
+            drag.addEventListener('pointercancel', ketThuc);
+            drag.addEventListener('lostpointercapture', ketThuc);
+            drag.addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
+            drag.addEventListener('wheel', function (e) {
+                if (!E.imgMain) return;
+                e.preventDefault();
+                datZoomFit(mode, st.z - e.deltaY * 0.002);
+            }, { passive: false });
+            drag.addEventListener('keydown', function (e) {
+                if (!E.imgMain) return;
+                let dung = true;
+                if (e.key === 'ArrowLeft') st.x = lamTron2Fit(kepSoFit(st.x + 2, 0, 100, 50));
+                else if (e.key === 'ArrowRight') st.x = lamTron2Fit(kepSoFit(st.x - 2, 0, 100, 50));
+                else if (e.key === 'ArrowUp') st.y = lamTron2Fit(kepSoFit(st.y + 2, 0, 100, 50));
+                else if (e.key === 'ArrowDown') st.y = lamTron2Fit(kepSoFit(st.y - 2, 0, 100, 50));
+                else if (e.key === '+' || e.key === '=') datZoomFit(mode, st.z + 0.1);
+                else if (e.key === '-' || e.key === '_') datZoomFit(mode, st.z - 0.1);
+                else dung = false;
+                if (dung) { e.preventDefault(); veLaiEditorFit(mode); }
+            });
+        }
+
+        (function khoiTaoCanhChinhAnhBia() {
+            ['new', 'edit'].forEach(taoEditorFitBia);
+            const timers = {};
+            document.addEventListener('input', function (e) {
+                const el = e.target;
+                const mode = el && el.id === 'new-cover-url' ? 'new' : (el && el.id === 'edit-cover-url' ? 'edit' : null);
+                if (!mode) return;
+                clearTimeout(timers[mode]);
+                timers[mode] = setTimeout(function () { capNhatEditorFitBia(mode); }, 300);
+            });
+            try {
+                const sel = document.getElementById('select-edit-story');
+                if (sel && sel.value && window.dữLiệuTruyện && window.dữLiệuTruyện[sel.value]) napFitBiaVaoForm('edit', window.dữLiệuTruyện[sel.value]);
+            } catch (err) {}
+        })();
 
         // ===== HÌNH ẢNH GIỚI THIỆU (tùy chọn theo từng truyện) =====
         // Ảnh chỉ được lưu dưới dạng link tới file gốc (truyen.introImages = [url, ...]).
@@ -6632,6 +6939,14 @@
                 };
             }
             d.images = chuanHoaDanhSachAnhGT((window._introImgs[mode] || []).map(function (it) { return it.url; })).filter(urlAnhHopLe);
+            const urlBiaNhap = g(mode === 'edit' ? 'edit-cover-url' : 'new-cover-url').value.trim();
+            const fitXT = urlBiaNhap ? layFitDeLuu(mode, urlBiaNhap) : null;
+            if (fitXT) d.imgFit = { cover: fitXT };
+            else if (mode === 'edit' && !urlBiaNhap) {
+                const kXT = g('select-edit-story').value;
+                const gocXT = (kXT && window.dữLiệuTruyện[kXT]) || {};
+                if (gocXT.imgFit) d.imgFit = gocXT.imgFit;
+            }
             return d;
         }
 
@@ -6668,7 +6983,7 @@
             const chaptersHTML = d.chapters.map(function (ch) {
                 return '<li class="chapter-item-v"><span class="chapter-title-line">' + (ch.is18 ? '<span class="badge-18">[18+]</span>' : '') + '<span class="chapter-name">' + E(ch.title) + '</span></span></li>';
             }).join('');
-            const coverHTML = d.cover && urlAnhHopLe(d.cover) ? '<img src="' + E(d.cover) + '" alt="">' : '[ Ảnh bìa ]';
+            const coverHTML = d.cover && urlAnhHopLe(d.cover) ? '<img src="' + E(d.cover) + '" alt=""' + thuocTinhFitBia(d) + '>' : '[ Ảnh bìa ]';
 
             body.innerHTML = `
                 <div class="story-decor-card">
@@ -7189,10 +7504,10 @@
             }
             hotList.forEach((item, index) => {
                 const tr = item.truyen;
-                const coverHTML = tr.cover ? `<img src="${tr.cover}">` : `[ Bìa ]`;
+                const coverHTML = taoBiaTruyenHTML(tr);
                 track.innerHTML += `
                     <div class="hot-slide-item" onclick="xemTruyen('${item.key}', false)">
-                        <div class="hot-slide-cover">${coverHTML}</div>
+                        <div class="hot-slide-cover${coAnhBiaHopLe(tr) ? '' : ' is-default-cover'}">${coverHTML}</div>
                     </div>
                 `;
                 dotsContainer.innerHTML += `<div class="slider-dot ${index === 0 ? 'active' : ''}" onclick="chuyenDenSlide(${index})"></div>`;
@@ -8512,6 +8827,7 @@
                 document.getElementById('edit-author').value = truyen.author || '';
                 document.getElementById('edit-cover-url').value = truyen.cover || '';
                 capNhatGoiYAnhTheoId('edit-cover-url');
+                napFitBiaVaoForm('edit', truyen);
                 document.getElementById('edit-status').value = truyen.status || 'Đang cập nhật';
                 document.getElementById('edit-main-chapters').value = truyen.mainChapterCount || truyen.totalChaptersInput || truyen.chapters.length || 42;
                 var hasExtra = truyen.hasExtraStories || false;
@@ -8714,6 +9030,8 @@
             };
             storyObj.chapters._lastUpdated = Date.now();
             if (introImgs.length) storyObj.introImages = introImgs;
+            const fitBiaMoi = layFitDeLuu('new', coverUrl);
+            if (fitBiaMoi) storyObj.imgFit = { cover: fitBiaMoi };
             let chapterTimestamp = Date.now().toString();
             if (chapterTimestampInput) {
                 const ts = new Date(chapterTimestampInput).getTime();
@@ -8754,6 +9072,7 @@
                 document.getElementById('new-summary').innerHTML = '';
                 document.getElementById('new-cover-url').value = '';
                 capNhatGoiYAnhTheoId('new-cover-url');
+                datLaiFitBia('new');
                 napAnhGioiThieuVaoForm('new', []);
                 document.getElementById('new-chapter-title').value = '';
                 document.getElementById('new-chapter-content').value = '';
@@ -8795,7 +9114,17 @@
             currentTruyen.mainChapterCount = mainChapters;
             currentTruyen.hasExtraStories = hasExtra;
             currentTruyen.extraStoryCount = extraChapters;
-            if (coverUrl) currentTruyen.cover = coverUrl;
+            if (coverUrl) {
+                currentTruyen.cover = coverUrl;
+                const fitBiaSua = layFitDeLuu('edit', coverUrl);
+                if (fitBiaSua) {
+                    if (!currentTruyen.imgFit || typeof currentTruyen.imgFit !== 'object') currentTruyen.imgFit = {};
+                    currentTruyen.imgFit.cover = fitBiaSua;
+                } else if (currentTruyen.imgFit && typeof currentTruyen.imgFit === 'object') {
+                    delete currentTruyen.imgFit.cover;
+                    if (!Object.keys(currentTruyen.imgFit).length) delete currentTruyen.imgFit;
+                }
+            }
             if (introImgs.length) currentTruyen.introImages = introImgs; else delete currentTruyen.introImages;
             currentTruyen.tags = tags;
             currentTruyen.summary = summaryHTML;
@@ -8910,7 +9239,7 @@
                 const limitedTags = truyen.tags.slice(0, 3);
                 tagsHTML = limitedTags.map(t => `<span class="mini-tag" onclick="event.stopPropagation(); timTheoTag('${t}')">${t}</span>`).join('');
             }
-            const coverHTML = truyen.cover ? `<img src="${truyen.cover}">` : `<span class="story-card-cover-title">${taoTenBiaMacDinh(truyen.title)}</span>`;
+            const coverHTML = taoBiaTruyenHTML(truyen);
             let chapterDisplay = '';
             let newBadgeHTML = '';
             if (truyen.chapters && truyen.chapters.length > 0) {
@@ -9202,7 +9531,7 @@
                 <div><strong style="color: var(--primary-color);">Thể loại / Thẻ:</strong> ${tagsHTML}</div>
             `;
             document.getElementById('detail-summary').innerHTML = truyen.summary ? apDungMauChuTheoTheme(truyen.summary) : (truyen.desc || 'Đang cập nhật...');
-            document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}">` : `[ Ảnh bìa ]`;
+            document.getElementById('detail-cover').innerHTML = truyen.cover ? `<img src="${truyen.cover}"${thuocTinhFitBia(truyen)}>` : `[ Ảnh bìa ]`;
             hienThiGalleryGioiThieuChiTiet(truyen);
             const progressFill = document.getElementById('story-progress-bar-fill');
             const progressPercentText = document.getElementById('story-progress-percent-text');
