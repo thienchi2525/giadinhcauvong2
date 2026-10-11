@@ -3829,6 +3829,39 @@
             .blockblast-dock { max-width: 230px; }
         }
 
+        /* ===== Phân trang kho truyện + bìa mặc định trên bảng xếp hạng ===== */
+        .story-pagination { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; margin: 22px 0 6px; }
+        .story-pagination:empty { display: none; }
+        .story-page-btn {
+            min-width: 36px; height: 36px; padding: 0 10px; box-sizing: border-box;
+            border: 1.5px solid var(--border-color); border-radius: 12px;
+            background: var(--container-bg); color: var(--primary-color);
+            font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+            transition: all 0.2s ease; line-height: 1;
+        }
+        .story-page-btn:hover:not(:disabled):not(.active) { border-color: var(--primary-color); box-shadow: 0 3px 10px var(--glow-color); }
+        .story-page-btn.active { background: var(--primary-color); border-color: var(--primary-color); color: #fff; cursor: default; }
+        .story-page-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .story-page-gap { color: var(--subtext-color); font-weight: 700; padding: 0 2px; }
+        @media (max-width: 480px) { .story-page-btn { min-width: 32px; height: 32px; padding: 0 7px; font-size: 12px; border-radius: 10px; } .story-pagination { gap: 4px; } }
+
+        .ranking-card-cover.is-default-cover {
+            background: linear-gradient(135deg, #ffe4e1, #ffb6c1);
+            color: var(--primary-color); font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .ranking-card-cover .story-card-cover-title {
+            font-size: 12px; padding: 6px; line-height: 1.3;
+            display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; overflow: hidden;
+        }
+        .ranking-card-top.rank-1 .ranking-card-cover .story-card-cover-title { font-size: 14px; padding: 8px; }
+        .ranking-card-row .ranking-card-cover .story-card-cover-title { font-size: 9.5px; padding: 3px; -webkit-line-clamp: 5; }
+        @media (max-width: 768px) {
+            .ranking-card-cover .story-card-cover-title { font-size: 9.5px; padding: 4px; -webkit-line-clamp: 6; }
+            .ranking-card-top.rank-1 .ranking-card-cover .story-card-cover-title { font-size: 11px; }
+            .ranking-card-row .ranking-card-cover .story-card-cover-title { font-size: 8.5px; padding: 3px; -webkit-line-clamp: 6; }
+        }
+
         /* ===== Căn chỉnh vị trí ảnh bìa (kéo / phóng to) + bìa mặc định trên carousel ===== */
         .story-decor-cover, .hot-slide-cover { position: relative; }
         .hot-slide-cover.is-default-cover {
@@ -4164,6 +4197,7 @@
             </div>
             
             <div class="story-grid" id="home-story-grid"></div>
+            <div class="story-pagination" id="home-pagination" role="navigation" aria-label="Phân trang kho truyện"></div>
 
             <div class="ranking-section" id="home-ranking-section">
                 <div class="ranking-section-header">
@@ -4218,6 +4252,7 @@
             <div class="active-tags-display" id="active-tags-display-all"></div>
             
             <div class="story-grid" id="danh-sach-truyen"></div>
+            <div class="story-pagination" id="all-pagination" role="navigation" aria-label="Phân trang danh sách truyện"></div>
         </div>
 
         <div id="tab-xep-hang" class="hidden">
@@ -4863,15 +4898,15 @@
             </div>
 
             <div id="admin-subcontent-tuongtac" class="hidden">
-                <div class="section-title"><svg class=ic aria-hidden=true><use href=#i-message /></svg> Quản Lý & Tổng Hợp Mã JSON Comment</div>
-                <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 15px;">Bấm nút bên dưới để hệ thống gom toàn bộ bình luận thành một đoạn mã JSON duy nhất, sau đó copy dán đè thẳng vào file <code>comment.json</code> trên GitHub!</p>
+                <div class="section-title"><svg class=ic aria-hidden=true><use href=#i-message /></svg> Tổng Hợp Comment</div>
+                <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 15px;">Bấm nút bên dưới để hệ thống gom toàn bộ bình luận thành một đoạn mã JSON duy nhất</p>
                 
                 <div style="background: var(--box-bg); padding: 16px; border-radius: 14px; border: 1.5px solid var(--border-color); margin-bottom: 20px; text-align: center;">
                     <button type="button" class="btn-submit" onclick="taoMaJsonCommentDeCopy()" style="padding: 12px 28px; font-size: 15px;"><svg class=ic aria-hidden=true><use href=#i-package /></svg> Tổng hợp toàn bộ Comment thành mã JSON</button>
                 </div>
 
                 <div class="form-group">
-                    <label>Mã JSON kết quả (Copy toàn bộ đoạn dưới đây dán vào comment.json):</label>
+                    <label>Mã JSON kết quả (Copy toàn bộ đoạn dưới đây) :</label>
                     <textarea id="output-json-comment-box" class="form-control" style="height: 200px; font-family: monospace; font-size: 12px; background: var(--container-bg);" readonly placeholder="Bấm nút tổng hợp ở trên để hiển thị mã..."></textarea>
                 </div>
             </div>
@@ -5184,13 +5219,14 @@
 
         function renderRankingCardTop(item, index, sortBy) {
             const truyen = item.truyen;
-            const coverHTML = truyen.cover ? `<img src="${truyen.cover}"${thuocTinhFitBia(truyen)}>` : `[ Bìa ]`;
+            const coverHTML = taoBiaTruyenHTML(truyen);
+            const coverClass = coAnhBiaHopLe(truyen) ? '' : ' is-default-cover';
             const stat = getRankingStatValue(item.key, truyen, sortBy);
             const rankClass = index === 0 ? 'rank-1' : (index === 1 ? 'rank-2' : 'rank-3');
             return `
                 <div class="ranking-card ranking-card-top ${rankClass}" onclick="xemTruyen('${item.key}', false)">
                     <div class="ranking-card-rank">#${index + 1}</div>
-                    <div class="ranking-card-cover">${coverHTML}</div>
+                    <div class="ranking-card-cover${coverClass}">${coverHTML}</div>
                     <div class="ranking-card-info">
                         <div class="ranking-card-title">${truyen.title}</div>
                         <div class="ranking-card-author">Tác giả: ${truyen.author || 'Đang cập nhật'}</div>
@@ -5203,13 +5239,14 @@
 
         function renderRankingCardRow(item, index, sortBy) {
             const truyen = item.truyen;
-            const coverHTML = truyen.cover ? `<img src="${truyen.cover}"${thuocTinhFitBia(truyen)}>` : `[ Bìa ]`;
+            const coverHTML = taoBiaTruyenHTML(truyen);
+            const coverClass = coAnhBiaHopLe(truyen) ? '' : ' is-default-cover';
             const stat = getRankingStatValue(item.key, truyen, sortBy);
             const trangThai = getTrangThaiHienThi(truyen);
             return `
                 <div class="ranking-card-row" onclick="xemTruyen('${item.key}', false)">
                     <div class="ranking-card-rank">#${index + 1}</div>
-                    <div class="ranking-card-cover">${coverHTML}</div>
+                    <div class="ranking-card-cover${coverClass}">${coverHTML}</div>
                     <div class="ranking-card-info">
                         <div class="ranking-card-title">${truyen.title}</div>
                         <div class="ranking-card-author">Tác giả: ${truyen.author || 'Đang cập nhật'} | Tình trạng: ${trangThai}</div>
@@ -6286,7 +6323,7 @@
             const span = document.createElement('span');
             span.className = 'story-card-cover-title';
             span.textContent = img.getAttribute('data-ten') || 'Ảnh bìa';
-            if (p.classList.contains('hot-slide-cover')) p.classList.add('is-default-cover');
+            if (p.classList.contains('hot-slide-cover') || p.classList.contains('ranking-card-cover')) p.classList.add('is-default-cover');
             p.textContent = '';
             p.appendChild(span);
         };
@@ -9297,6 +9334,46 @@
                 .replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
         }
 
+        // ===== Phân trang kho truyện (chỉ Kho Tàng Truyện ở trang chủ + Tất cả truyện) =====
+        const TRUYEN_MOI_TRANG = 10;
+        window.trangKhoTruyen = window.trangKhoTruyen || { home: { page: 1, sig: null }, all: { page: 1, sig: null } };
+
+        function taoPhanTrangHTML(page, total) {
+            if (total <= 1) return '';
+            const nut = (label, target, opts) => {
+                opts = opts || {};
+                return '<button type="button" class="story-page-btn' + (opts.active ? ' active' : '') + '"' +
+                    (opts.disabled ? ' disabled' : '') +
+                    (opts.active ? ' aria-current="page"' : '') +
+                    (opts.aria ? ' aria-label="' + opts.aria + '"' : '') +
+                    ' onclick="chuyenTrangKhoTruyen(' + target + ')">' + label + '</button>';
+            };
+            const nums = [];
+            for (let i = 1; i <= total; i++) {
+                if (i === 1 || i === total || Math.abs(i - page) <= 1 || (page <= 3 && i <= 4) || (page >= total - 2 && i >= total - 3)) nums.push(i);
+            }
+            let html = nut('&lsaquo; Trước', page - 1, { disabled: page <= 1, aria: 'Trang trước' });
+            let prev = 0;
+            nums.forEach(i => {
+                if (prev && i - prev > 1) html += '<span class="story-page-gap">…</span>';
+                html += nut(i, i, { active: i === page, aria: 'Trang ' + i });
+                prev = i;
+            });
+            html += nut('Sau &rsaquo;', page + 1, { disabled: page >= total, aria: 'Trang sau' });
+            return html;
+        }
+
+        window.chuyenTrangKhoTruyen = function(n) {
+            const home = document.getElementById('tab-trang-chu');
+            const ctx = (home && !home.classList.contains('hidden')) ? 'home' : 'all';
+            n = parseInt(n, 10);
+            if (!n || n < 1) return;
+            window.trangKhoTruyen[ctx].page = n; // được chặn lại trong locTruyen nếu vượt quá số trang
+            window.locTruyen();
+            const grid = document.getElementById(ctx === 'home' ? 'home-story-grid' : 'danh-sach-truyen');
+            if (grid && grid.scrollIntoView) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
         window.locTruyen = function() {
             const homeGrid = document.getElementById('home-story-grid');
             const allGrid = document.getElementById('danh-sach-truyen');
@@ -9308,6 +9385,10 @@
             const sortType = 'moi-nhat';
             const selectedTags = isHome ? window.selectedTagsHome : window.selectedTagsAll;
             homeGrid.innerHTML = ''; allGrid.innerHTML = ''; latestList.innerHTML = '';
+            const homePager = document.getElementById('home-pagination');
+            const allPager = document.getElementById('all-pagination');
+            if (homePager) homePager.innerHTML = '';
+            if (allPager) allPager.innerHTML = '';
             let dsTruyenThm = [];
             for (let key in window.dữLiệuTruyện) {
                 const truyen = window.dữLiệuTruyện[key];
@@ -9402,11 +9483,22 @@
                     `;
                 });
             }
-            displayedStories.forEach(item => {
-                const html = taoCardHTML(item.key, item.truyen);
-                homeGrid.innerHTML += html;
-                allGrid.innerHTML += html;
-            });
+            // Phân trang: đổi từ khóa / trạng thái / tag / tab sắp xếp => về trang 1; đăng/xóa truyện => tự chặn số trang
+            const ctx = isHome ? 'home' : 'all';
+            const st8 = window.trangKhoTruyen[ctx];
+            const sig = JSON.stringify([kw, st, Array.from(selectedTags || []).sort(), isHome ? (window.currentKhoTangTab || 'views') : '']);
+            if (st8.sig !== sig) { st8.sig = sig; st8.page = 1; }
+            const tongTrang = Math.max(1, Math.ceil(displayedStories.length / TRUYEN_MOI_TRANG));
+            if (st8.page > tongTrang) st8.page = tongTrang;
+            if (st8.page < 1) st8.page = 1;
+            const batDau = (st8.page - 1) * TRUYEN_MOI_TRANG;
+            const htmlTrang = displayedStories.slice(batDau, batDau + TRUYEN_MOI_TRANG)
+                .map(item => taoCardHTML(item.key, item.truyen)).join('');
+            homeGrid.innerHTML = htmlTrang;
+            allGrid.innerHTML = htmlTrang;
+            const pagerHTML = taoPhanTrangHTML(st8.page, tongTrang);
+            if (homePager) homePager.innerHTML = pagerHTML;
+            if (allPager) allPager.innerHTML = pagerHTML;
         };
 
         function moTrucTiepChuong(storyKey, chapterIndex) {
