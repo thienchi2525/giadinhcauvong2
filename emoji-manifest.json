@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "folder": "Emoji",
+  "emoji": [
+    {
+      "id": "gay",
+      "file": "Gay.gif",
+      "name": "Chữ GAY nhấp nháy",
+      "keywords": "chữ gay chu gay đen trắng chữ"
+    },
+    {
+      "id": "boomcat",
+      "file": "boomcat.gif",
+      "name": "Mèo trắng đầu bốc cháy",
+      "keywords": "mèo meo cháy lửa nổ boom bùng nổ"
+    },
+    {
+      "id": "capoo_khoc",
+      "file": "bugcatcry.GIF",
+      "name": "Capoo khóc",
+      "keywords": "capoo mèo xanh khóc buồn rưng nước mắt"
+    },
+    {
+      "id": "capoo_tim",
+      "file": "capoohearts.gif",
+      "name": "Capoo thả tim",
+      "keywords": "capoo mèo xanh tim yêu thương thả tim"
+    },
+    {
+      "id": "capoo_cuoi",
+      "file": "capoolaugh.GIF",
+      "name": "Capoo cười haha",
+      "keywords": "capoo mèo xanh cười haha ha ha vui"
+    },
+    {
+      "id": "capoo_liem",
+      "file": "capoolicks79.GIF",
+      "name": "Capoo thè lưỡi liếm",
+      "keywords": "capoo mèo xanh liếm thè lưỡi lè lưỡi"
+    },
+    {
+      "id": "capoo_cobap",
+      "file": "capoomuscle.GIF",
+      "name": "Capoo khoe cơ bắp",
+      "keywords": "capoo mèo xanh cơ bắp mạnh khoe cơ múi tập gym"
+    },
+    {
+      "id": "meo_nghi",
+      "file": "cathink.png",
+      "name": "Mèo đen trắng ngẫm nghĩ",
+      "keywords": "mèo meo suy nghĩ ngẫm nghĩ trầm tư chống cằm"
+    },
+    {
+      "id": "meo_hon",
+      "file": "catkiss.gif",
+      "name": "Mèo nhỏ nhào tới hôn",
+      "keywords": "mèo meo nhỏ hôn nhào tới lao tới"
+    },
+    {
+      "id": "meo_canh",
+      "file": "close-up-cat.png",
+      "name": "Mèo cận mặt",
+      "keywords": "mèo meo cận cảnh cận mặt nhìn thẳng"
+    },
+    {
+      "id": "shiba_nhay",
+      "file": "dogedancee.GIF",
+      "name": "Chó shiba nhảy",
+      "keywords": "chó cún shiba doge nhảy múa lắc"
+    },
+    {
+      "id": "doro_vay",
+      "file": "dorogrope1.gif",
+      "name": "Cô gái tóc hồng quơ tay",
+      "keywords": "doro cô gái tóc hồng anime quơ tay sờ soạng"
+    },
+    {
+      "id": "doro_lac",
+      "file": "doropphard.gif",
+      "name": "Cô gái tóc hồng lắc lư",
+      "keywords": "doro cô gái tóc hồng anime lắc lư nhảy"
+    },
+    {
+      "id": "doro_nghi",
+      "file": "dorothink.gif",
+      "name": "Cô gái tóc hồng suy nghĩ",
+      "keywords": "doro cô gái tóc hồng anime suy nghĩ chống cằm"
+    },
+    {
+      "id": "doro_roi",
+      "file": "dorowhip.gif",
+      "name": "Cô gái tóc hồng cầm roi",
+      "keywords": "doro cô gái tóc hồng anime roi quất"
+    },
+    {
+      "id": "capoo_lac",
+      "file": "dpbugcatbutttwir.GIF",
+      "name": "Capoo lắc mông",
+      "keywords": "capoo mèo xanh lắc mông nhảy"
+    },
+    {
+      "id": "ech_xanh_nghi",
+      "file": "gaidau.gif",
+      "name": "Ếch xanh áo xanh chống cằm",
+      "keywords": "ếch ech xanh áo xanh suy nghĩ nghĩ ngợi"
+    },
+    {
+      "id": "pepe_mua",
+      "file": "hoichieutroimua.gif",
+      "name": "Pepe che ô dưới mưa",
+      "keywords": "pepe ếch ech mưa ô dù buồn hội chiều trời mưa"
+    },
+    {
+      "id": "heo_hong",
+      "file": "hump69.GIF",
+      "name": "Heo hồng nhỏ",
+      "keywords": "heo lợn hồng nhỏ dễ thương lắc"
+    },
+    {
+      "id": "capoo_mlem",
+      "file": "mlem2.GIF",
+      "name": "Capoo thè lưỡi mlem",
+      "keywords": "capoo mèo xanh mlem thè lưỡi ngon thèm"
+    },
+    {
+      "id": "capoo_gat",
+      "file": "nod7.GIF",
+      "name": "Capoo gật đầu",
+      "keywords": "capoo mèo xanh gật đầu đồng ý ok"
+    },
+    {
+      "id": "nhan_nhay",
+      "file": "nsfwlaugh10.GIF",
+      "name": "Nhân vật trắng xám cười khúc khích",
+      "keywords": "nhân vật trắng xám cười khúc khích che miệng cười"
+    },
+    {
+      "id": "ohmaygot",
+      "file": "ohmaygot.jpg",
+      "name": "Người đàn ông ôm đầu sốc",
+      "keywords": "ôi trời ơi oh my god sốc ôm đầu hoảng hốt kinh ngạc"
+    },
+    {
+      "id": "pepe_hon",
+      "file": "peepoblowkiss.GIF",
+      "name": "Pepe thả nụ hôn",
+      "keywords": "pepe ếch ech hôn thả hôn má hồng"
+    },
+    {
+      "id": "pepe_beo",
+      "file": "pepe.gif",
+      "name": "Pepe áo xanh",
+      "keywords": "pepe ếch ech áo xanh to tròn"
+    },
+    {
+      "id": "pepe_fu",
+      "file": "pepefu10.PNG",
+      "name": "Pepe giơ ngón giữa",
+      "keywords": "pepe ếch ech ngón giữa chửi khinh"
+    },
+    {
+      "id": "pepe_daddy",
+      "file": "pepesigndaddy46.GIF",
+      "name": "Pepe cầm bảng DADDY",
+      "keywords": "pepe ếch ech bảng daddy biển"
+    },
+    {
+      "id": "pepe_mong",
+      "file": "pepetwerk.GIF",
+      "name": "Pepe lắc mông",
+      "keywords": "pepe ếch ech lắc mông nhảy mông quần xanh"
+    },
+    {
+      "id": "pepe_uwu",
+      "file": "pepeuwu.gif",
+      "name": "Pepe uwu ngại ngùng",
+      "keywords": "pepe ếch ech uwu ngại ngùng đỏ mặt dễ thương"
+    },
+    {
+      "id": "hong_tim",
+      "file": "pphappylittledic.GIF",
+      "name": "Nhân vật hồng có trái tim",
+      "keywords": "nhân vật hồng trái tim tim dễ thương vui"
+    },
+    {
+      "id": "keo_cat",
+      "file": "sansfwdick55.PNG",
+      "name": "Cây kéo đỏ",
+      "keywords": "kéo cắt kéo đỏ cắt"
+    },
+    {
+      "id": "meo_lan",
+      "file": "scuba-cat-scuba.gif",
+      "name": "Mèo vẽ trắng nâu vẫy tay",
+      "keywords": "mèo meo vẽ trắng nâu hoạt hình"
+    },
+    {
+      "id": "meo_sigma",
+      "file": "sigma-cat.png",
+      "name": "Mèo khoanh tay",
+      "keywords": "mèo meo khoanh tay sigma ngầu"
+    },
+    {
+      "id": "mat_ngai",
+      "file": "suck.gif",
+      "name": "Mặt cười ngượng ngùng",
+      "keywords": "mặt cười ngại ngùng ngượng đỏ mặt che miệng cà tím"
+    },
+    {
+      "id": "ca_tim",
+      "file": "sục.gif",
+      "name": "Cà tím và bàn tay",
+      "keywords": "cà tím cà tim bàn tay nháy mắt"
+    },
+    {
+      "id": "pepe_tits",
+      "file": "tits.gif",
+      "name": "Pepe nhìn nhân vật anime",
+      "keywords": "pepe ếch ech anime tóc bạc nhìn"
+    },
+    {
+      "id": "nhan_nhay_mong",
+      "file": "twerk.gif",
+      "name": "Nhân vật trắng lắc mông",
+      "keywords": "nhân vật trắng lắc mông nhảy lè lưỡi"
+    },
+    {
+      "id": "verwow",
+      "file": "verwow72.GIF",
+      "name": "Cô gái tóc xanh ngạc nhiên",
+      "keywords": "cô gái tóc xanh anime ngạc nhiên wow giơ tay hét"
+    },
+    {
+      "id": "mat_khoc",
+      "file": "very-not-happy.png",
+      "name": "Mặt vàng rưng rưng",
+      "keywords": "mặt vàng rưng nước mắt buồn khóc không vui"
+    },
+    {
+      "id": "meo_verycat",
+      "file": "verycat.gif",
+      "name": "Mèo trắng mờ",
+      "keywords": "mèo meo trắng ngó nhìn"
+    },
+    {
+      "id": "meo_xiu",
+      "file": "xiu.gif",
+      "name": "Mèo mướp trắng đi rồi nằm",
+      "keywords": "mèo meo mướp trắng đi nằm lăn"
+    }
+  ]
+}
