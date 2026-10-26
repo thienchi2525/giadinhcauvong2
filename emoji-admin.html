@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Quản lý emoji – Gia đình Cầu Vồng</title>
+<style>
+  :root {
+    --nen: #fdf7fb; --the: #ffffff; --vien: #eadff0; --chu: #3d3350; --chu-phu: #7d7392;
+    --hong: #f6b8d3; --hong-dam: #d9669f; --tim: #cdb8f2; --xanh: #b9e4d6; --vang: #fff1c2; --do: #c8456b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--nen); color: var(--chu); font: 15px/1.5 "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif; }
+  header { padding: 22px 20px 14px; max-width: 1100px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: 22px; }
+  header p { margin: 0; color: var(--chu-phu); max-width: 70ch; }
+  .thanh { position: sticky; top: 0; z-index: 5; background: rgba(253,247,251,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--vien); }
+  .thanh-trong { max-width: 1100px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  input[type=search], input[type=text] { font: inherit; color: inherit; border: 1.5px solid var(--vien); background: #fff; border-radius: 10px; padding: 8px 11px; min-width: 0; }
+  input:focus-visible, button:focus-visible, label:focus-within { outline: 3px solid var(--tim); outline-offset: 1px; }
+  input[type=search] { flex: 1 1 220px; }
+  button, .nut-file { font: inherit; font-weight: 600; cursor: pointer; border: 0; border-radius: 10px; padding: 8px 14px; background: var(--hong); color: var(--chu); }
+  button:hover, .nut-file:hover { background: #f1a3c6; }
+  button.phu, .nut-file { background: #efe6fb; }
+  button.phu:hover, .nut-file:hover { background: #e2d3f7; }
+  button:disabled { opacity: .5; cursor: default; }
+  .nut-file input { display: none; }
+  .loc { display: flex; gap: 6px; align-items: center; color: var(--chu-phu); white-space: nowrap; }
+  .trangthai { max-width: 1100px; margin: 0 auto; padding: 8px 20px 0; min-height: 30px; color: var(--chu-phu); }
+  .trangthai.loi { color: var(--do); }
+  .trangthai.ok { color: #2f7d62; }
+  main { max-width: 1100px; margin: 0 auto; padding: 8px 20px 60px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+  .o { background: var(--the); border: 1.5px solid var(--vien); border-radius: 14px; padding: 12px; display: grid; grid-template-columns: 64px 1fr; gap: 6px 12px; align-content: start; }
+  .o.sua { border-color: var(--hong-dam); }
+  .anh { grid-row: span 3; width: 64px; height: 64px; border-radius: 12px; background: #faf3fd; display: grid; place-items: center; overflow: hidden; }
+  .anh img { max-width: 56px; max-height: 56px; object-fit: contain; }
+  .tep { font-size: 12px; color: var(--chu-phu); overflow-wrap: anywhere; }
+  .tep b { font-weight: 600; color: var(--chu); }
+  .the { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 99px; background: var(--vang); margin-left: 6px; vertical-align: 1px; }
+  .o label { font-size: 12px; color: var(--chu-phu); display: grid; gap: 2px; grid-column: 2; }
+  .o input[type=text] { width: 100%; }
+  .trong { grid-column: 1 / -1; padding: 40px 0; text-align: center; color: var(--chu-phu); }
+  .huongdan { max-width: 1100px; margin: 0 auto; padding: 0 20px 4px; color: var(--chu-phu); font-size: 13px; }
+  @media (max-width: 520px) { main { grid-template-columns: 1fr; } .thanh-trong { padding: 8px 12px; } header, .trangthai, main { padding-left: 12px; padding-right: 12px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Quản lý emoji ảnh</h1>
+  <p>Sửa tên và từ khóa tìm kiếm cho các emoji trong <code>emoji-manifest.json</code>. Trang này chỉ chỉnh trên máy bạn, không ghi gì lên GitHub và không cần token.</p>
+</header>
+<div class="thanh"><div class="thanh-trong">
+  <input type="search" id="tim" placeholder="Tìm theo tên, từ khóa hoặc tên file…" aria-label="Tìm emoji">
+  <label class="loc"><input type="checkbox" id="chiTuDong"> Chỉ hiện mục chưa đặt tên</label>
+  <button id="taiXuong" class="phu" disabled>Tải emoji-manifest.json</button>
+  <button id="saoChep" disabled>Sao chép JSON</button>
+  <label class="nut-file">Mở file từ máy<input type="file" id="moFile" accept=".json,application/json"></label>
+</div></div>
+<div class="trangthai" id="tt" role="status">Đang tải danh sách emoji…</div>
+<div class="huongdan" id="hd"></div>
+<main id="luoi"></main>
+
+<script>
+(function () {
+  'use strict';
+  // Khớp với cấu hình đang dùng trong website. Đổi nếu repository/nhánh khác.
+  var CFG = {
+    baseUrl: 'https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/Emoji/',
+    jsonUrl: 'https://raw.githubusercontent.com/thienchi2525/giadinhcauvong2/main/emoji-manifest.json',
+    jsonDuPhong: 'emoji-manifest.json'
+  };
+  var data = null, goc = {}, daSua = false;
+  var $ = function (id) { return document.getElementById(id); };
+  var luoi = $('luoi'), tt = $('tt');
+
+  function bo(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd'); }
+  function stemCua(file) { var t = String(file || '').split('/').pop(); return t.replace(/\.[^.]+$/, ''); }
+  function trangThai(msg, loai) { tt.textContent = msg; tt.className = 'trangthai' + (loai ? ' ' + loai : ''); }
+  function duongAnh(e) {
+    if (typeof e.file === 'string') return CFG.baseUrl + e.file.split('/').map(encodeURIComponent).join('/');
+    return typeof e.src === 'string' && /^https:\/\//.test(e.src) ? e.src : '';
+  }
+
+  function nap(d, nguon) {
+    var arr = Array.isArray(d) ? d : d && d.emoji;
+    if (!Array.isArray(arr)) throw new Error('File không đúng định dạng (cần có mảng "emoji").');
+    data = Array.isArray(d) ? { emoji: d } : d;
+    goc = {}; arr.forEach(function (e, i) { goc[i] = (e.name || '') + '\u0001' + (e.keywords || ''); });
+    daSua = false;
+    $('taiXuong').disabled = $('saoChep').disabled = false;
+    trangThai('Đã tải ' + arr.length + ' emoji từ ' + nguon + '.', 'ok');
+    $('hd').textContent = 'Sửa xong bấm “Tải emoji-manifest.json”, rồi đưa file đó lên GitHub thay cho file cũ (Add file → Upload files, hoặc dán nội dung đã sao chép vào file trên GitHub).';
+    ve();
+  }
+
+  function ve() {
+    var q = bo($('tim').value).split(/\s+/).filter(Boolean), chiTD = $('chiTuDong').checked, n = 0;
+    luoi.textContent = '';
+    data.emoji.forEach(function (e, i) {
+      var tuDong = (e.name || '') === stemCua(e.file) || !e.name;
+      if (chiTD && !tuDong) return;
+      var nk = bo([e.name, e.keywords, e.id, e.file].join(' '));
+      if (!q.every(function (t) { return nk.indexOf(t) >= 0; })) return;
+      n++;
+      var o = document.createElement('div'); o.className = 'o'; o.dataset.i = i;
+      var a = document.createElement('div'); a.className = 'anh';
+      var src = duongAnh(e);
+      if (src) { var im = document.createElement('img'); im.loading = 'lazy'; im.alt = ''; im.src = src; im.onerror = function () { a.textContent = '?'; }; a.appendChild(im); }
+      var t = document.createElement('div'); t.className = 'tep';
+      var b = document.createElement('b'); b.textContent = ':' + e.id + ':'; t.appendChild(b);
+      t.appendChild(document.createTextNode(' · ' + (e.file || 'ảnh ngoài')));
+      if (tuDong) { var th = document.createElement('span'); th.className = 'the'; th.textContent = 'tên tự động'; t.appendChild(th); }
+      o.appendChild(a); o.appendChild(t);
+      o.appendChild(truong('Tên hiển thị', 'name', e, i, o));
+      o.appendChild(truong('Từ khóa tìm kiếm (cách nhau bằng dấu cách)', 'keywords', e, i, o));
+      if (goc[i] !== (e.name || '') + '\u0001' + (e.keywords || '')) o.classList.add('sua');
+      luoi.appendChild(o);
+    });
+    if (!n) { var r = document.createElement('div'); r.className = 'trong'; r.textContent = 'Không có emoji nào khớp.'; luoi.appendChild(r); }
+  }
+
+  function truong(nhan, khoa, e, i, o) {
+    var l = document.createElement('label'); l.textContent = nhan;
+    var inp = document.createElement('input'); inp.type = 'text'; inp.value = e[khoa] || ''; inp.maxLength = 300;
+    inp.addEventListener('input', function () {
+      e[khoa] = inp.value; daSua = true;
+      o.classList.toggle('sua', goc[i] !== (e.name || '') + '\u0001' + (e.keywords || ''));
+    });
+    l.appendChild(inp); return l;
+  }
+
+  function xuat() { return JSON.stringify(data, null, 2) + '\n'; }
+  $('taiXuong').addEventListener('click', function () {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([xuat()], { type: 'application/json' }));
+    a.download = 'emoji-manifest.json'; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+    daSua = false; trangThai('Đã tải file về. Hãy đưa file này lên GitHub để áp dụng cho website.', 'ok');
+  });
+  $('saoChep').addEventListener('click', function () {
+    var s = xuat();
+    (navigator.clipboard ? navigator.clipboard.writeText(s) : Promise.reject()).then(function () { trangThai('Đã sao chép JSON. Dán vào emoji-manifest.json trên GitHub rồi Commit.', 'ok'); })
+      .catch(function () { trangThai('Trình duyệt chặn sao chép. Hãy dùng nút “Tải emoji-manifest.json”.', 'loi'); });
+  });
+  $('tim').addEventListener('input', function () { if (data) ve(); });
+  $('chiTuDong').addEventListener('change', function () { if (data) ve(); });
+  $('moFile').addEventListener('change', function (ev) {
+    var f = ev.target.files[0]; if (!f) return;
+    var r = new FileReader();
+    r.onload = function () { try { nap(JSON.parse(String(r.result).replace(/^\uFEFF/, '')), 'file ' + f.name); } catch (e) { trangThai('Không đọc được file: ' + e.message, 'loi'); } };
+    r.readAsText(f);
+  });
+  window.addEventListener('beforeunload', function (ev) { if (daSua) { ev.preventDefault(); ev.returnValue = ''; } });
+
+  function tai(url) {
+    return fetch(url + (url.indexOf('?') < 0 ? '?_t=' + Date.now() : ''), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  }
+  tai(CFG.jsonUrl).then(function (d) { nap(d, 'GitHub'); })
+    .catch(function () { return tai(CFG.jsonDuPhong).then(function (d) { nap(d, 'cùng thư mục'); }); })
+    .catch(function (e) { trangThai('Không tải được emoji-manifest.json (' + e.message + '). Bấm “Mở file từ máy” để chọn file thủ công.', 'loi'); });
+})();
+</script>
+</body>
+</html>
