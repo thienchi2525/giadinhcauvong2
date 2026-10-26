@@ -1,0 +1,45 @@
+name: Đồng bộ emoji
+
+# Tự chạy khi có thay đổi trong thư mục Emoji/ (thêm/sửa/xóa ảnh), hoặc bấm chạy tay ở tab Actions.
+# Chỉ commit file emoji-manifest.json (nằm ngoài Emoji/ nên không tự kích hoạt lại vòng lặp).
+# Dùng GITHUB_TOKEN có sẵn của Actions: KHÔNG cần tạo hay lưu token nào trong code website.
+on:
+  push:
+    branches: [main]
+    paths: ['Emoji/**']
+  workflow_dispatch:
+    inputs:
+      prune:
+        description: 'Xóa khỏi manifest các emoji đã mất ảnh'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: emoji-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Quét Emoji/ và cập nhật manifest
+        run: node scripts/emoji-sync.mjs ${{ inputs.prune && '--prune' || '' }}
+      - name: Commit nếu manifest thay đổi
+        run: |
+          if [ -n "$(git status --porcelain emoji-manifest.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add emoji-manifest.json
+            git commit -m "chore(emoji): tự động cập nhật emoji-manifest.json"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          else
+            echo "Manifest đã đúng, không cần commit."
+          fi
