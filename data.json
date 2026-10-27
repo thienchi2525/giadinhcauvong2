@@ -383,7 +383,7 @@
       "author": "w Điểm Trản Đăng",
       "status": "Đang cập nhật",
       "statusClass": "dang-cap-nhat",
-      "cover": "",
+      "cover": "https://i.postimg.cc/50Y4yZyv/THXDDMT.png",
       "totalMode": "fixed",
       "totalChaptersInput": 13,
       "mainChapterCount": 11,
@@ -408,7 +408,14 @@
           "views": 556,
           "updatedAt": 1793127547179
         }
-      ]
+      ],
+      "imgFit": {
+        "cover": {
+          "x": 50,
+          "y": 50,
+          "z": 1.05
+        }
+      }
     }
   },
   "thongbao_data": [
