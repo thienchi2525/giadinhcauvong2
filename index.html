@@ -5560,6 +5560,22 @@
             return 'Đang cập nhật';
         }
 
+        // Thống kê số chương theo phân loại có sẵn của truyện: tổng (đọc được) = chương chính + ngoại truyện.
+        // totalChaptersInput luôn là TỔNG (dùng cho thanh tiến độ); chương chính = tổng - ngoại truyện.
+        function gcvThongKeChuong(truyen) {
+            var t = truyen || {};
+            var total = parseInt(t.totalChaptersInput, 10);
+            if (!(total > 0)) total = 0;
+            var extra = (t.hasExtraStories && parseInt(t.extraStoryCount, 10) > 0) ? parseInt(t.extraStoryCount, 10) : 0;
+            if (total > 0 && extra > total) extra = total;
+            var main = parseInt(t.mainChapterCount, 10);
+            if (!(main > 0) || (total > 0 && main + extra !== total)) main = Math.max(total - extra, 0);
+            var parts = [];
+            if (main > 0) parts.push(main + ' chương');
+            if (extra > 0) parts.push(extra + ' ngoại truyện');
+            return { total: total, main: main, extra: extra, text: parts.join(' + ') };
+        }
+
         function getStatusClassByStatus(status) {
             if (status === "Hoàn thành") return "hoan-thanh";
             if (status === "Tạm ẩn") return "tam-an";
@@ -7408,8 +7424,7 @@
             let chapterInfo;
             if (isUpdating) chapterInfo = 'Đang cập nhật';
             else {
-                chapterInfo = total + ' chương';
-                if (d.hasExtraStories && d.extraStoryCount > 0) chapterInfo += ' + ' + d.extraStoryCount + ' ngoại truyện';
+                chapterInfo = gcvThongKeChuong(d).text;
             }
             const tagsHTML = d.tags.length ? d.tags.map(function (t) { return '<span class="tag">' + E(t) + '</span>'; }).join('') : '<span class="tag">Đam Mỹ</span>';
             let pctText, fillW, chText, stText;
@@ -10354,7 +10369,7 @@
                         <div style="background: var(--box-bg); padding: 12px 15px; border-radius: 12px; border: 1.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
                             <div>
                                 <div style="font-weight: bold; font-size: 14px; color: var(--text-color);">${tr.title}</div>
-                                <div style="font-size: 13px; color: var(--subtext-color); margin-top: 3px;">Tác giả: ${tr.author || 'Đang cập nhật'} | Trạng thái: <strong>${trangThaiHienThi}</strong> | Số chương: ${tr.totalMode === 'updating' ? 'Đang cập nhật' : (tr.totalChaptersInput || chapCount)} | <svg class=ic aria-hidden=true><use href=#i-eye /></svg> ${v.toLocaleString()} views</div>
+                                <div style="font-size: 13px; color: var(--subtext-color); margin-top: 3px;">Tác giả: ${tr.author || 'Đang cập nhật'} | Trạng thái: <strong>${trangThaiHienThi}</strong> | Số chương: ${tr.totalMode === 'updating' ? 'Đang cập nhật' : (tr.totalChaptersInput ? gcvThongKeChuong(tr).text : chapCount)} | <svg class=ic aria-hidden=true><use href=#i-eye /></svg> ${v.toLocaleString()} views</div>
                             </div>
                             <button type="button" class="pass-btn" style="padding: 6px 14px; font-size: 12px; background: var(--header-bg);" onclick="xemTruyen('${key}', false)"><svg class=ic aria-hidden=true><use href=#i-book-open /></svg> Xem truyện</button>
                         </div>
@@ -10464,7 +10479,7 @@
                 capNhatGoiYAnhTheoId('edit-cover-url');
                 napFitBiaVaoForm('edit', truyen);
                 document.getElementById('edit-status').value = truyen.status || 'Đang cập nhật';
-                document.getElementById('edit-main-chapters').value = truyen.mainChapterCount || truyen.totalChaptersInput || truyen.chapters.length || 42;
+                document.getElementById('edit-main-chapters').value = gcvThongKeChuong(truyen).main || truyen.chapters.length || 42;
                 var hasExtra = truyen.hasExtraStories || false;
                 document.getElementById('edit-has-extra').checked = hasExtra;
                 document.getElementById('edit-extra-chapters').value = truyen.extraStoryCount || 0;
@@ -11250,10 +11265,7 @@
             if (isUpdating) {
                 chapterInfoText = 'Đang cập nhật';
             } else {
-                chapterInfoText = tongSoChuong + ' chương';
-                if (truyen.hasExtraStories && truyen.extraStoryCount > 0) {
-                    chapterInfoText += ' + ' + truyen.extraStoryCount + ' ngoại truyện';
-                }
+                chapterInfoText = gcvThongKeChuong(truyen).text;
             }
             const displayStatus = getTrangThaiHienThi(truyen);
             document.getElementById('detail-info-box').innerHTML = `
