@@ -5211,6 +5211,13 @@
             </div>
 
             <div id="admin-subcontent-hethong" class="hidden">
+                <div class="section-title">Đồng Bộ GitHub (data.json)</div>
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <button type="button" class="btn-submit" onclick="gcvDongBoThuCong()">Đồng bộ lên GitHub ngay</button>
+                    <button type="button" class="btn-delete" onclick="gcvQuenKhoaDongBo()">Xóa khóa đã nhập</button>
+                    <span id="gcv-sync-status" style="font-size: 13px;">Chưa có lần đồng bộ nào trong phiên này.</span>
+                </div>
+
                 <div class="section-title"><svg class=ic aria-hidden=true><use href=#i-clock /></svg> Lịch Hẹn Giờ Đăng Tự Động Đang Chờ</div>
                 <div id="admin-schedule-list" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;"></div>
 
@@ -7623,6 +7630,13 @@
                 let response = await fetch(GITHUB_JSON_URL + "?_t=" + new Date().getTime());
                 if (response.ok) {
                     let data = await response.json();
+                    // Giữ lại các trường khác (nếu data.json có) để khi đồng bộ không làm mất / đổi schema
+                    window._dataJsonExtra = {};
+                    Object.keys(data || {}).forEach(function (k) {
+                        if (k !== 'truyen_data' && k !== 'thongbao_data' && k !== 'thongbao_quantrong') window._dataJsonExtra[k] = data[k];
+                    });
+                    // Chỉ cho phép đồng bộ ngược lên GitHub khi đã tải được dữ liệu thật (tránh ghi đè bằng dữ liệu mặc định)
+                    window._gcvDaTaiData = !!(data && data.truyen_data && typeof data.truyen_data === 'object');
                     if (data.truyen_data) { window.dữLiệuTruyện = data.truyen_data; chuanHoaTatCaTrangThai18(); }
                     if (data.thongbao_data) window.danhSachThongBao = data.thongbao_data;
                     if (data.thongbao_quantrong !== undefined) {
@@ -8004,6 +8018,11 @@
         }
 
         function kiemTraLichHenGio() {
+            window.__gcvTuDong = true;
+            try { kiemTraLichHenGioGoc(); } finally { window.__gcvTuDong = false; }
+        }
+
+        function kiemTraLichHenGioGoc() {
             if (!window.danhSachHenGio || window.danhSachHenGio.length === 0) return;
             const now = new Date().getTime();
             let conLai = [];
@@ -8077,30 +8096,218 @@
             }
         };
 
-        function luuVaoLocalStorage() {
+        // opts (tùy chọn): { dongBo: false } = chỉ cập nhật cục bộ, KHÔNG đồng bộ GitHub (dùng cho lượt xem của người đọc)
+        function luuVaoLocalStorage(opts) {
             capNhatDropdownTag();
             buildTagSelectors();
             xuatFileDuLieuJSON();
+            gcvYeuCauDongBo(opts);
         }
 
-        function luuThongBaoVaoLocalStorage() {
+        function luuThongBaoVaoLocalStorage(opts) {
             xuatFileDuLieuJSON();
+            gcvYeuCauDongBo(opts);
         }
 
         function luuYeuThichVaoLocalStorage() {
             localStorage.setItem('giadinhcauvong_favorites', JSON.stringify(window.danhSachYeuThich));
         }
 
-        function xuatFileDuLieuJSON() {
+        // Dữ liệu đầy đủ đúng cấu trúc data.json: truyen_data + thongbao_data + thongbao_quantrong (+ mọi trường lạ đã có sẵn trong data.json)
+        function gcvTaoDuLieuDongBo() {
             dongBoTimestampVaoDuLieu();
             const masterData = {
                 truyen_data: window.dữLiệuTruyện,
                 thongbao_data: window.danhSachThongBao,
                 thongbao_quantrong: window.thongBaoQuanTrong || null
             };
+            const extra = window._dataJsonExtra || {};
+            Object.keys(extra).forEach(function (k) { if (!(k in masterData)) masterData[k] = extra[k]; });
+            return masterData;
+        }
+
+        function xuatFileDuLieuJSON() {
+            const masterData = gcvTaoDuLieuDongBo();
             console.log("--- DỮ LIỆU TRUYỆN JSON ĐỂ DÁN VÀO data.json ---");
             console.log(JSON.stringify(masterData, null, 2));
         }
+
+        // ===== ĐỒNG BỘ data.json LÊN GITHUB QUA CLOUDFLARE WORKER =====
+        // - ADMIN_KEY do chủ nhà nhập bằng prompt, chỉ nằm trong sessionStorage của tab hiện tại.
+        // - Không có ADMIN_KEY / GITHUB_TOKEN trong mã nguồn; không ghi khóa ra console; không hiển thị lại khóa.
+        // - Hàng đợi: mọi lần lưu liên tiếp được gom lại, luôn gửi bản dữ liệu MỚI NHẤT, mỗi lúc chỉ có 1 request chạy.
+        var GCV_SYNC_URL = "https://silent-hall-4674giadinhcauvong-save.thienchi2525.workers.dev/";
+        var GCV_SYNC_KEY_NAME = "giadinhcauvong_admin_key";
+        var GCV_SYNC_TIMEOUT_MS = 30000;
+        var GCV_SYNC_DELAY_MS = 400;
+        var GCV_SYNC = { dangChay: false, canChayLai: false, timer: null, choPhepHoi: false, chuaDongBo: false, lanCuoi: null };
+
+        function gcvDaMoKhoaAdmin() {
+            try { return sessionStorage.getItem('giadinhcauvong_admin_unlocked') === 'true'; } catch (e) { return false; }
+        }
+        function gcvLayKhoaDongBo() {
+            try { return sessionStorage.getItem(GCV_SYNC_KEY_NAME) || ''; } catch (e) { return ''; }
+        }
+        function gcvXoaKhoaDongBo() {
+            try { sessionStorage.removeItem(GCV_SYNC_KEY_NAME); } catch (e) { }
+        }
+        function gcvHoiKhoaDongBo() {
+            var v = window.prompt('Nhập ADMIN_KEY để đồng bộ dữ liệu lên GitHub.\n(Khóa chỉ được giữ trong tab này, đóng tab là mất.)');
+            if (v === null) return '';
+            v = String(v).trim();
+            if (!v) return '';
+            try { sessionStorage.setItem(GCV_SYNC_KEY_NAME, v); } catch (e) { }
+            return v;
+        }
+
+        function gcvHienThongBaoDongBo(msg, loai) {
+            try {
+                var el = document.getElementById('gcv-sync-toast');
+                if (!el) {
+                    el = document.createElement('div');
+                    el.id = 'gcv-sync-toast';
+                    el.setAttribute('role', 'status');
+                    el.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100000;max-width:90vw;padding:10px 18px;border-radius:14px;font-size:14px;font-weight:bold;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.3);transition:opacity .3s;pointer-events:none;text-align:center;opacity:0;';
+                    document.body.appendChild(el);
+                }
+                el.style.background = loai === 'ok' ? '#2e9e5b' : (loai === 'loi' ? '#d64545' : '#3b82c4');
+                el.textContent = msg;
+                el.style.opacity = '1';
+                clearTimeout(el._t);
+                el._t = setTimeout(function () { el.style.opacity = '0'; }, loai === 'loi' ? 10000 : 5000);
+            } catch (e) { }
+        }
+
+        function gcvCapNhatTrangThaiDongBo() {
+            var el = document.getElementById('gcv-sync-status');
+            if (!el) return;
+            if (GCV_SYNC.dangChay) el.textContent = 'Đang đồng bộ lên GitHub...';
+            else if (GCV_SYNC.chuaDongBo) el.textContent = 'Có thay đổi CHƯA đồng bộ lên GitHub.';
+            else if (GCV_SYNC.lanCuoi) el.textContent = 'Đồng bộ GitHub thành công lúc ' + GCV_SYNC.lanCuoi.toLocaleTimeString('vi-VN') + '.';
+            else el.textContent = 'Chưa có lần đồng bộ nào trong phiên này.';
+        }
+
+        // Gửi 1 lần: luôn chụp dữ liệu mới nhất tại thời điểm gửi
+        async function gcvGuiMotLan(choPhepHoi) {
+            if (!window._gcvDaTaiData) {
+                gcvHienThongBaoDongBo('❌ Chưa tải được data.json từ GitHub nên đã CHẶN đồng bộ để tránh ghi đè mất dữ liệu. Hãy tải lại trang rồi thử lại.', 'loi');
+                return { ok: false };
+            }
+            var key = gcvLayKhoaDongBo();
+            if (!key) {
+                if (!choPhepHoi) {
+                    gcvHienThongBaoDongBo('⚠️ Thay đổi mới chưa lên GitHub vì chưa nhập ADMIN_KEY. Vào Quản lý > Hệ thống > "Đồng bộ lên GitHub ngay".', 'loi');
+                    return { ok: false };
+                }
+                key = gcvHoiKhoaDongBo();
+                if (!key) {
+                    gcvHienThongBaoDongBo('⚠️ Đã hủy nhập ADMIN_KEY: thay đổi chỉ có trên trình duyệt này, CHƯA lên GitHub.', 'loi');
+                    return { ok: false, huy: true };
+                }
+            }
+            var body;
+            try {
+                body = JSON.stringify(gcvTaoDuLieuDongBo());
+            } catch (e) {
+                key = '';
+                gcvHienThongBaoDongBo('❌ Không đóng gói được dữ liệu để đồng bộ.', 'loi');
+                return { ok: false };
+            }
+            var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+            var to = ctl ? setTimeout(function () { ctl.abort(); }, GCV_SYNC_TIMEOUT_MS) : null;
+            var res;
+            try {
+                res = await fetch(GCV_SYNC_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-store',
+                    headers: { 'Content-Type': 'application/json', 'X-Admin-Key': key },
+                    body: body,
+                    signal: ctl ? ctl.signal : undefined
+                });
+            } catch (e) {
+                if (to) clearTimeout(to);
+                key = '';
+                if (e && e.name === 'AbortError') {
+                    gcvHienThongBaoDongBo('❌ Worker không phản hồi (quá ' + (GCV_SYNC_TIMEOUT_MS / 1000) + ' giây). CHƯA đồng bộ GitHub, hãy thử lại.', 'loi');
+                } else {
+                    gcvHienThongBaoDongBo('❌ Lỗi mạng hoặc Worker chặn CORS: không kết nối được. CHƯA đồng bộ GitHub, hãy kiểm tra mạng rồi thử lại.', 'loi');
+                }
+                return { ok: false };
+            }
+            if (to) clearTimeout(to);
+            key = '';
+            var json = null;
+            try { json = await res.json(); } catch (e) { json = null; }
+            if (res.status === 401) {
+                gcvXoaKhoaDongBo();
+                gcvHienThongBaoDongBo('🔑 ADMIN_KEY không đúng (401). Đã xóa khóa; hãy lưu lại hoặc bấm "Đồng bộ lên GitHub ngay" để nhập lại.', 'loi');
+                try { alert('ADMIN_KEY không đúng hoặc đã thay đổi. Khóa đã bị xóa khỏi tab này, vui lòng thao tác lưu lại để nhập khóa mới.'); } catch (e) { }
+                return { ok: false, huy401: true };
+            }
+            var baoLoi = !res.ok || (json && (json.success === false || json.ok === false || json.error));
+            if (baoLoi) {
+                var chiTiet = '';
+                if (json) {
+                    var m = json.error || json.message;
+                    if (m) chiTiet = typeof m === 'string' ? m : JSON.stringify(m);
+                }
+                chiTiet = String(chiTiet).slice(0, 200);
+                gcvHienThongBaoDongBo('❌ Đồng bộ GitHub thất bại (HTTP ' + res.status + ')' + (chiTiet ? ': ' + chiTiet : '') + '. Dữ liệu CHƯA lên GitHub.', 'loi');
+                return { ok: false };
+            }
+            GCV_SYNC.lanCuoi = new Date();
+            gcvHienThongBaoDongBo('✅ Đã đồng bộ lên GitHub thành công (Worker xác nhận). Trang công khai có thể cần vài phút để cập nhật.', 'ok');
+            return { ok: true };
+        }
+
+        // Hàng đợi: không chạy song song; yêu cầu đến khi đang gửi => gửi lại 1 lần nữa với dữ liệu mới nhất
+        async function gcvChayHangDoiDongBo() {
+            if (GCV_SYNC.dangChay) { GCV_SYNC.canChayLai = true; return; }
+            GCV_SYNC.dangChay = true;
+            gcvCapNhatTrangThaiDongBo();
+            var kq = { ok: false };
+            try {
+                do {
+                    GCV_SYNC.canChayLai = false;
+                    var hoi = GCV_SYNC.choPhepHoi;
+                    GCV_SYNC.choPhepHoi = false;
+                    kq = await gcvGuiMotLan(hoi);
+                    if (kq.ok && !GCV_SYNC.canChayLai) GCV_SYNC.chuaDongBo = false;
+                } while (GCV_SYNC.canChayLai && kq.ok);
+            } catch (e) {
+                gcvHienThongBaoDongBo('❌ Lỗi không xác định khi đồng bộ GitHub. Dữ liệu CHƯA lên GitHub.', 'loi');
+            } finally {
+                GCV_SYNC.dangChay = false;
+                GCV_SYNC.canChayLai = false;
+                gcvCapNhatTrangThaiDongBo();
+            }
+        }
+
+        function gcvYeuCauDongBo(opts) {
+            opts = opts || {};
+            if (opts.dongBo === false) return;                       // lượt xem của người đọc, v.v.
+            if (!opts.thuCong && !gcvDaMoKhoaAdmin()) return;        // chỉ chủ nhà đã mở khóa quản lý mới đồng bộ
+            var tuDong = !!(opts.tuDong || window.__gcvTuDong);      // đăng hẹn giờ: không bật prompt bất ngờ
+            GCV_SYNC.chuaDongBo = true;
+            if (!tuDong) GCV_SYNC.choPhepHoi = true;
+            gcvCapNhatTrangThaiDongBo();
+            if (GCV_SYNC.dangChay) { GCV_SYNC.canChayLai = true; return; }
+            clearTimeout(GCV_SYNC.timer);
+            GCV_SYNC.timer = setTimeout(function () { GCV_SYNC.timer = null; gcvChayHangDoiDongBo(); }, GCV_SYNC_DELAY_MS);
+        }
+
+        window.gcvDongBoThuCong = function () { gcvYeuCauDongBo({ thuCong: true }); };
+        window.gcvQuenKhoaDongBo = function () {
+            gcvXoaKhoaDongBo();
+            gcvHienThongBaoDongBo('🔑 Đã xóa ADMIN_KEY khỏi tab này. Lần đồng bộ tới sẽ hỏi lại.', 'info');
+        };
+        window.addEventListener('beforeunload', function (e) {
+            if (gcvDaMoKhoaAdmin() && (GCV_SYNC.dangChay || GCV_SYNC.timer || GCV_SYNC.chuaDongBo)) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
 
         window.taoMaJsonCommentDeCopy = function() {
             const commentMaster = window.gcvTaoDuLieuXuatComment();
@@ -11135,7 +11342,7 @@
             if (!giuViTriDoc) luuLichSuDoc(truyenHienTaiKey, index);
             if (!chuong.views) chuong.views = 100;
             chuong.views += Math.floor(Math.random() * 3) + 1;
-            luuVaoLocalStorage();
+            luuVaoLocalStorage({ dongBo: false });
             document.getElementById('chapter-views').innerHTML = `<svg class=ic aria-hidden=true><use href=#i-eye /></svg> Lượt xem: ${chuong.views}`;
             document.getElementById('reading-content').innerHTML = `
                 <h3 style="color: var(--primary-color); text-align: center; margin-top: 0; font-size: 22px;">${chuong.title}</h3>
