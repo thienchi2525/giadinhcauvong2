@@ -500,7 +500,7 @@
       "author": "Hoa Ngộ Nha",
       "status": "Đang cập nhật",
       "statusClass": "dang-cap-nhat",
-      "cover": "https://i.postimg.cc/mD1z5CCW/Phong-Canh-Son-Thuy-Hoa-Anh-Dao.png",
+      "cover": "https://i.postimg.cc/L6NnT2bZ/Phong-Canh-Son-Thuy-Hoa-Anh-Dao.png",
       "totalMode": "fixed",
       "totalChaptersInput": 4,
       "mainChapterCount": 4,
@@ -540,14 +540,7 @@
           "views": 291,
           "updatedAt": 1793358454277
         }
-      ],
-      "imgFit": {
-        "cover": {
-          "x": 94.25,
-          "y": 20,
-          "z": 1.2
-        }
-      }
+      ]
     }
   },
   "thongbao_data": [
