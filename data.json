@@ -554,7 +554,7 @@
       "author": "Mạch Tâm",
       "status": "Đang cập nhật",
       "statusClass": "dang-cap-nhat",
-      "cover": "https://i.postimg.cc/Nfvzf7dT/Xe-Van-Mong-Mo-Ben-Bien-copy.png",
+      "cover": "https://i.postimg.cc/wxRBdHr8/Xe-Van-Mong-Mo-Ben-Bien-copy.png",
       "totalMode": "fixed",
       "totalChaptersInput": 40,
       "mainChapterCount": 40,
@@ -582,7 +582,7 @@
       "imgFit": {
         "cover": {
           "x": 50,
-          "y": 70,
+          "y": 76.67,
           "z": 1.1
         }
       }
