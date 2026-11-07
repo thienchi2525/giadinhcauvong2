@@ -3034,6 +3034,26 @@
             background: var(--box-bg);
         }
 
+        /* Công tắc Tự điền tiêu đề + tab Nhập nhanh */
+        .batch-autotitle-row { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+        .batch-autotitle-toggle { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; font-weight: 700; color: var(--subtext-color); user-select: none; position: relative; }
+        .batch-autotitle-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+        .batch-switch { position: relative; width: 38px; height: 22px; border-radius: 12px; background: var(--border-color); box-shadow: inset 0 0 0 1.5px var(--border-color); transition: all 0.2s ease; flex-shrink: 0; }
+        .batch-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.25); transition: all 0.2s ease; }
+        .batch-autotitle-toggle input:checked + .batch-switch { background: var(--button-gradient); box-shadow: 0 2px 8px var(--glow-color); }
+        .batch-autotitle-toggle input:checked + .batch-switch::after { left: 19px; }
+        .batch-autotitle-toggle input:focus-visible + .batch-switch { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+
+        .quick-summary { background: var(--box-bg); border: 1.5px dashed var(--primary-color); border-radius: 12px; padding: 12px 14px; font-size: 13px; line-height: 1.6; color: var(--text-color); margin-bottom: 14px; }
+        .quick-summary.has-warn { border-color: #e8963a; }
+        .quick-item-tools { margin-left: auto; display: flex; gap: 4px; align-items: center; }
+        .quick-tool-btn { background: none; border: 1.5px solid var(--border-color); border-radius: 8px; color: var(--subtext-color); font-family: inherit; font-size: 11px; font-weight: 700; padding: 3px 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; transition: all 0.2s ease; }
+        .quick-tool-btn:hover:not(:disabled) { border-color: var(--primary-color); color: var(--primary-color); }
+        .quick-tool-btn.danger:hover:not(:disabled) { border-color: #ff4d4d; color: #ff4d4d; }
+        .quick-tool-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+        .quick-warn { margin-top: 8px; font-size: 12px; color: #e8963a; line-height: 1.5; }
+        .quick-warn:empty { display: none; }
+
         .batch-add-story-btn {
             background: var(--box-bg);
             border: 2px dashed var(--primary-color);
@@ -5118,7 +5138,7 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
     </style>
 </head>
 <body class="dark-mode">
-<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol><symbol id="i-library" viewBox="0 0 24 24"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol><symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-bookmark" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></symbol><symbol id="i-coffee" viewBox="0 0 24 24"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol><symbol id="i-heart-crack" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="m12 13-1-1 2-2-3-3 2-2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><line x1="12" x2="12" y1="17" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol><symbol id="i-volume-x" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol><symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-gamepad" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></symbol><symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol><symbol id="i-circle-fill" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/></symbol><symbol id="i-pointer" viewBox="0 0 24 24"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></symbol><symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol><symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol><symbol id="i-cog" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-log-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol><symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol><symbol id="i-library" viewBox="0 0 24 24"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol><symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-bookmark" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></symbol><symbol id="i-coffee" viewBox="0 0 24 24"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol><symbol id="i-heart-crack" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="m12 13-1-1 2-2-3-3 2-2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><line x1="12" x2="12" y1="17" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol><symbol id="i-volume-x" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol><symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-gamepad" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></symbol><symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol><symbol id="i-circle-fill" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/></symbol><symbol id="i-pointer" viewBox="0 0 24 24"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></symbol><symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol><symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol><symbol id="i-cog" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-log-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol><symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></symbol><symbol id="i-clipboard-paste" viewBox="0 0 24 24"><path d="M15 2H9a1 1 0 0 0-1 1v2c0 .6.4 1 1 1h6c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1Z"/><path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v2"/><path d="M11 14h10"/><path d="m17 10 4 4-4 4"/></symbol></svg>
 
     <div id="pass-screen">
         <div class="pass-box">
@@ -5846,11 +5866,19 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
                         <div class="mode-selector" style="margin-bottom: 16px;">
                             <button type="button" class="mode-btn active" id="btn-batch-mode-one" onclick="doiBatchMode('one')"><svg class=ic aria-hidden=true><use href=#i-library /></svg> Một truyện</button>
                             <button type="button" class="mode-btn" id="btn-batch-mode-multi" onclick="doiBatchMode('multi')"><svg class=ic aria-hidden=true><use href=#i-library /></svg> Nhiều truyện</button>
+                            <button type="button" class="mode-btn" id="btn-batch-mode-quick" onclick="doiBatchMode('quick')"><svg class=ic aria-hidden=true><use href=#i-clipboard-paste /></svg> Nhập nhanh</button>
                         </div>
 
                         <div id="batch-mode-one">
                             <div class="form-group"><label>Chọn Truyện</label>
                                 <select id="batch-one-story-select" class="form-control"></select>
+                            </div>
+                            <div class="batch-autotitle-row">
+                                <label class="batch-autotitle-toggle" title="Khi bật, nút thêm chương sẽ gợi ý tiêu đề kế tiếp">
+                                    <span>Tự điền tiêu đề</span>
+                                    <input type="checkbox" class="batch-autotitle-cb" onchange="batchToggleAutoTitle(this)">
+                                    <span class="batch-switch"></span>
+                                </label>
                             </div>
                             <div id="batch-one-chapters-container">
                             </div>
@@ -5861,11 +5889,36 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
                         </div>
 
                         <div id="batch-mode-multi" class="hidden">
+                            <div class="batch-autotitle-row">
+                                <label class="batch-autotitle-toggle" title="Khi bật, nút thêm chương sẽ gợi ý tiêu đề kế tiếp">
+                                    <span>Tự điền tiêu đề</span>
+                                    <input type="checkbox" class="batch-autotitle-cb" onchange="batchToggleAutoTitle(this)">
+                                    <span class="batch-switch"></span>
+                                </label>
+                            </div>
                             <div id="batch-multi-stories-container">
                             </div>
                             <button type="button" class="batch-add-story-btn" onclick="addBatchStory()"><svg class=ic aria-hidden=true><use href=#i-plus /></svg> Thêm truyện</button>
                             <div style="text-align:center;margin-top:20px;">
                                 <button type="button" class="btn-submit" onclick="xuLyDangBatchMulti()"><svg class=ic aria-hidden=true><use href=#i-package /></svg> Đăng tất cả</button>
+                            </div>
+                        </div>
+
+                        <div id="batch-mode-quick" class="hidden">
+                            <div class="form-group">
+                                <label>Nội dung truyện</label>
+                                <textarea id="quick-import-text" class="form-control" style="height:260px;" placeholder="Dán toàn bộ nội dung vào đây..."></textarea>
+                            </div>
+                            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;">
+                                <button type="button" class="btn-submit" onclick="quickPhanTich()">Phân tích &amp; tách chương</button>
+                                <button type="button" class="mode-btn" onclick="quickXoaTatCa()">Xóa làm lại</button>
+                            </div>
+                            <div id="quick-import-result" class="hidden">
+                                <div id="quick-import-summary" class="quick-summary"></div>
+                                <div id="quick-chapter-list"></div>
+                                <div style="text-align:center;margin-top:20px;">
+                                    <button type="button" class="btn-submit" onclick="quickChuyenSangBatch()"><svg class=ic aria-hidden=true><use href=#i-check-circle /></svg> Xác nhận chuyển sang Đăng hàng loạt</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -6696,17 +6749,255 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
             }
         }
 
-        function doiBatchMode(mode) {
+        function doiBatchMode(mode, skipInit) {
+            var prevMode = currentBatchMode;
             currentBatchMode = mode;
             document.getElementById('btn-batch-mode-one').classList.toggle('active', mode === 'one');
             document.getElementById('btn-batch-mode-multi').classList.toggle('active', mode === 'multi');
+            document.getElementById('btn-batch-mode-quick').classList.toggle('active', mode === 'quick');
             document.getElementById('batch-mode-one').classList.toggle('hidden', mode !== 'one');
             document.getElementById('batch-mode-multi').classList.toggle('hidden', mode !== 'multi');
+            document.getElementById('batch-mode-quick').classList.toggle('hidden', mode !== 'quick');
+            if (mode === 'quick') return;
+            // Quay lại từ tab Nhập nhanh thì giữ nguyên dữ liệu đang có trong biểu mẫu
+            if (skipInit || prevMode === 'quick') return;
             if (mode === 'one') {
                 khoiTaoBatchChapters();
             } else {
                 khoiTaoBatchStories();
             }
+        }
+
+
+        // ===== Nhập nhanh nhiều chương (cùng một truyện) =====
+        var quickChapters = [];
+
+        function quickNumFromTitle(t) {
+            var m = String(t || '').match(/^[^\d]{0,20}?(\d+)/);
+            return m ? parseInt(m[1], 10) : null;
+        }
+
+        function quickParseText(raw) {
+            var text = String(raw || '').replace(/\r\n?/g, '\n');
+            if (!text.trim()) return [];
+            var lines = text.split('\n');
+            var re = /^\s*(?:#{1,6}\s*)?(?:\*{1,3}|_{1,3})?\s*(?:chương|chuong|chapter|chap|hồi|hoi)\s+(\d{1,5})(?!\d)\s*(.*?)\s*(?:\*{1,3}|_{1,3})?\s*$/i;
+            var chapters = [];
+            var preface = [];
+            var current = null;
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i];
+                var m = line.trim().length <= 120 ? re.exec(line) : null;
+                var isHeading = false, weak = false;
+                if (m) {
+                    var rest = m[2];
+                    if (rest === '' || /^[:：.\-–—]/.test(rest)) {
+                        isHeading = true;
+                    } else {
+                        var c0 = rest.charAt(0);
+                        var startsOk = /\d/.test(c0) || (c0 !== c0.toLowerCase());
+                        if (rest.length <= 80 && startsOk && !/[.,;!?…"”]$/.test(rest)) {
+                            isHeading = true;
+                            weak = true;
+                        }
+                    }
+                }
+                if (isHeading) {
+                    var base = line.trim().replace(/^#{1,6}\s*/, '').replace(/^(\*{1,3}|_{1,3})/, '').replace(/(\*{1,3}|_{1,3})$/, '').trim();
+                    var hasBefore = (current && current.lines.some(function(l) { return l.trim() !== ''; })) || (!current && preface.some(function(l) { return l.trim() !== ''; }));
+                    var noBlank = i > 0 && lines[i - 1].trim() !== '' && hasBefore;
+                    current = { title: base, content: '', pf: [], lines: [] };
+                    if (weak) current.pf.push('weak');
+                    if (noBlank) current.pf.push('noblank');
+                    chapters.push(current);
+                } else if (current) {
+                    current.lines.push(line);
+                } else {
+                    preface.push(line);
+                }
+            }
+            function joinTrim(arr) {
+                var a = arr.slice();
+                while (a.length && a[0].trim() === '') a.shift();
+                while (a.length && a[a.length - 1].trim() === '') a.pop();
+                return a.join('\n').replace(/\s+$/, '');
+            }
+            chapters.forEach(function(ch) { ch.content = joinTrim(ch.lines); delete ch.lines; });
+            var prefaceText = joinTrim(preface);
+            if (!chapters.length) {
+                return [{ title: '', content: prefaceText, pf: ['nohead'] }];
+            }
+            if (prefaceText) chapters.unshift({ title: '', content: prefaceText, pf: ['preface'] });
+            return chapters;
+        }
+
+        function quickWarningsFor(i, medianLen) {
+            var ch = quickChapters[i], w = [];
+            if (ch.pf.indexOf('nohead') !== -1) w.push('Không nhận diện được tiêu đề chương nào nên toàn bộ văn bản được giữ thành 1 mục, chưa chia chương.');
+            if (ch.pf.indexOf('preface') !== -1) w.push('Đoạn văn này nằm trước tiêu đề chương đầu tiên và chưa có tiêu đề. Hãy đặt tiêu đề, gộp hoặc xóa.');
+            if (ch.pf.indexOf('weak') !== -1) w.push('Tiêu đề không có dấu phân cách (: hoặc -) nên chưa chắc đây là tiêu đề chương. Hãy kiểm tra.');
+            if (ch.pf.indexOf('noblank') !== -1) w.push('Dòng tiêu đề nằm sát dòng văn bản phía trước, không có dòng trống. Có thể đây không phải ranh giới chương.');
+            if (!ch.title.trim() && ch.pf.indexOf('preface') === -1 && ch.pf.indexOf('nohead') === -1) w.push('Chưa có tiêu đề.');
+            var n = quickNumFromTitle(ch.title);
+            if (i > 0 && n !== null) {
+                var pn = quickNumFromTitle(quickChapters[i - 1].title);
+                if (pn !== null) {
+                    if (n === pn) w.push('Trùng số chương ' + n + ' với chương liền trước.');
+                    else if (n !== pn + 1) w.push('Số chương không liên tục (chương trước là ' + pn + ', chương này là ' + n + '). Có thể bị sót hoặc chia sai.');
+                }
+            }
+            var len = ch.content.trim().length;
+            if (len === 0) w.push('Nội dung trống.');
+            else if (len < 100) w.push('Nội dung rất ngắn (' + len + ' ký tự). Hãy kiểm tra xem có chia nhầm không.');
+            else if (medianLen && len > 3000 && len > medianLen * 4) w.push('Nội dung dài bất thường so với các chương khác. Có thể bị sót tiêu đề chương ở giữa.');
+            return w;
+        }
+
+        function quickRefreshWarnings() {
+            var lens = quickChapters.map(function(c) { return c.content.trim().length; }).sort(function(a, b) { return a - b; });
+            var median = lens.length >= 4 ? lens[Math.floor(lens.length / 2)] : 0;
+            var list = document.getElementById('quick-chapter-list');
+            var warnItems = 0;
+            quickChapters.forEach(function(ch, i) {
+                var w = quickWarningsFor(i, median);
+                if (w.length) warnItems++;
+                var box = list.children[i] && list.children[i].querySelector('.quick-warn');
+                if (!box) return;
+                box.innerHTML = '';
+                w.forEach(function(t) {
+                    var d = document.createElement('div');
+                    d.textContent = '⚠ ' + t;
+                    box.appendChild(d);
+                });
+            });
+            var sum = document.getElementById('quick-import-summary');
+            sum.classList.toggle('has-warn', warnItems > 0);
+            sum.textContent = 'Đã tách ' + quickChapters.length + ' chương.' + (warnItems > 0
+                ? ' Có ' + warnItems + ' chương cần kiểm tra (xem cảnh báo màu cam). Hãy sửa, gộp, xóa hoặc sắp xếp lại trước khi chuyển.'
+                : ' Chưa phát hiện điểm đáng ngờ. Hãy xem lại danh sách rồi xác nhận.');
+        }
+
+        function quickMakeBtn(html, title, cls, onclick, disabled) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'quick-tool-btn' + (cls ? ' ' + cls : '');
+            b.title = title;
+            b.innerHTML = html;
+            b.disabled = !!disabled;
+            b.onclick = onclick;
+            return b;
+        }
+
+        function quickRender() {
+            var result = document.getElementById('quick-import-result');
+            var list = document.getElementById('quick-chapter-list');
+            list.innerHTML = '';
+            if (!quickChapters.length) { result.classList.add('hidden'); return; }
+            result.classList.remove('hidden');
+            quickChapters.forEach(function(ch, i) {
+                var block = document.createElement('div');
+                block.className = 'batch-chapter-block';
+                var label = document.createElement('div');
+                label.className = 'chapter-number-label';
+                label.innerHTML = '<span class="num-badge">' + (i + 1) + '</span> CHƯƠNG ' + (i + 1);
+                var tools = document.createElement('div');
+                tools.className = 'quick-item-tools';
+                tools.appendChild(quickMakeBtn('<svg class=ic aria-hidden=true><use href=#i-chevron-up /></svg>', 'Chuyển lên', '', function() { quickMove(i, -1); }, i === 0));
+                tools.appendChild(quickMakeBtn('<svg class=ic aria-hidden=true><use href=#i-chevron-down /></svg>', 'Chuyển xuống', '', function() { quickMove(i, 1); }, i === quickChapters.length - 1));
+                tools.appendChild(quickMakeBtn('Gộp lên', 'Gộp chương này vào chương liền trên (khi tách nhầm)', '', function() { quickMergeUp(i); }, i === 0));
+                tools.appendChild(quickMakeBtn('<svg class=ic aria-hidden=true><use href=#i-x /></svg>', 'Xóa chương này', 'danger', function() { quickDelete(i); }, false));
+                label.appendChild(tools);
+                block.appendChild(label);
+
+                var g1 = document.createElement('div');
+                g1.className = 'form-group';
+                g1.style.marginBottom = '10px';
+                var l1 = document.createElement('label'); l1.textContent = 'Tiêu đề';
+                var inp = document.createElement('input');
+                inp.type = 'text'; inp.className = 'form-control'; inp.value = ch.title;
+                inp.addEventListener('input', function() { ch.title = inp.value; });
+                inp.addEventListener('change', function() { ch.pf = []; quickRefreshWarnings(); });
+                g1.appendChild(l1); g1.appendChild(inp);
+                block.appendChild(g1);
+
+                var g2 = document.createElement('div');
+                g2.className = 'form-group';
+                g2.style.marginBottom = '0';
+                var l2 = document.createElement('label'); l2.textContent = 'Nội dung';
+                var ta = document.createElement('textarea');
+                ta.className = 'form-control'; ta.style.height = '120px'; ta.value = ch.content;
+                ta.addEventListener('input', function() { ch.content = ta.value; });
+                ta.addEventListener('change', quickRefreshWarnings);
+                g2.appendChild(l2); g2.appendChild(ta);
+                block.appendChild(g2);
+
+                var warn = document.createElement('div');
+                warn.className = 'quick-warn';
+                block.appendChild(warn);
+                list.appendChild(block);
+            });
+            quickRefreshWarnings();
+        }
+
+        function quickMove(i, dir) {
+            var j = i + dir;
+            if (j < 0 || j >= quickChapters.length) return;
+            var t = quickChapters[i]; quickChapters[i] = quickChapters[j]; quickChapters[j] = t;
+            quickRender();
+        }
+
+        function quickDelete(i) {
+            quickChapters.splice(i, 1);
+            quickRender();
+        }
+
+        function quickMergeUp(i) {
+            if (i <= 0) return;
+            var prev = quickChapters[i - 1], cur = quickChapters[i];
+            var tail = (cur.title.trim() ? cur.title.trim() + (cur.content ? '\n' : '') : '') + cur.content;
+            prev.content = prev.content.replace(/\s+$/, '') + (prev.content && tail ? '\n\n' : '') + tail;
+            quickChapters.splice(i, 1);
+            quickRender();
+        }
+
+        function quickPhanTich() {
+            var text = document.getElementById('quick-import-text').value;
+            if (!text.trim()) { alert('Vui lòng dán nội dung truyện vào ô văn bản!'); return; }
+            if (quickChapters.length && !confirm('Phân tích lại sẽ thay thế danh sách chương hiện tại (kể cả phần bạn đã chỉnh sửa). Tiếp tục?')) return;
+            quickChapters = quickParseText(text);
+            quickRender();
+        }
+
+        function quickXoaTatCa() {
+            if ((quickChapters.length || document.getElementById('quick-import-text').value.trim()) && !confirm('Xóa toàn bộ nội dung đã dán và danh sách chương đã tách?')) return;
+            document.getElementById('quick-import-text').value = '';
+            quickChapters = [];
+            quickRender();
+        }
+
+        function quickChuyenSangBatch() {
+            if (!quickChapters.length) { alert('Chưa có chương nào để chuyển!'); return; }
+            var warnItems = 0;
+            var lens = quickChapters.map(function(c) { return c.content.trim().length; }).sort(function(a, b) { return a - b; });
+            var median = lens.length >= 4 ? lens[Math.floor(lens.length / 2)] : 0;
+            quickChapters.forEach(function(c, i) { if (quickWarningsFor(i, median).length) warnItems++; });
+            var container = document.getElementById('batch-one-chapters-container');
+            var hasData = false;
+            container.querySelectorAll('.batch-chap-title, .batch-chap-content').forEach(function(e) { if (e.value.trim()) hasData = true; });
+            var msg = [];
+            if (warnItems) msg.push('Còn ' + warnItems + ' chương có cảnh báo chưa xử lý.');
+            if (hasData) msg.push('Biểu mẫu "Một truyện" đang có nội dung, chuyển sang sẽ thay thế toàn bộ.');
+            if (msg.length && !confirm(msg.join('\n') + '\nBạn vẫn muốn chuyển?')) return;
+            container.innerHTML = '';
+            quickChapters.forEach(function(ch, i) {
+                addBatchChapterHTML(container, i);
+                var blk = container.lastElementChild;
+                blk.querySelector('.batch-chap-title').value = ch.title;
+                blk.querySelector('.batch-chap-content').value = ch.content;
+            });
+            doiBatchMode('one', true);
+            var sel = document.getElementById('batch-mode-one');
+            if (sel && sel.scrollIntoView) sel.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function capNhatSelectChuongBatch() {
@@ -6728,11 +7019,36 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
             addBatchChapterHTML(container, 0);
         }
 
+        // Gợi ý tiêu đề chương tiếp theo từ tiêu đề chương liền trước (chỉ dùng làm giá trị mặc định, vẫn sửa được)
+        function goiYTieuDeChuongTiepTheo(prevTitle, fallbackNum) {
+            var t = (prevTitle || '').trim();
+            var m = t.match(/^([^\d]{0,20}?)(\d+)/);
+            if (m && !/[:\-–—.,;!?()\[\]]/.test(m[1])) {
+                var raw = m[2];
+                var next = String(parseInt(raw, 10) + 1);
+                if (raw.length > 1 && raw.charAt(0) === '0') {
+                    while (next.length < raw.length) next = '0' + next;
+                }
+                return m[1] + next;
+            }
+            return 'Chương ' + fallbackNum;
+        }
+
+        // Công tắc "Tự điền tiêu đề" (mặc định tắt)
+        window.batchAutoTitle = false;
+        function batchToggleAutoTitle(cb) {
+            window.batchAutoTitle = !!cb.checked;
+            document.querySelectorAll('.batch-autotitle-cb').forEach(function(el) { el.checked = window.batchAutoTitle; });
+        }
+
         function addBatchChapter() {
             var container = document.getElementById('batch-one-chapters-container');
             if (!container) return;
             var count = container.children.length;
+            var prevInput = count > 0 ? container.children[count - 1].querySelector('.batch-chap-title') : null;
             addBatchChapterHTML(container, count);
+            var newInput = container.lastElementChild.querySelector('.batch-chap-title');
+            if (window.batchAutoTitle && newInput) newInput.value = goiYTieuDeChuongTiepTheo(prevInput ? prevInput.value : '', count + 1);
         }
 
         function addBatchChapterHTML(container, index) {
@@ -6878,7 +7194,11 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
                     '<label>Nội dung</label>' +
                     '<textarea class="form-control batch-chap-content" style="height:120px;" placeholder="Nội dung chương ' + num + '..."></textarea>' +
                 '</div>';
+            var prevBlock = count > 0 ? container.children[count - 1] : null;
+            var prevInput = prevBlock ? prevBlock.querySelector('.batch-chap-title') : null;
             container.appendChild(chapBlock);
+            var newInput = chapBlock.querySelector('.batch-chap-title');
+            if (window.batchAutoTitle && newInput) newInput.value = goiYTieuDeChuongTiepTheo(prevInput ? prevInput.value : '', num);
         }
 
         function removeBatchChapterMulti(btn) {
