@@ -4897,6 +4897,225 @@ body.dark-mode .gy-env-front path:nth-child(3){fill:#ecdcc4}
 .gy-btn.danger{color:var(--gy-err);border-color:var(--gy-err)}
 .gy-flap .fi{clip-path:polygon(0 100%,100% 100%,56% 8%,50% 0,44% 8%)}
 </style>
+    <style id="gbt-style">
+/* ============================================================
+   MÁY BỐC THĂM TRUYỆN (Geiboy) — mọi selector đều có tiền tố gbt-
+   ============================================================ */
+.gbt-section { margin-top: 35px; }
+.gbt-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; max-width: 480px; margin: 0 auto; padding: 4px 0; }
+.gbt-kicker { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .18em; color: var(--subtext-color); padding-left: 4px; }
+
+.gbt-device {
+    --gbt-ink: #7a6a82;
+    --gbt-purple: #a493d3;
+    --gbt-purple-d: #8774bb;
+    --gbt-purple-ink: #5b4890;
+    position: relative; width: 100%; max-width: 460px; padding: 12px 12px 22px;
+    border-radius: 30px 30px 34px 30px; outline: none; font-family: 'Comfortaa', cursive, sans-serif;
+    background: linear-gradient(160deg, #fee9f5 0%, #f9d9ee 100%);
+    box-shadow: inset 0 1.5px 0 #fff, inset 0 -3px 0 rgba(226,172,208,.38), 7px 9px 0 -2px rgba(240,200,228,.6), 0 20px 36px rgba(214,150,190,.3);
+    -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none;
+}
+.gbt-device, .gbt-device * { box-sizing: border-box; }
+.gbt-device:focus-visible { outline: 3px solid var(--primary-color); outline-offset: 4px; }
+:where(.gbt-device) button { font-family: inherit; color: inherit; margin: 0; -webkit-appearance: none; appearance: none; }
+.gbt-device button:focus-visible { outline: 2px solid #6a4fb3; outline-offset: 2px; }
+
+.gbt-bezel { padding: 10px 10px 12px; border-radius: 22px; background: linear-gradient(180deg, #fcecf7, #f8def0); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.8), inset 0 -2px 6px rgba(226,172,208,.35); }
+.gbt-topbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 2px 6px 9px; font-size: 11px; font-weight: 700; color: var(--gbt-ink); }
+.gbt-brand { letter-spacing: .02em; }
+.gbt-status { letter-spacing: .12em; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.gbt-led { width: 8px; height: 8px; border-radius: 50%; background: #79c58a; box-shadow: 0 0 0 2px rgba(121,197,138,.25), 0 0 8px rgba(121,197,138,.8); display: inline-block; }
+
+.gbt-screen {
+    position: relative; height: 350px; overflow: hidden; display: flex; border-radius: 16px; color: #f1e9f8;
+    background: radial-gradient(130% 100% at 50% -10%, #30273f 0%, #1d1727 52%, #130f1a 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 8px 26px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.75);
+}
+.gbt-scroll { flex: 1; min-width: 0; overflow-y: auto; overflow-x: hidden; padding: 18px 20px; display: flex; flex-direction: column; scrollbar-width: thin; scrollbar-color: #5b4a6e transparent; }
+.gbt-scroll::-webkit-scrollbar { width: 6px; }
+.gbt-scroll::-webkit-scrollbar-thumb { background: #5b4a6e; border-radius: 3px; }
+.gbt-v { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; margin: auto 0; }
+.gbt-v-filter, .gbt-v-menu { margin: 0; align-items: stretch; text-align: left; gap: 10px; }
+
+.gbt-label { font-size: 10.5px; font-weight: 700; letter-spacing: .2em; line-height: 1.5; color: #b9a8cc; text-align: center; }
+.gbt-label.is-warn { color: #ffb0b0; }
+.gbt-h { margin: 0; font-size: clamp(17px, 4.8vw, 21px); line-height: 1.35; font-weight: 700; color: #fff6ff; }
+
+.gbt-mode { width: 100%; text-align: left; display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 14px; cursor: pointer; color: #fff; border: 1.5px solid rgba(255,255,255,.14); background: linear-gradient(135deg, rgba(125,86,60,.5), rgba(60,42,52,.55)); transition: border-color .15s, box-shadow .15s; }
+.gbt-mode.is-focus { border-color: #f6d489; box-shadow: 0 0 0 3px rgba(246,212,137,.2); }
+.gbt-mode-tag { font-size: 10px; font-weight: 700; letter-spacing: .16em; color: #f3c677; }
+.gbt-mode strong { font-size: 16px; font-weight: 700; }
+.gbt-mode-desc { font-size: 12px; line-height: 1.55; color: #d3c6de; }
+
+.gbt-row { display: flex; gap: 10px; width: 100%; }
+.gbt-chipbtn { flex: 1; min-width: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 10px; border-radius: 12px; cursor: pointer; font-size: 12.5px; font-weight: 700; line-height: 1.2; color: #efe5f6; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.05); transition: border-color .15s, background .15s; }
+.gbt-chipbtn.is-focus { border-color: #ff9ccc; background: rgba(255,156,204,.14); }
+.gbt-chipbtn svg { width: 15px; height: 15px; flex: none; }
+.gbt-count { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; display: inline-grid; place-items: center; background: #f3c677; color: #3b2a1a; font-size: 11px; font-weight: 700; }
+.gbt-qmark { width: 15px; text-align: center; font-size: 14px; }
+
+.gbt-hint { font-size: 10.5px; font-weight: 700; letter-spacing: .13em; line-height: 1.6; color: #8f7f9e; text-align: center; }
+.gbt-hint b { color: #d3c5e4; margin-right: 8px; }
+.gbt-hint span { color: #c9a983; }
+
+.gbt-btn { flex: 1; min-width: 0; padding: 10px 8px; border-radius: 12px; cursor: pointer; font-size: 12px; font-weight: 900; line-height: 1.2; letter-spacing: .06em; color: #f3eaf9; border: 1.5px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); transition: border-color .15s, box-shadow .15s; }
+.gbt-btn.is-focus { border-color: #f6d489; box-shadow: 0 0 0 3px rgba(246,212,137,.2); }
+.gbt-btn-primary { color: #3a1230; border-color: transparent; background: linear-gradient(135deg, #ff69b4, #ff9ccc); }
+.gbt-btn-primary.is-focus { border-color: #fff1c9; }
+
+/* Ảnh bìa */
+.gbt-cover { position: relative; overflow: hidden; aspect-ratio: 3 / 4; border-radius: 10px; background: linear-gradient(160deg, #ffd6e8, #f4a9d0); box-shadow: 0 6px 18px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.12); }
+.gbt-cover img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .18s; }
+.gbt-cover img.ok { opacity: 1; }
+.gbt-cover-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 8px; text-align: center; font-size: 11px; font-weight: 700; line-height: 1.35; color: #8a3a62; overflow-wrap: anywhere; overflow: hidden; }
+
+/* Màn hình quay */
+.gbt-reel { width: min(124px, 34%); padding: 4px; border-radius: 15px; background: linear-gradient(160deg, rgba(255,255,255,.16), rgba(255,255,255,.04)); box-shadow: 0 0 0 1px rgba(255,255,255,.14); }
+.gbt-reel .gbt-cover { animation: gbt-tick .13s ease-out; }
+.gbt-reel.is-lock { box-shadow: 0 0 0 2px #f6d489, 0 0 30px rgba(246,212,137,.5); animation: gbt-pop .5s ease-out; }
+.gbt-spin-title { width: 100%; min-height: 2.7em; max-width: 92%; font-size: 14px; font-weight: 700; line-height: 1.35; color: #fff; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.gbt-dots { display: flex; gap: 6px; }
+.gbt-dots i { width: 6px; height: 6px; border-radius: 50%; background: #ff9ccc; animation: gbt-blink 1s infinite; }
+.gbt-dots i:nth-child(2) { animation-delay: .2s; }
+.gbt-dots i:nth-child(3) { animation-delay: .4s; }
+@keyframes gbt-tick { from { transform: translateY(-9px); opacity: .45; } to { transform: none; opacity: 1; } }
+@keyframes gbt-pop { 0% { transform: scale(.94); } 55% { transform: scale(1.05); } 100% { transform: scale(1); } }
+@keyframes gbt-blink { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+
+/* Kết quả */
+.gbt-res { display: flex; gap: 14px; width: 100%; align-items: flex-start; text-align: left; }
+.gbt-res .gbt-cover { width: clamp(84px, 27%, 114px); flex: none; }
+.gbt-res-info { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 7px; }
+.gbt-res-title { margin: 0; font-size: 15px; font-weight: 700; line-height: 1.35; color: #fff; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.gbt-meta { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 8px; font-size: 11.5px; line-height: 1.5; }
+.gbt-meta dt { color: #a99bba; font-weight: 700; }
+.gbt-meta dd { margin: 0; color: #ece3f4; overflow-wrap: anywhere; }
+.gbt-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.gbt-tag { font-size: 10.5px; line-height: 1.4; padding: 2px 8px; border-radius: 999px; color: #ffc4df; background: rgba(255,156,204,.16); border: 1px solid rgba(255,156,204,.3); }
+.gbt-tag.is-18 { color: #ffd0d0; background: rgba(255,90,90,.2); border-color: rgba(255,120,120,.4); }
+
+/* Bộ lọc + Menu */
+.gbt-fh { margin: 4px 0 6px; font-size: 11px; font-weight: 700; color: #cbbddb; line-height: 1.5; }
+.gbt-fh small { font-weight: 400; color: #9d8fae; }
+.gbt-chips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
+.gbt-chip { padding: 5px 11px; border-radius: 999px; cursor: pointer; font-size: 11.5px; font-weight: 700; line-height: 1.3; color: #e7ddf1; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.05); }
+.gbt-chip[aria-pressed="true"] { color: #3b2a1a; background: #f3c677; border-color: #f3c677; }
+.gbt-chip.is-focus { outline: 2px solid #ff9ccc; outline-offset: 1px; }
+.gbt-empty { margin: 0; font-size: 12px; line-height: 1.6; color: #a99bba; }
+.gbt-tabs { display: flex; gap: 8px; }
+.gbt-tab { flex: 1; padding: 8px 6px; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: 700; color: #d9cce8; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04); }
+.gbt-tab[aria-selected="true"] { color: #3b2a1a; background: #f3c677; border-color: #f3c677; }
+.gbt-tab.is-focus { outline: 2px solid #ff9ccc; outline-offset: 1px; }
+
+/* ---------- Màn hình HƯỚNG DẪN ---------- */
+.gbt-scroll.is-tight { padding: 12px 14px; }
+.gbt-v-guide { margin: auto 0; align-items: stretch; text-align: left; gap: 10px; }
+
+.gbt-gd-title { display: flex; align-items: center; gap: 10px; }
+.gbt-gd-title h3 { margin: 0; flex: none; font-size: 12.5px; font-weight: 900; line-height: 1.2; letter-spacing: .26em; padding-left: .26em; color: #efe6fb; }
+.gbt-gd-line { position: relative; flex: 1; min-width: 12px; height: 1px; background: linear-gradient(90deg, rgba(164,147,211,0), #8f7cc0); }
+.gbt-gd-line + h3 + .gbt-gd-line { background: linear-gradient(270deg, rgba(164,147,211,0), #8f7cc0); }
+.gbt-gd-line::after { content: ""; position: absolute; right: -1px; top: -2px; width: 5px; height: 5px; background: #b9a3ea; transform: rotate(45deg); }
+.gbt-gd-line + h3 + .gbt-gd-line::after { right: auto; left: -1px; }
+
+.gbt-gd-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.gbt-gd-list li { display: grid; grid-template-columns: 58px minmax(0, 1fr); column-gap: 12px; align-items: center; min-height: 24px; }
+.gbt-gk { display: flex; align-items: center; justify-content: center; }
+.gbt-gd-d { font-size: 10.5px; line-height: 1.4; color: #ddd1ec; overflow-wrap: anywhere; }
+
+.gbt-key { display: inline-flex; align-items: center; justify-content: center; flex: none; gap: 3px; font-weight: 900; line-height: 1; }
+.gbt-key svg { display: block; width: 8px; height: 8px; }
+.gbt-key-pad { height: 22px; min-width: 46px; padding: 0 8px; border-radius: 8px; color: #e4d9f4; background: rgba(164,147,211,.22); border: 1px solid rgba(164,147,211,.55); box-shadow: 0 2px 0 rgba(135,116,187,.55); }
+.gbt-key-a, .gbt-key-b { width: 22px; height: 22px; border-radius: 50%; font-size: 11px; }
+.gbt-key-a { color: #2f2350; background: #ab98dd; box-shadow: 0 2px 0 #8a76c2; }
+.gbt-key-b { color: #4a1a38; background: #ff9ccc; box-shadow: 0 2px 0 #d9709f; }
+.gbt-key-pill { height: 20px; padding: 0 6px; border-radius: 999px; font-size: 8px; letter-spacing: .1em; }
+.gbt-key-filter { color: #5b4a8a; background: #fff; border: 1.5px solid #c1b1e6; box-shadow: 0 2px 0 #e3d8f6; }
+.gbt-key-menu { color: #8a6a82; background: #fcebf6; border: 1.5px solid #f1d0e6; box-shadow: 0 2px 0 #f5dcee; }
+
+.gbt-gd-kb { margin: 2px 0 0; padding-top: 9px; border-top: 1px dashed rgba(185,168,204,.28); text-align: center; font-size: 9.5px; line-height: 1.65; letter-spacing: .02em; color: #a898bd; }
+.gbt-gd-kb b { margin-right: 4px; font-weight: 700; color: #cdbfe0; }
+.gbt-gd-kb span { white-space: nowrap; }
+
+.gbt-gd-go { align-self: center; max-width: 100%; margin: 0; padding: 6px 8px; border: 0; background: none; cursor: pointer; font-size: 11px; font-weight: 700; line-height: 1.4; letter-spacing: .08em; text-align: center; color: #f7eaaa; animation: gbt-gd-pulse 1.6s ease-in-out infinite; }
+.gbt-gd-go.is-focus { text-shadow: 0 0 10px rgba(247,234,170,.45); }
+@keyframes gbt-gd-pulse { 0%, 100% { opacity: .62; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .gbt-gd-go { animation: none; } }
+.gbt-hist { display: flex; flex-direction: column; gap: 7px; }
+.gbt-hrow { display: flex; align-items: center; gap: 10px; width: 100%; padding: 6px; border-radius: 10px; cursor: pointer; text-align: left; color: #f0e8f7; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); }
+.gbt-hrow.is-focus { border-color: #ff9ccc; background: rgba(255,156,204,.12); }
+.gbt-hrow .gbt-cover { width: 30px; flex: none; border-radius: 6px; box-shadow: none; }
+.gbt-hrow .gbt-cover-ph { font-size: 6px; padding: 2px; }
+.gbt-hrow-b { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.gbt-hrow-t { font-size: 12px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gbt-hrow-s { font-size: 10.5px; color: #a99bba; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.gbt-toast { position: absolute; left: 50%; bottom: 14px; max-width: 88%; padding: 7px 14px; border-radius: 999px; text-align: center; font-size: 11.5px; font-weight: 700; line-height: 1.4; color: #5b2a48; background: rgba(255,236,246,.97); box-shadow: 0 4px 14px rgba(0,0,0,.35); opacity: 0; pointer-events: none; transform: translate(-50%, 8px); transition: opacity .2s, transform .2s; }
+.gbt-toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* Tay cầm */
+.gbt-controls { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; padding: 20px 12px 6px; }
+.gbt-dpad { justify-self: start; display: grid; grid-template: repeat(3, 26px) / repeat(3, 26px); filter: drop-shadow(0 3px 0 var(--gbt-purple-d)); }
+.gbt-dp { border: 0; padding: 0; display: grid; place-items: center; cursor: pointer; background: var(--gbt-purple); color: var(--gbt-purple-ink); }
+.gbt-dp svg { width: 10px; height: 10px; }
+.gbt-dp-up { grid-area: 1 / 2; border-radius: 9px 9px 0 0; }
+.gbt-dp-left { grid-area: 2 / 1; border-radius: 9px 0 0 9px; }
+.gbt-dp-right { grid-area: 2 / 3; border-radius: 0 9px 9px 0; }
+.gbt-dp-down { grid-area: 3 / 2; border-radius: 0 0 9px 9px; }
+.gbt-dp-c { grid-area: 2 / 2; background: var(--gbt-purple); display: grid; place-items: center; }
+.gbt-dp-c i { width: 12px; height: 12px; border-radius: 50%; background: var(--gbt-purple-d); box-shadow: inset 0 1px 2px rgba(0,0,0,.25); }
+.gbt-dp:active, .gbt-dp.is-press { background: #9684c9; }
+
+.gbt-mid { display: flex; gap: 10px; justify-content: center; align-self: end; padding-bottom: 4px; }
+.gbt-pill { padding: 7px 12px; border-radius: 999px; cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .14em; line-height: 1; position: relative; }
+.gbt-pill-filter { color: #5b4a8a; background: #fff; border: 1.5px solid #c1b1e6; box-shadow: 0 2px 0 #e3d8f6; }
+.gbt-pill-menu { color: #8a6a82; background: #fcebf6; border: 1.5px solid #f1d0e6; box-shadow: 0 2px 0 #f5dcee; }
+.gbt-pill:active, .gbt-pill.is-press { transform: translateY(2px); box-shadow: none; }
+.gbt-pill-filter.is-on::after { content: ""; position: absolute; top: -3px; right: -2px; width: 9px; height: 9px; border-radius: 50%; background: #ff69b4; border: 2px solid #fff; }
+
+.gbt-ab { justify-self: end; position: relative; width: 108px; height: 78px; }
+.gbt-ab-btn { position: absolute; border: 0; border-radius: 50%; cursor: pointer; display: grid; place-items: center; font-size: 14px; font-weight: 900; transition: transform .06s, box-shadow .06s; }
+.gbt-a { right: 0; top: 0; width: 48px; height: 48px; color: #33284f; background: #ab98dd; box-shadow: 0 4px 0 #8a76c2, 0 9px 12px rgba(120,90,180,.25); }
+.gbt-b { left: 2px; bottom: 0; width: 44px; height: 44px; color: #4d3f3b; background: #c0b3af; box-shadow: 0 4px 0 #a39591, 0 9px 12px rgba(130,110,105,.22); }
+.gbt-ab-btn:active, .gbt-ab-btn.is-press { transform: translateY(3px); }
+.gbt-a:active, .gbt-a.is-press { box-shadow: 0 1px 0 #8a76c2; }
+.gbt-b:active, .gbt-b.is-press { box-shadow: 0 1px 0 #a39591; }
+
+.gbt-grille { display: flex; gap: 6px; width: max-content; margin: 10px auto 0; padding: 5px 10px; border-radius: 10px; background: rgba(214,160,196,.18); box-shadow: inset 0 1px 2px rgba(150,90,130,.28); }
+.gbt-grille i { display: block; width: 20px; height: 5px; border-radius: 3px; background: #8e7fb0; opacity: .85; }
+.gbt-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Chế độ tối của website */
+body.dark-mode .gbt-device { --gbt-ink: #d3c6e3; background: linear-gradient(160deg, #4b3b5e, #3a2c4a); box-shadow: inset 0 1.5px 0 rgba(255,255,255,.18), inset 0 -3px 0 rgba(0,0,0,.25), 7px 9px 0 -2px rgba(0,0,0,.25), 0 20px 36px rgba(0,0,0,.45); }
+body.dark-mode .gbt-bezel { background: linear-gradient(180deg, #54426a, #473858); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.12), inset 0 -2px 6px rgba(0,0,0,.25); }
+body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
+
+@media (max-width: 420px) {
+    .gbt-device { padding: 10px 10px 18px; border-radius: 26px; }
+    .gbt-screen { height: 340px; }
+    .gbt-scroll { padding: 16px 14px; }
+    .gbt-controls { padding: 18px 6px 4px; }
+    .gbt-pill { padding: 7px 9px; letter-spacing: .1em; }
+    .gbt-mid { gap: 7px; }
+    .gbt-gd-list li { grid-template-columns: 54px minmax(0, 1fr); column-gap: 10px; }
+}
+@media (max-width: 360px) {
+    .gbt-dpad { grid-template: repeat(3, 23px) / repeat(3, 23px); }
+    .gbt-ab { width: 96px; }
+    .gbt-a { width: 44px; height: 44px; }
+    .gbt-b { width: 40px; height: 40px; }
+    .gbt-status { letter-spacing: .06em; font-size: 10px; }
+    .gbt-gd-d { font-size: 10px; }
+    .gbt-gd-kb { font-size: 9px; }
+    .gbt-gd-go { font-size: 10.5px; letter-spacing: .05em; }
+    .gbt-res { gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .gbt-reel .gbt-cover, .gbt-reel.is-lock, .gbt-dots i { animation: none; }
+    .gbt-toast, .gbt-mode, .gbt-chipbtn, .gbt-btn, .gbt-cover img { transition: none; }
+}
+    </style>
 </head>
 <body class="dark-mode">
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol><symbol id="i-library" viewBox="0 0 24 24"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol><symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-bookmark" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></symbol><symbol id="i-coffee" viewBox="0 0 24 24"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol><symbol id="i-heart-crack" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="m12 13-1-1 2-2-3-3 2-2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><line x1="12" x2="12" y1="17" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol><symbol id="i-volume-x" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol><symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-gamepad" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></symbol><symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol><symbol id="i-circle-fill" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/></symbol><symbol id="i-pointer" viewBox="0 0 24 24"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></symbol><symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol><symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol><symbol id="i-cog" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-log-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol><symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></symbol></svg>
@@ -5078,6 +5297,46 @@ body.dark-mode .gy-env-front path:nth-child(3){fill:#ecdcc4}
             </div>
 
             <div id="home-chat-list-box" style="display: flex; flex-direction: column; gap: 12px;"></div>
+
+            <!-- ===== MÁY BỐC THĂM TRUYỆN (Geiboy) — cuối trang chủ ===== -->
+            <section class="gbt-section" id="gbt-section" aria-labelledby="gbt-heading">
+                <div class="section-title" id="gbt-heading">Máy Bốc Thăm Truyện</div>
+                <p class="home-chat-description">Chưa biết đọc gì? Để máy chọn giúp bạn một bộ truyện.</p>
+                <div class="gbt-wrap">
+                    <div class="gbt-kicker">KHÁM PHÁ / NGẪU NHIÊN</div>
+                    <div class="gbt-device" id="gbt-device" tabindex="0" role="group" aria-label="Máy bốc thăm truyện Geiboy. Phím mũi tên để chọn, Enter hoặc Z là nút A, X là nút B, Shift mở bộ lọc, Esc mở menu.">
+                        <div class="gbt-bezel">
+                            <div class="gbt-topbar">
+                                <span class="gbt-brand">Geiboy</span>
+                                <span class="gbt-status">LƯỢT <span id="gbt-turn">01</span> · <i class="gbt-led" aria-hidden="true"></i> ĐANG BẬT</span>
+                            </div>
+                            <div class="gbt-screen" id="gbt-screen">
+                                <div class="gbt-scroll" id="gbt-scroll"><div class="gbt-v" id="gbt-view"></div></div>
+                                <div class="gbt-toast" id="gbt-toast" role="status" aria-live="polite"></div>
+                            </div>
+                        </div>
+                        <div class="gbt-controls">
+                            <div class="gbt-dpad">
+                                <button type="button" class="gbt-dp gbt-dp-up" data-hw="up" aria-label="Lên"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 2 9 8H1z" fill="currentColor"/></svg></button>
+                                <button type="button" class="gbt-dp gbt-dp-left" data-hw="left" aria-label="Trái"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5 8 1v8z" fill="currentColor"/></svg></button>
+                                <span class="gbt-dp-c" aria-hidden="true"><i></i></span>
+                                <button type="button" class="gbt-dp gbt-dp-right" data-hw="right" aria-label="Phải"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M8 5 2 1v8z" fill="currentColor"/></svg></button>
+                                <button type="button" class="gbt-dp gbt-dp-down" data-hw="down" aria-label="Xuống"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 8 1 2h8z" fill="currentColor"/></svg></button>
+                            </div>
+                            <div class="gbt-mid">
+                                <button type="button" class="gbt-pill gbt-pill-filter" data-hw="filter" aria-label="Bộ lọc (phím Shift)">FILTER</button>
+                                <button type="button" class="gbt-pill gbt-pill-menu" data-hw="menu" aria-label="Menu và hướng dẫn (phím Esc)">MENU</button>
+                            </div>
+                            <div class="gbt-ab">
+                                <button type="button" class="gbt-ab-btn gbt-b" data-hw="b" aria-label="Nút B: quay lại">B</button>
+                                <button type="button" class="gbt-ab-btn gbt-a" data-hw="a" aria-label="Nút A: xác nhận">A</button>
+                            </div>
+                        </div>
+                        <div class="gbt-grille" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                    <div class="gbt-sr" id="gbt-live" aria-live="polite"></div>
+                </div>
+            </section>
         </div>
 
         <div id="tab-tat-ca-truyen" class="hidden">
@@ -15992,6 +16251,573 @@ const $ = id => document.getElementById(id);
   });
 })();
 
+    </script>
+    <script id="gbt-script">
+/* ============================================================
+   MÁY BỐC THĂM TRUYỆN (Geiboy)
+   - Đọc trực tiếp kho truyện hiện tại (window.dữLiệuTruyện), không có dữ liệu giả.
+   - Chỉ chọn truyện công khai: bỏ truyện "Tạm ẩn"; truyện đã xóa không còn trong kho nên không bao giờ xuất hiện.
+   - "ĐỌC NGAY" dùng đúng hàm xemTruyen của website. Không sửa bất kỳ hàm nào của website.
+   ============================================================ */
+(function () {
+    'use strict';
+    var root = document.getElementById('gbt-device');
+    if (!root) return;
+
+    var $scroll = document.getElementById('gbt-scroll');
+    var $view = document.getElementById('gbt-view');
+    var $toast = document.getElementById('gbt-toast');
+    var $turn = document.getElementById('gbt-turn');
+    var $live = document.getElementById('gbt-live');
+    var $filterBtn = root.querySelector('[data-hw="filter"]');
+
+    var DATA_NAME = 'd\u1eefLi\u1ec7uTruy\u1ec7n';          // dữLiệuTruyện (viết bằng mã Unicode để không phụ thuộc cách gõ dấu)
+    var HIST_KEY = 'giadinhcauvong_boc_tham_lich_su';
+    var HIST_MAX = 20;
+    var STATUSES = [['all', 'Tất cả'], ['Đang cập nhật', 'Đang cập nhật'], ['Hoàn thành', 'Hoàn thành']];
+    var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    var S = {
+        view: 'start', ret: 'start', cur: null, focus: null,
+        spins: 0, status: 'all', tags: [], tab: 'hist',
+        timer: null, toastT: null, sig: ''
+    };
+    var memHist = null;
+
+    /* ---------- Tiện ích ---------- */
+    function nfc(s) { s = String(s == null ? '' : s); return s.normalize ? s.normalize('NFC') : s; }
+    function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+    function pad2(n) { n = Math.max(0, n | 0); return n < 10 ? '0' + n : String(n); }
+    function has(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+    function rnd(n) {
+        if (n <= 1) return 0;
+        try {
+            if (window.crypto && window.crypto.getRandomValues) {
+                var a = new Uint32Array(1); window.crypto.getRandomValues(a); return a[0] % n;
+            }
+        } catch (e) { /* dùng Math.random */ }
+        return Math.floor(Math.random() * n);
+    }
+    function announce(msg) {
+        $live.textContent = '';
+        setTimeout(function () { $live.textContent = msg; }, 40);
+    }
+    function toast(msg) {
+        $toast.textContent = msg;
+        $toast.classList.add('on');
+        clearTimeout(S.toastT);
+        S.toastT = setTimeout(function () { $toast.classList.remove('on'); }, 2800);
+    }
+    function timeAgo(ts) {
+        var s = Math.max(0, (Date.now() - ts) / 1000);
+        if (s < 60) return 'vừa xong';
+        if (s < 3600) return Math.floor(s / 60) + ' phút trước';
+        if (s < 86400) return Math.floor(s / 3600) + ' giờ trước';
+        return Math.floor(s / 86400) + ' ngày trước';
+    }
+
+    /* ---------- Dữ liệu truyện (đọc trực tiếp mỗi lần dùng) ---------- */
+    function getData() {
+        var d = window[DATA_NAME];
+        if (d && typeof d === 'object') return d;
+        try {
+            var ks = Object.keys(window);
+            for (var i = 0; i < ks.length; i++) {
+                if (nfc(ks[i]) === DATA_NAME) { d = window[ks[i]]; if (d && typeof d === 'object') return d; }
+            }
+        } catch (e) { /* bỏ qua */ }
+        return {};
+    }
+    function isPublic(t) {
+        if (!t || typeof t !== 'object') return false;
+        if (nfc(t.status) === nfc('Tạm ẩn')) return false;
+        if (t.deleted === true || t.isDeleted === true || t.daXoa === true || t.hidden === true || t.isHidden === true) return false;
+        return !!(t.title && String(t.title).trim());
+    }
+    function allPublic() {
+        var d = getData(), out = [];
+        for (var k in d) {
+            if (!has(d, k)) continue;
+            if (isPublic(d[k])) out.push({ key: k, t: d[k] });
+        }
+        return out;
+    }
+    function storyByKey(key) {
+        var d = getData();
+        return (key != null && has(d, key) && isPublic(d[key])) ? d[key] : null;
+    }
+    function statusOf(t) {
+        try { if (typeof window.getTrangThaiHienThi === 'function') return window.getTrangThaiHienThi(t); } catch (e) { /* dùng mặc định */ }
+        return t.status || 'Đang cập nhật';
+    }
+    function tagsOf(t) {
+        return Array.isArray(t.tags) ? t.tags.map(function (x) { return String(x).trim(); }).filter(Boolean) : [];
+    }
+    function is18(t) {
+        try { if (typeof window.chuanHoaTrangThai18 === 'function') return !!window.chuanHoaTrangThai18(t); } catch (e) { /* bỏ qua */ }
+        return t.is18 === true;
+    }
+    function isFiltered() { return S.status !== 'all' || S.tags.length > 0; }
+    function getPool() {
+        return allPublic().filter(function (it) {
+            if (S.status !== 'all' && nfc(statusOf(it.t)) !== nfc(S.status)) return false;
+            if (S.tags.length) {
+                var tg = tagsOf(it.t);
+                for (var i = 0; i < S.tags.length; i++) { if (tg.indexOf(S.tags[i]) < 0) return false; }
+            }
+            return true;
+        });
+    }
+    function tagUniverse() {
+        var cnt = {}, list = allPublic();
+        list.forEach(function (it) { tagsOf(it.t).forEach(function (g) { cnt[g] = (cnt[g] || 0) + 1; }); });
+        return Object.keys(cnt).sort(function (a, b) { return (cnt[b] - cnt[a]) || a.localeCompare(b, 'vi'); });
+    }
+    function pruneTags() {
+        var u = tagUniverse();
+        S.tags = S.tags.filter(function (g) { return u.indexOf(g) >= 0; });
+    }
+    function dataSig() {
+        var d = getData(), n = 0, p = 0;
+        for (var k in d) { if (!has(d, k)) continue; n++; if (isPublic(d[k])) p++; }
+        return n + ':' + p;
+    }
+
+    /* ---------- Lịch sử kết quả ---------- */
+    function loadHist() {
+        try {
+            var a = JSON.parse(localStorage.getItem(HIST_KEY) || '[]');
+            return Array.isArray(a) ? a.filter(function (x) { return x && typeof x.k === 'string'; }) : [];
+        } catch (e) { return memHist || []; }
+    }
+    function saveHist(a) {
+        a = a.slice(0, HIST_MAX); memHist = a;
+        try { localStorage.setItem(HIST_KEY, JSON.stringify(a)); } catch (e) { /* trình duyệt chặn lưu: giữ tạm trong bộ nhớ */ }
+    }
+    function pushHist(key) {
+        var a = loadHist().filter(function (x) { return x.k !== key; });
+        a.unshift({ k: key, t: Date.now() });
+        saveHist(a);
+    }
+    function validHist() { return loadHist().filter(function (x) { return !!storyByKey(x.k); }); }
+
+    /* ---------- Ảnh bìa ---------- */
+    function placeholderTitle(title) {
+        var g = String(title == null ? '' : title);
+        var t = g.replace(/^\s*\[[^\]]*\]\s*/, '').trim() || g.trim() || 'Ảnh bìa';
+        return esc(t);
+    }
+    function coverHTML(t) {
+        var src = (typeof t.cover === 'string' && t.cover.trim()) ? t.cover.trim() : '';
+        var fit = '';
+        try { if (typeof window.thuocTinhFitBia === 'function') fit = window.thuocTinhFitBia(t) || ''; } catch (e) { fit = ''; }
+        var img = src ? '<img src="' + esc(src) + '"' + fit + ' alt="" decoding="async" onload="this.classList.add(\'ok\')" onerror="this.remove()">' : '';
+        return '<div class="gbt-cover"><span class="gbt-cover-ph">' + placeholderTitle(t.title) + '</span>' + img + '</div>';
+    }
+
+    /* ---------- Các màn hình ---------- */
+    function vStart() {
+        var total = allPublic().length, pool = getPool().length, hist = validHist().length, label;
+        if (!total) label = 'CHƯA CÓ TRUYỆN TRONG KHO';
+        else if (!pool) label = 'KHÔNG CÓ TRUYỆN PHÙ HỢP BỘ LỌC';
+        else if (isFiltered()) label = pool + '/' + total + ' TRUYỆN · ĐANG LỌC';
+        else label = pool + ' TRUYỆN SẴN SÀNG';
+        return '' +
+            '<div class="gbt-label' + (pool ? '' : ' is-warn') + '">— ' + label + ' —</div>' +
+            '<h3 class="gbt-h">Hôm nay cậu muốn đọc truyện gì?</h3>' +
+            '<button type="button" class="gbt-mode" data-id="mode" data-act="start" data-hint="BẤM A ĐỂ BẮT ĐẦU">' +
+                '<span class="gbt-mode-tag">BỐC THĂM</span>' +
+                '<strong>Truyện ngẫu nhiên</strong>' +
+                '<span class="gbt-mode-desc">Bốc thăm một bộ truyện bất kỳ theo cách may mắn của bạn.</span>' +
+            '</button>' +
+            '<div class="gbt-row">' +
+                '<button type="button" class="gbt-chipbtn" data-id="recent" data-act="recent" data-hint="BẤM A ĐỂ XEM LỊCH SỬ">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' +
+                    'Vừa quay' + (hist ? ' <span class="gbt-count">' + hist + '</span>' : '') +
+                '</button>' +
+                '<button type="button" class="gbt-chipbtn" data-id="guide" data-act="guide" data-hint="BẤM A ĐỂ XEM HƯỚNG DẪN">' +
+                    '<span class="gbt-qmark" aria-hidden="true">?</span> Hướng dẫn' +
+                '</button>' +
+            '</div>' +
+            '<div class="gbt-hint" id="gbt-hint"></div>';
+    }
+    function vSpin() {
+        return '<div class="gbt-label">— ĐANG BỐC THĂM —</div>' +
+            '<div class="gbt-reel" id="gbt-reel"></div>' +
+            '<div class="gbt-spin-title" id="gbt-spin-title" aria-hidden="true"></div>' +
+            '<div class="gbt-dots" aria-hidden="true"><i></i><i></i><i></i></div>';
+    }
+    function vResult() {
+        var t = storyByKey(S.cur);
+        if (!t) { S.view = 'start'; return vStart(); }
+        var posted = Array.isArray(t.chapters) ? t.chapters.length : 0;
+        var total = parseInt(t.totalChaptersInput, 10) || 0;
+        var chap = (total > 0 && posted <= total) ? (posted + '/' + total + ' chương') : (posted + ' chương');
+        var tg = tagsOf(t), shown = tg.slice(0, 4), more = tg.length - shown.length;
+        var tagsHTML = (is18(t) ? '<span class="gbt-tag is-18">18+</span>' : '') +
+            shown.map(function (g) { return '<span class="gbt-tag">' + esc(g) + '</span>'; }).join('') +
+            (more > 0 ? '<span class="gbt-tag">+' + more + '</span>' : '');
+        return '' +
+            '<div class="gbt-label">— MÁY ĐÃ CHỌN —</div>' +
+            '<div class="gbt-res">' + coverHTML(t) +
+                '<div class="gbt-res-info">' +
+                    '<h3 class="gbt-res-title" title="' + esc(t.title) + '">' + esc(t.title) + '</h3>' +
+                    '<dl class="gbt-meta">' +
+                        '<dt>Tác giả</dt><dd>' + esc(t.author || 'Đang cập nhật') + '</dd>' +
+                        '<dt>Tình trạng</dt><dd>' + esc(statusOf(t)) + '</dd>' +
+                        '<dt>Số chương</dt><dd>' + esc(chap) + '</dd>' +
+                    '</dl>' +
+                    (tagsHTML ? '<div class="gbt-tags">' + tagsHTML + '</div>' : '') +
+                '</div>' +
+            '</div>' +
+            '<div class="gbt-row">' +
+                '<button type="button" class="gbt-btn gbt-btn-primary" data-id="read" data-act="read" data-hint="A: MỞ TRANG TRUYỆN">ĐỌC NGAY</button>' +
+                '<button type="button" class="gbt-btn" data-id="again" data-act="again" data-hint="A: BỐC THĂM BỘ KHÁC">BỐC THĂM LẠI</button>' +
+            '</div>' +
+            '<div class="gbt-hint" id="gbt-hint"></div>';
+    }
+    function vFilter() {
+        var total = allPublic().length, pool = getPool().length;
+        var label = !total ? 'CHƯA CÓ TRUYỆN TRONG KHO' : (pool ? 'BỘ LỌC · CÒN ' + pool + '/' + total + ' TRUYỆN' : 'KHÔNG CÓ TRUYỆN PHÙ HỢP');
+        var uni = tagUniverse();
+        var st = STATUSES.map(function (s, i) {
+            return '<button type="button" class="gbt-chip" data-id="st:' + i + '" data-act="status" data-arg="' + esc(s[0]) + '" aria-pressed="' + (S.status === s[0]) + '">' + esc(s[1]) + '</button>';
+        }).join('');
+        var tg = uni.length ? uni.map(function (g, i) {
+            return '<button type="button" class="gbt-chip" data-id="tg:' + i + '" data-act="tag" data-arg="' + esc(g) + '" aria-pressed="' + (S.tags.indexOf(g) >= 0) + '">' + esc(g) + '</button>';
+        }).join('') : '<p class="gbt-empty">Kho truyện chưa có thẻ nào để lọc.</p>';
+        return '' +
+            '<div class="gbt-label' + (pool ? '' : ' is-warn') + '">— ' + label + ' —</div>' +
+            '<div><div class="gbt-fh">Tình trạng</div><div class="gbt-chips">' + st + '</div></div>' +
+            '<div><div class="gbt-fh">Thể loại / thẻ <small>(chọn nhiều: truyện phải có đủ các thẻ)</small></div><div class="gbt-chips">' + tg + '</div></div>' +
+            '<div class="gbt-row">' +
+                '<button type="button" class="gbt-btn" data-id="clear" data-act="clear">XÓA LỌC</button>' +
+                '<button type="button" class="gbt-btn gbt-btn-primary" data-id="done" data-act="back">XONG</button>' +
+            '</div>';
+    }
+    function vMenu() {
+        var h = validHist(), body;
+        if (!h.length) {
+            body = '<p class="gbt-empty">Chưa có lần bốc nào. Bấm A ở màn hình chính để thử vận may.</p>';
+        } else {
+            body = '<div class="gbt-hist">' + h.map(function (x, i) {
+                var t = storyByKey(x.k);
+                return '<button type="button" class="gbt-hrow" data-id="h:' + i + '" data-act="hist-open" data-arg="' + esc(x.k) + '">' +
+                    coverHTML(t) +
+                    '<span class="gbt-hrow-b"><span class="gbt-hrow-t">' + esc(t.title) + '</span>' +
+                    '<span class="gbt-hrow-s">' + esc(t.author || 'Đang cập nhật') + ' · ' + timeAgo(x.t) + '</span></span></button>';
+            }).join('') + '</div>' +
+            '<div class="gbt-row"><button type="button" class="gbt-btn" data-id="hclear" data-act="hist-clear">XÓA LỊCH SỬ</button></div>';
+        }
+        var hn = h.length;
+        return '' +
+            '<div class="gbt-tabs" role="tablist">' +
+                '<button type="button" class="gbt-tab" role="tab" data-id="tab:guide" data-act="guide" aria-selected="false">Hướng dẫn</button>' +
+                '<button type="button" class="gbt-tab" role="tab" data-id="tab:hist" data-act="tab" data-arg="hist" aria-selected="true">Lịch sử' + (hn ? ' (' + hn + ')' : '') + '</button>' +
+            '</div>' + body +
+            '<div class="gbt-row"><button type="button" class="gbt-btn" data-id="back" data-act="back">QUAY LẠI</button></div>';
+    }
+    /* Màn hình HƯỚNG DẪN: chỉ liệt kê thao tác máy thật sự hỗ trợ (xem hw(), act() và bộ nghe phím bên dưới) */
+    function vGuide() {
+        function tri(d) { return '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="' + d + '" fill="currentColor"/></svg>'; }
+        var UP = tri('M5 1.5 9 8.5H1z'), DN = tri('M5 8.5 1 1.5h8z'), LT = tri('M1.5 5 8.5 1v8z'), RT = tri('M8.5 5 1.5 1v8z');
+        var rows = [
+            ['<span class="gbt-key gbt-key-pad" role="img" aria-label="Mũi tên lên, xuống">' + UP + DN + '</span>', 'Di chuyển lựa chọn trong menu.'],
+            ['<span class="gbt-key gbt-key-pad" role="img" aria-label="Mũi tên trái, phải">' + LT + RT + '</span>', 'Chuyển đổi và điều chỉnh lựa chọn.'],
+            ['<span class="gbt-key gbt-key-a" aria-label="Nút A">A</span>', 'Bắt đầu bốc thăm / Đọc truyện.'],
+            ['<span class="gbt-key gbt-key-b" aria-label="Nút B">B</span>', 'Quay lại / Đóng cửa sổ.'],
+            ['<span class="gbt-key gbt-key-pill gbt-key-filter">FILTER</span>', 'Mở bộ lọc truyện.'],
+            ['<span class="gbt-key gbt-key-pill gbt-key-menu">MENU</span>', 'Mở menu / Hướng dẫn.']
+        ];
+        return '' +
+            '<div class="gbt-gd-title"><span class="gbt-gd-line" aria-hidden="true"></span><h3>HƯỚNG DẪN</h3><span class="gbt-gd-line" aria-hidden="true"></span></div>' +
+            '<ul class="gbt-gd-list">' + rows.map(function (r) {
+                return '<li><span class="gbt-gk">' + r[0] + '</span><span class="gbt-gd-d">' + esc(r[1]) + '</span></li>';
+            }).join('') + '</ul>' +
+            '<p class="gbt-gd-kb"><b>Bàn phím:</b> <span>Mũi tên = D-pad</span> · <span>Enter/Z = A</span> · <span>X = B</span> · <span>Shift = Filter</span> · <span>Esc = Menu</span></p>' +
+            '<button type="button" class="gbt-gd-go" data-id="go" data-act="start" data-hint="BẤM A ĐỂ BẮT ĐẦU BỐC THĂM">BẤM A ĐỂ BẮT ĐẦU BỐC THĂM.</button>';
+    }
+
+    /* ---------- Hiển thị + tiêu điểm ---------- */
+    function items() { return Array.prototype.slice.call($view.querySelectorAll('[data-id]')); }
+    function findById(id) {
+        var els = items();
+        for (var i = 0; i < els.length; i++) { if (els[i].getAttribute('data-id') === id) return els[i]; }
+        return null;
+    }
+    function defaultFocus() {
+        if (S.view === 'start') return 'mode';
+        if (S.view === 'result') return 'read';
+        if (S.view === 'filter') {
+            for (var i = 0; i < STATUSES.length; i++) { if (STATUSES[i][0] === S.status) return 'st:' + i; }
+            return 'st:0';
+        }
+        if (S.view === 'menu') return 'tab:hist';
+        if (S.view === 'guide') return 'go';
+        return null;
+    }
+    function ensureVisible(el) {
+        var cr = $scroll.getBoundingClientRect(), er = el.getBoundingClientRect();
+        if (er.top < cr.top + 8) $scroll.scrollTop -= (cr.top + 8 - er.top);
+        else if (er.bottom > cr.bottom - 8) $scroll.scrollTop += (er.bottom - (cr.bottom - 8));
+    }
+    function updateHint(el) {
+        var h = document.getElementById('gbt-hint');
+        if (!h) return;
+        var nav = S.view === 'result' ? '◀▶ CHỌN' : '▲▼◀▶ CHỌN';
+        var def = S.view === 'result' ? 'A XÁC NHẬN · B VỀ MÀN CHÍNH' : 'BẤM A ĐỂ BẮT ĐẦU';
+        var txt = (el && el.getAttribute('data-hint')) || def;
+        h.innerHTML = '<b>' + nav + '</b><span>' + esc(txt) + '</span>';
+    }
+    function setFocus(id) {
+        var found = null;
+        items().forEach(function (el) {
+            var on = el.getAttribute('data-id') === id;
+            el.classList.toggle('is-focus', on);
+            if (on) found = el;
+        });
+        S.focus = found ? id : null;
+        if (found) ensureVisible(found);
+        updateHint(found);
+    }
+    function updateTurn() { $turn.textContent = pad2(Math.max(1, S.spins)); }
+    function updateFilterBadge() { if ($filterBtn) $filterBtn.classList.toggle('is-on', isFiltered()); }
+    function render(keep) {
+        var st = keep ? $scroll.scrollTop : 0, prev = keep ? S.focus : null;
+        var hadFocus = root.contains(document.activeElement);   // nút vừa bấm sắp bị thay mới: giữ phím điều khiển hoạt động
+        var fn = { start: vStart, spin: vSpin, result: vResult, filter: vFilter, menu: vMenu, guide: vGuide }[S.view];
+        var html = fn();                                   // có thể tự đổi S.view (vd. truyện vừa chọn đã bị ẩn)
+        $view.className = 'gbt-v gbt-v-' + S.view;
+        $scroll.classList.toggle('is-tight', S.view === 'guide');
+        $view.innerHTML = html;
+        if (hadFocus && !root.contains(document.activeElement)) {
+            try { root.focus({ preventScroll: true }); } catch (x) { root.focus(); }
+        }
+        $scroll.scrollTop = st;
+        setFocus((prev && findById(prev)) ? prev : defaultFocus());
+        updateTurn(); updateFilterBadge();
+    }
+
+    /* ---------- Điều hướng bằng nút ---------- */
+    function move(dir) {
+        if (S.view === 'spin') return;
+        var els = items();
+        if (!els.length) return;
+        var cur = findById(S.focus);
+        if (!cur) { setFocus(els[0].getAttribute('data-id')); return; }
+        var cr = cur.getBoundingClientRect(), cx = cr.left + cr.width / 2, cy = cr.top + cr.height / 2;
+        var best = null, bs = Infinity;
+        els.forEach(function (el) {
+            if (el === cur) return;
+            var r = el.getBoundingClientRect(), dx = r.left + r.width / 2 - cx, dy = r.top + r.height / 2 - cy, ok, prim, sec;
+            if (dir === 'up') { ok = dy < -4; prim = -dy; sec = Math.abs(dx); }
+            else if (dir === 'down') { ok = dy > 4; prim = dy; sec = Math.abs(dx); }
+            else if (dir === 'left') { ok = dx < -4 && Math.abs(dy) < Math.max(cr.height, r.height) * 0.75; prim = -dx; sec = Math.abs(dy); }
+            else { ok = dx > 4 && Math.abs(dy) < Math.max(cr.height, r.height) * 0.75; prim = dx; sec = Math.abs(dy); }
+            if (!ok) return;
+            var sc = prim + sec * 2;
+            if (sc < bs) { bs = sc; best = el; }
+        });
+        if (!best && (dir === 'left' || dir === 'right')) {       // hết hàng: sang phần tử kế theo thứ tự đọc
+            var i = els.indexOf(cur), j = dir === 'right' ? i + 1 : i - 1;
+            if (j >= 0 && j < els.length) best = els[j];
+        }
+        if (best) setFocus(best.getAttribute('data-id'));
+    }
+    function goBack() {
+        if (S.view === 'spin') return;
+        S.view = (S.ret === 'result' && S.cur && storyByKey(S.cur)) ? 'result' : 'start';
+        render();
+    }
+    function openSub(v, tab) {
+        if (S.view === 'spin') return;
+        if (S.view !== 'filter' && S.view !== 'menu' && S.view !== 'guide') S.ret = S.view;
+        if (tab) S.tab = tab;
+        S.view = v;
+        render();
+    }
+    function toggleSub(v) { if (S.view === v) goBack(); else openSub(v); }
+    function pressA() {
+        if (S.view === 'spin') return;
+        var el = findById(S.focus) || findById(defaultFocus());
+        if (el) act(el.getAttribute('data-act'), el.getAttribute('data-arg'));
+    }
+    function pressB() {
+        if (S.view === 'spin' || S.view === 'start') return;
+        if (S.view === 'result') { S.view = 'start'; render(); return; }
+        goBack();
+    }
+    function hw(n) {
+        if (n === 'up' || n === 'down' || n === 'left' || n === 'right') move(n);
+        else if (n === 'a') pressA();
+        else if (n === 'b') pressB();
+        else if (n === 'filter') toggleSub('filter');
+        else if (n === 'menu') { if (S.view === 'guide' || S.view === 'menu') goBack(); else openSub('guide'); }
+    }
+    function flash(n) {
+        var b = root.querySelector('[data-hw="' + n + '"]');
+        if (!b) return;
+        b.classList.add('is-press');
+        setTimeout(function () { b.classList.remove('is-press'); }, 130);
+    }
+
+    /* ---------- Hành động ---------- */
+    function act(name, arg) {
+        switch (name) {
+            case 'start': case 'again': startSpin(); break;
+            case 'recent': openSub('menu', 'hist'); break;
+            case 'guide': openSub('guide'); break;
+            case 'read': readNow(); break;
+            case 'status': S.status = arg; render(true); break;
+            case 'tag':
+                var i = S.tags.indexOf(arg);
+                if (i >= 0) S.tags.splice(i, 1); else S.tags.push(arg);
+                render(true); break;
+            case 'clear': S.status = 'all'; S.tags = []; render(true); break;
+            case 'back': goBack(); break;
+            case 'tab': S.tab = arg; render(); setFocus('tab:' + arg); break;
+            case 'hist-open':
+                if (!storyByKey(arg)) { toast('Truyện này không còn trong kho công khai.'); render(true); break; }
+                S.cur = arg; S.ret = 'start'; S.view = 'result'; render(); break;
+            case 'hist-clear': saveHist([]); render(); setFocus('tab:hist'); break;
+        }
+    }
+    function readNow() {
+        var key = S.cur;
+        if (!storyByKey(key)) { toast('Truyện này không còn trong kho công khai.'); S.view = 'start'; render(); return; }
+        try {
+            if (typeof window.xemTruyen === 'function') { window.xemTruyen(key, false); return; }
+        } catch (e) { /* rơi xuống thông báo bên dưới */ }
+        toast('Chưa mở được trang truyện. Hãy tải lại trang rồi thử lại.');
+    }
+
+    /* ---------- Quay số ---------- */
+    function preload(pool, final) {
+        var picks = [final], n = Math.min(pool.length, 24), i;
+        for (i = 0; i < n; i++) picks.push(pool[rnd(pool.length)]);
+        picks.forEach(function (it) {
+            if (typeof it.t.cover === 'string' && it.t.cover.trim()) { var im = new Image(); im.src = it.t.cover.trim(); }
+        });
+    }
+    function startSpin() {
+        var pool = getPool();
+        if (!pool.length) {
+            toast(allPublic().length ? 'Bộ lọc đang quá chặt. Bấm FILTER để nới ra.' : 'Kho truyện chưa có truyện công khai.');
+            return;
+        }
+        clearTimeout(S.timer);
+        S.spins++; S.view = 'spin'; render();
+        announce('Đang bốc thăm');
+        var final = pool[rnd(pool.length)];
+        preload(pool, final);
+
+        var D = 2000 + Math.random() * 1000, sum = 0, d = reduce ? 250 : 55, delays = [];
+        while (sum < D) { delays.push(d); sum += d; if (!reduce) d = Math.min(d * 1.13, 330); }
+        var reel = document.getElementById('gbt-reel'), ttl = document.getElementById('gbt-spin-title');
+        var last = null, i = 0;
+        function show(it, lock) {
+            reel.innerHTML = coverHTML(it.t);
+            ttl.textContent = it.t.title;
+            reel.classList.toggle('is-lock', !!lock);
+        }
+        function step() {
+            if (S.view !== 'spin') return;
+            if (i < delays.length) {
+                var it, tries = 0;
+                do { it = pool[rnd(pool.length)]; tries++; } while (pool.length > 1 && it === last && tries < 6);
+                last = it; show(it, false);
+                S.timer = setTimeout(step, delays[i++]);
+            } else {
+                show(final, true);
+                S.timer = setTimeout(function () { finish(final); }, reduce ? 300 : 750);
+            }
+        }
+        step();
+    }
+    function finish(final) {
+        if (S.view !== 'spin') return;
+        if (!storyByKey(final.key)) { S.view = 'start'; render(); toast('Truyện vừa chọn đã không còn công khai. Hãy bốc lại.'); return; }
+        S.cur = final.key; S.ret = 'start'; S.view = 'result';
+        pushHist(final.key);
+        render();
+        announce('Máy đã chọn: ' + final.t.title + (final.t.author ? ', tác giả ' + final.t.author : ''));
+    }
+
+    /* ---------- Sự kiện ---------- */
+    $view.addEventListener('click', function (e) {
+        var el = e.target.closest ? e.target.closest('[data-act]') : null;
+        if (!el || !$view.contains(el)) return;
+        var id = el.getAttribute('data-id');
+        if (id) setFocus(id);
+        act(el.getAttribute('data-act'), el.getAttribute('data-arg'));
+    });
+    $view.addEventListener('mouseover', function (e) {
+        var el = e.target.closest ? e.target.closest('[data-id]') : null;
+        if (!el || S.view === 'spin') return;
+        var id = el.getAttribute('data-id');
+        if (id !== S.focus) {
+            items().forEach(function (x) { x.classList.toggle('is-focus', x === el); });
+            S.focus = id; updateHint(el);
+        }
+    });
+    $view.addEventListener('focusin', function (e) {      // Tab bằng bàn phím: đồng bộ tiêu điểm
+        var el = e.target.closest ? e.target.closest('[data-id]') : null;
+        if (el && el.getAttribute('data-id') !== S.focus) setFocus(el.getAttribute('data-id'));
+    });
+    Array.prototype.forEach.call(root.querySelectorAll('[data-hw]'), function (b) {
+        b.addEventListener('click', function () { hw(b.getAttribute('data-hw')); });
+    });
+    root.addEventListener('mousedown', function (e) {
+        if (!(e.target.closest && e.target.closest('button'))) { try { root.focus({ preventScroll: true }); } catch (x) { root.focus(); } }
+    });
+    /* Bàn phím (khớp đúng dòng "Bàn phím" trên màn hình hướng dẫn):
+       Mũi tên = D-pad · Enter/Z = A · X = B · Shift = Filter · Esc = Menu */
+    var shiftArmed = false;      // Shift chỉ có tác dụng khi bấm-nhả một mình, để Shift+Tab / Shift+phím khác không mở bộ lọc
+    root.addEventListener('keydown', function (e) {
+        if (e.key === 'Shift') { if (!e.repeat) shiftArmed = true; return; }
+        shiftArmed = false;
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        var onBtn = !!(e.target.closest && e.target.closest('button')), map = null;
+        switch (e.key) {
+            case 'ArrowUp': map = 'up'; break;
+            case 'ArrowDown': map = 'down'; break;
+            case 'ArrowLeft': map = 'left'; break;
+            case 'ArrowRight': map = 'right'; break;
+            case 'Enter': if (!onBtn) map = 'a'; break;               // trên nút thật: để trình duyệt tự bấm
+            case 'z': case 'Z': map = 'a'; break;
+            case 'x': case 'X': map = 'b'; break;
+            case 'Escape': map = 'menu'; break;
+        }
+        if (!map) return;
+        e.preventDefault();
+        if (e.repeat && map === 'menu') return;                       // giữ Esc không nhấp nháy menu
+        flash(map);
+        hw(map);
+    });
+    root.addEventListener('keyup', function (e) {
+        if (e.key !== 'Shift') return;
+        var fire = shiftArmed && !e.ctrlKey && !e.metaKey && !e.altKey;
+        shiftArmed = false;
+        if (fire) { flash('filter'); hw('filter'); }
+    });
+
+    /* Cập nhật khi kho truyện được nạp/đổi (không can thiệp vào luồng nạp dữ liệu của website) */
+    S.sig = dataSig();
+    setInterval(function () {
+        if (!root.offsetParent) return;
+        var s = dataSig();
+        if (s === S.sig) return;
+        S.sig = s; pruneTags();
+        if (S.view === 'result' && !storyByKey(S.cur)) { S.view = 'start'; render(); toast('Truyện vừa bốc không còn công khai.'); }
+        else if (S.view !== 'spin') render(true);
+    }, 1500);
+
+    render();
+})();
     </script>
 </body>
 </html>
