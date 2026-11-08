@@ -4192,6 +4192,62 @@
         body.dark-mode .gcv-like.on svg .ln{stroke:#4f2a3d}
         @media (max-width:600px){.gcv-bl-act .gcv-act-btn{min-height:38px;padding:6px 16px;font-size:13px}.gcv-bl-act{gap:6px 10px}}
         @media (prefers-reduced-motion:reduce){.gcv-like svg{transition:none}.gcv-like.pop svg{animation:none}}
+        /* ===== Reaction emoji (độc lập với Like) ===== */
+        .gcv-rx-wrap{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:6px;min-width:0;max-width:100%}
+        .gcv-rx-list{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:6px;min-width:0;overflow-x:auto;padding:1px 0;scrollbar-width:none}
+        .gcv-rx-list::-webkit-scrollbar{display:none}
+        .gcv-rx-list .gcv-rx-chip,.gcv-rx-wrap .gcv-rx-add{flex:none}
+        .gcv-rx-list:empty{display:none}
+        .gcv-bl-act .gcv-rx-add{padding:4px 11px}
+        .gcv-rx-add svg{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s ease}
+        .gcv-rx-add:active svg{transform:scale(1.2)}
+        .gcv-bl-act .gcv-rx-add[aria-expanded="true"]{background:#ffe3ef;border-color:#ff9ec4;color:#d6407f}
+        .gcv-bl-act .gcv-rx-chip{display:inline-flex;align-items:center;gap:5px;min-height:28px;padding:2px 10px;border-radius:999px;border:1px solid #ffd6e6;background:#fff;color:var(--subtext-color);font-size:12px;font-weight:700;line-height:1;cursor:pointer;transition:background .18s,border-color .18s,color .18s,transform .12s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+        .gcv-bl-act .gcv-rx-chip:hover{background:#fff7fb;border-color:#ffb8d3;color:#c2457f}
+        .gcv-bl-act .gcv-rx-chip:active{transform:scale(.95)}
+        .gcv-bl-act .gcv-rx-chip.on{background:#ffe3ef;border-color:#ff9ec4;color:#d6407f}
+        .gcv-rx-e{font-size:15px;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+        .gcv-rx-img{width:18px;height:18px;object-fit:contain;display:block}
+        .gcv-rx-n{font-variant-numeric:tabular-nums}
+        .gcv-rx-pop{position:fixed;z-index:100030;left:0;top:0;box-sizing:border-box;width:min(296px,calc(100vw - 16px));background:#fff;border:1px solid #ffd6e6;border-radius:16px;box-shadow:0 10px 30px rgba(194,69,127,.24);padding:8px;color:#333;animation:gcvRxIn .16s ease}
+        @keyframes gcvRxIn{from{opacity:0;transform:translateY(6px) scale(.96)}to{opacity:1;transform:none}}
+        @keyframes gcvRxFade{from{opacity:0}to{opacity:1}}
+        .gcv-rx-scroll{max-height:236px;overflow-y:auto;overscroll-behavior:contain}
+        .gcv-rx-title{font-size:11px;font-weight:700;color:#c2457f;margin:6px 4px 2px}
+        .gcv-rx-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
+        .gcv-rx-opt{display:grid;place-items:center;height:40px;border:0;background:none;border-radius:10px;cursor:pointer;padding:0;transition:transform .12s,background .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+        .gcv-rx-opt:hover{background:#fff0f6;transform:scale(1.15)}
+        .gcv-rx-opt.on{background:#ffe3ef;box-shadow:inset 0 0 0 1.5px #ff9ec4}
+        .gcv-rx-opt .gcv-rx-img{width:26px;height:26px}
+        .gcv-rx-modal{position:fixed;inset:0;z-index:100040;background:rgba(60,20,40,.45);display:grid;place-items:center;padding:16px;animation:gcvRxFade .15s ease}
+        .gcv-rx-dlg{background:#fff;color:#333;border-radius:18px;width:100%;max-width:400px;max-height:min(80vh,560px);display:flex;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.25);overflow:hidden;animation:gcvRxIn .18s ease}
+        .gcv-rx-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 6px;flex:none}
+        .gcv-rx-hd b{color:#c2457f;font-size:15px}
+        .gcv-rx-x{border:0;background:none;font-size:22px;line-height:1;cursor:pointer;color:#999;padding:2px 8px;border-radius:8px}
+        .gcv-rx-x:hover{background:#fff0f6;color:#c2457f}
+        .gcv-rx-tabs{display:flex;gap:6px;padding:4px 14px 8px;overflow-x:auto;flex:none}
+        .gcv-rx-tab{flex:none;display:inline-flex;align-items:center;gap:5px;border:1px solid #ffd6e6;background:#fff;color:#777;border-radius:999px;padding:4px 11px;font:inherit;font-size:12.5px;font-weight:700;line-height:1.2;cursor:pointer}
+        .gcv-rx-tab.on{background:#ffe3ef;border-color:#ff9ec4;color:#d6407f}
+        .gcv-rx-users{overflow-y:auto;overscroll-behavior:contain;padding:2px 14px 14px;display:flex;flex-direction:column;gap:2px;min-height:60px}
+        .gcv-rx-u{display:flex;align-items:center;gap:8px;padding:6px 0;min-width:0}
+        .gcv-rx-u .who{display:flex;align-items:center;gap:2px 6px;min-width:0;flex:1;flex-wrap:wrap}
+        .gcv-rx-u .gcv-nm{font-weight:600;font-size:13px}
+        .gcv-rx-u .em{flex:none;display:inline-flex;align-items:center}
+        .gcv-rx-me{font-size:11px;color:#c2457f;font-weight:700}
+        .gcv-rx-go{flex:none;border:1px solid #ffd6e6;background:#fff;color:#c2457f;border-radius:999px;font:inherit;font-size:12px;font-weight:700;padding:3px 11px;cursor:pointer}
+        .gcv-rx-go:hover{background:#fff0f6;border-color:#ffb8d3}
+        .gcv-rx-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100050;background:#4a2a3b;color:#fff;font-size:13px;line-height:1.4;padding:9px 16px;border-radius:999px;max-width:calc(100vw - 32px);box-shadow:0 6px 20px rgba(0,0,0,.25);text-align:center;animation:gcvRxFade .18s ease}
+        body.dark-mode .gcv-bl-act .gcv-rx-chip{background:var(--container-bg);border-color:var(--border-color);color:var(--subtext-color)}
+        body.dark-mode .gcv-bl-act .gcv-rx-chip:hover{background:#3d2530;border-color:#8a4a67;color:#ffb3cf}
+        body.dark-mode .gcv-bl-act .gcv-rx-chip.on,body.dark-mode .gcv-bl-act .gcv-rx-add[aria-expanded="true"]{background:#4f2a3d;border-color:#8a4a67;color:#ff9ec4}
+        body.dark-mode .gcv-rx-pop,body.dark-mode .gcv-rx-dlg{background:var(--container-bg);border-color:var(--border-color);color:var(--text-color)}
+        body.dark-mode .gcv-rx-opt:hover{background:#3d2530}
+        body.dark-mode .gcv-rx-opt.on{background:#4f2a3d;box-shadow:inset 0 0 0 1.5px #8a4a67}
+        body.dark-mode .gcv-rx-tab,body.dark-mode .gcv-rx-go{background:var(--container-bg);border-color:var(--border-color);color:var(--subtext-color)}
+        body.dark-mode .gcv-rx-tab.on{background:#4f2a3d;border-color:#8a4a67;color:#ff9ec4}
+        body.dark-mode .gcv-rx-x:hover{background:#3d2530}
+        @media (max-width:600px){.gcv-bl-act .gcv-rx-chip{min-height:32px;padding:3px 12px}.gcv-rx-opt{height:44px}}
+        @media (prefers-reduced-motion:reduce){.gcv-rx-pop,.gcv-rx-modal,.gcv-rx-dlg,.gcv-rx-toast{animation:none}.gcv-rx-add svg,.gcv-rx-opt,.gcv-bl-act .gcv-rx-chip{transition:none}}
         .gcv-at{color:var(--primary-color);font-weight:700}
         .gcv-rp-wrap{margin:8px 0 0 12px;padding-left:10px;border-left:2px solid var(--border-color);display:flex;flex-direction:column;gap:8px}
         .gcv-rp-sub{margin:8px 0 0 12px;display:flex;flex-direction:column;gap:8px}.gcv-rp-sub.flat{margin-left:0}
@@ -10294,7 +10350,7 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
 
         // Hàng nút của lời nhắn trang chủ mới (Firestore): Thích + Trả lời + Xóa. Lời nhắn cũ (comment.json) không có mã nên không có nút.
         function gcvHangNutHome(item) {
-            var nut = gcvNutLike(item) + ((item.fsId && window.GCV_FB) ? '<button type="button" class="gcv-act-btn" onclick="gcvMoTL(\'' + gcvThoat(item.fsId) + '\')">Trả lời</button>' : '') + gcvNutXoa(item);
+            var nut = gcvNutLike(item) + gcvRxNut(item) + ((item.fsId && window.GCV_FB) ? '<button type="button" class="gcv-act-btn" onclick="gcvMoTL(\'' + gcvThoat(item.fsId) + '\')">Trả lời</button>' : '') + gcvNutXoa(item);
             return nut ? '<div class="gcv-bl-act">' + nut + '</div>' : '';
         }
 
@@ -10342,13 +10398,206 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
             }
         };
 
+        // ============================================================
+        // REACTION EMOJI (độc lập hoàn toàn với Like)
+        //  - Dữ liệu: Firestore collection RIÊNG "commentReactions" (xử lý trong khối Firebase: GCV_FB.doiReaction).
+        //    Mỗi tài khoản chỉ 1 lượt cho mỗi loại emoji trên mỗi bình luận (ID tài liệu cố định = col_idBL_emoji_uid).
+        //  - KHÔNG đọc / ghi / đổi commentLikes, commentLikeCounts, paraLikes, paraLikeCounts, _fsLikeN, _fsLikeMine.
+        //  - Đồng bộ thời gian thực qua onSnapshot -> window._fsReact; cập nhật tại chỗ, không vẽ lại cả danh sách.
+        //  - Dùng chung cho: bình luận truyện, bình luận chương, trả lời, bình luận đoạn, lời nhắn trang chủ, bình luận dưới bài viết.
+        // ============================================================
+        window._fsReact = window._fsReact || {};   // 'col|idBinhLuan' -> { emojiKey: { uid: { name, ts } } }
+        window.gcvRxBusy = window.gcvRxBusy || {};
+        var GCV_RX_COL = { comments: 1, commentReplies: 1, homechat: 1, paraComments: 1, paraReplies: 1, ownerPostComments: 1 };
+        var GCV_RX_RE = /^c_[a-z0-9_-]{1,32}$/;   // chỉ emoji ảnh của kho website (emoji-manifest.json); không có emoji Unicode
+        var GCV_RX_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5"/><path d="M8 14s1.5 2.5 4 2.5S16 14 16 14"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>';
+        var gcvRxPick = null;   // bảng chọn đang mở: { col, id, btn, pop }
+        var gcvRxDS = null;     // hộp danh sách người thả đang mở: { col, id, tab }
+        var gcvRxToastT = null;
+
+        function gcvRxMe() { var st = window.GCV_FB ? window.GCV_FB.trangThai() : null; return (st && st.user) ? st.user.uid : ''; }
+
+        // Hiển thị một emoji (Unicode hoặc emoji ảnh của website). Mọi chuỗi đều được thoát HTML.
+        function gcvRxEmo(key) {
+            var id = key.slice(2), e = gcvEmojiAnh[id];   // dùng lại kho emoji hiện có (gcvEmojiAnh)
+            return e ? '<img class="gcv-rx-img" src="' + gcvThoat(e.src) + '" alt=":' + gcvThoat(id) + ':" draggable="false" loading="lazy" onerror="this.replaceWith(document.createTextNode(this.alt))">'
+                : '<span class="gcv-rx-e" style="font-size:11px">:' + gcvThoat(id) + ':</span>';   // kho chưa tải: chỉ hiện mã :id:, không thay bằng emoji mặc định
+        }
+
+        // Gom Reaction của một bình luận theo loại emoji (thứ tự ổn định: loại được thả sớm nhất đứng trước).
+        function gcvRxNhom(col, id) {
+            var g = (window._fsReact || {})[col + '|' + id] || {}, me = gcvRxMe(), out = [];
+            Object.keys(g).forEach(function (key) {
+                if (!GCV_RX_RE.test(key)) return;
+                var us = Object.keys(g[key]).map(function (u) { return { uid: u, name: g[key][u].name, ts: g[key][u].ts }; });
+                if (!us.length) return;
+                us.sort(function (a, b) { return a.ts - b.ts; });
+                out.push({ key: key, n: us.length, mine: !!(me && g[key][me]), users: us, ts: us[0].ts });
+            });
+            out.sort(function (a, b) { return (a.ts - b.ts) || (a.key < b.key ? -1 : 1); });
+            return out;
+        }
+
+        function gcvRxChipsHTML(col, id) {
+            var c = gcvThoat(col), i = gcvThoat(id);
+            return gcvRxNhom(col, id).map(function (g) {
+                return '<button type="button" class="gcv-rx-chip' + (g.mine ? ' on' : '') + '" aria-label="Xem người đã thả emoji này (' + g.n + ')" title="Xem người đã thả" onclick="gcvRxXem(\'' + c + '\',\'' + i + '\',\'' + g.key + '\')">' +
+                    gcvRxEmo(g.key) + '<span class="gcv-rx-n">' + g.n + '</span></button>';
+            }).join('');
+        }
+
+        // Nút mặt cười + các emoji đã thả. Đặt ngay cạnh nút Like (không thay đổi nút Like).
+        function gcvRxNut(it) {
+            if (gcvRxPick) setTimeout(gcvRxVePicker, 0);   // kho emoji vừa tải xong: làm mới bảng chọn đang mở
+            var col = gcvColOf(it), id = it && it.fsId;
+            if (!id || !GCV_RX_COL[col] || !window.GCV_FB || !window.GCV_FB.doiReaction) return '';
+            var c = gcvThoat(col), i = gcvThoat(id);
+            var mo = !!(gcvRxPick && gcvRxPick.col === col && gcvRxPick.id === id);
+            return '<span class="gcv-rx-wrap" data-rx-col="' + c + '" data-rx-id="' + i + '">' +
+                '<span class="gcv-rx-list">' + gcvRxChipsHTML(col, id) + '</span>' +
+                '<button type="button" class="gcv-act-btn gcv-rx-add" aria-haspopup="dialog" aria-expanded="' + (mo ? 'true' : 'false') + '" aria-label="Thả emoji" title="Thả emoji" onclick="gcvRxMo(this,\'' + c + '\',\'' + i + '\')">' + GCV_RX_SVG + '</button></span>';
+        }
+
+        function gcvRxToast(msg) {
+            var el = document.getElementById('gcv-rx-toast');
+            if (!el) { el = document.createElement('div'); el.id = 'gcv-rx-toast'; el.className = 'gcv-rx-toast'; el.setAttribute('role', 'status'); document.body.appendChild(el); }
+            el.textContent = msg; el.style.display = '';
+            clearTimeout(gcvRxToastT); gcvRxToastT = setTimeout(function () { el.style.display = 'none'; }, 2800);
+        }
+
+        // ---------- Bảng chọn emoji (popup nhỏ gọn, gắn vào body nên không bị khung cuộn cắt) ----------
+        function gcvRxDongPicker() {
+            if (!gcvRxPick) return;
+            var p = gcvRxPick; gcvRxPick = null;
+            if (p.pop && p.pop.parentNode) p.pop.parentNode.removeChild(p.pop);
+            var ds = document.querySelectorAll('.gcv-rx-add[aria-expanded="true"]');
+            for (var i = 0; i < ds.length; i++) ds[i].setAttribute('aria-expanded', 'false');
+        }
+        function gcvRxOpt(key, inner, on, label) {
+            return '<button type="button" class="gcv-rx-opt' + (on ? ' on' : '') + '" data-k="' + key + '" aria-pressed="' + (on ? 'true' : 'false') + '" aria-label="' + gcvThoat(label) + '" title="' + gcvThoat(label) + '">' + inner + '</button>';
+        }
+        function gcvRxVePicker() {
+            var P = gcvRxPick; if (!P || !P.pop) return;
+            var mine = {}; gcvRxNhom(P.col, P.id).forEach(function (g) { if (g.mine) mine[g.key] = 1; });
+            var sc = P.pop.querySelector('.gcv-rx-scroll'), top = sc ? sc.scrollTop : 0;
+            var anh = Object.keys(gcvEmojiAnh), h;
+            if (anh.length) {
+                h = '<div class="gcv-rx-title">Gia đình cầu vồng</div><div class="gcv-rx-grid">' + anh.map(function (id2) {
+                    var k = 'c_' + id2, e = gcvEmojiAnh[id2];
+                    return gcvRxOpt(k, '<img class="gcv-rx-img" src="' + gcvThoat(e.src) + '" alt=":' + gcvThoat(id2) + ':" draggable="false" loading="lazy" onerror="this.parentNode.style.display=\'none\'">', mine[k], e.name || id2);
+                }).join('') + '</div>';
+            } else {
+                h = '<div class="gcv-rx-title" style="font-weight:600;color:#999;margin:10px 6px;text-align:center">Chưa tải được kho emoji của website. Hãy thử lại sau.</div>';   // không thay bằng emoji mặc định
+            }
+            P.pop.innerHTML = '<div class="gcv-rx-scroll">' + h + '</div>';
+            var sc2 = P.pop.querySelector('.gcv-rx-scroll'); if (sc2) sc2.scrollTop = top;
+        }
+        function gcvRxDatViTri() {
+            var P = gcvRxPick; if (!P) return;
+            var pop = P.pop, r = P.btn.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
+            var pw = pop.offsetWidth, ph = pop.offsetHeight;
+            var left = Math.max(8, Math.min(r.left, vw - pw - 8));
+            var top = r.top - ph - 8;
+            if (top < 8) top = r.bottom + 8;
+            if (top + ph > vh - 8) top = Math.max(8, vh - ph - 8);
+            pop.style.left = left + 'px'; pop.style.top = top + 'px';
+        }
+        window.gcvRxMo = function (btn, col, id) {
+            if (gcvRxPick && gcvRxPick.col === col && gcvRxPick.id === id) { gcvRxDongPicker(); return; }
+            gcvRxDongPicker();
+            if (!gcvRxMe()) { gcvRxToast('Bạn cần đăng nhập để thả emoji.'); return; }   // kiểm tra đăng nhập trước khi cho tương tác
+            var pop = document.createElement('div');
+            pop.className = 'gcv-rx-pop'; pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', 'Chọn emoji');
+            pop.addEventListener('click', function (e) {
+                var b = e.target.closest ? e.target.closest('.gcv-rx-opt') : null;
+                if (b) window.gcvRxChon(b.getAttribute('data-k'));
+            });
+            document.body.appendChild(pop);
+            gcvRxPick = { col: col, id: id, btn: btn, pop: pop };
+            btn.setAttribute('aria-expanded', 'true');
+            gcvRxVePicker();
+            gcvRxDatViTri();
+        };
+
+        // ---------- Thả / gỡ emoji ----------
+        function gcvRxDoi(col, id, key) {
+            var bk = col + '|' + id + '|' + key;
+            if (window.gcvRxBusy[bk] || !window.GCV_FB || !window.GCV_FB.doiReaction) return Promise.resolve();
+            window.gcvRxBusy[bk] = 1;
+            return window.GCV_FB.doiReaction({ col: col, id: id, emoji: key }).catch(function (e) {
+                console.error('Thả emoji thất bại:', e);
+                gcvRxToast((e && e.message) ? e.message : 'Không thả được emoji. Hãy thử lại.');
+            }).then(function () { delete window.gcvRxBusy[bk]; });
+        }
+        window.gcvRxChon = function (key) { var P = gcvRxPick; if (!P || !GCV_RX_RE.test(key || '') || !gcvEmojiAnh[key.slice(2)]) return; return gcvRxDoi(P.col, P.id, key); };
+
+        // ---------- Danh sách người đã thả ----------
+        function gcvRxDongModal() { gcvRxDS = null; var m = document.getElementById('gcv-rx-modal'); if (m && m.parentNode) m.parentNode.removeChild(m); }
+        window.gcvRxDongModal = gcvRxDongModal;
+        window.gcvRxXem = function (col, id, key) { gcvRxDongPicker(); gcvRxDS = { col: col, id: id, tab: key || 'all' }; gcvRxVeModal(); };
+        window.gcvRxTab = function (k) { if (gcvRxDS) { gcvRxDS.tab = k; gcvRxVeModal(); } };
+        window.gcvRxGo = function (key) { if (gcvRxDS && GCV_RX_RE.test(key || '')) gcvRxDoi(gcvRxDS.col, gcvRxDS.id, key); };
+        function gcvRxVeModal() {
+            var D = gcvRxDS; if (!D) return;
+            var gs = gcvRxNhom(D.col, D.id);
+            if (!gs.length) { gcvRxDongModal(); return; }   // không còn ai thả: tự đóng
+            if (D.tab !== 'all' && !gs.some(function (g) { return g.key === D.tab; })) D.tab = 'all';
+            var me = gcvRxMe(), tong = 0; gs.forEach(function (g) { tong += g.n; });
+            var tabs = '<button type="button" class="gcv-rx-tab' + (D.tab === 'all' ? ' on' : '') + '" onclick="gcvRxTab(\'all\')">Tất cả <span class="gcv-rx-n">' + tong + '</span></button>' +
+                gs.map(function (g) { return '<button type="button" class="gcv-rx-tab' + (D.tab === g.key ? ' on' : '') + '" onclick="gcvRxTab(\'' + g.key + '\')">' + gcvRxEmo(g.key) + '<span class="gcv-rx-n">' + g.n + '</span></button>'; }).join('');
+            var rows = [];
+            gs.forEach(function (g) { if (D.tab !== 'all' && D.tab !== g.key) return; g.users.forEach(function (u) { rows.push({ g: g, u: u, me: !!(me && u.uid === me) }); }); });
+            rows.sort(function (a, b) { return (b.me ? 1 : 0) - (a.me ? 1 : 0) || a.u.ts - b.u.ts; });   // tài khoản của mình lên đầu
+            var users = rows.map(function (r) {
+                return '<div class="gcv-rx-u">' + gcvAv({ uid: r.u.uid }, true) + '<div class="who">' + gcvTen({ uid: r.u.uid, name: r.u.name }) + (r.me ? '<span class="gcv-rx-me">(Bạn)</span>' : '') + '</div>' +
+                    (D.tab === 'all' ? '<span class="em">' + gcvRxEmo(r.g.key) + '</span>' : '') +
+                    (r.me ? '<button type="button" class="gcv-rx-go" onclick="gcvRxGo(\'' + r.g.key + '\')">Gỡ</button>' : '') + '</div>';
+            }).join('');
+            var m = document.getElementById('gcv-rx-modal');
+            if (!m) {
+                m = document.createElement('div'); m.id = 'gcv-rx-modal'; m.className = 'gcv-rx-modal';
+                m.innerHTML = '<div class="gcv-rx-dlg" role="dialog" aria-modal="true" aria-label="Danh sách người đã thả emoji"><div class="gcv-rx-hd"><b>Cảm xúc</b><button type="button" class="gcv-rx-x" aria-label="Đóng" onclick="gcvRxDongModal()">&times;</button></div><div class="gcv-rx-tabs"></div><div class="gcv-rx-users"></div></div>';
+                m.addEventListener('click', function (e) { if (e.target === m) gcvRxDongModal(); });
+                document.body.appendChild(m);
+                var x = m.querySelector('.gcv-rx-x'); if (x) x.focus({ preventScroll: true });
+            }
+            var tb = m.querySelector('.gcv-rx-tabs'), us = m.querySelector('.gcv-rx-users'), s0 = us.scrollTop, t0 = tb.scrollLeft;
+            tb.innerHTML = tabs; us.innerHTML = users; us.scrollTop = s0; tb.scrollLeft = t0;
+        }
+
+        // Dữ liệu Reaction đổi (thời gian thực): chỉ cập nhật phần Reaction tại chỗ, không vẽ lại danh sách bình luận (không làm mất ô đang gõ).
+        window.gcvRxCapNhat = function (keys) {
+            try {
+                var set = {}; (keys || []).forEach(function (k) { set[k] = 1; });
+                var ws = document.querySelectorAll('.gcv-rx-wrap');
+                for (var i = 0; i < ws.length; i++) {
+                    var w = ws[i], col = w.getAttribute('data-rx-col'), id = w.getAttribute('data-rx-id');
+                    if (!set[col + '|' + id]) continue;
+                    var l = w.querySelector('.gcv-rx-list'); if (l) l.innerHTML = gcvRxChipsHTML(col, id);
+                }
+                if (gcvRxPick && set[gcvRxPick.col + '|' + gcvRxPick.id]) gcvRxVePicker();
+                if (gcvRxDS && set[gcvRxDS.col + '|' + gcvRxDS.id]) gcvRxVeModal();
+            } catch (e) { console.error('Lỗi cập nhật Reaction:', e); }
+        };
+
+        document.addEventListener('pointerdown', function (e) {
+            if (gcvRxPick && !gcvRxPick.pop.contains(e.target) && !(e.target.closest && e.target.closest('.gcv-rx-add'))) gcvRxDongPicker();
+        }, true);
+        window.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            if (gcvRxDS) { gcvRxDongModal(); e.stopPropagation(); e.preventDefault(); }
+            else if (gcvRxPick) { gcvRxDongPicker(); e.stopPropagation(); }
+        }, true);
+        window.addEventListener('resize', gcvRxDongPicker);
+        window.addEventListener('scroll', function (e) { if (gcvRxPick && !gcvRxPick.pop.contains(e.target)) gcvRxDongPicker(); }, true);
+
         function gcvTheBL(it, laTL) {
             var kb = gcvKhoa(it);
             var nutTL = (kb && window.GCV_FB) ? '<button type="button" class="gcv-act-btn" onclick="gcvMoTL(\'' + gcvThoat(kb) + '\')">Trả lời</button>' : '';
             return '<div class="gcv-bl' + gcvLopChuNha(it) + '"><div class="gcv-bl-head"><span class="gcv-bl-who">' + gcvWho(it, laTL) + '</span>' +
                 '<span class="gcv-bl-time">' + gcvThoat(it.date || '') + '</span></div>' +
                 '<div class="gcv-comment-text">' + (laTL && it.replyToName ? '<span class="gcv-at">@' + gcvThoat(it.replyToName) + '</span> ' : '') + gcvRenderText(it.text) + '</div>' +
-                '<div class="gcv-bl-act">' + gcvNutLike(it) + nutTL + gcvNutXoa(it) + '</div>' +
+                '<div class="gcv-bl-act">' + gcvNutLike(it) + gcvRxNut(it) + nutTL + gcvNutXoa(it) + '</div>' +
                 (window.gcvTL.target === kb && kb ? gcvFormTL(it) : '') + '</div>';
         }
 
@@ -16097,6 +16346,118 @@ const $ = id => document.getElementById(id);
     } finally { likeDangXuLy.delete(lid); }
   }
 
+  /* ---------------- Reaction emoji (độc lập hoàn toàn với Like) ----------------
+     commentReactions/{col_idBinhLuan_emoji_uid} : mỗi tài khoản chỉ 1 lượt cho mỗi loại emoji trên mỗi bình luận
+       (ID tài liệu cố định nên không thể thả trùng). Trường: col, targetId, storyKey, emoji, uid, name, createdAt.
+     KHÔNG đọc / ghi / đổi: commentLikes, commentLikeCounts, paraLikes, paraLikeCounts.
+     Đồng bộ thời gian thực bằng onSnapshot -> window._fsReact[col|idBinhLuan][emoji][uid].
+
+     Firestore Security Rules cần thêm (dán vào trong "match /databases/{database}/documents { ... }"):
+
+       match /commentReactions/{rid} {
+         allow read: if true;
+         allow create: if request.auth != null
+           && request.auth.token.email_verified == true
+           && request.resource.data.keys().hasOnly(['col','targetId','storyKey','emoji','uid','name','createdAt'])
+           && request.resource.data.uid == request.auth.uid
+           && request.resource.data.col in ['comments','commentReplies','homechat','paraComments','paraReplies','ownerPostComments']
+           && request.resource.data.targetId is string && request.resource.data.targetId.size() > 0 && request.resource.data.targetId.size() <= 200
+           && request.resource.data.storyKey is string && request.resource.data.storyKey.size() <= 300
+           && request.resource.data.emoji is string
+           && request.resource.data.emoji.matches('^c_[a-z0-9_-]{1,32}$')
+           && request.resource.data.name == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.displayName
+           && request.resource.data.createdAt == request.time
+           && rid == request.resource.data.col + '_' + request.resource.data.targetId + '_' + request.resource.data.emoji + '_' + request.auth.uid;
+         allow update: if false;
+         allow delete: if request.auth != null && (resource.data.uid == request.auth.uid
+           || request.auth.uid == 'IsmvyzRPiOW0OkrHSYhG1nlRJ4D3'
+           || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+       }
+  */
+  const REACT_COL = new Set(["comments", "commentReplies", "homechat", "paraComments", "paraReplies", "ownerPostComments"]);
+  const REACT_EMOJI_RE = /^c_[a-z0-9_-]{1,32}$/;   // chỉ emoji ảnh của kho website
+  const GIOI_HAN_TAI_REACTION = 10000;   // số lượt Reaction tối đa theo dõi cùng lúc (nâng nếu website lớn hơn)
+  const reactDangXuLy = new Set();
+  let reactHuy = null;
+
+  function datReact(d, daXoa) {
+    const x = d.data();
+    if (!x || !x.col || !x.targetId || !x.emoji || !x.uid) return null;
+    const R = window._fsReact, k = x.col + "|" + x.targetId;
+    if (daXoa) {
+      const g = R[k] && R[k][x.emoji];
+      if (g) {
+        delete g[x.uid];
+        if (!Object.keys(g).length) delete R[k][x.emoji];
+        if (!Object.keys(R[k]).length) delete R[k];
+      }
+      return k;
+    }
+    const ms = (x.createdAt && typeof x.createdAt.toMillis === "function") ? x.createdAt.toMillis() : Date.now();
+    if (!R[k]) R[k] = {};
+    if (!R[k][x.emoji]) R[k][x.emoji] = {};
+    R[k][x.emoji][x.uid] = { name: String(x.name == null ? "" : x.name), ts: ms };
+    return k;
+  }
+
+  // Theo dõi thời gian thực toàn bộ Reaction (đọc công khai, không cần đăng nhập).
+  function batDauReact() {
+    if (reactHuy) return;
+    try {
+      reactHuy = F.onSnapshot(F.query(F.collection(db, "commentReactions"), F.limit(GIOI_HAN_TAI_REACTION)), snap => {
+        const doi = new Set();
+        snap.docChanges().forEach(c => { const k = datReact(c.doc, c.type === "removed"); if (k) doi.add(k); });
+        if (doi.size && window.gcvRxCapNhat) window.gcvRxCapNhat(Array.from(doi));
+      }, err => {
+        console.warn("Chưa theo dõi được Reaction (kiểm tra Rules commentReactions):", err);
+        if (reactHuy) { try { reactHuy(); } catch (e) { } }
+        reactHuy = null;
+      });
+    } catch (e) { console.warn("Không bật được theo dõi Reaction:", e); reactHuy = null; }
+  }
+
+  // Thả emoji; nếu tài khoản này đã thả đúng emoji đó trên bình luận thì gỡ.
+  async function doiReaction(p) {
+    const user = auth.currentUser;
+    if (!user) throw taoLoi("gcv/chua-dang-nhap", "Bạn cần đăng nhập để thả emoji.");
+    if (!user.emailVerified) {
+      try { await lamMoiXacNhan(user); } catch (e) { console.warn(e); }
+      if (!user.emailVerified) throw taoLoi("gcv/chua-xac-nhan", "Email chưa được xác nhận. Hãy xác nhận email trong trang tài khoản rồi thả emoji lại.");
+      S.verified = true;
+    }
+    const col = p && p.col, id = String((p && p.id) || ""), emoji = String((p && p.emoji) || "");
+    if (!REACT_COL.has(col) || !id || !REACT_EMOJI_RE.test(emoji)) throw taoLoi("gcv/du-lieu");
+    const nguon = (window[MANG_THEO_COL[col]] || []).find(x => x.fsId === id);
+    if (!nguon) throw taoLoi("gcv/du-lieu", "Không tìm thấy bình luận để thả emoji (có thể đã bị xóa).");
+    const ten = (hoSo && typeof hoSo.displayName === "string") ? hoSo.displayName : "";
+    if (!ten.trim()) throw taoLoi("gcv/thieu-ten");
+    batDauReact();
+    const rid = col + "_" + id + "_" + emoji + "_" + user.uid;
+    if (reactDangXuLy.has(rid)) return;
+    reactDangXuLy.add(rid);
+    const ref = F.doc(db, "commentReactions", rid), k = col + "|" + id;
+    const daCo = !!(window._fsReact[k] && window._fsReact[k][emoji] && window._fsReact[k][emoji][user.uid]);
+    try {
+      if (daCo) await voiGioiHan(F.deleteDoc(ref), HET_HAN_GHI_MS);
+      else await voiGioiHan(F.setDoc(ref, { col, targetId: id, storyKey: String(nguon.storyKey || ""), emoji, uid: user.uid, name: ten, createdAt: F.serverTimestamp() }), HET_HAN_GHI_MS);
+    } catch (e) {
+      // Đã thả từ trước nhưng chưa tải về máy: Rules từ chối tạo trùng -> nếu đã có trên máy chủ thì coi như đã thả, không báo lỗi.
+      let co = false;
+      if (!daCo && e && e.code === "permission-denied") { try { co = (await voiGioiHan(F.getDocFromServer(ref), 8000)).exists(); } catch (e2) { } }
+      if (!co) throw taoLoi((e && e.code) || "unknown", loiTV(e));
+    } finally { reactDangXuLy.delete(rid); }
+  }
+
+  // Dọn Reaction của bình luận vừa xóa (tốt nhất có thể, theo quyền hiện có). Nằm ngoài xoaBinhLuan nên không sửa logic cũ.
+  async function donReaction(ds) {
+    for (const t of ds) {
+      try {
+        const s = await voiGioiHan(F.getDocs(F.query(F.collection(db, "commentReactions"), F.where("targetId", "==", t.id))), 15000);
+        await Promise.allSettled(s.docs.filter(d => (d.data() || {}).col === t.col).map(d => F.deleteDoc(d.ref)));
+      } catch (e) { console.warn("Chưa dọn được Reaction của bình luận đã xóa:", e); }
+    }
+  }
+
   /* ---------------- Quản lí → Tương tác: tải TOÀN BỘ bình luận (phân trang theo ID tài liệu) ---------------- */
   async function taiTatCaTuongTac() {
     const items = [], loi = [];
@@ -16550,12 +16911,26 @@ const $ = id => document.getElementById(id);
     taiTienTrinhWaterSort, luuTienTrinhWaterSort
   };
 
+  // Reaction: API mới, độc lập với Like. xoaBinhLuan được bọc thêm bước dọn Reaction (hàm gốc giữ nguyên).
+  window.GCV_FB.doiReaction = doiReaction;
+  (function () {
+    const xoaGoc = window.GCV_FB.xoaBinhLuan;
+    window.GCV_FB.xoaBinhLuan = async function (col, id) {
+      const con = col === "comments" ? window._fsTraLoi : col === "ownerPostComments" ? window._fsBaiVietBL : col === "paraComments" ? window._fsParaTL : [];
+      const ds = [{ col, id }].concat((con || []).filter(x => x.rootId === id).map(x => ({ col: x.fsCol, id: x.fsId })));
+      const kq = await xoaGoc.apply(this, arguments);
+      donReaction(ds);   // không chờ, không ảnh hưởng kết quả xóa
+      return kq;
+    };
+  })();
+
   chuyenCheDo("login");
   if (window.capNhatGiaoDienBinhLuan) window.capNhatGiaoDienBinhLuan();
 
   // Đọc bình luận công khai: không cần đăng nhập
   taiBanDau().catch(e => { console.error(e); window.GCV_FB_LOI_DOC = true; });
   taiBaiViet().catch(e => console.error(e));   // bài viết của Chủ nhà (đọc công khai)
+  batDauReact();   // Reaction emoji: theo dõi thời gian thực (độc lập với Like)
   // Mở thẳng một chương (tải lại trang khi đang đọc): nạp comment đoạn của chương đó ngay khi Firebase sẵn sàng.
   if (window.gcvPCKhoiDong) window.gcvPCKhoiDong();
 
