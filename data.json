@@ -884,6 +884,16 @@
   },
   "thongbao_data": [
     {
+      "id": 1794137158618,
+      "type": "tamsu",
+      "title": "Chủ nhà đã đăng bài viết mới",
+      "date": "08/11/2026",
+      "content": "Chủ nhà đã đăng bài viết mới",
+      "storyKey": null,
+      "isPinned": false,
+      "chapters": null
+    },
+    {
       "id": 1794136342834,
       "type": "truyen-moi",
       "title": "📖 Truyện mới: \"[ĐM/EDIT] Nhật Ký Chuẩn Bị Mang Thai Mỗi Ngày Của Cục Cưng\" đã ra mắt!",
