@@ -7515,6 +7515,13 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
                 localStorage.setItem('giadinhcauvong_last_read_notice', notice.id);
                 capNhatBadgeThongBao();
             }
+            var laTBBaiViet = (notice.kind === 'bai-viet' && notice.postId) || (!notice.kind && notice.title === 'Chủ nhà đã đăng bài viết mới');
+            if (laTBBaiViet) {   // thông báo bài viết của Chủ nhà: mở đúng bài theo ID (thông báo cũ chưa có ID: khớp bài theo thời điểm đăng)
+                if (typeof closeNoticePopup === 'function') { try { closeNoticePopup(); } catch (e) {} }
+                if (window.gcvMoBaiViet) window.gcvMoBaiViet(notice.ownerUid, notice.postId || '', notice.postId ? 0 : notice.id);
+                else console.warn('gcvMoBaiViet chưa sẵn sàng');
+                return;
+            }
             var isSystemNotice = notice.title.includes('Hệ thống') || notice.title.includes('Chào mừng');
             if (isSystemNotice) {
                 return;
@@ -11358,7 +11365,8 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
             return 'tamsu';
         }
 
-        function taoThongBaoTuDong(tieuDeThongBao, noiDungChiTiet, storyKey = null, isPinned = false, loai = null) {
+        function taoThongBaoTuDong(tieuDeThongBao, noiDungChiTiet, storyKey = null, isPinned = false, loai = null, extra = null) {
+            if (extra && extra.postId && (window.danhSachThongBao || []).some(function(n) { return n.postId === extra.postId; })) return;   // không tạo trùng thông báo cho cùng một bài viết
             const now = new Date();
             const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
                             String(now.getMonth() + 1).padStart(2, '0') + '/' + 
@@ -11373,6 +11381,7 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
                 isPinned: isPinned,
                 chapters: storyKey ? [{ storyKey: storyKey, chapterIndex: 0, title: 'Chương 1' }] : null
             };
+            if (extra && extra.kind === 'bai-viet' && extra.postId) { newNotice.kind = 'bai-viet'; newNotice.postId = String(extra.postId); newNotice.ownerUid = String(extra.ownerUid || ''); }
             window.danhSachThongBao.unshift(newNotice);
             luuThongBaoVaoLocalStorage();
             capNhatBadgeThongBao();
@@ -14235,7 +14244,7 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
     const bio = $("gcv-pf-bio");
     if (typeof ho.bio === "string" && ho.bio.trim()) { bio.textContent = ho.bio; bio.classList.remove("is-empty"); }
     else {
-      bio.textContent = X.dang && !X.ho ? "Đang tải hồ sơ..." : (X.loi && !X.ho ? "Chưa tải được hồ sơ của Chủ nhà. Hãy thử lại sau." : "Chưa có lời giới thiệu.");
+      bio.textContent = X.dang && !X.ho ? "Đang tải hồ sơ..." : (X.loi && !X.ho ? "Chưa tải được hồ sơ của Chủ nhà. Hãy thử lại sau." + (X.ma ? " (mã lỗi: " + X.ma + ")" : "") : "Chưa có lời giới thiệu.");
       bio.classList.add("is-empty");
     }
     const av = (typeof ho.avatar === "string" && ho.avatar) || (window.gcvAvCache && window.gcvAvCache[X.uid]) || "";
@@ -14262,12 +14271,12 @@ body.dark-mode .gbt-grille { background: rgba(0,0,0,.2); }
     }).catch(e => {
       console.warn("Không tải được hồ sơ Chủ nhà:", e);
       if (X.uid !== uid) return;
-      X.dang = false; X.loi = true; veXem();
+      X.dang = false; X.loi = true; X.ma = (e && e.code) ? String(e.code) : ""; veXem();
     });
   }
   function moTrangXem(uid, ten, daCoLichSu) {
     if (typeof window.gcvPCDong === "function") { try { window.gcvPCDong(true); } catch (e) {} }   // đóng khung comment đoạn đang mở (nháp được giữ)
-    X.uid = uid; X.fb = ten || ""; X.loi = false;
+    X.uid = uid; X.fb = ten || ""; X.loi = false; X.ma = "";
     X.ho = (window._gcvHoSoXem && window._gcvHoSoXem[uid]) || null;
     X.dang = true;
     X.noi = true;
@@ -15824,6 +15833,7 @@ const $ = id => document.getElementById(id);
 
   window.gcvVeGiaoDienTK = function () { veGiaoDien(); };
   function veGiaoDien() {
+    dongBoHoSoCongKhai();   // Chủ nhà đổi avatar/tiểu sử/tên hoặc vừa đăng nhập: cập nhật hồ sơ công khai
     $("gcv-auth-loading").classList.add("hidden");
     const coUser = !!S.user;
     const xemChuNha = !!window.gcvXemUid;   // đang xem hồ sơ Chủ nhà trên trang hồ sơ (không cần đăng nhập)
@@ -16527,9 +16537,20 @@ const $ = id => document.getElementById(id);
   }
 
   /* ---------------- Avatar người viết bình luận (chỉ ĐỌC users/{uid}.avatar để hiển thị, không ghi gì) ---------------- */
+  let chanPublic = false;   // Rules publicProfiles chưa cho đọc: không gọi lặp lại
   let chanDocAvatar = false;   // Rules không cho đọc hồ sơ người khác: không gọi lặp lại, giao diện dùng ảnh mặc định
   async function taiAvatar(uids) {
-    const ra = {}, ds = Array.from(new Set((uids || []).filter(u => typeof u === "string" && u && u.indexOf("/") < 0)));
+    const ra = {}; let ds = Array.from(new Set((uids || []).filter(u => typeof u === "string" && u && u.indexOf("/") < 0)));
+    if (!chanPublic) {   // avatar người viết: đọc hồ sơ công khai publicProfiles/{uid} (không bị chặn bởi Rules users/{uid} chỉ cho chủ tài khoản)
+      for (let i = 0; i < ds.length && !chanPublic; i += 20) {
+        await Promise.all(ds.slice(i, i + 20).map(async u => {
+          if (chanPublic) return;
+          try { const sn = await voiGioiHan(F.getDoc(F.doc(db, "publicProfiles", u)), 10000); if (sn.exists()) { const a = sn.data().avatar; ra[u] = typeof a === "string" ? a : ""; } }
+          catch (e) { if (e && e.code === "permission-denied") { chanPublic = true; console.warn("Chưa đọc được publicProfiles (kiểm tra Rules publicProfiles):", e); } }
+        }));
+      }
+      ds = ds.filter(u => !Object.prototype.hasOwnProperty.call(ra, u));
+    }
     for (let i = 0; i < ds.length && !chanDocAvatar; i += 20) {
       await Promise.all(ds.slice(i, i + 20).map(async u => {
         if (chanDocAvatar) return;
@@ -16546,14 +16567,52 @@ const $ = id => document.getElementById(id);
   }
 
   /* ---------------- Xem hồ sơ người khác (CHỈ ĐỌC users/{uid}; chỉ lấy tên, giới thiệu, avatar — không lấy email, không ghi gì) ---------------- */
+  /* Hồ sơ công khai của Chủ nhà nằm ở publicProfiles/{uid} (chỉ tên, giới thiệu, avatar), được chính tài khoản Chủ nhà đồng bộ từ users/{uid}.
+     Lý do: Rules của users/{uid} chỉ cho chủ tài khoản đọc (trong đó có email), nên thành viên khác đọc users/{uid} bị permission-denied.
+     Firestore Security Rules cần thêm (dán vào trong "match /databases/{database}/documents { ... }"):
+
+       match /publicProfiles/{pid} {
+         allow read: if true;
+         allow create, update: if request.auth != null && request.auth.uid == pid
+           && pid == 'IsmvyzRPiOW0OkrHSYhG1nlRJ4D3'
+           && request.resource.data.keys().hasOnly(['displayName','bio','avatar','updatedAt'])
+           && request.resource.data.displayName is string && request.resource.data.displayName.size() > 0
+           && request.resource.data.bio is string && request.resource.data.avatar is string;
+         allow delete: if false;
+       }
+  */
+  var sigHoSoCK = "";
+  function dongBoHoSoCongKhai() {   // Tài khoản đang đăng nhập: đẩy tên + avatar MỚI NHẤT sang publicProfiles (Chủ nhà thêm tiểu sử). Chỉ ghi khi có thay đổi; không ghi khi hồ sơ chưa tải được
+    try {
+      if (!S.user || !hoSo) return;
+      const laChu = S.user.uid === CHU_NHA_UID;
+      const ten = typeof hoSo.displayName === "string" ? hoSo.displayName.trim() : "";
+      if (!ten) return;
+      const bio = typeof hoSo.bio === "string" ? hoSo.bio : "", av = typeof hoSo.avatar === "string" ? hoSo.avatar : "";
+      const sig = S.user.uid + "\u0001" + ten + "\u0001" + (laChu ? bio : "") + "\u0001" + av;
+      if (sig === sigHoSoCK) return;
+      sigHoSoCK = sig;
+      const dl = laChu ? { displayName: ten, bio: bio, avatar: av, updatedAt: F.serverTimestamp() } : { displayName: ten, avatar: av, updatedAt: F.serverTimestamp() };   // thành viên thường: không công khai tiểu sử
+      F.setDoc(F.doc(db, "publicProfiles", S.user.uid), dl)
+        .then(() => console.info("[GCV] Đã đồng bộ hồ sơ công khai → publicProfiles/" + S.user.uid))
+        .catch(e => { sigHoSoCK = ""; console.warn("Chưa đồng bộ được hồ sơ công khai (kiểm tra Rules publicProfiles):", e && e.code, e); });
+    } catch (e) { console.warn(e); }
+  }
   async function taiHoSoCongKhai(uid) {
     uid = String(uid || "");
     if (!uid || uid.indexOf("/") >= 0) throw taoLoi("gcv/du-lieu");
-    const sn = await voiGioiHan(F.getDoc(F.doc(db, "users", uid)), 10000);
-    if (!sn.exists()) return null;
-    const d = sn.data() || {}, ch = v => (typeof v === "string" ? v : "");
+    let d = null, loiCK = null, loiUS = null;
+    try { const sn = await voiGioiHan(F.getDoc(F.doc(db, "publicProfiles", uid)), 10000); if (sn.exists()) d = sn.data() || {}; }
+    catch (e) { loiCK = e; console.warn("Không đọc được publicProfiles/" + uid + ":", e); }
+    if (!d) {   // chưa có bản công khai: thử users/{uid} (chỉ thành công nếu Rules cho phép)
+      try { const sn = await voiGioiHan(F.getDoc(F.doc(db, "users", uid)), 10000); if (sn.exists()) d = sn.data() || {}; else if (!loiCK) return null; }
+      catch (e) { loiUS = e; console.warn("Không đọc được users/" + uid + " (Rules chỉ cho chủ tài khoản đọc; cần publicProfiles):", e); }
+    }
+    if (!d) throw loiCK || (loiUS ? taoLoi("gcv/chua-dong-bo", "Hồ sơ công khai chưa được tạo.") : taoLoi("gcv/du-lieu"));   // loiCK = Rules publicProfiles chặn; chua-dong-bo = đọc được nhưng Chủ nhà chưa đồng bộ   // lỗi thật: ném ra để giao diện báo lỗi, KHÔNG thay bằng dữ liệu mặc định
+    const ch = v => (typeof v === "string" ? v : "");
     const ho = { displayName: ch(d.displayName), bio: ch(d.bio), avatar: ch(d.avatar) };
     window._gcvHoSoXem = window._gcvHoSoXem || {}; window._gcvHoSoXem[uid] = ho;
+    window.gcvAvCache = window.gcvAvCache || {}; window.gcvAvCache[uid] = ho.avatar;   // avatar mới nhất cũng dùng cho bình luận/bài viết
     return ho;
   }
 
@@ -16623,7 +16682,7 @@ const $ = id => document.getElementById(id);
     const item = await taoTaiLieu("ownerPosts", { uid: user.uid, name: ten, text, createdAt: F.serverTimestamp() }, ["bv", user.uid, text].join("|"), user);
     // Chỉ tạo thông báo SAU KHI máy chủ đã xác nhận bài đăng thành công (không tạo khi sửa/xóa/thất bại).
     try {
-      if (typeof window.taoThongBaoTuDong === "function") window.taoThongBaoTuDong("Chủ nhà đã đăng bài viết mới", "Chủ nhà đã đăng bài viết mới", null, false, "tamsu");
+      if (typeof window.taoThongBaoTuDong === "function") window.taoThongBaoTuDong("Chủ nhà đã đăng bài viết mới", "Chủ nhà đã đăng bài viết mới", null, false, "tamsu", { kind: "bai-viet", postId: item.fsId, ownerUid: user.uid });
       else console.warn("Không tìm thấy hàm tạo thông báo của website.");
     } catch (e) { console.warn("Không tạo được thông báo bài viết mới:", e); }
     window.capNhatSauKhiBinhLuanDoi();
@@ -17514,5 +17573,54 @@ const $ = id => document.getElementById(id);
     render();
 })();
     </script>
+<style>.bv-card{scroll-margin-top:90px}.bv-card.bv-focus{outline:3px solid rgba(255,120,180,.85);outline-offset:3px;animation:bvFocus 2.8s ease forwards}@keyframes bvFocus{0%,70%{outline-color:rgba(255,120,180,.85)}100%{outline-color:rgba(255,120,180,0)}}</style>
+<script>
+/* Mở đúng bài viết của Chủ nhà theo ID (từ thông báo hoặc đường dẫn #bai-viet-<id>, kể cả sau khi tải lại trang). */
+(function () {
+  var h0 = location.hash || '', dem = 0, CN = 'IsmvyzRPiOW0OkrHSYhG1nlRJ4D3';
+  function tim(id) {
+    var box = document.getElementById('gcv-bv-list'); if (!box) return null;
+    var cs = box.querySelectorAll('.bv-card[data-pid]');
+    for (var i = 0; i < cs.length; i++) if (cs[i].getAttribute('data-pid') === id && cs[i].getClientRects().length) return cs[i];
+    return null;
+  }
+  function chieu(id, lan) {
+    var el = tim(id); if (!el) return;
+    try { el.scrollIntoView({ behavior: lan ? 'smooth' : 'auto', block: 'center' }); } catch (e) { el.scrollIntoView(); }
+    el.classList.add('bv-focus'); setTimeout(function () { el.classList.remove('bv-focus'); }, 2900);
+  }
+  function theoGio(ts) {   // thông báo cũ không có ID: lấy bài đăng gần thời điểm tạo thông báo nhất (trong 15 phút)
+    var ds = window._fsBaiViet || [], best = null, bd = 15 * 60 * 1000;
+    for (var i = 0; i < ds.length; i++) { var d = Math.abs((ds[i].ts || 0) - ts); if (d <= bd) { bd = d; best = ds[i]; } }
+    return best ? String(best.fsId || best.id || '') : '';
+  }
+  window.gcvMoBaiViet = function (ownerUid, postId, tsThongBao) {
+    postId = String(postId || ''); if (!postId && !tsThongBao) return;
+    ownerUid = String(ownerUid || '') || CN;
+    var token = ++dem;
+    if (window.gcvXemHoSo) window.gcvXemHoSo(ownerUid, {});
+    try { history.replaceState(history.state, '', '#bai-viet-' + encodeURIComponent(postId)); } catch (e) {}
+    var t0 = Date.now();
+    (function thu() {
+      if (token !== dem) return;
+      if (!postId && tsThongBao && (window._fsBaiViet || []).length) {
+        postId = theoGio(tsThongBao);
+        if (!postId) { var sec = document.getElementById('gcv-bv-section'); if (sec) sec.scrollIntoView({ block: 'start' }); return; }
+      }
+      if (postId && tim(postId)) {   // danh sách có thể vẽ lại sau khi bài tải xong: căn lại vài lần cho chắc
+        chieu(postId, true); setTimeout(function () { if (token === dem) chieu(postId, false); }, 450); setTimeout(function () { if (token === dem) chieu(postId, false); }, 1300);
+        return;
+      }
+      if (Date.now() - t0 < 15000) setTimeout(thu, 200);
+      else console.warn('Không tìm thấy bài viết có ID', postId, '(đã xóa, hoặc chưa đăng nhập nên chưa hiện khu bài viết).');
+    })();
+  };
+  var m = h0.match(/^#bai-viet-(.+)$/);
+  if (m) {
+    var id0 = ''; try { id0 = decodeURIComponent(m[1]); } catch (e) { id0 = m[1]; }
+    var n = 0; (function cho() { if (window.gcvXemHoSo && window.GCV_FB) { setTimeout(function () { window.gcvMoBaiViet('', id0); }, 300); } else if (n++ < 100) setTimeout(cho, 150); })();
+  }
+})();
+</script>
 </body>
 </html>
